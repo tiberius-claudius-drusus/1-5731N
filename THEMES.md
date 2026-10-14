@@ -34,7 +34,7 @@ Fallback values: if a variable is missing, the value of the Clean light theme (c
 | Group | Variables |
 |---|---|
 | Page | `--bg` background · `--fg` text · `--muted` quiet text · `--acc` accent colour (titles, timer) · `--theme-color` browser bar |
-| Buttons | `--btn-bg` `--btn-fg` `--btn-bd` `--btn-active` `--btn-radius` · `--danger-*` ("Erase" button) · `--mode-excl-bg/fg` (✗ button) |
+| Buttons | `--btn-bg` `--btn-fg` `--btn-bd` `--btn-active` `--btn-radius` · `--danger-*` ("Erase" button) · `--mode-excl-bg/fg` (✗ button, red) · `--mode-ok-bg/fg/bd` (✓ button, green) |
 | Board | `--board-bg` `--board-radius` `--board-gap` · `--cell-bg` `--cell-def-bg` (solved cell) `--cell-radius` `--cell-bd` · `--cell-err` (error outline) |
 | Tiles | `--tile-bg` `--tile-bd` `--tile-radius` `--tile-shadow` · `--tile-def-ring` (width of the coloured ring of a solved cell) |
 | Symbols | `--glyph-font` `--glyph-weight` (digits and letters) · `--glyph-stroke` `--glyph-stroke-bold` (strokes: shapes, signs, Roman numerals) · `--icon-stroke` (stroke of the bar pictograms: menu, undo, ✓, ✗) · `--icon-stroke-big` (stroke of the 3 large zoom buttons, thicker because bigger) · `--row-0` … `--row-5` (one colour per row: digits, letters, Roman numerals, dice, shapes, signs) · `--slot-opacity` |

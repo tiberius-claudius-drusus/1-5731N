@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_version.js
- * Version   : 1.0.1
- * Role      : Release consistency test: the version in app.js, the service-worker cache name and the top entry of CHANGELOG.md must agree; every file cached by sw.js must exist.
+ * Version   : 1.0.3
+ * Role      : Release consistency test: the version in app.js, the service-worker cache name and the top entry of CHANGELOG.md must agree; every file cached by sw.js (application files and sounds) must exist.
  * Depends on: Node.js (standard library only)
  * Called by : by hand (node test_version.js) ; GitHub Actions (.github/workflows/test.yml)
  * Produces  : stdout ; exit code 1 on any mismatch
@@ -21,7 +21,9 @@ if (!app || !sw || !log) fail('version not found (app.js: ' + app + ', sw.js: ' 
 else if (app !== sw || app !== log) fail('versions differ: app.js ' + app + ', sw.js cache ' + sw + ', CHANGELOG.md ' + log);
 
 const files = JSON.parse(read('sw.js').match(/const FILES = (\[.*?\]);/s)[1].replace(/'/g, '"'));
+const extra = JSON.parse(read('sw.js').match(/const extra = (\[.*?\]);/s)[1].replace(/'/g, '"'));
+extra.forEach(f => { if (!fs.existsSync(path.join(__dirname, f))) fail('sound cached by sw.js is missing: ' + f); });
 files.filter(f => f !== './').forEach(f => { if (!fs.existsSync(path.join(__dirname, f))) fail('file cached by sw.js is missing: ' + f); });
 
-console.log(bad ? bad + ' problem(s)' : 'version ' + app + ': app.js, sw.js and CHANGELOG.md agree; ' + files.length + ' cached files exist');
+console.log(bad ? bad + ' problem(s)' : 'version ' + app + ': app.js, sw.js and CHANGELOG.md agree; ' + (files.length + extra.length) + ' cached files exist');
 process.exit(bad ? 1 : 0);

@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.0.1
+ * Version   : 1.0.3
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
- * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, hintsQty, ruleToJSON, ruleFromJSON
+ * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, hintsQty, ruleToJSON, ruleFromJSON, validGame
  * Changelog : see CHANGELOG.md
  * ---------------------------------------------------------------------------
  * JavaScript port of puzgen.cpp / rules.cpp from "Einstein Puzzle" 2.0
@@ -314,9 +314,37 @@
     throw new Error('unknown rule type: ' + o.t);
   }
 
+  /* Strict check of a saved game (from localStorage) before it is given to the engine or the interface.
+   * Returns true only for the exact structure written by the application: nothing is repaired, a doubtful save is rejected. */
+  function validGame(g) {
+    var isInt = function (v, lo, hi) { return typeof v === 'number' && v % 1 === 0 && v >= lo && v <= hi; };
+    var isBits = function (a) { return Array.isArray(a) && a.length === N * N * N && a.every(function (v) { return v === 0 || v === 1; }); };
+    var isCell = function (c) { return Array.isArray(c) && c.length === 2 && isInt(c[0], 0, N - 1) && isInt(c[1], 1, N); };
+    if (!g || typeof g !== 'object' || Array.isArray(g)) return false;
+    if (!Array.isArray(g.solved) || g.solved.length !== N) return false;
+    if (!g.solved.every(function (row) { return Array.isArray(row) && row.length === N && row.every(function (v) { return isInt(v, 1, N); }); })) return false;
+    if (!isBits(g.pos)) return false;
+    if (!Array.isArray(g.rules) || g.rules.length > 200) return false;
+    var okRule = g.rules.every(function (r) {
+      if (!r || typeof r !== 'object') return false;
+      switch (r.t) {
+        case 'near': case 'dir': case 'under': return isCell(r.a) && isCell(r.b);
+        case 'between': return isCell(r.a) && isCell(r.b) && isCell(r.c);
+        case 'open': return isInt(r.col, 0, N - 1) && isInt(r.row, 0, N - 1) && isInt(r.el, 1, N);
+        default: return false;
+      }
+    });
+    if (!okRule) return false;
+    if (!Array.isArray(g.checked) || g.checked.length > g.rules.length || !g.checked.every(function (i) { return isInt(i, 0, g.rules.length - 1); })) return false;
+    if (!Array.isArray(g.history) || g.history.length > 300 || !g.history.every(isBits)) return false;
+    if (typeof g.elapsed !== 'number' || !isFinite(g.elapsed) || g.elapsed < 0) return false;
+    if (!isInt(g.errors, 0, 1e6)) return false;
+    return true;
+  }
+
   var api = {
     N: N, Possibilities: Possibilities, genPuzzle: genPuzzle, openInitial: openInitial,
-    canSolve: canSolve, hintsQty: hintsQty, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON
+    canSolve: canSolve, hintsQty: hintsQty, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Stein = api;

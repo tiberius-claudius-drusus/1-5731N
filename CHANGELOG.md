@@ -1,5 +1,13 @@
 # Changelog - 1-5731N
 
+## 1.0.3 - 2026-10-14
+Robustness, following a second external review of the repository.
+- A saved game read back from `localStorage` is now checked strictly (`validGame` in `engine.js`: structure, sizes, value ranges, rule coordinates, history) before it reaches the engine or the interface. A truncated, edited or incompatible save is discarded instead of leaving "Continue" active and failing on every click, or opening a broken game. Covered by tests (200 generated games accepted, 14 kinds of corrupted saves rejected).
+- Imported statistics: a date must be a real calendar day (`2026-19-42` and `2026-02-30` were accepted).
+- `test_version.js` also checks the sound files cached separately by `sw.js`.
+- Look: the "choose" button (check mark) is now green on a green background in every theme, the counterpart of the red cross on a red background (`--mode-ok-bg/fg/bd`, documented in `THEMES.md`).
+- The short tap / long press reminder now stays permanently at the bottom of the screen, as it already did in the zoom panel (the toast that replaced it is gone). It is hidden while the zoom panel, which has its own, is open.
+
 ## 1.0.2 - 2026-10-14
 Hardening, following an external security review of the repository.
 - Content Security Policy (`<meta http-equiv>` in `index.html`): scripts, workers, manifest, images, media and connections only from the application's own origin; no plugins, no `<base>`, no form submission. Inline styles stay allowed (the style sheet is inlined, the symbols use style attributes).

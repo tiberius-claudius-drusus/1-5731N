@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.0.2
+ * Version   : 1.0.3
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.0.2', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.0.3', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var $ = function (id) { return document.getElementById(id); };
@@ -43,7 +43,7 @@
   /* ---------- screens ---------- */
   function show(id) {
     ['s-home', 's-game', 's-help', 's-stats', 's-options'].forEach(function (s) { $(s).classList.toggle('on', s === id); });
-    if (id === 's-home') { $('b-continue').disabled = !load(KEY_GAME, null); drawLogo(); }
+    if (id === 's-home') { $('b-continue').disabled = !loadGame(); drawLogo(); }
     if (id === 's-game') startTimer(); else stopTimer();
   }
   function goHome() { persist(); show('s-home'); }
@@ -118,7 +118,7 @@
     persist();
   }
   function askNew() {
-    if (load(KEY_GAME, null)) dialog(t('dlg.abandon'), [[t('dlg.no')], [t('dlg.yesNew'), newGame]]);
+    if (loadGame()) dialog(t('dlg.abandon'), [[t('dlg.no')], [t('dlg.yesNew'), newGame]]);
     else newGame();
   }
 
@@ -311,10 +311,10 @@
   function setModeButtons() {
     var ex = opt.mode !== 'choose';
     $('g-mode').innerHTML = GL.icon(ex ? 'no' : 'ok');
-    $('g-mode').classList.toggle('excl', ex);
+    $('g-mode').classList.toggle('excl', ex); $('g-mode').classList.toggle('chs', !ex);
     $('z-mode').innerHTML = GL.icon(ex ? 'no' : 'ok');
-    $('z-mode').classList.toggle('excl', ex);
-    $('zcap').innerHTML = t(ex ? 'cap.excl' : 'cap.choose');
+    $('z-mode').classList.toggle('excl', ex); $('z-mode').classList.toggle('chs', !ex);
+    $('zcap').innerHTML = $('gcap').innerHTML = t(ex ? 'cap.excl' : 'cap.choose');   // the caption stays under the board (and in the zoom panel)
   }
   function applyHand() {
     var left = opt.hand === 'left';
@@ -326,7 +326,6 @@
   function toggleMode() {
     opt.mode = opt.mode === 'choose' ? 'excl' : 'choose'; save(KEY_OPT, opt);
     setModeButtons();
-    if (!zoomCell) toast(I.plain(t(opt.mode === 'choose' ? 'cap.choose' : 'cap.excl')));
   }
   $('g-mode').onclick = toggleMode;
   $('z-mode').onclick = toggleMode;
@@ -385,7 +384,13 @@
 
   /* ---------- accueil, aide, stats ---------- */
   $('b-new').onclick = askNew;
-  $('b-continue').onclick = function () { var g = load(KEY_GAME, null); if (g) setup(g); };
+  /* The saved game, or null: a save that fails the strict check (truncated, edited, from another version) is dropped. */
+  function loadGame() {
+    var g = load(KEY_GAME, null);
+    if (g && !E.validGame(g)) { drop(KEY_GAME); g = null; }
+    return g;
+  }
+  $('b-continue').onclick = function () { var g = loadGame(); if (g) setup(g); else $('b-continue').disabled = true; };
   $('b-help').onclick = function () { show('s-help'); history.pushState({}, ''); };
   $('b-stats').onclick = function () { renderStats(); show('s-stats'); history.pushState({}, ''); };
   Array.prototype.forEach.call(document.querySelectorAll('.back'), function (b) { b.onclick = function () { show('s-home'); }; });
@@ -449,6 +454,13 @@
     }
     download();
   }
+  /* YYYY-MM-DD that is a real calendar day (2026-19-42 and 2026-02-30 are rejected). */
+  function isRealDate(d) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d);
+    if (!m) return false;
+    var y = +m[1], mo = +m[2], da = +m[3], x = new Date(Date.UTC(y, mo - 1, da));
+    return x.getUTCFullYear() === y && x.getUTCMonth() === mo - 1 && x.getUTCDate() === da;
+  }
   /* Strict check of a file coming from outside: nothing is kept that is not a number or a date. */
   function cleanImport(obj) {
     if (!obj || typeof obj !== 'object' || obj.app !== 'stein' || !Array.isArray(obj.games) || obj.games.length > 5000) return null;
@@ -459,7 +471,7 @@
       var tm = g.t, er = g.errors, d = g.d;
       if (typeof tm !== 'number' || !isFinite(tm) || tm < 0 || tm > 86400000 * 7) return null;
       if (typeof er !== 'number' || !isFinite(er) || er < 0 || er > 100000) return null;
-      if (typeof d !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return null;
+      if (typeof d !== 'string' || !isRealDate(d)) return null;
       out.push({ t: Math.round(tm), errors: Math.round(er), d: d });
     }
     var started = typeof obj.started === 'number' && isFinite(obj.started) && obj.started >= 0 ? Math.min(Math.round(obj.started), 1e6) : 0;
