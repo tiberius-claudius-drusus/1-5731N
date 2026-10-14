@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ru.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Russian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("ru", {
     "packs.bad": "Недопустимый набор",
     "packs.badVersion": "Этот набор несовместим с этой версией игры",
     "packs.avail": "Доступные наборы",
-    "packs.get": "Установить"
+    "packs.get": "Установить",
+    "new.noPuzzle": "Для этого уровня головоломка не найдена, попробуйте ещё раз."
   }
 });

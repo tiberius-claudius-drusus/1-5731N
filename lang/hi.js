@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/hi.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Hindi (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("hi", {
     "packs.bad": "अमान्य पैक",
     "packs.badVersion": "यह पैक खेल के इस संस्करण के साथ संगत नहीं है",
     "packs.avail": "उपलब्ध पैक",
-    "packs.get": "इंस्टॉल करें"
+    "packs.get": "इंस्टॉल करें",
+    "new.noPuzzle": "इस स्तर के लिए कोई पहेली नहीं मिली, फिर से प्रयास करें।"
   }
 });

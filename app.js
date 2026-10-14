@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.2.1
+ * Version   : 1.2.2
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.2.1', BUILD_DATE = '2026-10-15';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.2.2', BUILD_DATE = '2026-10-15';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -188,8 +188,10 @@
     if (code && !played[code]) return code;
     var t0 = performance.now();                                  // library exhausted for this level: search for one (a short while)
     while (performance.now() - t0 < 2500) {
-      var g = E.genPuzzle();
-      if (E.gradeOf(g.solved, g.rules).level === level && !played[g.code]) return g.code;
+      try {
+        var g = E.genPuzzle();
+        if (E.gradeOf(g.solved, g.rules).level === level && !played[g.code]) return g.code;
+      } catch (e) { break; }                                     // generation failed (bounded loops): give up on this level
     }
     return code;                                                 // may be null (empty level and nothing found)
   }
@@ -288,7 +290,7 @@
     for (var lv = 0; lv < E.LEVEL_COUNT; lv++) (function (l) {
       btns.push([t('lvl.' + l), function () {
         var code = codeForLevel(l);
-        if (code) startPuzzle(code); else toast(t('code.invalid'));
+        if (code) startPuzzle(code); else toast(t('new.noPuzzle'));
       }]);
     })(lv);
     btns.push([t('common.cancel'), askNew]);
@@ -841,12 +843,7 @@
     download();
   }
   /* YYYY-MM-DD that is a real calendar day (2026-19-42 and 2026-02-30 are rejected). */
-  function isRealDate(d) {
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d);
-    if (!m) return false;
-    var y = +m[1], mo = +m[2], da = +m[3], x = new Date(Date.UTC(y, mo - 1, da));
-    return x.getUTCFullYear() === y && x.getUTCMonth() === mo - 1 && x.getUTCDate() === da;
-  }
+  function isRealDate(d) { return E.validDate(d); }
   /* Strict check of a file coming from outside: nothing is kept that is not a number or a date. */
   function cleanImport(obj) {
     if (!obj || typeof obj !== 'object' || obj.app !== 'stein' || !Array.isArray(obj.games) || obj.games.length > 5000) return null;

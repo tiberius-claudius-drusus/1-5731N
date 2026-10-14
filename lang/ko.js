@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ko.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Korean (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("ko", {
     "packs.bad": "잘못된 팩",
     "packs.badVersion": "이 팩은 이 버전의 게임과 호환되지 않습니다",
     "packs.avail": "사용 가능한 팩",
-    "packs.get": "설치"
+    "packs.get": "설치",
+    "new.noPuzzle": "이 레벨의 퍼즐을 찾지 못했습니다. 다시 시도하세요."
   }
 });

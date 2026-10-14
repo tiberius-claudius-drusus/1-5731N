@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/es.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Spanish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("es", {
     "packs.bad": "Paquete no válido",
     "packs.badVersion": "Este paquete no es compatible con esta versión del juego",
     "packs.avail": "Paquetes disponibles",
-    "packs.get": "Instalar"
+    "packs.get": "Instalar",
+    "new.noPuzzle": "No se encontró ningún puzle de este nivel, inténtalo de nuevo."
   }
 });

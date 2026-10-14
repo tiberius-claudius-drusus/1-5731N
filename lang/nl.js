@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/nl.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Dutch (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("nl", {
     "packs.bad": "Ongeldig pakket",
     "packs.badVersion": "Dit pakket is niet compatibel met deze versie van het spel",
     "packs.avail": "Beschikbare pakketten",
-    "packs.get": "Installeren"
+    "packs.get": "Installeren",
+    "new.noPuzzle": "Geen puzzel gevonden voor dit niveau, probeer opnieuw."
   }
 });

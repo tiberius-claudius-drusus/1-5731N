@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Turkish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("tr", {
     "packs.bad": "Geçersiz paket",
     "packs.badVersion": "Bu paket oyunun bu sürümüyle uyumlu değil",
     "packs.avail": "Mevcut paketler",
-    "packs.get": "Yükle"
+    "packs.get": "Yükle",
+    "new.noPuzzle": "Bu seviye için bulmaca bulunamadı, tekrar dene."
   }
 });
