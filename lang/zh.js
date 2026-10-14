@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/zh.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Chinese (Simplified) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("zh", {
     "code.invalid": "此代码无效。",
     "code.copied": "代码已复制",
     "code.aria": "谜题代码{code}（点按复制）",
-    "help.code": "每个谜题都有一个代码，显示在计时器下方：相同的代码总是得到相同的谜题。点按代码即可复制。在“新游戏”中，“输入谜题代码”可重玩某个谜题，“每日谜题”在同一天对所有人都相同（从午夜到午夜，按您设备的时区）。"
+    "help.code": "每个谜题都有一个代码，显示在计时器下方：相同的代码总是得到相同的谜题。点按代码即可复制。在“新游戏”中，“输入谜题代码”可重玩某个谜题，“每日谜题”在同一天对所有人都相同（从午夜到午夜，按您设备的时区）。",
+    "lvl.0": "简单",
+    "lvl.1": "普通",
+    "lvl.2": "困难",
+    "lvl.3": "专家",
+    "lvl.4": "极限",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "按难度",
+    "stats.nolevel": "无代码",
+    "new.level": "选择难度",
+    "packs.title": "谜题包",
+    "packs.count": "{n} 道谜题",
+    "packs.install": "安装谜题包（文件）",
+    "packs.remove": "移除",
+    "packs.removeConfirm": "要移除谜题包“{name}”吗？",
+    "packs.ok": "已安装谜题包：{name}",
+    "packs.bad": "无效的谜题包",
+    "packs.badVersion": "此谜题包与当前游戏版本不兼容",
+    "packs.avail": "可用的谜题包",
+    "packs.get": "安装"
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Latin (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("la", {
     "code.invalid": "Hic codex non valet.",
     "code.copied": "Codex exscriptus",
     "code.aria": "Codex aenigmatis {code} (tange ut exscribas)",
-    "help.code": "Omne aenigma codicem habet, sub horologio ostensum: idem codex semper idem aenigma dat. Codicem tange ut exscribas. In Ludo novo, «Codicem aenigmatis insere» aenigma iterum ludit, et «Aenigma diei» idem est omnibus eodem die (a media nocte ad mediam noctem, in zona horaria instrumenti tui)."
+    "help.code": "Omne aenigma codicem habet, sub horologio ostensum: idem codex semper idem aenigma dat. Codicem tange ut exscribas. In Ludo novo, «Codicem aenigmatis insere» aenigma iterum ludit, et «Aenigma diei» idem est omnibus eodem die (a media nocte ad mediam noctem, in zona horaria instrumenti tui).",
+    "lvl.0": "Facilis",
+    "lvl.1": "Mediocris",
+    "lvl.2": "Difficilis",
+    "lvl.3": "Peritus",
+    "lvl.4": "Extremus",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Per gradus",
+    "stats.nolevel": "Sine codice",
+    "new.level": "Gradum elige",
+    "packs.title": "Fasces aenigmatum",
+    "packs.count": "{n} aenigmata",
+    "packs.install": "Fascem instrue (tabella)",
+    "packs.remove": "Tolle",
+    "packs.removeConfirm": "Fascem «{name}» tollere?",
+    "packs.ok": "Fascis instructus: {name}",
+    "packs.bad": "Fascis invalidus",
+    "packs.badVersion": "Hic fascis cum hac ludi versione non congruit",
+    "packs.avail": "Fasces praesto",
+    "packs.get": "Instrue"
   }
 });

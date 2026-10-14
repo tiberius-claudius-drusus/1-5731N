@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Polish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("pl", {
     "code.invalid": "Ten kod jest nieprawidłowy.",
     "code.copied": "Skopiowano kod",
     "code.aria": "Kod łamigłówki {code} (dotknij, aby skopiować)",
-    "help.code": "Każda łamigłówka ma kod, wyświetlany pod czasomierzem: ten sam kod zawsze daje tę samą łamigłówkę. Dotknij kodu, aby go skopiować. W Nowej grze „Wpisz kod łamigłówki” pozwala zagrać ją ponownie, a „Łamigłówka dnia” jest taka sama dla wszystkich w tym samym dniu (od północy do północy, w strefie czasowej urządzenia)."
+    "help.code": "Każda łamigłówka ma kod, wyświetlany pod czasomierzem: ten sam kod zawsze daje tę samą łamigłówkę. Dotknij kodu, aby go skopiować. W Nowej grze „Wpisz kod łamigłówki” pozwala zagrać ją ponownie, a „Łamigłówka dnia” jest taka sama dla wszystkich w tym samym dniu (od północy do północy, w strefie czasowej urządzenia).",
+    "lvl.0": "Łatwy",
+    "lvl.1": "Normalny",
+    "lvl.2": "Trudny",
+    "lvl.3": "Ekspert",
+    "lvl.4": "Ekstremalny",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Według poziomu",
+    "stats.nolevel": "Bez kodu",
+    "new.level": "Wybierz poziom",
+    "packs.title": "Paczki łamigłówek",
+    "packs.count": "{n} łamigłówek",
+    "packs.install": "Zainstaluj paczkę (plik)",
+    "packs.remove": "Usuń",
+    "packs.removeConfirm": "Usunąć paczkę „{name}”?",
+    "packs.ok": "Zainstalowano paczkę: {name}",
+    "packs.bad": "Nieprawidłowa paczka",
+    "packs.badVersion": "Ta paczka nie jest zgodna z tą wersją gry",
+    "packs.avail": "Dostępne paczki",
+    "packs.get": "Zainstaluj"
   }
 });

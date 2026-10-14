@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Turkish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("tr", {
     "code.invalid": "Bu kod geçerli değil.",
     "code.copied": "Kod kopyalandı",
     "code.aria": "Bulmaca kodu {code} (kopyalamak için dokunun)",
-    "help.code": "Her bulmacanın sayacın altında gösterilen bir kodu vardır: aynı kod her zaman aynı bulmacayı verir. Kodu kopyalamak için dokunun. Yeni oyun içinde \"Bulmaca kodu gir\" bir bulmacayı yeniden oynatır, \"Günün bulmacası\" ise aynı tarihte herkes için aynıdır (gece yarısından gece yarısına, cihazınızın saat diliminde)."
+    "help.code": "Her bulmacanın sayacın altında gösterilen bir kodu vardır: aynı kod her zaman aynı bulmacayı verir. Kodu kopyalamak için dokunun. Yeni oyun içinde \"Bulmaca kodu gir\" bir bulmacayı yeniden oynatır, \"Günün bulmacası\" ise aynı tarihte herkes için aynıdır (gece yarısından gece yarısına, cihazınızın saat diliminde).",
+    "lvl.0": "Kolay",
+    "lvl.1": "Normal",
+    "lvl.2": "Zor",
+    "lvl.3": "Uzman",
+    "lvl.4": "Aşırı",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Seviyeye göre",
+    "stats.nolevel": "Kodsuz",
+    "new.level": "Seviye seç",
+    "packs.title": "Bulmaca paketleri",
+    "packs.count": "{n} bulmaca",
+    "packs.install": "Paket yükle (dosya)",
+    "packs.remove": "Kaldır",
+    "packs.removeConfirm": "“{name}” paketi kaldırılsın mı?",
+    "packs.ok": "Paket yüklendi: {name}",
+    "packs.bad": "Geçersiz paket",
+    "packs.badVersion": "Bu paket oyunun bu sürümüyle uyumlu değil",
+    "packs.avail": "Mevcut paketler",
+    "packs.get": "Yükle"
   }
 });

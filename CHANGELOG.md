@@ -1,5 +1,14 @@
 # Changelog - 1-5731N
 
+## 1.2.0 - 2026-10-15
+Levels, puzzle packs, background generation.
+- **Difficulty**: `gradeSolve()` replays the solution like a systematic player (easiest kind of clue first); its score becomes a **note 0-20** (rank among 100 002 generated puzzles) and one of **five levels**: Facile, Normal, Difficile, Expert, Extrême (the top 0.5 %, 1 puzzle in 200). The level is shown under the code on the board; it is recomputed from the puzzle, so it needs no new field in codes or saves. The scale is versioned (`SCALE_VERSION = 1`).
+- **New game** offers "Choose a level" (five levels); the **puzzle of the day** now has a level drawn uniformly from the date, from 2026-10-15 (earlier dates keep the old rule). Its level is shown in the menu.
+- **Statistics by level** (won, best time, average time); games already played with a code are classified afterwards, a few at a time. No change to the export/import file.
+- **Puzzle packs**: base pack of 2 500 puzzles (`lib_base.js`, 500 per level, 22 KB compressed); add-ons are JSON lists of codes (`addons/`, or "Install a pack (file)" in Options), validated strictly and refused if made for another generator or scale. Puzzles already played are not offered again.
+- **Background generation**: while a game is on screen, one puzzle every 10 s is made, graded and kept for its level (40 per level at most), in a Web Worker.
+- Tools: `tools/grade_distribution.js`, `tools/make_pack.js`; test `test_library.js`. 20 new texts in the 20 languages (same reservation as the others: not proofread by native speakers).
+
 ## 1.1.0 - 2026-10-14
 Puzzle codes, puzzle of the day, and a tidier menu.
 - Every puzzle has a **code** `01-AAAA-AAAA` (generator version + 8-character seed, 40 bits): the same code always gives the same puzzle. It is shown in small characters under the timer (tap it to copy it), on the victory screen, and kept with each game in the statistics (also in the export/import file, where it must be well formed).

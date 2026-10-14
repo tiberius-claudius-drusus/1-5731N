@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/en.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in English (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("en", {
     "code.invalid": "This code is not valid.",
     "code.copied": "Code copied",
     "code.aria": "Puzzle code {code} (tap to copy)",
-    "help.code": "Every puzzle has a code, shown under the timer: the same code always gives the same puzzle. Tap the code to copy it. In New game, \"Enter a puzzle code\" replays a puzzle, and the \"Puzzle of the day\" is the same for everyone on the same date (midnight to midnight, in the time zone of your device)."
+    "help.code": "Every puzzle has a code, shown under the timer: the same code always gives the same puzzle. Tap the code to copy it. In New game, \"Enter a puzzle code\" replays a puzzle, and the \"Puzzle of the day\" is the same for everyone on the same date (midnight to midnight, in the time zone of your device).",
+    "lvl.0": "Easy",
+    "lvl.1": "Normal",
+    "lvl.2": "Hard",
+    "lvl.3": "Expert",
+    "lvl.4": "Extreme",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "By level",
+    "stats.nolevel": "Without code",
+    "new.level": "Choose a level",
+    "packs.title": "Puzzle packs",
+    "packs.count": "{n} puzzles",
+    "packs.install": "Install a pack (file)",
+    "packs.remove": "Remove",
+    "packs.removeConfirm": "Remove the pack \"{name}\"?",
+    "packs.ok": "Pack installed: {name}",
+    "packs.bad": "Invalid pack",
+    "packs.badVersion": "This pack is not compatible with this version of the game",
+    "packs.avail": "Available packs",
+    "packs.get": "Install"
   }
 });

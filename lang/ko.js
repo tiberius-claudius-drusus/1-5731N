@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ko.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Korean (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("ko", {
     "code.invalid": "이 코드는 올바르지 않습니다.",
     "code.copied": "코드를 복사했습니다",
     "code.aria": "퍼즐 코드 {code} (눌러서 복사)",
-    "help.code": "모든 퍼즐에는 타이머 아래에 표시되는 코드가 있습니다. 같은 코드는 항상 같은 퍼즐을 만듭니다. 코드를 누르면 복사됩니다. 새 게임에서 '퍼즐 코드 입력'으로 퍼즐을 다시 플레이할 수 있고, '오늘의 퍼즐'은 같은 날짜에 모든 사람에게 같습니다(자정부터 자정까지, 기기의 시간대 기준)."
+    "help.code": "모든 퍼즐에는 타이머 아래에 표시되는 코드가 있습니다. 같은 코드는 항상 같은 퍼즐을 만듭니다. 코드를 누르면 복사됩니다. 새 게임에서 '퍼즐 코드 입력'으로 퍼즐을 다시 플레이할 수 있고, '오늘의 퍼즐'은 같은 날짜에 모든 사람에게 같습니다(자정부터 자정까지, 기기의 시간대 기준).",
+    "lvl.0": "쉬움",
+    "lvl.1": "보통",
+    "lvl.2": "어려움",
+    "lvl.3": "전문가",
+    "lvl.4": "극한",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "레벨별",
+    "stats.nolevel": "코드 없음",
+    "new.level": "레벨 선택",
+    "packs.title": "퍼즐 팩",
+    "packs.count": "퍼즐 {n}개",
+    "packs.install": "팩 설치(파일)",
+    "packs.remove": "삭제",
+    "packs.removeConfirm": "\"{name}\" 팩을 삭제할까요?",
+    "packs.ok": "팩 설치됨: {name}",
+    "packs.bad": "잘못된 팩",
+    "packs.badVersion": "이 팩은 이 버전의 게임과 호환되지 않습니다",
+    "packs.avail": "사용 가능한 팩",
+    "packs.get": "설치"
   }
 });

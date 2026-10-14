@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,9 +11,10 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.1.0', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.2.0', BUILD_DATE = '2026-10-15';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
+  var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
   var $ = function (id) { return document.getElementById(id); };
   var LET = 'ABCDEF', let_ = 'abcdef';
 
@@ -157,11 +158,80 @@
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(code).then(done, fallback); return; } } catch (e) {}
     fallback();
   };
+  /* ---------- puzzle packs, puzzles already played, puzzles made in the background ---------- */
+  var LIB = window.SteinLib, MAX_PLAYED = 2500, POOL_MAX = 40;
+  function validSavedPacks() {                                   // add-ons kept on this device, re-checked each time
+    var a = load(KEY_PACKS, []), ok = [];
+    (Array.isArray(a) ? a : []).forEach(function (p) { var r = LIB.install(p); if (r.ok) ok.push(r.pack); });
+    return ok;
+  }
+  var savedPacks = validSavedPacks();
+  function writePacks() { try { localStorage.setItem(KEY_PACKS, JSON.stringify(savedPacks)); return true; } catch (e) { return false; } }
+  function playedSet() { var o = {}, a = load(KEY_PLAYED, []); (Array.isArray(a) ? a : []).forEach(function (c) { if (typeof c === 'string') o[c] = 1; }); return o; }
+  function markPlayed(code) {
+    if (!code) return;
+    var a = load(KEY_PLAYED, []); if (!Array.isArray(a)) a = [];
+    if (a.indexOf(code) < 0) { a.push(code); if (a.length > MAX_PLAYED) a.shift(); save(KEY_PLAYED, a); }
+  }
+  function poolLoad() { var p = load(KEY_POOL, {}); return p && typeof p === 'object' && !Array.isArray(p) ? p : {}; }
+  /* a puzzle of the level: first one made in the background on this device, then the packs (not played yet), else made on the spot */
+  function codeForLevel(level) {
+    var played = playedSet(), pool = poolLoad(), list = Array.isArray(pool[level]) ? pool[level] : [];
+    while (list.length) {
+      var c = list.shift();
+      if (typeof c === 'string' && E.canonicalCode(c) === c && !played[c]) { pool[level] = list; save(KEY_POOL, pool); return c; }
+    }
+    pool[level] = list; save(KEY_POOL, pool);
+    var code = LIB.pick(level, played);
+    if (code && !played[code]) return code;
+    var t0 = performance.now();                                  // library exhausted for this level: search for one (a short while)
+    while (performance.now() - t0 < 2500) {
+      var g = E.genPuzzle();
+      if (E.gradeOf(g.solved, g.rules).level === level && !played[g.code]) return g.code;
+    }
+    return code;                                                 // may be null (empty level and nothing found)
+  }
+  /* background generation: one puzzle every 10 s while a game is on screen, graded and kept per level (at most POOL_MAX each) */
+  var bgWorker = null, bgOff = false;
+  function bgAsk() {
+    if (bgOff || document.hidden || !$('s-game').classList.contains('on') || !G || ended) return;
+    try {
+      if (!bgWorker) {
+        bgWorker = new Worker('worker.js');
+        bgWorker.onmessage = function (ev) {
+          var m = ev.data;
+          if (!m || m.error || typeof m.code !== 'string' || E.canonicalCode(m.code) !== m.code || !(m.level >= 0 && m.level < E.LEVEL_COUNT)) return;
+          var pool = poolLoad(), l = Array.isArray(pool[m.level]) ? pool[m.level] : [];
+          if (l.length >= POOL_MAX || l.indexOf(m.code) >= 0 || playedSet()[m.code]) return;
+          l.push(m.code); pool[m.level] = l; save(KEY_POOL, pool);
+        };
+        bgWorker.onerror = function () { bgOff = true; };
+      }
+      bgWorker.postMessage(1);
+    } catch (e) { bgOff = true; }
+  }
+  setInterval(bgAsk, 10000);
+
+  /* the level of the puzzle (name and note 0-20), small under the code */
+  var grade = null;
+  function showLevel() {
+    var gl = $('g-level'); gl.hidden = !grade;
+    if (grade) gl.textContent = t('lvl.show', { name: t('lvl.' + grade.level), note: grade.note });
+  }
+  /* level of a code, kept in a cache apart from the statistics (never exported; recomputed if the scale changes) */
+  var KEY_LVL = 'stein.lvl.v1';
+  function lvlCache() { var c = load(KEY_LVL, null); return c && c.s === E.SCALE_VERSION && c.m && typeof c.m === 'object' ? c : { s: E.SCALE_VERSION, m: {} }; }
+  function cacheLevel(code, level) { if (!code) return; var c = lvlCache(); c.m[code] = level; save(KEY_LVL, c); }
+  function levelForCode(code, cache) {
+    if (cache.m[code] != null) return cache.m[code];
+    try { var g = E.genPuzzle(code); var lv = E.gradeOf(g.solved, g.rules).level; cache.m[code] = lv; return lv; } catch (e) { cache.m[code] = -1; return -1; }
+  }
   function setup(g) {
     G = g; ended = false; focusCell = [0, 0];
     rules = G.rules.map(E.ruleFromJSON);
     pos = new E.Possibilities(G.pos);
-    renderAll(); showCode();
+    grade = E.gradeOf(G.solved, rules);
+    renderAll(); showCode(); showLevel();
     closeZoom(); setModeButtons(); applyHand();
     show('s-game');
   }
@@ -172,6 +242,7 @@
     E.openInitial(p, g.rules);
     var st = load(KEY_STATS, { games: [], started: 0 });
     st.started = (st.started || 0) + 1; save(KEY_STATS, st);
+    markPlayed(g.code);
     setup({
       solved: g.solved, rules: g.rules.map(E.ruleToJSON), code: g.code,
       pos: Array.prototype.slice.call(p.p), checked: [], history: [],
@@ -209,15 +280,28 @@
       }]
     ], { field: { value: (E.CODE_VERSION < 10 ? '0' : '') + E.CODE_VERSION + '-', placeholder: '01-AAAA-AAAA', label: t('code.prompt') }, escIndex: 0, enterIndex: 1 });
   }
-  /* "New game": a random puzzle, the puzzle of the day, or a puzzle from a code */
+  /* "New game": a random puzzle, a puzzle of a chosen level, the puzzle of the day, or a puzzle from a code */
+  function askLevel() {
+    var btns = [];
+    for (var lv = 0; lv < E.LEVEL_COUNT; lv++) (function (l) {
+      btns.push([t('lvl.' + l), function () {
+        var code = codeForLevel(l);
+        if (code) startPuzzle(code); else toast(t('code.invalid'));
+      }]);
+    })(lv);
+    btns.push([t('common.cancel'), askNew]);
+    dialog(t('new.level'), btns, { escIndex: btns.length - 1 });
+  }
   function askNew() {
-    var dc = E.dailyCode(localDate()), done = bestTimeFor(dc);
+    var today = localDate(), dc = LIB.daily(today), done = bestTimeFor(dc), cache = lvlCache(), dl = levelForCode(dc, cache);
+    save(KEY_LVL, cache);
     dialog(t('home.new'), [
       [t('new.random'), function () { startPuzzle(null); }],
-      [t('new.daily') + (done != null ? ' ✓ (' + t('new.dailyDone', { time: fmt(done) }) + ')' : ''), function () { startPuzzle(dc); }],
+      [t('new.level'), askLevel],
+      [t('new.daily') + (dl >= 0 ? ' · ' + t('lvl.' + dl) : '') + (done != null ? ' ✓ (' + t('new.dailyDone', { time: fmt(done) }) + ')' : ''), function () { startPuzzle(dc); }],
       [t('new.code'), askCode],
       [t('common.cancel')]
-    ], { escIndex: 3 });
+    ], { escIndex: 4 });
   }
 
   /* ---------- chrono ---------- */
@@ -355,6 +439,7 @@
     st.games.push(rec);
     if (st.games.length > 500) st.games.shift();
     save(KEY_STATS, st); drop(KEY_GAME);
+    if (grade) cacheLevel(G.code, grade.level);
     play('applause');
     dialog([t('win.title'), t('win.time', { time: fmt(G.elapsed) }), G.errors ? t('win.errors', { n: G.errors }) : t('win.clean')].concat(G.code ? [G.code] : []).join('\n'),
       [[t('win.menu'), function () { show('s-home'); }], [t('win.new'), askNew]], { escIndex: -1 });
@@ -574,20 +659,78 @@
       '<div class="optrow"><h3>' + t('opt.version') + '</h3>' + seg('variant', th.variants.map(function (x) { return [x.id, I.tOr('variant.' + x.id, x.label)]; }), opt.variant) + '</div>' +
       '<div class="optrow"><h3>' + t('opt.lang') + '</h3><select id="opt-lang">' + I.list().map(function (l) {
         return '<option value="' + l.code + '"' + (l.code === curLang ? ' selected' : '') + '>' + l.name + '</option>';
-      }).join('') + '</select></div>';
+      }).join('') + '</select></div>' + packsHtml();
   }
+  /* ---------- puzzle packs (options) ---------- */
+  var avail = null;                                              // add-ons offered by the site (addons/index.json), if any
+  function packsHtml() {
+    var h = '<div class="optrow"><h3>' + t('packs.title') + '</h3><table>';
+    LIB.packs().forEach(function (p) {
+      h += '<tr><td>' + esc(p.name) + '</td><td>' + esc(t('packs.count', { n: p.count })) + '</td><td>' +
+        (p.base ? '' : '<button class="pk-del" data-id="' + esc(p.id) + '">' + esc(t('packs.remove')) + '</button>') + '</td></tr>';
+    });
+    h += '</table><button id="pk-install">' + esc(t('packs.install')) + '</button>';
+    var have = {}; LIB.packs().forEach(function (p) { have[p.id] = 1; });
+    var offer = (avail || []).filter(function (a) { return !have[a.id]; });
+    if (offer.length) {
+      h += '<h3>' + t('packs.avail') + '</h3><table>';
+      offer.forEach(function (a) {
+        h += '<tr><td>' + esc(a.name) + '</td><td>' + esc(t('packs.count', { n: a.count })) + '</td><td><button class="pk-get" data-f="' + esc(a.file) + '">' + esc(t('packs.get')) + '</button></td></tr>';
+      });
+      h += '</table>';
+    }
+    return h + '</div>';
+  }
+  function loadAvail() {                                         // optional: the file may not exist, nothing is shown then
+    if (avail !== null) return; avail = [];
+    fetch('addons/index.json').then(function (r) { return r.ok ? r.json() : []; }).then(function (a) {
+      if (!Array.isArray(a)) return;
+      avail = a.filter(function (x) {
+        return x && typeof x.name === 'string' && x.name.length <= 40 && typeof x.id === 'string' && /^[a-z0-9-]{1,32}$/.test(x.id) &&
+          typeof x.file === 'string' && /^[a-z0-9-]{1,40}\.json$/.test(x.file) && Number.isInteger(x.count) && x.count > 0 && x.count <= 20000;
+      }).slice(0, 20);
+      if ($('s-options').classList.contains('on')) renderOptions();
+    }).catch(function () {});
+  }
+  function installPack(obj) {
+    var r = LIB.install(obj);
+    if (!r.ok) { toast(t(r.error === 'gen' || r.error === 'scale' ? 'packs.badVersion' : 'packs.bad')); return; }
+    savedPacks = savedPacks.filter(function (p) { return p.id !== r.pack.id; }); savedPacks.push(r.pack);
+    if (!writePacks()) { LIB.remove(r.pack.id); savedPacks.pop(); toast(t('packs.bad')); return; }
+    toast(t('packs.ok', { name: r.pack.name })); renderOptions();
+  }
+  $('pack-file').addEventListener('change', function () {
+    var f = this.files && this.files[0];
+    if (!f || f.size > 1024 * 1024) { toast(t('packs.bad')); return; }
+    var fr = new FileReader();
+    fr.onload = function () { var o = null; try { o = JSON.parse(String(fr.result)); } catch (e) {} installPack(o); };
+    fr.onerror = function () { toast(t('packs.bad')); };
+    fr.readAsText(f);
+  });
   $('opt-body').addEventListener('change', function (ev) {
     if (ev.target.id === 'opt-lang') { curLang = opt.lang = I.set(ev.target.value); save(KEY_OPT, opt); applyLang(); }
   });
   $('opt-body').addEventListener('click', function (ev) {
     var b = ev.target.closest('button'); if (!b) return;
+    if (b.id === 'pk-install') { $('pack-file').value = ''; $('pack-file').click(); return; }
+    if (b.classList.contains('pk-get')) {
+      fetch('addons/' + b.dataset.f).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(installPack).catch(function () { toast(t('packs.bad')); });
+      return;
+    }
+    if (b.classList.contains('pk-del')) {
+      var id = b.dataset.id, nm = (LIB.packs().filter(function (p) { return p.id === id; })[0] || {}).name || id;
+      dialog(t('packs.removeConfirm', { name: nm }), [[t('dlg.no')], [t('packs.remove'), function () {
+        LIB.remove(id); savedPacks = savedPacks.filter(function (p) { return p.id !== id; }); writePacks(); renderOptions();
+      }]]);
+      return;
+    }
     var k = b.parentNode.dataset.k, v = b.dataset.v;
     if (k === 'sound') { opt.sound = v === 'on'; save(KEY_OPT, opt); play('click'); }
     else if (k === 'theme') setLook(v, opt.variant);
     else if (k === 'variant') setLook(opt.theme, v);
     renderOptions();
   });
-  $('b-options').onclick = function () { renderOptions(); show('s-options'); history.pushState({}, ''); };
+  $('b-options').onclick = function () { renderOptions(); show('s-options'); history.pushState({}, ''); loadAvail(); };
 
   /* ---------- accueil, aide, stats ---------- */
   $('b-new').onclick = askNew;
@@ -635,7 +778,41 @@
     g.slice(-10).reverse().forEach(function (x) {
       h += '<tr><td>' + esc(fmtDate(x.d)) + '</td><td>' + (x.errors ? esc(t('stats.err', { n: +x.errors || 0 })) : '') + '</td><td>' + esc(fmt(x.t)) + '</td><td class="cd">' + esc(E.canonicalCode(x.c) || '') + '</td></tr>';
     });
-    $('stats-body').innerHTML = h + '</table>';
+    $('stats-body').innerHTML = h + '</table>' + levelTable(g);
+    fillLevels(g);
+  }
+  /* statistics by level: the level of a game comes from its code (cache); old games are classified a few at a time */
+  function levelTable(g) {
+    var cache = lvlCache(), rows = [], pending = 0, lv, i;
+    var by = [[], [], [], [], []], none = 0;
+    g.forEach(function (x) {
+      var c = x.c ? E.canonicalCode(x.c) : null;
+      if (!c) { none++; return; }
+      if (cache.m[c] == null) { pending++; return; }
+      if (cache.m[c] < 0) { none++; return; }
+      by[cache.m[c]].push(x);
+    });
+    var h = '<h3>' + t('stats.bylevel') + '</h3><table><tr><th></th><th>' + t('stats.won') + '</th><th>' + t('stats.best') + '</th><th>' + t('stats.avg') + '</th></tr>';
+    for (lv = 0; lv < E.LEVEL_COUNT; lv++) {
+      var ts = by[lv].map(function (x) { return x.t; });
+      h += '<tr><td>' + esc(t('lvl.' + lv)) + '</td><td>' + ts.length + '</td><td>' + (ts.length ? esc(fmt(Math.min.apply(null, ts))) : '–') +
+        '</td><td>' + (ts.length ? esc(fmt(ts.reduce(function (a, b) { return a + b; }, 0) / ts.length)) : '–') + '</td></tr>';
+    }
+    if (none) h += '<tr><td>' + esc(t('stats.nolevel')) + '</td><td>' + none + '</td><td></td><td></td></tr>';
+    return h + '</table>' + (pending ? '<p id="lvl-wait">…</p>' : '');
+  }
+  var fillT = 0;
+  function fillLevels(g) {
+    clearTimeout(fillT);
+    var cache = lvlCache(), todo = [];
+    g.forEach(function (x) { var c = x.c ? E.canonicalCode(x.c) : null; if (c && cache.m[c] == null && todo.indexOf(c) < 0) todo.push(c); });
+    if (!todo.length) return;
+    fillT = setTimeout(function () {
+      var t0 = performance.now(), i = 0;
+      while (i < todo.length && performance.now() - t0 < 40) { levelForCode(todo[i], cache); i++; }
+      save(KEY_LVL, cache);
+      if ($('s-stats').classList.contains('on')) renderStats();
+    }, 30);
   }
 
   /* ---------- statistics backup: export / import of a .json file ---------- */
@@ -738,7 +915,7 @@
   /* ---------- language: (re)writes everything that holds text ---------- */
   function applyLang() {
     I.apply();
-    renderHelp(); setModeButtons(); showCode();
+    renderHelp(); setModeButtons(); showCode(); showLevel();
     $('ver').textContent = t('foot.build', { v: VERSION, date: BUILD_DATE });
     if ($('s-options').classList.contains('on')) renderOptions();
     if ($('s-stats').classList.contains('on')) renderStats();

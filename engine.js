@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
- * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, hintsQty, ruleToJSON, ruleFromJSON, validGame, parseCode, canonicalCode, dailyCode
+ * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, gradeSolve, gradeOf, noteOf, levelOf, LEVEL_COUNT, SCALE_VERSION, hintsQty, ruleToJSON, ruleFromJSON, validGame, parseCode, canonicalCode, dailyCode
  * Changelog : see CHANGELOG.md
  * ---------------------------------------------------------------------------
  * JavaScript port of puzgen.cpp / rules.cpp from "Einstein Puzzle" 2.0
@@ -292,6 +292,57 @@
     return pos.isSolved();
   }
 
+  /* ---------- Difficulty ----------
+   * gradeSolve() replays the solution the way a systematic player would: the clues given at the start are opened, then at
+   * every step the EASIEST kind of clue that still removes a possibility is applied (one clue at a time), until the board
+   * is solved or nothing moves any more. The tier of each step is what it cost: under 1, dir 2, near 3, between 4.
+   * It only reads the puzzle (solution + clues), so it never changes a puzzle or a code: the grade can be recomputed anywhere.
+   * Returns { solved, steps, tiers: [under, dir, near, between counts], maxTier, raw } ; raw = sum of the tier of every step. */
+  var TIER = { under: 1, dir: 2, near: 3, between: 4 };
+
+  function gradeSolve(pz, rules) {
+    var pos = new Possibilities(), byTier = [[], [], [], [], []], i, t;
+    openInitial(pos, rules);
+    for (i = 0; i < rules.length; i++) if (TIER[rules[i].t]) byTier[TIER[rules[i].t]].push(rules[i]);
+    var counts = [0, 0, 0, 0], steps = 0, raw = 0, maxTier = 0, moved;
+    do {
+      moved = false;
+      for (t = 1; t <= 4 && !moved; t++) {
+        for (i = 0; i < byTier[t].length; i++) {
+          if (byTier[t][i].apply(pos)) {
+            if (!pos.isValid(pz)) throw new Error('Invalid possibilities after ' + byTier[t][i].key());
+            counts[t - 1]++; steps++; raw += t; if (t > maxTier) maxTier = t;
+            moved = true; break;
+          }
+        }
+      }
+    } while (moved && !pos.isSolved());
+    return { solved: pos.isSolved(), steps: steps, tiers: counts, maxTier: maxTier, raw: raw };
+  }
+
+  /* ---------- Scale 0-20 and the five levels ----------
+   * The raw score of gradeSolve() is turned into a note 0..20 by RANK: each note holds about 1/21 of the puzzles the generator
+   * makes (cuts measured on 100 002 generated puzzles, see tools/grade_distribution.js: the cuts are the 1/21 ... 20/21 quantiles of the raw score, and the extreme cut its 99.5 % quantile). The five levels are bands of the note:
+   * 0 easy (notes 0-4), 1 normal (5-9), 2 hard (10-14), 3 expert (15-20), 4 extreme (the top 0.5 %, a raw score of
+   * LEVEL_EXTREME or more). The scale is FROZEN once published: changing a cut changes the level shown for an existing code,
+   * so it needs a new SCALE_VERSION (and a note in the changelog). */
+  var SCALE_VERSION = 1;
+  var SCALE_CUTS = [91, 97, 101, 105, 108, 111, 114, 117, 120, 122, 125, 128, 131, 134, 138, 142, 146, 152, 160, 172];
+  var LEVEL_EXTREME = 203;
+  var LEVEL_COUNT = 5;
+
+  function noteOf(raw) { var k = 0; while (k < SCALE_CUTS.length && raw >= SCALE_CUTS[k]) k++; return k; }
+  function levelOf(raw) {
+    if (raw >= LEVEL_EXTREME) return 4;
+    var n = noteOf(raw);
+    return n < 5 ? 0 : n < 10 ? 1 : n < 15 ? 2 : 3;
+  }
+  /* { raw, note, level, steps, solved } for a puzzle (solution + rule objects) */
+  function gradeOf(pz, rules) {
+    var g = gradeSolve(pz, rules);
+    return { raw: g.raw, note: noteOf(g.raw), level: levelOf(g.raw), steps: g.steps, solved: g.solved };
+  }
+
   function shuffle(arr) {
     for (var i = arr.length - 1; i > 0; i--) {
       var j = rnd(i + 1), t = arr[i]; arr[i] = arr[j]; arr[j] = t;
@@ -415,7 +466,7 @@
 
   var api = {
     N: N, Possibilities: Possibilities, genPuzzle: genPuzzle, openInitial: openInitial,
-    canSolve: canSolve, hintsQty: hintsQty, parseCode: parseCode, canonicalCode: canonicalCode, dailyCode: dailyCode, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
+    canSolve: canSolve, gradeSolve: gradeSolve, gradeOf: gradeOf, noteOf: noteOf, levelOf: levelOf, LEVEL_COUNT: LEVEL_COUNT, SCALE_VERSION: SCALE_VERSION, hintsQty: hintsQty, parseCode: parseCode, canonicalCode: canonicalCode, dailyCode: dailyCode, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Stein = api;
