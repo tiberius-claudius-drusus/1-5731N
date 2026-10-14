@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/de.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in German (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("de", {
     "packs.bad": "Ungültiges Paket",
     "packs.badVersion": "Dieses Paket ist mit dieser Spielversion nicht kompatibel",
     "packs.avail": "Verfügbare Pakete",
-    "packs.get": "Installieren"
+    "packs.get": "Installieren",
+    "new.noPuzzle": "Für diese Stufe wurde kein Rätsel gefunden, versuche es erneut."
   }
 });

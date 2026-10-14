@@ -1,5 +1,14 @@
 # Changelog - 1-5731N
 
+## 1.2.2 - 2026-10-15
+Targeted audit by ChatGPT of the published 1.2.1 (each point checked in the code and by measurement first).
+- **Dates**: one calendar check (`validDate`) shared by `dailyCode()`, `daily()` and `dailyLevel()`: `2026-19-42`, `2026-02-30`, `2025-02-29` are refused (the format alone was checked before). Also used by the statistics import.
+- **Saved games** (`validGame`): every clue must be true in the solution (the five kinds), the board and each history step must keep the solution, each solution row must hold 1 to 6 once, and the code of the game must give back exactly this puzzle.
+- **Generator**: the loops are bounded (20 000 rule draws per attempt, 2 000 attempts per code), then an error instead of a possible endless run; existing codes give the same puzzles (pinned by `test_code.js`). Measured on 40 000 puzzles: mean 11.6 ms, 99th percentile 22 ms, 99.99th 74 ms, maximum 192 ms. The on-the-spot search for a level is protected against a failure, and a level for which nothing is found says so (new text in the 20 languages).
+- **Packs**: a verified pick tries up to 20 puzzles (was 8) before giving up.
+- **Service worker**: when the installation of a new version fails (a file missing), the half-filled cache of that version is now deleted; the old version keeps serving, offline included (tested in a browser: offline start, update, failed install).
+- **Tests**: `test_engine.js` now exits with an error when a generated puzzle is not solved by deduction (it only counted before, so the CI could stay green).
+
 ## 1.2.1 - 2026-10-15
 Fourth review by Kimi K3 (each point checked in the code first; one was wrong and is not changed: `theme-color` already follows the theme), and the first add-on pack.
 - **Packs**: the score written in a pack only decides where a puzzle is *listed*. Before a puzzle is offered for a level, the game now rebuilds and grades it (`pickVerified`); one that does not match is dropped for the session. The documentation said a pack "cannot lie about difficulty": it now says exactly what is guaranteed.

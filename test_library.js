@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_library.js
- * Version   : 1.2.1
+ * Version   : 1.2.2
  * Role      : Library test: validation of packs, base pack consistency (levels recomputed from the codes), pick, puzzle of the day by level.
  * Depends on: Node.js ; engine.js ; library.js ; lib_base.js
  * Called by : by hand: node test_library.js (exit code 1 on any problem) ; GitHub Actions
@@ -72,7 +72,7 @@ ok('pick: all played, still one of the level', per[2].indexOf(L.pick(2, played))
   L.remove('liar');
 }
 // the date given to daily() must be YYYY-MM-DD
-['2026-1-5', '15/10/2026', '', null, '2026-10-15T10:00'].forEach(d => { let threw = false; try { L.daily(d); } catch (e) { threw = true; } ok('daily refuses ' + JSON.stringify(d), threw); });
+['2026-1-5', '15/10/2026', '', null, '2026-10-15T10:00', '2026-99-99', '2026-02-30'].forEach(d => { let threw = false; try { L.daily(d); } catch (e) { threw = true; } ok('daily refuses ' + JSON.stringify(d), threw); let t2 = false; try { L.dailyLevel(d); } catch (e) { t2 = true; } ok('dailyLevel refuses ' + JSON.stringify(d), t2); });
 
 // add-ons published in addons/: the index matches the files, every pack is valid, and its puzzles are of the level they claim (1 in 10 rebuilt)
 {

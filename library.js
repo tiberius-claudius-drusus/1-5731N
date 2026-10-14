@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/library.js
- * Version   : 1.2.1
+ * Version   : 1.2.2
  * Role      : Puzzle packs: validation of a pack, registry (base pack + add-ons), pick of an unplayed puzzle of a level, puzzle of the day by level.
  * Depends on: engine.js (window.Stein)
  * Called by : lib_base.js (addBase) ; app.js (browser, window.SteinLib) ; test_library.js (Node, module.exports)
@@ -88,9 +88,9 @@
 
   /* Same as pick(), but the level of the puzzle is checked by levelOf(code) (the game rebuilds and grades the puzzle) before it is
    * offered: the score written in a pack only decides where a puzzle is listed, so a pack that lies cannot get a puzzle of another
-   * level played. A puzzle that does not match is dropped for the rest of the session. Null if nothing matches in a few tries. */
+   * level played. A puzzle that does not match is dropped for the rest of the session. Null if nothing matches in 20 tries. */
   function pickVerified(level, played, rnd, levelOf) {
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 20; i++) {                 // 20 mismatches in a row: the pack is junk, stop
       var c = pick(level, played, rnd);
       if (c === null) return null;
       if (levelOf(c) === level) return c;
@@ -107,11 +107,14 @@
     return h >>> 0;
   }
   /* level of the puzzle of the day for a date (YYYY-MM-DD): the same for everyone, uniform over the five levels */
-  function dailyLevel(dateText) { return hash32('stein-daily-level-' + dateText) % 5; }
+  function dailyLevel(dateText) {
+    if (!E.validDate(dateText)) throw new Error('dailyLevel: date must be a real day, YYYY-MM-DD');
+    return hash32('stein-daily-level-' + dateText) % 5;
+  }
   /* code of the puzzle of the day: before DAILY_LEVEL_FROM (or without a base pack) the old rule; after, a puzzle of the level of the day,
    * drawn from the frozen start of the base pack, so it is the same on every device whatever add-ons are installed. */
   function daily(dateText) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateText)) throw new Error('daily: date must be YYYY-MM-DD');   // the comparison below is on strings
+    if (!E.validDate(dateText)) throw new Error('daily: date must be a real day, YYYY-MM-DD');   // the comparison below is on strings
     if (!base || dateText < DAILY_LEVEL_FROM) return E.dailyCode(dateText);
     var lv = dailyLevel(dateText);
     var pool = base.puzzles.filter(function (x) { return E.levelOf(x[1]) === lv; }).slice(0, DAILY_POOL);

@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.2.1
+ * Version   : 1.2.2
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
- * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, gradeSolve, gradeOf, noteOf, levelOf, LEVEL_COUNT, SCALE_VERSION, hintsQty, ruleToJSON, ruleFromJSON, validGame, parseCode, canonicalCode, dailyCode
+ * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, gradeSolve, gradeOf, noteOf, levelOf, LEVEL_COUNT, SCALE_VERSION, hintsQty, ruleToJSON, ruleFromJSON, validGame, parseCode, canonicalCode, dailyCode, validDate
  * Changelog : see CHANGELOG.md
  * ---------------------------------------------------------------------------
  * JavaScript port of puzgen.cpp / rules.cpp from "Einstein Puzzle" 2.0
@@ -349,6 +349,7 @@
     }
   }
 
+  var MAX_DRAWS = 20000, MAX_TRIES = 2000;                       // bounds of the generator loops: a seed can never hang the game
   function genPuzzleOnce() {
     var pz = [];
     for (var i = 0; i < N; i++) {
@@ -356,8 +357,9 @@
       shuffle(row);
       pz.push(row);
     }
-    var rules = [], seen = {}, done = false;
+    var rules = [], seen = {}, done = false, draws = 0;
     while (!done) {
+      if (++draws > MAX_DRAWS) return null;                      // never reached in practice (a puzzle needs about 30 draws)
       var r = genRule(pz), k = r.key();
       if (seen[k]) continue;
       seen[k] = true;
@@ -385,9 +387,15 @@
   /* As in Game::genPuzzle: games with too many clues are rejected. */
   /* Puzzle of the day: the code is derived from the calendar date "YYYY-MM-DD" (the caller passes the date of the
    * device, in its own time zone), so that everybody who plays "the puzzle of the day" on the same date gets the same one. */
+  /* YYYY-MM-DD that is a real calendar day (2026-19-42 and 2026-02-30 are refused) */
+  function validDate(d) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(typeof d === 'string' ? d : '');
+    if (!m) return false;
+    var y = +m[1], mo = +m[2], da = +m[3], x = new Date(Date.UTC(y, mo - 1, da));
+    return x.getUTCFullYear() === y && x.getUTCMonth() === mo - 1 && x.getUTCDate() === da;
+  }
   function dailyCode(dateText) {
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dateText));
-    if (!m) throw new Error('invalid date: ' + dateText);
+    if (!validDate(dateText)) throw new Error('invalid date: ' + dateText);
     var w = cyrb128('stein-daily-' + dateText), seed = '', i;
     for (i = 0; i < 6; i++) seed += CODE_ALPHABET.charAt((w[0] >>> (27 - 5 * i)) & 31);
     seed += CODE_ALPHABET.charAt((w[1] >>> 27) & 31) + CODE_ALPHABET.charAt((w[1] >>> 22) & 31);
@@ -404,10 +412,13 @@
     var version = c ? c.version : CODE_VERSION, seed = c ? c.seed : randomSeed();
     rng = seeded('stein-puzzle-' + version + '-' + seed);
     try {
-      for (;;) {
-        var g = genPuzzleOnce(), q = hintsQty(g.rules);
+      for (var tries = 0; tries < MAX_TRIES; tries++) {
+        var g = genPuzzleOnce();
+        if (!g) continue;
+        var q = hintsQty(g.rules);
         if (q.h <= 24 && q.v <= 15) { g.code = formatCode(version, seed); return g; }
       }
+      throw new Error('no puzzle found for this code');
     } finally { rng = Math.random; }
   }
 
@@ -448,6 +459,17 @@
     // each row of the solution holds every element once, and the possibilities (now and in the history) never exclude the solution:
     // a save written by hand with a board that contradicts its own solution is refused
     if (!g.solved.every(function (row) { return row.slice().sort().join() === '1,2,3,4,5,6'; })) return false;
+    var colOf = function (cell) { return g.solved[cell[0]].indexOf(cell[1]); };         // column of element cell[1] in row cell[0]
+    var holds = function (r) {                                                         // is the clue true in the solution?
+      switch (r.t) {
+        case 'near': return Math.abs(colOf(r.a) - colOf(r.b)) === 1;
+        case 'dir': return colOf(r.a) < colOf(r.b);
+        case 'under': return colOf(r.a) === colOf(r.b);
+        case 'between': { var a = colOf(r.a), b = colOf(r.b), c = colOf(r.c); return (a + 1 === c && c + 1 === b) || (b + 1 === c && c + 1 === a); }
+        case 'open': return g.solved[r.row][r.col] === r.el;
+      }
+      return false;
+    };
     var keepsSolution = function (bits) {
       for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) if (bits[(c * N + r) * N + g.solved[r][c] - 1] !== 1) return false;
       return true;
@@ -464,9 +486,16 @@
       }
     });
     if (!okRule) return false;
+    if (!g.rules.every(holds)) return false;                      // every clue is true in the solution
     if (!Array.isArray(g.checked) || g.checked.length > g.rules.length || !g.checked.every(function (i) { return isInt(i, 0, g.rules.length - 1); })) return false;
     if (!Array.isArray(g.history) || g.history.length > 300 || !g.history.every(isBits) || !g.history.every(keepsSolution)) return false;
-    if (g.code != null && canonicalCode(g.code) !== g.code) return false;          // optional: the code of the puzzle
+    if (g.code != null) {                                                          // optional: the code of the puzzle, which must give this very puzzle
+      if (canonicalCode(g.code) !== g.code) return false;
+      try {
+        var again = genPuzzle(g.code);
+        if (JSON.stringify(again.solved) !== JSON.stringify(g.solved) || JSON.stringify(again.rules.map(ruleToJSON)) !== JSON.stringify(g.rules)) return false;
+      } catch (e) { return false; }
+    }
     if (typeof g.elapsed !== 'number' || !isFinite(g.elapsed) || g.elapsed < 0) return false;
     if (!isInt(g.errors, 0, 1e6)) return false;
     return true;
@@ -474,7 +503,7 @@
 
   var api = {
     N: N, Possibilities: Possibilities, genPuzzle: genPuzzle, openInitial: openInitial,
-    canSolve: canSolve, gradeSolve: gradeSolve, gradeOf: gradeOf, noteOf: noteOf, levelOf: levelOf, LEVEL_COUNT: LEVEL_COUNT, SCALE_VERSION: SCALE_VERSION, hintsQty: hintsQty, parseCode: parseCode, canonicalCode: canonicalCode, dailyCode: dailyCode, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
+    canSolve: canSolve, gradeSolve: gradeSolve, gradeOf: gradeOf, noteOf: noteOf, levelOf: levelOf, LEVEL_COUNT: LEVEL_COUNT, SCALE_VERSION: SCALE_VERSION, hintsQty: hintsQty, parseCode: parseCode, canonicalCode: canonicalCode, dailyCode: dailyCode, validDate: validDate, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Stein = api;

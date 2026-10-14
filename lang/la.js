@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Latin (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("la", {
     "packs.bad": "Fascis invalidus",
     "packs.badVersion": "Hic fascis cum hac ludi versione non congruit",
     "packs.avail": "Fasces praesto",
-    "packs.get": "Instrue"
+    "packs.get": "Instrue",
+    "new.noPuzzle": "Aenigma huius gradus non inventum est; iterum tempta."
   }
 });

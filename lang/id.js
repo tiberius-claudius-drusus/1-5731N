@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Indonesian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("id", {
     "packs.bad": "Paket tidak valid",
     "packs.badVersion": "Paket ini tidak kompatibel dengan versi permainan ini",
     "packs.avail": "Paket tersedia",
-    "packs.get": "Pasang"
+    "packs.get": "Pasang",
+    "new.noPuzzle": "Tidak ada teka-teki untuk tingkat ini, coba lagi."
   }
 });

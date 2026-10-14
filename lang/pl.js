@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Polish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("pl", {
     "packs.bad": "Nieprawidłowa paczka",
     "packs.badVersion": "Ta paczka nie jest zgodna z tą wersją gry",
     "packs.avail": "Dostępne paczki",
-    "packs.get": "Zainstaluj"
+    "packs.get": "Zainstaluj",
+    "new.noPuzzle": "Nie znaleziono łamigłówki tego poziomu, spróbuj ponownie."
   }
 });

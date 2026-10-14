@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ja.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Japanese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("ja", {
     "packs.bad": "無効なパック",
     "packs.badVersion": "このパックはこのバージョンのゲームと互換性がありません",
     "packs.avail": "利用可能なパック",
-    "packs.get": "インストール"
+    "packs.get": "インストール",
+    "new.noPuzzle": "このレベルのパズルが見つかりませんでした。もう一度お試しください。"
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ar.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Arabic (right to left) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("ar", {
     "packs.bad": "حزمة غير صالحة",
     "packs.badVersion": "هذه الحزمة غير متوافقة مع هذا الإصدار من اللعبة",
     "packs.avail": "الحزم المتاحة",
-    "packs.get": "تثبيت"
+    "packs.get": "تثبيت",
+    "new.noPuzzle": "لم يتم العثور على لغز لهذا المستوى، حاول مرة أخرى."
   }
 });

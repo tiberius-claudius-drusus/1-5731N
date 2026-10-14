@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_engine.js
- * Version   : 1.2.1
+ * Version   : 1.2.2
  * Role      : Engine test: generates puzzles and checks each is solved by deduction alone, with a JSON round trip of the rules.
  * Depends on: Node.js ; engine.js
  * Called by : by hand: node test_engine.js
@@ -22,6 +22,7 @@ for(let i=0;i<n;i++){
   if(!E.canSolve(g.solved,r2)) bad++;
 }
 console.log({n,bad,msPerGame:(Date.now()-t0)/n,H:nH/n,V:nV/n,open:nO/n});
+if (bad) { console.log('FAIL: ' + bad + ' generated puzzle(s) not solved by deduction or not kept by the JSON round trip'); process.exit(1); }
 
 // an unknown rule type must fail loudly, not give undefined
 {
@@ -45,8 +46,15 @@ console.log({n,bad,msPerGame:(Date.now()-t0)/n,H:nH/n,V:nV/n,open:nO/n});
     'solved with a 9': mut(x => { x.solved[0][0] = 9; }), 'checked out of range': mut(x => { x.checked = [999]; }),
     'history too long': mut(x => { x.history = new Array(301).fill(x.pos); }), 'history item truncated': mut(x => { x.history = [[1, 0]]; }),
     'pos without the solution': mut(x => { x.pos[(0 * 6 + 0) * 6 + x.solved[0][0] - 1] = 0; }), 'history without the solution': mut(x => { x.history = [x.pos.slice()]; x.history[0][(2 * 6 + 3) * 6 + x.solved[3][2] - 1] = 0; }), 'solved row not a permutation': mut(x => { x.solved[1][0] = x.solved[1][1]; }),
+    'clue false in the solution': mut(x => { const i = x.rules.findIndex(r => r.t === 'dir'); const r = x.rules[i]; x.rules[i] = { t: 'dir', a: r.b, b: r.a }; }),
+    'open clue that contradicts the solution': mut(x => { x.rules.push({ t: 'open', col: 0, row: 0, el: x.solved[0][0] % 6 + 1 }); }),
+    'code of another puzzle': mut(x => { x.code = E.genPuzzle().code; }),
     'elapsed text': mut(x => { x.elapsed = '12'; }), 'elapsed negative': mut(x => { x.elapsed = -1; }), 'errors fractional': mut(x => { x.errors = 1.5; })
   };
+  // a game started from a code keeps working with it: the code gives back exactly this puzzle
+  { const h = E.genPuzzle(), q = new E.Possibilities(); E.openInitial(q, h.rules);
+    const withCode = { solved: h.solved, rules: h.rules.map(E.ruleToJSON), code: h.code, pos: Array.from(q.p), checked: [], history: [], elapsed: 0, errors: 0 };
+    if (!E.validGame(withCode)) { console.log('FAIL: a save with its own code was refused'); process.exit(1); } }
   let bads = 0;
   if (!E.validGame(good())) { console.log('FAIL: a valid saved game was rejected'); bads++; }
   for (let i = 0; i < 200; i++) { const h = E.genPuzzle(); const q = new E.Possibilities(); E.openInitial(q, h.rules);
@@ -54,4 +62,17 @@ console.log({n,bad,msPerGame:(Date.now()-t0)/n,H:nH/n,V:nV/n,open:nO/n});
   Object.keys(bad).forEach(k => { if (E.validGame(bad[k])) { console.log('FAIL: accepted a bad save:', k); bads++; } });
   if (bads) process.exit(1);
   console.log('saved games: 200 generated games accepted,', Object.keys(bad).length, 'corrupted ones rejected');
+}
+
+// the calendar: a date must be a real day (the puzzle of the day is drawn from it)
+{
+  let b = 0;
+  ['2026-10-15', '2024-02-29', '2000-02-29'].forEach(d => { if (!E.validDate(d)) { console.log('FAIL: real date refused', d); b++; } });
+  ['2026-19-42', '2026-02-30', '2025-02-29', '1900-02-29', '2026-00-10', '2026-10-00', '2026-1-5', '', null, 20261015, '2026-10-15T10:00'].forEach(d => {
+    if (E.validDate(d)) { console.log('FAIL: false date accepted', d); b++; }
+    let threw = false; try { E.dailyCode(d); } catch (e) { threw = true; }
+    if (!threw) { console.log('FAIL: dailyCode accepted', d); b++; }
+  });
+  if (b) process.exit(1);
+  console.log('dates: real days accepted, 11 false dates refused by validDate and by dailyCode');
 }

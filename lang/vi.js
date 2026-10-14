@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/vi.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Vietnamese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("vi", {
     "packs.bad": "Gói không hợp lệ",
     "packs.badVersion": "Gói này không tương thích với phiên bản trò chơi này",
     "packs.avail": "Gói có sẵn",
-    "packs.get": "Cài"
+    "packs.get": "Cài",
+    "new.noPuzzle": "Không tìm thấy câu đố cho cấp độ này, hãy thử lại."
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/zh.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Chinese (Simplified) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("zh", {
     "packs.bad": "无效的谜题包",
     "packs.badVersion": "此谜题包与当前游戏版本不兼容",
     "packs.avail": "可用的谜题包",
-    "packs.get": "安装"
+    "packs.get": "安装",
+    "new.noPuzzle": "未找到此难度的谜题，请重试。"
   }
 });

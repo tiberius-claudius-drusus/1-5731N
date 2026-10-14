@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/it.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Italian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("it", {
     "packs.bad": "Pacchetto non valido",
     "packs.badVersion": "Questo pacchetto non è compatibile con questa versione del gioco",
     "packs.avail": "Pacchetti disponibili",
-    "packs.get": "Installa"
+    "packs.get": "Installa",
+    "new.noPuzzle": "Nessun puzzle trovato per questo livello, riprova."
   }
 });

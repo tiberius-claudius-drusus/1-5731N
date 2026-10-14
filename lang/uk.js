@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/uk.js
- * Version   : 1.2.0
+ * Version   : 1.2.2
  * Role      : User-interface texts in Ukrainian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -142,6 +142,7 @@ SteinI18n.add("uk", {
     "packs.bad": "Недійсний набір",
     "packs.badVersion": "Цей набір несумісний із цією версією гри",
     "packs.avail": "Доступні набори",
-    "packs.get": "Встановити"
+    "packs.get": "Встановити",
+    "new.noPuzzle": "Для цього рівня головоломку не знайдено, спробуйте ще раз."
   }
 });
