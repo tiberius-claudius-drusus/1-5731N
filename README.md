@@ -10,9 +10,13 @@ Six rows of six symbols, six columns: use the clues to find which symbol goes in
 
 > The translations (except French and English) were written with an AI and have **not** been proofread by native speakers. Corrections are welcome.
 
-## Run it
+## Install / play
 
-Serve the folder over HTTPS (a service worker needs a secure origin; `localhost` also works):
+Open **https://tiberius-claudius-drusus.github.io/1-5731N/** on your phone or computer and use "Install app" (Android/Chrome, desktop) or "Add to Home Screen" (iOS Safari). It works offline once loaded.
+
+## Run it locally
+
+For local tests only (`python3 -m http.server` has no HTTPS and sends no security headers; use any static host with HTTPS for real use). A service worker needs a secure origin; `localhost` counts as one:
 
 ```bash
 python3 -m http.server 8080      # then open http://localhost:8080

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.0.1
+ * Version   : 1.0.2
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.0.1', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.0.2', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var $ = function (id) { return document.getElementById(id); };
@@ -398,6 +398,11 @@
     dialog(t('stats.resetConfirm'), [[t('dlg.no')], [t('stats.reset'), function () { drop(KEY_STATS); renderStats(); }]]);
   };
 
+  /* HTML-escapes a value that comes from storage before it is put in an innerHTML string. */
+  function esc(v) {
+    return String(v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  }
+
   /* ISO date YYYY-MM-DD → format of the current language */
   function fmtDate(iso) {
     var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
@@ -411,12 +416,12 @@
     var avg = ts.reduce(function (a, b) { return a + b; }, 0) / ts.length;
     var clean = g.filter(function (x) { return !x.errors; }).length;
     var h = '<table><tr><td>' + t('stats.won') + '</td><td>' + g.length + '</td></tr>' +
-      '<tr><td>' + t('stats.started') + '</td><td>' + (st.started || g.length) + '</td></tr>' +
-      '<tr><td>' + t('stats.best') + '</td><td>' + fmt(Math.min.apply(null, ts)) + '</td></tr>' +
-      '<tr><td>' + t('stats.avg') + '</td><td>' + fmt(avg) + '</td></tr>' +
+      '<tr><td>' + t('stats.started') + '</td><td>' + esc(+st.started || g.length) + '</td></tr>' +
+      '<tr><td>' + t('stats.best') + '</td><td>' + esc(fmt(Math.min.apply(null, ts))) + '</td></tr>' +
+      '<tr><td>' + t('stats.avg') + '</td><td>' + esc(fmt(avg)) + '</td></tr>' +
       '<tr><td>' + t('stats.clean') + '</td><td>' + clean + '</td></tr></table><h3>' + t('stats.last') + '</h3><table>';
     g.slice(-10).reverse().forEach(function (x) {
-      h += '<tr><td>' + fmtDate(x.d) + '</td><td>' + (x.errors ? t('stats.err', { n: x.errors }) : '') + '</td><td>' + fmt(x.t) + '</td></tr>';
+      h += '<tr><td>' + esc(fmtDate(x.d)) + '</td><td>' + (x.errors ? esc(t('stats.err', { n: +x.errors || 0 })) : '') + '</td><td>' + esc(fmt(x.t)) + '</td></tr>';
     });
     $('stats-body').innerHTML = h + '</table>';
   }

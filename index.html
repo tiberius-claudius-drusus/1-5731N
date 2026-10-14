@@ -2,7 +2,7 @@
 <!--
 ===========================================================================
 File      : 1-5731n/index.html
-Version   : 1.0.0
+Version   : 1.0.2
 Role      : Single page of the application: markup of all screens, the whole stylesheet (inline, theme-driven) and the script tags.
 Depends on: all scripts of the project
 Called by : the browser (served by the portal)
@@ -17,6 +17,7 @@ fallback values of the Clean light theme). Only layout and sizes are fixed here.
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; worker-src 'self'; manifest-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#f5f6f8">
 <title>1-5+31IV</title>
 <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">

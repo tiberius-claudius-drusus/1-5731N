@@ -1,5 +1,11 @@
 # Changelog - 1-5731N
 
+## 1.0.2 - 2026-10-14
+Hardening, following an external security review of the repository.
+- Content Security Policy (`<meta http-equiv>` in `index.html`): scripts, workers, manifest, images, media and connections only from the application's own origin; no plugins, no `<base>`, no form submission. Inline styles stay allowed (the style sheet is inlined, the symbols use style attributes).
+- Values read back from `localStorage` are HTML-escaped before being put in the statistics table (`esc()`; the date fallback of `fmtDate` and the error counter were the only paths that could carry a raw string).
+- README: the Python server is for local tests only; link to the installable version on GitHub Pages.
+
 ## 1.0.1 - 2026-10-14
 Fixes following an external review of the repository.
 - Statistics export: if the share sheet fails for any reason other than the user cancelling it, the file is now downloaded instead of being silently lost.
