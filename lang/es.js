@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/es.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Spanish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("es", {
     "code.invalid": "Este código no es válido.",
     "code.copied": "Código copiado",
     "code.aria": "Código del rompecabezas {code} (toca para copiar)",
-    "help.code": "Cada rompecabezas tiene un código, que aparece bajo el cronómetro: el mismo código siempre da el mismo rompecabezas. Toca el código para copiarlo. En Nueva partida, «Introducir un código de rompecabezas» repite un rompecabezas, y el «Rompecabezas del día» es el mismo para todos en la misma fecha (de medianoche a medianoche, en la zona horaria de tu dispositivo)."
+    "help.code": "Cada rompecabezas tiene un código, que aparece bajo el cronómetro: el mismo código siempre da el mismo rompecabezas. Toca el código para copiarlo. En Nueva partida, «Introducir un código de rompecabezas» repite un rompecabezas, y el «Rompecabezas del día» es el mismo para todos en la misma fecha (de medianoche a medianoche, en la zona horaria de tu dispositivo).",
+    "lvl.0": "Fácil",
+    "lvl.1": "Normal",
+    "lvl.2": "Difícil",
+    "lvl.3": "Experto",
+    "lvl.4": "Extremo",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Por nivel",
+    "stats.nolevel": "Sin código",
+    "new.level": "Elegir un nivel",
+    "packs.title": "Paquetes de puzles",
+    "packs.count": "{n} puzles",
+    "packs.install": "Instalar un paquete (archivo)",
+    "packs.remove": "Quitar",
+    "packs.removeConfirm": "¿Quitar el paquete «{name}»?",
+    "packs.ok": "Paquete instalado: {name}",
+    "packs.bad": "Paquete no válido",
+    "packs.badVersion": "Este paquete no es compatible con esta versión del juego",
+    "packs.avail": "Paquetes disponibles",
+    "packs.get": "Instalar"
   }
 });

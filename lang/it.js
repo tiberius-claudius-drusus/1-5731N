@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/it.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Italian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("it", {
     "code.invalid": "Questo codice non è valido.",
     "code.copied": "Codice copiato",
     "code.aria": "Codice del rompicapo {code} (tocca per copiare)",
-    "help.code": "Ogni rompicapo ha un codice, mostrato sotto il cronometro: lo stesso codice dà sempre lo stesso rompicapo. Tocca il codice per copiarlo. In Nuova partita, «Inserisci un codice di rompicapo» rigioca un rompicapo, e il «Rompicapo del giorno» è lo stesso per tutti nella stessa data (da mezzanotte a mezzanotte, nel fuso orario del tuo dispositivo)."
+    "help.code": "Ogni rompicapo ha un codice, mostrato sotto il cronometro: lo stesso codice dà sempre lo stesso rompicapo. Tocca il codice per copiarlo. In Nuova partita, «Inserisci un codice di rompicapo» rigioca un rompicapo, e il «Rompicapo del giorno» è lo stesso per tutti nella stessa data (da mezzanotte a mezzanotte, nel fuso orario del tuo dispositivo).",
+    "lvl.0": "Facile",
+    "lvl.1": "Normale",
+    "lvl.2": "Difficile",
+    "lvl.3": "Esperto",
+    "lvl.4": "Estremo",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Per livello",
+    "stats.nolevel": "Senza codice",
+    "new.level": "Scegli un livello",
+    "packs.title": "Pacchetti di puzzle",
+    "packs.count": "{n} puzzle",
+    "packs.install": "Installa un pacchetto (file)",
+    "packs.remove": "Rimuovi",
+    "packs.removeConfirm": "Rimuovere il pacchetto «{name}»?",
+    "packs.ok": "Pacchetto installato: {name}",
+    "packs.bad": "Pacchetto non valido",
+    "packs.badVersion": "Questo pacchetto non è compatibile con questa versione del gioco",
+    "packs.avail": "Pacchetti disponibili",
+    "packs.get": "Installa"
   }
 });

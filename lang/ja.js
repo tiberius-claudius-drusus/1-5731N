@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ja.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Japanese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("ja", {
     "code.invalid": "このコードは無効です。",
     "code.copied": "コードをコピーしました",
     "code.aria": "パズルコード {code}（タップでコピー）",
-    "help.code": "すべてのパズルにはタイマーの下に表示されるコードがあり、同じコードからは必ず同じパズルが作られます。コードをタップするとコピーできます。「新しいゲーム」の「パズルコードを入力」で同じパズルを遊び直せます。「今日のパズル」は同じ日付なら誰でも同じです（午前0時から午後11時59分まで、端末のタイムゾーン）。"
+    "help.code": "すべてのパズルにはタイマーの下に表示されるコードがあり、同じコードからは必ず同じパズルが作られます。コードをタップするとコピーできます。「新しいゲーム」の「パズルコードを入力」で同じパズルを遊び直せます。「今日のパズル」は同じ日付なら誰でも同じです（午前0時から午後11時59分まで、端末のタイムゾーン）。",
+    "lvl.0": "やさしい",
+    "lvl.1": "ふつう",
+    "lvl.2": "むずかしい",
+    "lvl.3": "エキスパート",
+    "lvl.4": "極限",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "レベル別",
+    "stats.nolevel": "コードなし",
+    "new.level": "レベルを選ぶ",
+    "packs.title": "パズルパック",
+    "packs.count": "{n} 問",
+    "packs.install": "パックをインストール（ファイル）",
+    "packs.remove": "削除",
+    "packs.removeConfirm": "パック「{name}」を削除しますか？",
+    "packs.ok": "パックをインストールしました：{name}",
+    "packs.bad": "無効なパック",
+    "packs.badVersion": "このパックはこのバージョンのゲームと互換性がありません",
+    "packs.avail": "利用可能なパック",
+    "packs.get": "インストール"
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/nl.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Dutch (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("nl", {
     "code.invalid": "Deze code is ongeldig.",
     "code.copied": "Code gekopieerd",
     "code.aria": "Puzzelcode {code} (tik om te kopiëren)",
-    "help.code": "Elke puzzel heeft een code, getoond onder de timer: dezelfde code geeft altijd dezelfde puzzel. Tik op de code om hem te kopiëren. Bij Nieuw spel speelt \"Puzzelcode invoeren\" een puzzel opnieuw, en de \"Puzzel van de dag\" is op dezelfde datum voor iedereen gelijk (van middernacht tot middernacht, in de tijdzone van je apparaat)."
+    "help.code": "Elke puzzel heeft een code, getoond onder de timer: dezelfde code geeft altijd dezelfde puzzel. Tik op de code om hem te kopiëren. Bij Nieuw spel speelt \"Puzzelcode invoeren\" een puzzel opnieuw, en de \"Puzzel van de dag\" is op dezelfde datum voor iedereen gelijk (van middernacht tot middernacht, in de tijdzone van je apparaat).",
+    "lvl.0": "Makkelijk",
+    "lvl.1": "Normaal",
+    "lvl.2": "Moeilijk",
+    "lvl.3": "Expert",
+    "lvl.4": "Extreem",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Per niveau",
+    "stats.nolevel": "Zonder code",
+    "new.level": "Kies een niveau",
+    "packs.title": "Puzzelpakketten",
+    "packs.count": "{n} puzzels",
+    "packs.install": "Pakket installeren (bestand)",
+    "packs.remove": "Verwijderen",
+    "packs.removeConfirm": "Pakket “{name}” verwijderen?",
+    "packs.ok": "Pakket geïnstalleerd: {name}",
+    "packs.bad": "Ongeldig pakket",
+    "packs.badVersion": "Dit pakket is niet compatibel met deze versie van het spel",
+    "packs.avail": "Beschikbare pakketten",
+    "packs.get": "Installeren"
   }
 });

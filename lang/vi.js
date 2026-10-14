@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/vi.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Vietnamese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("vi", {
     "code.invalid": "Mã này không hợp lệ.",
     "code.copied": "Đã sao chép mã",
     "code.aria": "Mã câu đố {code} (chạm để sao chép)",
-    "help.code": "Mỗi câu đố có một mã hiển thị dưới đồng hồ: cùng một mã luôn cho cùng một câu đố. Chạm vào mã để sao chép. Trong Ván mới, \"Nhập mã câu đố\" cho chơi lại một câu đố, và \"Câu đố của ngày\" giống nhau với mọi người trong cùng một ngày (từ nửa đêm đến nửa đêm, theo múi giờ của thiết bị)."
+    "help.code": "Mỗi câu đố có một mã hiển thị dưới đồng hồ: cùng một mã luôn cho cùng một câu đố. Chạm vào mã để sao chép. Trong Ván mới, \"Nhập mã câu đố\" cho chơi lại một câu đố, và \"Câu đố của ngày\" giống nhau với mọi người trong cùng một ngày (từ nửa đêm đến nửa đêm, theo múi giờ của thiết bị).",
+    "lvl.0": "Dễ",
+    "lvl.1": "Bình thường",
+    "lvl.2": "Khó",
+    "lvl.3": "Chuyên gia",
+    "lvl.4": "Cực khó",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Theo cấp độ",
+    "stats.nolevel": "Không có mã",
+    "new.level": "Chọn cấp độ",
+    "packs.title": "Gói câu đố",
+    "packs.count": "{n} câu đố",
+    "packs.install": "Cài gói (tệp)",
+    "packs.remove": "Gỡ",
+    "packs.removeConfirm": "Gỡ gói \"{name}\"?",
+    "packs.ok": "Đã cài gói: {name}",
+    "packs.bad": "Gói không hợp lệ",
+    "packs.badVersion": "Gói này không tương thích với phiên bản trò chơi này",
+    "packs.avail": "Gói có sẵn",
+    "packs.get": "Cài"
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pt-br.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Portuguese (Brazil) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("pt-br", {
     "code.invalid": "Este código não é válido.",
     "code.copied": "Código copiado",
     "code.aria": "Código do quebra-cabeça {code} (toque para copiar)",
-    "help.code": "Cada quebra-cabeça tem um código, mostrado abaixo do cronômetro: o mesmo código sempre dá o mesmo quebra-cabeça. Toque no código para copiá-lo. Em Novo jogo, \"Digitar um código de quebra-cabeça\" repete um quebra-cabeça, e o \"Quebra-cabeça do dia\" é o mesmo para todos na mesma data (da meia-noite à meia-noite, no fuso horário do seu dispositivo)."
+    "help.code": "Cada quebra-cabeça tem um código, mostrado abaixo do cronômetro: o mesmo código sempre dá o mesmo quebra-cabeça. Toque no código para copiá-lo. Em Novo jogo, \"Digitar um código de quebra-cabeça\" repete um quebra-cabeça, e o \"Quebra-cabeça do dia\" é o mesmo para todos na mesma data (da meia-noite à meia-noite, no fuso horário do seu dispositivo).",
+    "lvl.0": "Fácil",
+    "lvl.1": "Normal",
+    "lvl.2": "Difícil",
+    "lvl.3": "Especialista",
+    "lvl.4": "Extremo",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Por nível",
+    "stats.nolevel": "Sem código",
+    "new.level": "Escolher um nível",
+    "packs.title": "Pacotes de quebra-cabeças",
+    "packs.count": "{n} quebra-cabeças",
+    "packs.install": "Instalar um pacote (arquivo)",
+    "packs.remove": "Remover",
+    "packs.removeConfirm": "Remover o pacote “{name}”?",
+    "packs.ok": "Pacote instalado: {name}",
+    "packs.bad": "Pacote inválido",
+    "packs.badVersion": "Este pacote não é compatível com esta versão do jogo",
+    "packs.avail": "Pacotes disponíveis",
+    "packs.get": "Instalar"
   }
 });

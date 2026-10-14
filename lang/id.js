@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in Indonesian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("id", {
     "code.invalid": "Kode ini tidak valid.",
     "code.copied": "Kode disalin",
     "code.aria": "Kode teka-teki {code} (ketuk untuk menyalin)",
-    "help.code": "Setiap teka-teki punya kode yang ditampilkan di bawah pengatur waktu: kode yang sama selalu menghasilkan teka-teki yang sama. Ketuk kode untuk menyalinnya. Di Permainan baru, \"Masukkan kode teka-teki\" memainkan ulang sebuah teka-teki, dan \"Teka-teki hari ini\" sama untuk semua orang pada tanggal yang sama (dari tengah malam sampai tengah malam, menurut zona waktu perangkat Anda)."
+    "help.code": "Setiap teka-teki punya kode yang ditampilkan di bawah pengatur waktu: kode yang sama selalu menghasilkan teka-teki yang sama. Ketuk kode untuk menyalinnya. Di Permainan baru, \"Masukkan kode teka-teki\" memainkan ulang sebuah teka-teki, dan \"Teka-teki hari ini\" sama untuk semua orang pada tanggal yang sama (dari tengah malam sampai tengah malam, menurut zona waktu perangkat Anda).",
+    "lvl.0": "Mudah",
+    "lvl.1": "Normal",
+    "lvl.2": "Sulit",
+    "lvl.3": "Ahli",
+    "lvl.4": "Ekstrem",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Per tingkat",
+    "stats.nolevel": "Tanpa kode",
+    "new.level": "Pilih tingkat",
+    "packs.title": "Paket teka-teki",
+    "packs.count": "{n} teka-teki",
+    "packs.install": "Pasang paket (berkas)",
+    "packs.remove": "Hapus",
+    "packs.removeConfirm": "Hapus paket \"{name}\"?",
+    "packs.ok": "Paket terpasang: {name}",
+    "packs.bad": "Paket tidak valid",
+    "packs.badVersion": "Paket ini tidak kompatibel dengan versi permainan ini",
+    "packs.avail": "Paket tersedia",
+    "packs.get": "Pasang"
   }
 });

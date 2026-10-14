@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/de.js
- * Version   : 1.1.0
+ * Version   : 1.2.0
  * Role      : User-interface texts in German (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -123,6 +123,25 @@ SteinI18n.add("de", {
     "code.invalid": "Dieser Code ist ungültig.",
     "code.copied": "Code kopiert",
     "code.aria": "Rätselcode {code} (zum Kopieren antippen)",
-    "help.code": "Jedes Rätsel hat einen Code, der unter der Zeit angezeigt wird: Derselbe Code ergibt immer dasselbe Rätsel. Tippe auf den Code, um ihn zu kopieren. Unter Neues Spiel wiederholt „Rätselcode eingeben“ ein Rätsel, und das „Rätsel des Tages“ ist am selben Datum für alle gleich (von Mitternacht bis Mitternacht, in der Zeitzone deines Geräts)."
+    "help.code": "Jedes Rätsel hat einen Code, der unter der Zeit angezeigt wird: Derselbe Code ergibt immer dasselbe Rätsel. Tippe auf den Code, um ihn zu kopieren. Unter Neues Spiel wiederholt „Rätselcode eingeben“ ein Rätsel, und das „Rätsel des Tages“ ist am selben Datum für alle gleich (von Mitternacht bis Mitternacht, in der Zeitzone deines Geräts).",
+    "lvl.0": "Leicht",
+    "lvl.1": "Normal",
+    "lvl.2": "Schwer",
+    "lvl.3": "Experte",
+    "lvl.4": "Extrem",
+    "lvl.show": "{name} · {note}/20",
+    "stats.bylevel": "Nach Stufe",
+    "stats.nolevel": "Ohne Code",
+    "new.level": "Stufe wählen",
+    "packs.title": "Rätselpakete",
+    "packs.count": "{n} Rätsel",
+    "packs.install": "Paket installieren (Datei)",
+    "packs.remove": "Entfernen",
+    "packs.removeConfirm": "Paket „{name}“ entfernen?",
+    "packs.ok": "Paket installiert: {name}",
+    "packs.bad": "Ungültiges Paket",
+    "packs.badVersion": "Dieses Paket ist mit dieser Spielversion nicht kompatibel",
+    "packs.avail": "Verfügbare Pakete",
+    "packs.get": "Installieren"
   }
 });
