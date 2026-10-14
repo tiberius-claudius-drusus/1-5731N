@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/i18n.js
- * Version   : 1.0.0
+ * Version   : 1.0.1
  * Role      : Translation engine: language registry, lookup with fallback, browser-language detection, DOM text application, text direction.
  * Depends on: lang/<code>.js (each calls SteinI18n.add)
  * Called by : app.js (window.SteinI18n) ; test_lang.js ; index.html (script tag)
@@ -21,7 +21,10 @@
   var ORDER = ['ar', 'de', 'en', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'la', 'nl', 'pl', 'pt-br', 'pt-pt', 'ru', 'tr', 'uk', 'vi', 'zh'];   // order of the selector: alphabetical by language code
 
   function add(code, def) { langs[code] = def; }
-  function has(key) { return !!(langs.fr && langs.fr.s[key] != null); }
+  /* True if t(key) would find a text: current language, then English, then French (same chain as t). */
+  function has(key) {
+    return [cur, DEFAULT, 'fr'].some(function (c) { return !!(langs[c] && langs[c].s[key] != null); });
+  }
 
   function t(key, params) {
     var s = langs[cur] && langs[cur].s[key];

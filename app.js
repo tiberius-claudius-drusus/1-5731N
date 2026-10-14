@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.0.0
+ * Version   : 1.0.1
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.0.0', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.0.1', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var $ = function (id) { return document.getElementById(id); };
@@ -430,14 +430,19 @@
     var blob = new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' });
     var file = null;
     try { file = new File([blob], name, { type: 'application/json' }); } catch (e) {}
+    function download() {
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      toast(t('stats.exported'));
+    }
     if (file && navigator.canShare && navigator.canShare({ files: [file] })) {          // share sheet (Drive, mail, files…)
-      navigator.share({ files: [file], title: name }).then(function () { toast(t('stats.exported')); }, function () {});
+      navigator.share({ files: [file], title: name }).then(function () { toast(t('stats.exported')); }, function (err) {
+        if (!err || err.name !== 'AbortError') download();    // cancelled by the user: nothing; any other failure: plain download
+      });
       return;
     }
-    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
-    document.body.appendChild(a); a.click();
-    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-    toast(t('stats.exported'));
+    download();
   }
   /* Strict check of a file coming from outside: nothing is kept that is not a number or a date. */
   function cleanImport(obj) {

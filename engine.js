@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.0.0
+ * Version   : 1.0.1
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
@@ -236,7 +236,7 @@
       for (var i = 0; i < rules.length; i++) {
         if (rules[i].apply(pos)) {
           changed = true;
-          if (!pos.isValid(pz)) throw new Error('Possibilités invalides après ' + rules[i].key());
+          if (!pos.isValid(pz)) throw new Error('Invalid possibilities after ' + rules[i].key());
         }
       }
     } while (changed);
@@ -301,6 +301,7 @@
       case 'between': return { t: r.t, a: r.a, b: r.b, c: r.c };
       case 'open': return { t: r.t, col: r.col, row: r.row, el: r.el };
     }
+    throw new Error('unknown rule type: ' + r.t);
   }
   function ruleFromJSON(o) {
     switch (o.t) {
@@ -310,7 +311,7 @@
       case 'between': return new Between(o.a, o.b, o.c);
       case 'open': return new Open(o.col, o.row, o.el);
     }
-    throw new Error('règle inconnue ' + o.t);
+    throw new Error('unknown rule type: ' + o.t);
   }
 
   var api = {

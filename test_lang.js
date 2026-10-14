@@ -30,7 +30,15 @@ for (const [c, d] of Object.entries(tables)) {
     if (tg(d.s[k]) !== tg(ref[k])) { console.log(c, k, 'balises', tg(d.s[k]), '≠', tg(ref[k])); bad++; }
     if (!d.s[k].trim()) { console.log(c, k, 'vide'); bad++; }
   }
-  if (!d.name || (d.dir !== 'ltr' && d.dir !== 'rtl')) { console.log(c, 'name/dir invalides'); bad++; }
+  if (!d.name || (d.dir !== 'ltr' && d.dir !== 'rtl')) { console.log(c, 'invalid name/dir'); bad++; }
 }
+// has() must follow the same fallback chain as t(): current language, then English, then French
+I.add('t-only-cur', { name: 'x', dir: 'ltr', s: { 'only.cur': 'x' } });
+I.add('t-en-only', { name: 'x', dir: 'ltr', s: {} });
+I.set('t-only-cur');
+if (!I.has('only.cur')) { console.log('has(): key of the current language not found'); bad++; }
+if (!I.has('home.new')) { console.log('has(): English/French fallback not found'); bad++; }
+if (I.has('no.such.key')) { console.log('has(): unknown key reported as present'); bad++; }
+I.set('en');
 console.log(Object.keys(tables).length, 'languages,', keys.length, 'keys,', bad ? bad + ' problem(s)' : 'all consistent');
 process.exit(bad ? 1 : 0);

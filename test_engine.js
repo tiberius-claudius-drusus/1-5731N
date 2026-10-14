@@ -22,3 +22,12 @@ for(let i=0;i<n;i++){
   if(!E.canSolve(g.solved,r2)) bad++;
 }
 console.log({n,bad,msPerGame:(Date.now()-t0)/n,H:nH/n,V:nV/n,open:nO/n});
+
+// an unknown rule type must fail loudly, not give undefined
+{
+  let threw = 0;
+  try { E.ruleToJSON({ t: 'nope' }); } catch (e) { threw++; }
+  try { E.ruleFromJSON({ t: 'nope' }); } catch (e) { threw++; }
+  if (threw !== 2) { console.log('FAIL: unknown rule type did not throw in both directions'); process.exit(1); }
+  console.log('unknown rule type: throws in both directions');
+}

@@ -1,5 +1,12 @@
 # Changelog - 1-5731N
 
+## 1.0.1 - 2026-10-14
+Fixes following an external review of the repository.
+- Statistics export: if the share sheet fails for any reason other than the user cancelling it, the file is now downloaded instead of being silently lost.
+- `ruleToJSON` throws an explicit error for an unknown rule type (it returned `undefined` and crashed later); the remaining French error messages are in English.
+- `has()` in `i18n.js` follows the same fallback chain as `t()` (current language, English, French).
+- New `test_version.js` (app version, service-worker cache name and changelog must agree; every cached file must exist) and a GitHub Actions workflow running the three test scripts on every push.
+
 ## 1.0.0 - 2026-10-14
 - First public release of **1-5731N** (display name "1-5+31IV"): an installable web app port of the free game *Einstein Puzzle* 2.0 (Flowix Games, GPL v2+).
 - Engine ported from the original generator and solver; every puzzle is solvable by pure deduction (checked on 40 generated puzzles).

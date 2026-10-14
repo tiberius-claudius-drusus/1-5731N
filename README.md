@@ -23,6 +23,7 @@ On a phone: open the page in the browser, then "Add to Home Screen" (iOS: Safari
 ## Files
 
 - `engine.js` — generator, solver and rules, ported from `puzgen.cpp` / `rules.cpp` (test: `node test_engine.js`).
+- `test_version.js` — release check (app version = cache name = changelog); the three tests run on every push (`.github/workflows/test.yml`).
 - `app.js`, `index.html` — interface; game saved in `localStorage` (keys `stein.*`). The CSS is inlined in `index.html`.
 - `glyphs.js` — the 36 game symbols and the title characters, drawn as SVG.
 - `themes.js`, `THEMES.md` — themes (how to add one).
