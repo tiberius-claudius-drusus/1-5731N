@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Indonesian (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Indonesian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "id"
@@ -113,6 +113,16 @@ SteinI18n.add("id", {
     "sym.sign4": "kali",
     "sym.sign5": "sama dengan",
     "sym.sign6": "akar kuadrat",
-    "help.keys": "Papan tombol: tombol panah bergerak di papan, Enter membuka sel, 1 sampai 6 menerapkan mode saat ini (memilih atau mengecualikan) pada simbol, Shift+Enter menerapkan mode lainnya, M mengganti mode, U atau Ctrl+Z membatalkan, T membacakan waktu, Esc menutup."
+    "help.keys": "Papan tombol: tombol panah bergerak di papan, Enter membuka sel, 1 sampai 6 menerapkan mode saat ini (memilih atau mengecualikan) pada simbol, Shift+Enter menerapkan mode lainnya, M mengganti mode, U atau Ctrl+Z membatalkan, T membacakan waktu, Esc menutup.",
+    "new.random": "Teka-teki acak",
+    "new.daily": "Teka-teki hari ini",
+    "new.dailyDone": "selesai dalam {time}",
+    "new.code": "Masukkan kode teka-teki",
+    "code.prompt": "Kode teka-teki",
+    "code.play": "Main",
+    "code.invalid": "Kode ini tidak valid.",
+    "code.copied": "Kode disalin",
+    "code.aria": "Kode teka-teki {code} (ketuk untuk menyalin)",
+    "help.code": "Setiap teka-teki punya kode yang ditampilkan di bawah pengatur waktu: kode yang sama selalu menghasilkan teka-teki yang sama. Ketuk kode untuk menyalinnya. Di Permainan baru, \"Masukkan kode teka-teki\" memainkan ulang sebuah teka-teki, dan \"Teka-teki hari ini\" sama untuk semua orang pada tanggal yang sama (dari tengah malam sampai tengah malam, menurut zona waktu perangkat Anda)."
   }
 });

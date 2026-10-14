@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/es.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Spanish (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Spanish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "es"
@@ -113,6 +113,16 @@ SteinI18n.add("es", {
     "sym.sign4": "por",
     "sym.sign5": "igual",
     "sym.sign6": "raíz cuadrada",
-    "help.keys": "Teclado: las flechas se mueven por el tablero, Intro abre una casilla, 1 a 6 aplican a un símbolo el modo actual (elegir o excluir), Mayús+Intro aplica el otro, M cambia de modo, U o Ctrl+Z deshace, T anuncia el tiempo, Esc cierra."
+    "help.keys": "Teclado: las flechas se mueven por el tablero, Intro abre una casilla, 1 a 6 aplican a un símbolo el modo actual (elegir o excluir), Mayús+Intro aplica el otro, M cambia de modo, U o Ctrl+Z deshace, T anuncia el tiempo, Esc cierra.",
+    "new.random": "Rompecabezas al azar",
+    "new.daily": "Rompecabezas del día",
+    "new.dailyDone": "resuelto en {time}",
+    "new.code": "Introducir un código de rompecabezas",
+    "code.prompt": "Código del rompecabezas",
+    "code.play": "Jugar",
+    "code.invalid": "Este código no es válido.",
+    "code.copied": "Código copiado",
+    "code.aria": "Código del rompecabezas {code} (toca para copiar)",
+    "help.code": "Cada rompecabezas tiene un código, que aparece bajo el cronómetro: el mismo código siempre da el mismo rompecabezas. Toca el código para copiarlo. En Nueva partida, «Introducir un código de rompecabezas» repite un rompecabezas, y el «Rompecabezas del día» es el mismo para todos en la misma fecha (de medianoche a medianoche, en la zona horaria de tu dispositivo)."
   }
 });

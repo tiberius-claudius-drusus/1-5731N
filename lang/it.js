@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/it.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Italian (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Italian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "it"
@@ -113,6 +113,16 @@ SteinI18n.add("it", {
     "sym.sign4": "per",
     "sym.sign5": "uguale",
     "sym.sign6": "radice quadrata",
-    "help.keys": "Tastiera: le frecce si spostano sul tabellone, Invio apre una casella, da 1 a 6 applicano a un simbolo la modalità attuale (scegliere o escludere), Maiusc+Invio applica l'altra, M cambia modalità, U o Ctrl+Z annulla, T annuncia il tempo, Esc chiude."
+    "help.keys": "Tastiera: le frecce si spostano sul tabellone, Invio apre una casella, da 1 a 6 applicano a un simbolo la modalità attuale (scegliere o escludere), Maiusc+Invio applica l'altra, M cambia modalità, U o Ctrl+Z annulla, T annuncia il tempo, Esc chiude.",
+    "new.random": "Rompicapo a caso",
+    "new.daily": "Rompicapo del giorno",
+    "new.dailyDone": "risolto in {time}",
+    "new.code": "Inserisci un codice di rompicapo",
+    "code.prompt": "Codice del rompicapo",
+    "code.play": "Gioca",
+    "code.invalid": "Questo codice non è valido.",
+    "code.copied": "Codice copiato",
+    "code.aria": "Codice del rompicapo {code} (tocca per copiare)",
+    "help.code": "Ogni rompicapo ha un codice, mostrato sotto il cronometro: lo stesso codice dà sempre lo stesso rompicapo. Tocca il codice per copiarlo. In Nuova partita, «Inserisci un codice di rompicapo» rigioca un rompicapo, e il «Rompicapo del giorno» è lo stesso per tutti nella stessa data (da mezzanotte a mezzanotte, nel fuso orario del tuo dispositivo)."
   }
 });

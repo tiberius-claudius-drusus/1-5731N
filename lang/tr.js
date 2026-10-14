@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Turkish (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Turkish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "tr"
@@ -113,6 +113,16 @@ SteinI18n.add("tr", {
     "sym.sign4": "çarpı",
     "sym.sign5": "eşittir",
     "sym.sign6": "karekök",
-    "help.keys": "Klavye: ok tuşları tahtada gezinir, Enter bir kutuyu açar, 1 ile 6 arası bir simgeye geçerli kipi (seçme veya dışlama) uygular, Shift+Enter diğerini uygular, M kipi değiştirir, U veya Ctrl+Z geri alır, T süreyi okur, Esc kapatır."
+    "help.keys": "Klavye: ok tuşları tahtada gezinir, Enter bir kutuyu açar, 1 ile 6 arası bir simgeye geçerli kipi (seçme veya dışlama) uygular, Shift+Enter diğerini uygular, M kipi değiştirir, U veya Ctrl+Z geri alır, T süreyi okur, Esc kapatır.",
+    "new.random": "Rastgele bulmaca",
+    "new.daily": "Günün bulmacası",
+    "new.dailyDone": "{time} içinde çözüldü",
+    "new.code": "Bulmaca kodu gir",
+    "code.prompt": "Bulmaca kodu",
+    "code.play": "Oyna",
+    "code.invalid": "Bu kod geçerli değil.",
+    "code.copied": "Kod kopyalandı",
+    "code.aria": "Bulmaca kodu {code} (kopyalamak için dokunun)",
+    "help.code": "Her bulmacanın sayacın altında gösterilen bir kodu vardır: aynı kod her zaman aynı bulmacayı verir. Kodu kopyalamak için dokunun. Yeni oyun içinde \"Bulmaca kodu gir\" bir bulmacayı yeniden oynatır, \"Günün bulmacası\" ise aynı tarihte herkes için aynıdır (gece yarısından gece yarısına, cihazınızın saat diliminde)."
   }
 });

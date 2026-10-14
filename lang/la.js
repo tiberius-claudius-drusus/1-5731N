@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Latin (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Latin (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "la"
@@ -113,6 +113,16 @@ SteinI18n.add("la", {
     "sym.sign4": "multiplicatum per",
     "sym.sign5": "aequale",
     "sym.sign6": "radix quadrata",
-    "help.keys": "Claviatura: sagittae per tabulam moventur, Enter cellam aperit, 1 ad 6 modum praesentem (eligere vel excludere) signo applicant, Shift+Enter alterum applicat, M modum mutat, U vel Ctrl+Z revocat, T tempus pronuntiat, Esc claudit."
+    "help.keys": "Claviatura: sagittae per tabulam moventur, Enter cellam aperit, 1 ad 6 modum praesentem (eligere vel excludere) signo applicant, Shift+Enter alterum applicat, M modum mutat, U vel Ctrl+Z revocat, T tempus pronuntiat, Esc claudit.",
+    "new.random": "Aenigma fortuitum",
+    "new.daily": "Aenigma diei",
+    "new.dailyDone": "solutum in {time}",
+    "new.code": "Codicem aenigmatis insere",
+    "code.prompt": "Codex aenigmatis",
+    "code.play": "Lude",
+    "code.invalid": "Hic codex non valet.",
+    "code.copied": "Codex exscriptus",
+    "code.aria": "Codex aenigmatis {code} (tange ut exscribas)",
+    "help.code": "Omne aenigma codicem habet, sub horologio ostensum: idem codex semper idem aenigma dat. Codicem tange ut exscribas. In Ludo novo, «Codicem aenigmatis insere» aenigma iterum ludit, et «Aenigma diei» idem est omnibus eodem die (a media nocte ad mediam noctem, in zona horaria instrumenti tui)."
   }
 });

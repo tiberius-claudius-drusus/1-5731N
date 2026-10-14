@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ar.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Arabic (right to left) (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Arabic (right to left) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "ar"
@@ -113,6 +113,16 @@ SteinI18n.add("ar", {
     "sym.sign4": "ضرب",
     "sym.sign5": "يساوي",
     "sym.sign6": "الجذر التربيعي",
-    "help.keys": "لوحة المفاتيح: تتنقل الأسهم على اللوحة، وEnter يفتح خانة، والمفاتيح من 1 إلى 6 تطبّق الوضع الحالي (اختيار أو استبعاد) على رمز، وShift+Enter يطبّق الوضع الآخر، وM يغيّر الوضع، وU أو Ctrl+Z يتراجع، وT يقرأ الوقت، وEsc يغلق."
+    "help.keys": "لوحة المفاتيح: تتنقل الأسهم على اللوحة، وEnter يفتح خانة، والمفاتيح من 1 إلى 6 تطبّق الوضع الحالي (اختيار أو استبعاد) على رمز، وShift+Enter يطبّق الوضع الآخر، وM يغيّر الوضع، وU أو Ctrl+Z يتراجع، وT يقرأ الوقت، وEsc يغلق.",
+    "new.random": "لغز عشوائي",
+    "new.daily": "لغز اليوم",
+    "new.dailyDone": "حُلّ في {time}",
+    "new.code": "أدخل رمز لغز",
+    "code.prompt": "رمز اللغز",
+    "code.play": "العب",
+    "code.invalid": "هذا الرمز غير صالح.",
+    "code.copied": "تم نسخ الرمز",
+    "code.aria": "رمز اللغز {code} (المس للنسخ)",
+    "help.code": "لكل لغز رمز يظهر تحت المؤقت: الرمز نفسه يعطي دائمًا اللغز نفسه. المس الرمز لنسخه. في «لعبة جديدة»، يعيد «أدخل رمز لغز» لعب لغز، و«لغز اليوم» هو نفسه للجميع في التاريخ نفسه (من منتصف الليل إلى منتصف الليل، بحسب المنطقة الزمنية لجهازك)."
   }
 });

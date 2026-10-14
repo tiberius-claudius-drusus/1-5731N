@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_code.js
- * Version   : 1.0.3
+ * Version   : 1.1.0
  * Role      : Tests of the puzzle code ("VV-AAAA-AAAA"): same code = same puzzle, pinned puzzles of generator version 1, uniqueness, independence of neighbouring codes, parsing, speed.
  * Depends on: engine.js ; Node.js (standard library only)
  * Called by : by hand (node test_code.js ; STEIN_HEAVY=1 for the large samples) ; GitHub Actions
@@ -65,6 +65,28 @@ console.log('pinned puzzles:', Object.keys(GOLDEN).length, 'codes');
   const cs = Array.from({ length: 300 }, code);
   const a = t(() => E.genPuzzle()), b = t(i => E.genPuzzle(cs[i]));
   console.log('speed: random ' + a.toFixed(1) + ' ms/puzzle, from a code ' + b.toFixed(1) + ' ms/puzzle'); }
+
+// 8. puzzle of the day: derived from the date only
+{ const d1 = E.dailyCode('2026-10-14'), d2 = E.dailyCode('2026-10-14'), d3 = E.dailyCode('2026-10-15');
+  if (d1 !== d2) fail('the code of a day is not stable');
+  if (d1 === d3) fail('two days have the same code');
+  if (!/^01-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/.test(d1)) fail('malformed daily code ' + d1);
+  const seen = new Set(); for (let i = 0; i < 3650; i++) { const dt = new Date(Date.UTC(2026, 0, 1) + i * 86400000).toISOString().slice(0, 10); seen.add(E.dailyCode(dt)); }
+  if (seen.size !== 3650) fail('10 years of dates gave ' + seen.size + ' different codes instead of 3650');
+  const DAILY = { '2026-10-14': '01-YF8R-B4JA', '2026-12-31': '01-GR56-4TC7', '2027-01-01': '01-KCHP-ARTW' };
+  if (process.argv[2] === '--print-daily') { Object.keys(DAILY).forEach(k => console.log("'" + k + "': '" + E.dailyCode(k) + "',")); process.exit(0); }
+  Object.keys(DAILY).forEach(k => { if (E.dailyCode(k) !== DAILY[k]) fail('pinned daily code of ' + k + ': expected ' + DAILY[k] + ', got ' + E.dailyCode(k)); });
+  ['2026-13-01x', '', 'hello', null, undefined].forEach(v => { let threw = false; try { E.dailyCode(v); } catch (e) { threw = true; } if (!threw) fail('dailyCode accepted ' + v); });
+  const g = E.genPuzzle(d1); if (g.code !== d1 || !E.canSolve(g.solved, g.rules)) fail('the puzzle of the day is not a valid puzzle');
+  if (E.canonicalCode(' 01 7k3f 9a2q ') !== '01-7K3F-9A2Q' || E.canonicalCode('nope') !== null) fail('canonicalCode');
+  console.log('puzzle of the day: stable per date, 3650 dates give 3650 codes, pinned'); }
+
+// 9. a saved game may carry its code, which must be a canonical one
+{ const g = E.genPuzzle(), p = new E.Possibilities(); E.openInitial(p, g.rules);
+  const sv = extra => Object.assign({ solved: g.solved, rules: g.rules.map(E.ruleToJSON), pos: Array.from(p.p), checked: [], history: [], elapsed: 0, errors: 0 }, extra);
+  if (!E.validGame(sv({ code: g.code })) || !E.validGame(sv({}))) fail('a game with a valid code, or without code, was refused');
+  ['nope', '01-7k3f-9a2q', 123, '02-7K3F-9A2Q'].forEach(v => { if (E.validGame(sv({ code: v }))) fail('a game with the code ' + v + ' was accepted'); });
+  console.log('saved games with a code: canonical codes only'); }
 
 console.log(bad ? bad + ' problem(s)' : 'puzzle code: all consistent');
 process.exit(bad ? 1 : 0);

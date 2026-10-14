@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/de.js
- * Version   : 1.0.4
- * Role      : User-interface texts in German (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in German (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "de"
@@ -113,6 +113,16 @@ SteinI18n.add("de", {
     "sym.sign4": "mal",
     "sym.sign5": "gleich",
     "sym.sign6": "Quadratwurzel",
-    "help.keys": "Tastatur: Die Pfeiltasten bewegen sich über das Spielfeld, Enter öffnet ein Feld, 1 bis 6 wenden den aktuellen Modus (Wählen oder Ausschließen) auf ein Symbol an, Umschalt+Enter wendet den anderen an, M wechselt den Modus, U oder Strg+Z macht rückgängig, T liest die Zeit vor, Esc schließt."
+    "help.keys": "Tastatur: Die Pfeiltasten bewegen sich über das Spielfeld, Enter öffnet ein Feld, 1 bis 6 wenden den aktuellen Modus (Wählen oder Ausschließen) auf ein Symbol an, Umschalt+Enter wendet den anderen an, M wechselt den Modus, U oder Strg+Z macht rückgängig, T liest die Zeit vor, Esc schließt.",
+    "new.random": "Zufälliges Rätsel",
+    "new.daily": "Rätsel des Tages",
+    "new.dailyDone": "gelöst in {time}",
+    "new.code": "Rätselcode eingeben",
+    "code.prompt": "Rätselcode",
+    "code.play": "Spielen",
+    "code.invalid": "Dieser Code ist ungültig.",
+    "code.copied": "Code kopiert",
+    "code.aria": "Rätselcode {code} (zum Kopieren antippen)",
+    "help.code": "Jedes Rätsel hat einen Code, der unter der Zeit angezeigt wird: Derselbe Code ergibt immer dasselbe Rätsel. Tippe auf den Code, um ihn zu kopieren. Unter Neues Spiel wiederholt „Rätselcode eingeben“ ein Rätsel, und das „Rätsel des Tages“ ist am selben Datum für alle gleich (von Mitternacht bis Mitternacht, in der Zeitzone deines Geräts)."
   }
 });

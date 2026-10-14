@@ -10,4 +10,5 @@ jobs:
           node-version: 20
       - run: node test_engine.js
       - run: node test_lang.js
+      - run: node test_code.js
       - run: node test_version.js

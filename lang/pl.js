@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Polish (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Polish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "pl"
@@ -113,6 +113,16 @@ SteinI18n.add("pl", {
     "sym.sign4": "razy",
     "sym.sign5": "równa się",
     "sym.sign6": "pierwiastek kwadratowy",
-    "help.keys": "Klawiatura: strzałki przesuwają po planszy, Enter otwiera pole, od 1 do 6 stosują do symbolu bieżący tryb (wybieranie lub wykluczanie), Shift+Enter stosuje drugi, M zmienia tryb, U lub Ctrl+Z cofa, T odczytuje czas, Esc zamyka."
+    "help.keys": "Klawiatura: strzałki przesuwają po planszy, Enter otwiera pole, od 1 do 6 stosują do symbolu bieżący tryb (wybieranie lub wykluczanie), Shift+Enter stosuje drugi, M zmienia tryb, U lub Ctrl+Z cofa, T odczytuje czas, Esc zamyka.",
+    "new.random": "Losowa łamigłówka",
+    "new.daily": "Łamigłówka dnia",
+    "new.dailyDone": "rozwiązana w {time}",
+    "new.code": "Wpisz kod łamigłówki",
+    "code.prompt": "Kod łamigłówki",
+    "code.play": "Graj",
+    "code.invalid": "Ten kod jest nieprawidłowy.",
+    "code.copied": "Skopiowano kod",
+    "code.aria": "Kod łamigłówki {code} (dotknij, aby skopiować)",
+    "help.code": "Każda łamigłówka ma kod, wyświetlany pod czasomierzem: ten sam kod zawsze daje tę samą łamigłówkę. Dotknij kodu, aby go skopiować. W Nowej grze „Wpisz kod łamigłówki” pozwala zagrać ją ponownie, a „Łamigłówka dnia” jest taka sama dla wszystkich w tym samym dniu (od północy do północy, w strefie czasowej urządzenia)."
   }
 });

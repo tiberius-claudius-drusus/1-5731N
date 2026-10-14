@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/vi.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Vietnamese (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Vietnamese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "vi"
@@ -113,6 +113,16 @@ SteinI18n.add("vi", {
     "sym.sign4": "nhân",
     "sym.sign5": "bằng",
     "sym.sign6": "căn bậc hai",
-    "help.keys": "Bàn phím: phím mũi tên di chuyển trên bàn, Enter mở một ô, 1 đến 6 áp dụng chế độ hiện tại (chọn hoặc loại) cho ký hiệu, Shift+Enter áp dụng chế độ còn lại, M đổi chế độ, U hoặc Ctrl+Z hoàn tác, T đọc thời gian, Esc đóng."
+    "help.keys": "Bàn phím: phím mũi tên di chuyển trên bàn, Enter mở một ô, 1 đến 6 áp dụng chế độ hiện tại (chọn hoặc loại) cho ký hiệu, Shift+Enter áp dụng chế độ còn lại, M đổi chế độ, U hoặc Ctrl+Z hoàn tác, T đọc thời gian, Esc đóng.",
+    "new.random": "Câu đố ngẫu nhiên",
+    "new.daily": "Câu đố của ngày",
+    "new.dailyDone": "đã giải trong {time}",
+    "new.code": "Nhập mã câu đố",
+    "code.prompt": "Mã câu đố",
+    "code.play": "Chơi",
+    "code.invalid": "Mã này không hợp lệ.",
+    "code.copied": "Đã sao chép mã",
+    "code.aria": "Mã câu đố {code} (chạm để sao chép)",
+    "help.code": "Mỗi câu đố có một mã hiển thị dưới đồng hồ: cùng một mã luôn cho cùng một câu đố. Chạm vào mã để sao chép. Trong Ván mới, \"Nhập mã câu đố\" cho chơi lại một câu đố, và \"Câu đố của ngày\" giống nhau với mọi người trong cùng một ngày (từ nửa đêm đến nửa đêm, theo múi giờ của thiết bị)."
   }
 });

@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/nl.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Dutch (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Dutch (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "nl"
@@ -113,6 +113,16 @@ SteinI18n.add("nl", {
     "sym.sign4": "keer",
     "sym.sign5": "is gelijk aan",
     "sym.sign6": "vierkantswortel",
-    "help.keys": "Toetsenbord: met de pijltjestoetsen ga je over het bord, Enter opent een vakje, 1 tot 6 passen de huidige modus (kiezen of uitsluiten) toe op een symbool, Shift+Enter past de andere toe, M wisselt van modus, U of Ctrl+Z maakt ongedaan, T leest de tijd voor, Esc sluit."
+    "help.keys": "Toetsenbord: met de pijltjestoetsen ga je over het bord, Enter opent een vakje, 1 tot 6 passen de huidige modus (kiezen of uitsluiten) toe op een symbool, Shift+Enter past de andere toe, M wisselt van modus, U of Ctrl+Z maakt ongedaan, T leest de tijd voor, Esc sluit.",
+    "new.random": "Willekeurige puzzel",
+    "new.daily": "Puzzel van de dag",
+    "new.dailyDone": "opgelost in {time}",
+    "new.code": "Puzzelcode invoeren",
+    "code.prompt": "Puzzelcode",
+    "code.play": "Spelen",
+    "code.invalid": "Deze code is ongeldig.",
+    "code.copied": "Code gekopieerd",
+    "code.aria": "Puzzelcode {code} (tik om te kopiëren)",
+    "help.code": "Elke puzzel heeft een code, getoond onder de timer: dezelfde code geeft altijd dezelfde puzzel. Tik op de code om hem te kopiëren. Bij Nieuw spel speelt \"Puzzelcode invoeren\" een puzzel opnieuw, en de \"Puzzel van de dag\" is op dezelfde datum voor iedereen gelijk (van middernacht tot middernacht, in de tijdzone van je apparaat)."
   }
 });

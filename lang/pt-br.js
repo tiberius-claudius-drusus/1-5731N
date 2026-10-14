@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pt-br.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Portuguese (Brazil) (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Portuguese (Brazil) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "pt-br"
@@ -113,6 +113,16 @@ SteinI18n.add("pt-br", {
     "sym.sign4": "vezes",
     "sym.sign5": "igual",
     "sym.sign6": "raiz quadrada",
-    "help.keys": "Teclado: as setas se movem pelo tabuleiro, Enter abre uma casa, 1 a 6 aplicam a um símbolo o modo atual (escolher ou excluir), Shift+Enter aplica o outro, M muda de modo, U ou Ctrl+Z desfaz, T anuncia o tempo, Esc fecha."
+    "help.keys": "Teclado: as setas se movem pelo tabuleiro, Enter abre uma casa, 1 a 6 aplicam a um símbolo o modo atual (escolher ou excluir), Shift+Enter aplica o outro, M muda de modo, U ou Ctrl+Z desfaz, T anuncia o tempo, Esc fecha.",
+    "new.random": "Quebra-cabeça aleatório",
+    "new.daily": "Quebra-cabeça do dia",
+    "new.dailyDone": "resolvido em {time}",
+    "new.code": "Digitar um código de quebra-cabeça",
+    "code.prompt": "Código do quebra-cabeça",
+    "code.play": "Jogar",
+    "code.invalid": "Este código não é válido.",
+    "code.copied": "Código copiado",
+    "code.aria": "Código do quebra-cabeça {code} (toque para copiar)",
+    "help.code": "Cada quebra-cabeça tem um código, mostrado abaixo do cronômetro: o mesmo código sempre dá o mesmo quebra-cabeça. Toque no código para copiá-lo. Em Novo jogo, \"Digitar um código de quebra-cabeça\" repete um quebra-cabeça, e o \"Quebra-cabeça do dia\" é o mesmo para todos na mesma data (da meia-noite à meia-noite, no fuso horário do seu dispositivo)."
   }
 });

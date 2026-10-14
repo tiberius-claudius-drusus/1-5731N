@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ko.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Korean (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Korean (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "ko"
@@ -113,6 +113,16 @@ SteinI18n.add("ko", {
     "sym.sign4": "곱하기",
     "sym.sign5": "같음",
     "sym.sign6": "제곱근",
-    "help.keys": "키보드: 화살표 키로 보드를 이동하고, Enter로 칸을 열고, 1~6으로 기호에 현재 모드(선택 또는 제외)를 적용하고, Shift+Enter로 다른 모드를 적용하며, M으로 모드를 바꾸고, U 또는 Ctrl+Z로 취소하고, T로 시간을 읽어 주며, Esc로 닫습니다."
+    "help.keys": "키보드: 화살표 키로 보드를 이동하고, Enter로 칸을 열고, 1~6으로 기호에 현재 모드(선택 또는 제외)를 적용하고, Shift+Enter로 다른 모드를 적용하며, M으로 모드를 바꾸고, U 또는 Ctrl+Z로 취소하고, T로 시간을 읽어 주며, Esc로 닫습니다.",
+    "new.random": "무작위 퍼즐",
+    "new.daily": "오늘의 퍼즐",
+    "new.dailyDone": "{time}에 해결",
+    "new.code": "퍼즐 코드 입력",
+    "code.prompt": "퍼즐 코드",
+    "code.play": "시작",
+    "code.invalid": "이 코드는 올바르지 않습니다.",
+    "code.copied": "코드를 복사했습니다",
+    "code.aria": "퍼즐 코드 {code} (눌러서 복사)",
+    "help.code": "모든 퍼즐에는 타이머 아래에 표시되는 코드가 있습니다. 같은 코드는 항상 같은 퍼즐을 만듭니다. 코드를 누르면 복사됩니다. 새 게임에서 '퍼즐 코드 입력'으로 퍼즐을 다시 플레이할 수 있고, '오늘의 퍼즐'은 같은 날짜에 모든 사람에게 같습니다(자정부터 자정까지, 기기의 시간대 기준)."
   }
 });

@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/en.js
- * Version   : 1.0.4
- * Role      : User-interface texts in English (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in English (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "en"
@@ -113,6 +113,16 @@ SteinI18n.add("en", {
     "sym.sign4": "times",
     "sym.sign5": "equals",
     "sym.sign6": "square root",
-    "help.keys": "Keyboard: arrow keys move around the board, Enter opens a cell, 1 to 6 apply the current mode (choose or exclude) to a symbol, Shift+Enter applies the other one, M switches mode, U or Ctrl+Z undoes, T reads the time, Esc closes."
+    "help.keys": "Keyboard: arrow keys move around the board, Enter opens a cell, 1 to 6 apply the current mode (choose or exclude) to a symbol, Shift+Enter applies the other one, M switches mode, U or Ctrl+Z undoes, T reads the time, Esc closes.",
+    "new.random": "Random puzzle",
+    "new.daily": "Puzzle of the day",
+    "new.dailyDone": "done in {time}",
+    "new.code": "Enter a puzzle code",
+    "code.prompt": "Puzzle code",
+    "code.play": "Play",
+    "code.invalid": "This code is not valid.",
+    "code.copied": "Code copied",
+    "code.aria": "Puzzle code {code} (tap to copy)",
+    "help.code": "Every puzzle has a code, shown under the timer: the same code always gives the same puzzle. Tap the code to copy it. In New game, \"Enter a puzzle code\" replays a puzzle, and the \"Puzzle of the day\" is the same for everyone on the same date (midnight to midnight, in the time zone of your device)."
   }
 });

@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/zh.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Chinese (Simplified) (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Chinese (Simplified) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "zh"
@@ -113,6 +113,16 @@ SteinI18n.add("zh", {
     "sym.sign4": "乘以",
     "sym.sign5": "等于",
     "sym.sign6": "平方根",
-    "help.keys": "键盘：方向键在棋盘上移动，回车键打开格子，1到6对符号应用当前模式（选择或排除），Shift加回车应用另一种模式，M切换模式，U或Ctrl+Z撤销，T报读时间，Esc关闭。"
+    "help.keys": "键盘：方向键在棋盘上移动，回车键打开格子，1到6对符号应用当前模式（选择或排除），Shift加回车应用另一种模式，M切换模式，U或Ctrl+Z撤销，T报读时间，Esc关闭。",
+    "new.random": "随机谜题",
+    "new.daily": "每日谜题",
+    "new.dailyDone": "用时{time}完成",
+    "new.code": "输入谜题代码",
+    "code.prompt": "谜题代码",
+    "code.play": "开始",
+    "code.invalid": "此代码无效。",
+    "code.copied": "代码已复制",
+    "code.aria": "谜题代码{code}（点按复制）",
+    "help.code": "每个谜题都有一个代码，显示在计时器下方：相同的代码总是得到相同的谜题。点按代码即可复制。在“新游戏”中，“输入谜题代码”可重玩某个谜题，“每日谜题”在同一天对所有人都相同（从午夜到午夜，按您设备的时区）。"
   }
 });

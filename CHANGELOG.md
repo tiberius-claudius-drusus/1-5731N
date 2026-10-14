@@ -1,5 +1,13 @@
 # Changelog - 1-5731N
 
+## 1.1.0 - 2026-10-14
+Puzzle codes, puzzle of the day, and a tidier menu.
+- Every puzzle has a **code** `01-AAAA-AAAA` (generator version + 8-character seed, 40 bits): the same code always gives the same puzzle. It is shown in small characters under the timer (tap it to copy it), on the victory screen, and kept with each game in the statistics (also in the export/import file, where it must be well formed).
+- **New game** now offers three choices: a random puzzle, the **puzzle of the day** (derived from the date of the device, from 00:00:00 to 23:59:59 in its time zone; marked "done in m:ss" once solved), and **Enter a puzzle code** (the field fills in the dashes while you type, accepts a pasted code, reads o/i/l as 0/1/1, and refuses an invalid code without closing). Starting any of them while a game is in progress still asks for confirmation.
+- Menu and dialog buttons are aligned and standardised: three or more buttons are stacked in a column of equal width, one or two share a row equally, same font and size as the home menu.
+- The generator draws from a seeded generator when a code is given (`engine.js`); `test_code.js` pins five puzzles and three daily codes so that an accidental change of the algorithm is caught (it would need a new generator version). The saved-game check accepts an optional canonical code.
+- 10 new texts in the 20 languages.
+
 ## 1.0.4 - 2026-10-14
 Accessibility and keyboard play, following the suggestions of a fourth external review.
 - Keyboard (desktop): arrow keys / Home / End move over the board, Enter opens a cell (the focus goes into the zoom panel), 1 to 6 apply the current mode (choose or exclude) to a symbol, Shift+Enter applies the other one, arrows move inside the panel, M switches the mode, U or Ctrl+Z undoes, T reads the time, Esc closes the panel (or opens the menu). Digits work directly on the focused cell too.

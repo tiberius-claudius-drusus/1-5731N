@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/hi.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Hindi (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Hindi (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "hi"
@@ -113,6 +113,16 @@ SteinI18n.add("hi", {
     "sym.sign4": "गुणा",
     "sym.sign5": "बराबर",
     "sym.sign6": "वर्गमूल",
-    "help.keys": "कीबोर्ड: तीर कुंजियाँ बोर्ड पर चलती हैं, Enter खाना खोलता है, 1 से 6 चिह्न पर मौजूदा मोड (चुनना या बाहर करना) लागू करते हैं, Shift+Enter दूसरा मोड लागू करता है, M मोड बदलता है, U या Ctrl+Z वापस लेता है, T समय बोलता है, Esc बंद करता है।"
+    "help.keys": "कीबोर्ड: तीर कुंजियाँ बोर्ड पर चलती हैं, Enter खाना खोलता है, 1 से 6 चिह्न पर मौजूदा मोड (चुनना या बाहर करना) लागू करते हैं, Shift+Enter दूसरा मोड लागू करता है, M मोड बदलता है, U या Ctrl+Z वापस लेता है, T समय बोलता है, Esc बंद करता है।",
+    "new.random": "यादृच्छिक पहेली",
+    "new.daily": "आज की पहेली",
+    "new.dailyDone": "{time} में हल हुई",
+    "new.code": "पहेली कोड दर्ज करें",
+    "code.prompt": "पहेली कोड",
+    "code.play": "खेलें",
+    "code.invalid": "यह कोड मान्य नहीं है।",
+    "code.copied": "कोड कॉपी हो गया",
+    "code.aria": "पहेली कोड {code} (कॉपी करने के लिए छुएँ)",
+    "help.code": "हर पहेली का एक कोड होता है, जो टाइमर के नीचे दिखता है: एक ही कोड हमेशा एक ही पहेली देता है। कोड को कॉपी करने के लिए उसे छुएँ। नया खेल में \"पहेली कोड दर्ज करें\" से कोई पहेली फिर खेली जा सकती है, और \"आज की पहेली\" एक ही तारीख़ पर सबके लिए एक जैसी होती है (आधी रात से आधी रात तक, आपके उपकरण के समय क्षेत्र में)।"
   }
 });

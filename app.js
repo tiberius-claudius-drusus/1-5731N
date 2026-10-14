@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.0.4
+ * Version   : 1.1.0
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.0.4', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.1.0', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var $ = function (id) { return document.getElementById(id); };
@@ -79,30 +79,43 @@
   /* ---------- dialogues ---------- */
   var dialogReturn = null, dialogEsc = null;
   function hideDialog() {
-    $('dialog').hidden = true; dialogEsc = null;
+    $('dialog').hidden = true; dialogEsc = null; $('d-field').hidden = true; $('d-err').hidden = true;
     var r = dialogReturn; dialogReturn = null;
     if (r && document.body.contains(r)) { try { r.focus(); } catch (e) {} }
     else if (r && $('s-game').classList.contains('on') && !zoomCell) focusBoardCell(focusCell[0], focusCell[1]);   // the element was rebuilt meanwhile
   }
-  /* btns: [[label, callback?], ...]. opts.escIndex: button run by Escape (default the first; -1 = none). Focus goes to the first button and comes back. */
+  function dialogError(msg) { var e = $('d-err'); e.textContent = msg; e.hidden = false; say(msg); }
+  /* btns: [[label, callback?, validator?], ...]; the validator runs before the dialog closes and keeps it open by returning false.
+   * opts.field {value, placeholder, label}: a text field (its value is passed to the validator and the callback).
+   * opts.escIndex: button run by Escape (default the first; -1 = none). opts.enterIndex: button run by Enter in the field.
+   * Three or more buttons are stacked in a column of equal width, one or two share a row equally. */
   function dialog(text, btns, opts) {
     opts = opts || {};
     $('d-text').textContent = text;
-    var box = $('d-btns'); box.innerHTML = '';
+    var box = $('d-btns'); box.innerHTML = ''; box.className = btns.length > 2 ? 'col' : 'row';
+    var fld = $('d-field'); $('d-err').hidden = true; $('d-err').textContent = '';
+    fld.hidden = !opts.field;
+    if (opts.field) { fld.value = opts.field.value || ''; fld.placeholder = opts.field.placeholder || ''; fld.setAttribute('aria-label', opts.field.label || text); }
     var shownAt = performance.now();   // ignore the ghost click of the last tap on the board
     btns.forEach(function (b) {
       var el = document.createElement('button'); el.textContent = b[0];
       el.onclick = function () {
         if (performance.now() - shownAt < 400) return;
-        hideDialog(); if (b[1]) b[1]();
+        var v = opts.field ? fld.value : undefined;
+        if (b[2] && b[2](v) === false) return;
+        hideDialog(); if (b[1]) b[1](v);
       };
       box.appendChild(el);
     });
     var ei = opts.escIndex == null ? 0 : opts.escIndex;
     dialogEsc = ei >= 0 && btns[ei] ? function () { hideDialog(); if (btns[ei][1]) btns[ei][1](); } : null;
+    fld.onkeydown = function (ev) {
+      if (ev.key === 'Enter' && opts.enterIndex != null) { ev.preventDefault(); box.children[opts.enterIndex].click(); }
+      else if (ev.key === 'Escape' && dialogEsc) { ev.preventDefault(); dialogEsc(); }
+    };
     if (!dialogReturn && document.activeElement && document.activeElement !== document.body) dialogReturn = document.activeElement;
     $('dialog').hidden = false;
-    if (box.firstChild) box.firstChild.focus();
+    var f = opts.field ? fld : box.firstChild; if (f) f.focus();
   }
   var toastT;
   function toast(msg) {
@@ -127,30 +140,84 @@
     G.pos = Array.prototype.slice.call(pos.p);
     save(KEY_GAME, G);
   }
+  /* the puzzle code, small under the timer: tap to copy */
+  function showCode() {
+    var gc = $('g-code'); gc.hidden = !(G && G.code);
+    if (G && G.code) { gc.textContent = G.code; gc.setAttribute('aria-label', t('code.aria', { code: G.code })); }
+  }
+  $('g-code').onclick = function () {
+    if (!G || !G.code) return;
+    var code = G.code, done = function () { toast(t('code.copied')); };
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = code; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { if (document.execCommand('copy')) done(); } catch (e) {}
+      ta.remove();
+    }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(code).then(done, fallback); return; } } catch (e) {}
+    fallback();
+  };
   function setup(g) {
     G = g; ended = false; focusCell = [0, 0];
     rules = G.rules.map(E.ruleFromJSON);
     pos = new E.Possibilities(G.pos);
-    renderAll();
+    renderAll(); showCode();
     closeZoom(); setModeButtons(); applyHand();
     show('s-game');
   }
-  function newGame() {
-    var g = E.genPuzzle();
+  function newGame(code) {
+    var g;
+    try { g = E.genPuzzle(code || undefined); } catch (e) { toast(t('code.invalid')); return; }
     var p = new E.Possibilities();
     E.openInitial(p, g.rules);
     var st = load(KEY_STATS, { games: [], started: 0 });
     st.started = (st.started || 0) + 1; save(KEY_STATS, st);
     setup({
-      solved: g.solved, rules: g.rules.map(E.ruleToJSON),
+      solved: g.solved, rules: g.rules.map(E.ruleToJSON), code: g.code,
       pos: Array.prototype.slice.call(p.p), checked: [], history: [],
       elapsed: 0, errors: 0
     });
     persist();
   }
+  /* The date of the device, in its own time zone: the puzzle of the day changes at 00:00:00 local time. */
+  function localDate() { return new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+  function bestTimeFor(code) {
+    var best = null;
+    load(KEY_STATS, { games: [] }).games.forEach(function (x) { if (x.c === code && (best === null || x.t < best)) best = x.t; });
+    return best;
+  }
+  /* code: a puzzle code, or null for a random puzzle. A game in progress is only abandoned after confirmation. */
+  function startPuzzle(code) {
+    if (loadGame()) dialog(t('dlg.abandon'), [[t('dlg.no')], [t('dlg.yesNew'), function () { newGame(code); }]]);
+    else newGame(code);
+  }
+  function typeCode(s) {                      // "017k3f9a2q" -> "01-7K3F-9A2Q" while typing
+    s = String(s).toUpperCase().replace(/[^0-9A-Z]/g, '').slice(0, 10);
+    return s.slice(0, 2) + (s.length > 2 ? '-' : '') + s.slice(2, 6) + (s.length > 6 ? '-' : '') + s.slice(6);
+  }
+  $('d-field').addEventListener('input', function () { var v = typeCode(this.value); if (v !== this.value) this.value = v; });
+  $('d-field').addEventListener('paste', function (ev) {
+    var cb = ev.clipboardData || window.clipboardData; if (!cb) return;
+    ev.preventDefault(); var raw = cb.getData('text'); this.value = E.canonicalCode(raw) || typeCode(raw);
+  });
+  function askCode() {
+    dialog(t('code.prompt'), [
+      [t('common.cancel')],
+      [t('code.play'), function (v) { startPuzzle(E.canonicalCode(v)); }, function (v) {
+        if (E.canonicalCode(v)) return true;
+        dialogError(t('code.invalid')); return false;
+      }]
+    ], { field: { value: (E.CODE_VERSION < 10 ? '0' : '') + E.CODE_VERSION + '-', placeholder: '01-AAAA-AAAA', label: t('code.prompt') }, escIndex: 0, enterIndex: 1 });
+  }
+  /* "New game": a random puzzle, the puzzle of the day, or a puzzle from a code */
   function askNew() {
-    if (loadGame()) dialog(t('dlg.abandon'), [[t('dlg.no')], [t('dlg.yesNew'), newGame]]);
-    else newGame();
+    var dc = E.dailyCode(localDate()), done = bestTimeFor(dc);
+    dialog(t('home.new'), [
+      [t('new.random'), function () { startPuzzle(null); }],
+      [t('new.daily') + (done != null ? ' ✓ (' + t('new.dailyDone', { time: fmt(done) }) + ')' : ''), function () { startPuzzle(dc); }],
+      [t('new.code'), askCode],
+      [t('common.cancel')]
+    ], { escIndex: 3 });
   }
 
   /* ---------- chrono ---------- */
@@ -283,12 +350,14 @@
   function win() {
     tick(); ended = true; stopTimer();
     var st = load(KEY_STATS, { games: [], started: 0 });
-    st.games.push({ t: Math.round(G.elapsed), errors: G.errors, d: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10) });
+    var rec = { t: Math.round(G.elapsed), errors: G.errors, d: localDate() };
+    if (G.code) rec.c = G.code;
+    st.games.push(rec);
     if (st.games.length > 500) st.games.shift();
     save(KEY_STATS, st); drop(KEY_GAME);
     play('applause');
-    dialog([t('win.title'), t('win.time', { time: fmt(G.elapsed) }), G.errors ? t('win.errors', { n: G.errors }) : t('win.clean')].join('\n'),
-      [[t('win.menu'), function () { show('s-home'); }], [t('win.new'), newGame]], { escIndex: -1 });
+    dialog([t('win.title'), t('win.time', { time: fmt(G.elapsed) }), G.errors ? t('win.errors', { n: G.errors }) : t('win.clean')].concat(G.code ? [G.code] : []).join('\n'),
+      [[t('win.menu'), function () { show('s-home'); }], [t('win.new'), askNew]], { escIndex: -1 });
   }
 
   /* ---------- cell zoom: tapping an unsolved cell enlarges it in the centre ---------- */
@@ -425,7 +494,8 @@
     if (!$('dialog').hidden) {
       if (ev.key === 'Escape' && dialogEsc) { ev.preventDefault(); dialogEsc(); }
       else if (ev.key === 'Tab') {                              // the focus stays inside the dialog
-        var bs = $('d-btns').querySelectorAll('button'); if (!bs.length) return;
+        var bs = Array.prototype.slice.call($('d-btns').querySelectorAll('button')); if (!bs.length) return;
+        if (!$('d-field').hidden) bs.unshift($('d-field'));
         var first = bs[0], last = bs[bs.length - 1];
         if (!$('dialog').contains(document.activeElement)) { ev.preventDefault(); first.focus(); }
         else if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
@@ -563,7 +633,7 @@
       '<tr><td>' + t('stats.avg') + '</td><td>' + esc(fmt(avg)) + '</td></tr>' +
       '<tr><td>' + t('stats.clean') + '</td><td>' + clean + '</td></tr></table><h3>' + t('stats.last') + '</h3><table>';
     g.slice(-10).reverse().forEach(function (x) {
-      h += '<tr><td>' + esc(fmtDate(x.d)) + '</td><td>' + (x.errors ? esc(t('stats.err', { n: +x.errors || 0 })) : '') + '</td><td>' + esc(fmt(x.t)) + '</td></tr>';
+      h += '<tr><td>' + esc(fmtDate(x.d)) + '</td><td>' + (x.errors ? esc(t('stats.err', { n: +x.errors || 0 })) : '') + '</td><td>' + esc(fmt(x.t)) + '</td><td class="cd">' + esc(E.canonicalCode(x.c) || '') + '</td></tr>';
     });
     $('stats-body').innerHTML = h + '</table>';
   }
@@ -609,12 +679,14 @@
       if (typeof tm !== 'number' || !isFinite(tm) || tm < 0 || tm > 86400000 * 7) return null;
       if (typeof er !== 'number' || !isFinite(er) || er < 0 || er > 100000) return null;
       if (typeof d !== 'string' || !isRealDate(d)) return null;
-      out.push({ t: Math.round(tm), errors: Math.round(er), d: d });
+      var item = { t: Math.round(tm), errors: Math.round(er), d: d };
+      if (g.c != null) { var cc = E.canonicalCode(g.c); if (cc === null || cc !== g.c) return null; item.c = cc; }
+      out.push(item);
     }
     var started = typeof obj.started === 'number' && isFinite(obj.started) && obj.started >= 0 ? Math.min(Math.round(obj.started), 1e6) : 0;
     return { games: out, started: Math.max(started, out.length) };
   }
-  function gkey(g) { return g.d + '|' + g.t + '|' + g.errors; }
+  function gkey(g) { return g.d + '|' + g.t + '|' + g.errors + '|' + (g.c || ''); }
   function importStats(file) {
     if (!file || file.size > 2 * 1024 * 1024) { toast(t('stats.importBad')); return; }
     var fr = new FileReader();
@@ -660,13 +732,13 @@
       ex(im(0, 1) + imSym('side') + im(1, 3), 'help.ex2') +
       ex(im(0, 1) + im(2, 2) + im(1, 3), 'help.ex3') +
       ex(im(0, 1) + im(2, 2), 'help.ex4') +
-      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.keys') + '</p>';
+      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.keys') + '</p>';
   }
 
   /* ---------- language: (re)writes everything that holds text ---------- */
   function applyLang() {
     I.apply();
-    renderHelp(); setModeButtons();
+    renderHelp(); setModeButtons(); showCode();
     $('ver').textContent = t('foot.build', { v: VERSION, date: BUILD_DATE });
     if ($('s-options').classList.contains('on')) renderOptions();
     if ($('s-stats').classList.contains('on')) renderStats();

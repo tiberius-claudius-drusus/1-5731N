@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.0.3
+ * Version   : 1.1.0
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
- * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, hintsQty, ruleToJSON, ruleFromJSON, validGame
+ * Produces  : window.Stein : N, Possibilities, genPuzzle, openInitial, canSolve, hintsQty, ruleToJSON, ruleFromJSON, validGame, parseCode, canonicalCode, dailyCode
  * Changelog : see CHANGELOG.md
  * ---------------------------------------------------------------------------
  * JavaScript port of puzgen.cpp / rules.cpp from "Einstein Puzzle" 2.0
@@ -332,6 +332,19 @@
   }
 
   /* As in Game::genPuzzle: games with too many clues are rejected. */
+  /* Puzzle of the day: the code is derived from the calendar date "YYYY-MM-DD" (the caller passes the date of the
+   * device, in its own time zone), so that everybody who plays "the puzzle of the day" on the same date gets the same one. */
+  function dailyCode(dateText) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dateText));
+    if (!m) throw new Error('invalid date: ' + dateText);
+    var w = cyrb128('stein-daily-' + dateText), seed = '', i;
+    for (i = 0; i < 6; i++) seed += CODE_ALPHABET.charAt((w[0] >>> (27 - 5 * i)) & 31);
+    seed += CODE_ALPHABET.charAt((w[1] >>> 27) & 31) + CODE_ALPHABET.charAt((w[1] >>> 22) & 31);
+    return formatCode(CODE_VERSION, seed);
+  }
+  /* Any way of typing a code -> the canonical "VV-AAAA-AAAA", or null */
+  function canonicalCode(text) { var c = parseCode(text); return c ? formatCode(c.version, c.seed) : null; }
+
   /* genPuzzle() gives a new random puzzle; genPuzzle("01-7K3F-9A2Q") gives the puzzle of that code again.
    * The result carries its code (g.code). An invalid or unsupported code throws. */
   function genPuzzle(code) {
@@ -394,6 +407,7 @@
     if (!okRule) return false;
     if (!Array.isArray(g.checked) || g.checked.length > g.rules.length || !g.checked.every(function (i) { return isInt(i, 0, g.rules.length - 1); })) return false;
     if (!Array.isArray(g.history) || g.history.length > 300 || !g.history.every(isBits)) return false;
+    if (g.code != null && canonicalCode(g.code) !== g.code) return false;          // optional: the code of the puzzle
     if (typeof g.elapsed !== 'number' || !isFinite(g.elapsed) || g.elapsed < 0) return false;
     if (!isInt(g.errors, 0, 1e6)) return false;
     return true;
@@ -401,7 +415,7 @@
 
   var api = {
     N: N, Possibilities: Possibilities, genPuzzle: genPuzzle, openInitial: openInitial,
-    canSolve: canSolve, hintsQty: hintsQty, parseCode: parseCode, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
+    canSolve: canSolve, hintsQty: hintsQty, parseCode: parseCode, canonicalCode: canonicalCode, dailyCode: dailyCode, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Stein = api;

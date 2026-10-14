@@ -5,6 +5,7 @@
 
 Six rows of six symbols, six columns: use the clues to find which symbol goes in each cell. Every puzzle is generated and can be solved by pure deduction.
 
+- Every puzzle has a code (`01-AAAA-AAAA`, shown under the timer): the same code always gives the same puzzle, so you can replay or share one. A **puzzle of the day** is the same for everyone on the same date.
 - Playable with the keyboard and with a screen reader (arrow keys, Enter, 1-6, M, U, T, Esc: see the Help screen).
 - 20 languages (English by default), 4 themes × light/dark, sounds of the original, works offline, no account, no tracking.
 - Statistics are kept on the device; they can be exported to / imported from a `.json` file.
@@ -28,7 +29,7 @@ On a phone: open the page in the browser, then "Add to Home Screen" (iOS: Safari
 ## Files
 
 - `engine.js` — generator, solver and rules, ported from `puzgen.cpp` / `rules.cpp` (test: `node test_engine.js`).
-- `test_version.js` — release check (app version = cache name = changelog); the three tests run on every push (`.github/workflows/test.yml`).
+- `test_code.js` — puzzle codes (same code = same puzzle, pinned puzzles, puzzle of the day; `STEIN_HEAVY=1` for the large samples). `test_version.js` — release check (app version = cache name = changelog). The tests run on every push (`.github/workflows/test.yml`).
 - `app.js`, `index.html` — interface; game saved in `localStorage` (keys `stein.*`). The CSS is inlined in `index.html`.
 - `glyphs.js` — the 36 game symbols and the title characters, drawn as SVG.
 - `themes.js`, `THEMES.md` — themes (how to add one).

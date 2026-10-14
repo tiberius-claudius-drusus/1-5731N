@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ja.js
- * Version   : 1.0.4
- * Role      : User-interface texts in Japanese (101 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.1.0
+ * Role      : User-interface texts in Japanese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "ja"
@@ -113,6 +113,16 @@ SteinI18n.add("ja", {
     "sym.sign4": "掛ける",
     "sym.sign5": "イコール",
     "sym.sign6": "平方根",
-    "help.keys": "キーボード：矢印キーで盤上を移動し、Enterでマスを開き、1〜6で記号に現在のモード（選択または除外）を適用し、Shift＋Enterでもう一方を適用し、Mでモードを切り替え、UまたはCtrl+Zで取り消し、Tで時間を読み上げ、Escで閉じます。"
+    "help.keys": "キーボード：矢印キーで盤上を移動し、Enterでマスを開き、1〜6で記号に現在のモード（選択または除外）を適用し、Shift＋Enterでもう一方を適用し、Mでモードを切り替え、UまたはCtrl+Zで取り消し、Tで時間を読み上げ、Escで閉じます。",
+    "new.random": "ランダムなパズル",
+    "new.daily": "今日のパズル",
+    "new.dailyDone": "{time}で解決",
+    "new.code": "パズルコードを入力",
+    "code.prompt": "パズルコード",
+    "code.play": "プレイ",
+    "code.invalid": "このコードは無効です。",
+    "code.copied": "コードをコピーしました",
+    "code.aria": "パズルコード {code}（タップでコピー）",
+    "help.code": "すべてのパズルにはタイマーの下に表示されるコードがあり、同じコードからは必ず同じパズルが作られます。コードをタップするとコピーできます。「新しいゲーム」の「パズルコードを入力」で同じパズルを遊び直せます。「今日のパズル」は同じ日付なら誰でも同じです（午前0時から午後11時59分まで、端末のタイムゾーン）。"
   }
 });
