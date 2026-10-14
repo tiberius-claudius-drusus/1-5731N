@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/tools/make_pack.js
- * Version   : 1.2.0
+ * Version   : 1.2.1
  * Role      : Authoring aid: builds a puzzle pack (base library or add-on) from the graded samples written by grade_distribution.js.
  * Depends on: Node.js ; ../engine.js ; sample files from tools/grade_distribution.js --out
  * Called by : by hand: node tools/make_pack.js --base samples_1.json samples_2.json ... | --id ultimate --name Ultimate --min-raw 230 --count 100 samples_*.json
@@ -15,7 +15,9 @@
  *   --id --name       add-on: id (lower case letters, digits, dashes) and display name
  *   --min-raw N       add-on: only puzzles with a raw score >= N
  *   --count N         add-on: keep the N hardest (default: all that qualify)
+ *   --exclude-base    add-on: leave out the puzzles that are already in the base pack (lib_base.js)
  *   --per-level N     base: puzzles per level (default 500)
+ *   --force           base: overwrite an existing lib_base.js (refused otherwise: see the warning above)
  *   --out FILE        output file (default lib_base.js or <id>.json, in the current directory)
  */
 'use strict';
@@ -28,6 +30,8 @@ const opt = {}, files = [];
 for (let i = 0; i < argv.length; i++) {
   const a = argv[i];
   if (a === '--base') opt.base = true;
+  else if (a === '--exclude-base') opt.excludeBase = true;
+  else if (a === '--force') opt.force = true;
   else if (/^--(id|name|min-raw|count|per-level|out)$/.test(a)) opt[a.slice(2)] = argv[++i];
   else files.push(a);
 }
@@ -61,6 +65,11 @@ if (opt.base) {
   }
   const p = pack('base', 'Base', rows);
   const out = opt.out || 'lib_base.js';
+  if (fs.existsSync(out) && !opt.force) {
+    console.error('refused: ' + out + ' already exists. The base pack is FROZEN once published: the puzzle of the day indexes into its order,\n' +
+      'so a different base pack changes every puzzle of the day (and needs a new DAILY_LEVEL_FROM date). Use --force only for that.');
+    process.exit(2);
+  }
   const header = '/* ---------------------------------------------------------------------------\n' +
     ' * File      : 1-5731n/lib_base.js\n * Version   : 1.0.0\n' +
     ' * Role      : Base puzzle library: ' + per + ' puzzle codes (with their raw score) for each of the five levels.\n' +
@@ -74,6 +83,11 @@ if (opt.base) {
   if (!/^[a-z0-9-]{1,32}$/.test(opt.id)) { console.error('--id: lower case letters, digits and dashes (1-32)'); process.exit(2); }
   const min = parseInt(opt['min-raw'] || '0', 10);
   let pool = samples.filter(s => s.raw >= min).sort((a, b) => b.raw - a.raw);
+  if (opt.excludeBase) {
+    const L = require(path.join(__dirname, '..', 'library.js')); require(path.join(__dirname, '..', 'lib_base.js'));
+    const inBase = new Set(); for (let k = 0; k < E.LEVEL_COUNT; k++) L.byLevel(k).forEach(c => inBase.add(c));
+    const before = pool.length; pool = pool.filter(s => !inBase.has(s.code)); console.log('left out (already in the base pack):', before - pool.length);
+  }
   if (opt.count) pool = pool.slice(0, parseInt(opt.count, 10));
   const p = pack(opt.id, opt.name || opt.id, pool);
   const out = opt.out || opt.id + '.json';

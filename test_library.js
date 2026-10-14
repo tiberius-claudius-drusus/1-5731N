@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_library.js
- * Version   : 1.2.0
+ * Version   : 1.2.1
  * Role      : Library test: validation of packs, base pack consistency (levels recomputed from the codes), pick, puzzle of the day by level.
  * Depends on: Node.js ; engine.js ; library.js ; lib_base.js
  * Called by : by hand: node test_library.js (exit code 1 on any problem) ; GitHub Actions
@@ -56,6 +56,40 @@ ok('pick: the only unplayed one', L.pick(2, played) === per[2][499]);
 per[2].forEach(c => { played[c] = 1; });
 ok('pick: all played, still one of the level', per[2].indexOf(L.pick(2, played)) >= 0);
 
+// a pack that lies about the score: the puzzle is listed in a level it does not belong to, but is never offered there
+{
+  const easy = per[0][1], hard = per[4][2];
+  const lie = L.install({ format: 1, id: 'liar', name: 'Liar', gen: E.CODE_VERSION, scale: E.SCALE_VERSION, puzzles: [[E.genPuzzle().code, 250]] });
+  ok('liar pack installed', lie.ok);
+  const lieCode = lie.pack.puzzles[0][0], real = (() => { const g = E.genPuzzle(lieCode); return E.gradeOf(g.solved, g.rules).level; })();
+  ok('the lie lists the puzzle as extreme', L.byLevel(4).indexOf(lieCode) >= 0 || real === 4);
+  const lv = c => { const g = E.genPuzzle(c); return E.gradeOf(g.solved, g.rules).level; };
+  const only = {}; per[4].forEach(c => { only[c] = 1; });                         // played: only the liar puzzle is unplayed in level 4
+  if (real !== 4) {
+    ok('verified pick refuses the lying puzzle', L.pickVerified(4, only, () => 0, lv) === null || lv(L.pickVerified(4, only, () => 0, lv)) === 4);
+    ok('the lying puzzle is dropped from the level', L.byLevel(4).indexOf(lieCode) < 0);
+  }
+  L.remove('liar');
+}
+// the date given to daily() must be YYYY-MM-DD
+['2026-1-5', '15/10/2026', '', null, '2026-10-15T10:00'].forEach(d => { let threw = false; try { L.daily(d); } catch (e) { threw = true; } ok('daily refuses ' + JSON.stringify(d), threw); });
+
+// add-ons published in addons/: the index matches the files, every pack is valid, and its puzzles are of the level they claim (1 in 10 rebuilt)
+{
+  const fs = require('fs'), path = require('path');
+  const idx = JSON.parse(fs.readFileSync(path.join(__dirname, 'addons', 'index.json'), 'utf8'));
+  ok('addons/index.json is a list', Array.isArray(idx));
+  idx.forEach(a => {
+    const o = JSON.parse(fs.readFileSync(path.join(__dirname, 'addons', a.file), 'utf8')), r = L.install(o);
+    ok('add-on ' + a.id + ' valid', r.ok, r.error);
+    if (!r.ok) return;
+    ok('add-on ' + a.id + ': id and count match the index', r.pack.id === a.id && r.pack.puzzles.length === a.count, r.pack.id + ' ' + r.pack.puzzles.length);
+    ok('add-on ' + a.id + ': no puzzle already in the base pack', r.pack.puzzles.every(x => per.every(l => l.indexOf(x[0]) < 0)));
+    r.pack.puzzles.forEach((x, i) => { if (i % 10) return; const g = E.genPuzzle(x[0]), q = E.gradeOf(g.solved, g.rules); ok('add-on ' + a.id + ' ' + x[0] + ' raw score', q.raw === x[1], q.raw + ' vs ' + x[1]); });
+    L.remove(a.id);
+  });
+  console.log('add-ons in the index:', idx.map(a => a.id + ' (' + a.count + ')').join(', ') || 'none');
+}
 // puzzle of the day: same for everyone, uniform over the 5 levels, old rule before the switch date
 const day = n => new Date(Date.UTC(2026, 9, 15 + n)).toISOString().slice(0, 10);
 const cnt = [0, 0, 0, 0, 0], codes = new Set();

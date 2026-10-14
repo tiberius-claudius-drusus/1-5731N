@@ -1,10 +1,10 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/library.js
- * Version   : 1.2.0
+ * Version   : 1.2.1
  * Role      : Puzzle packs: validation of a pack, registry (base pack + add-ons), pick of an unplayed puzzle of a level, puzzle of the day by level.
  * Depends on: engine.js (window.Stein)
  * Called by : lib_base.js (addBase) ; app.js (browser, window.SteinLib) ; test_library.js (Node, module.exports)
- * Produces  : window.SteinLib : addBase, install, remove, packs, byLevel, pick, daily, validatePack, DAILY_LEVEL_FROM
+ * Produces  : window.SteinLib : addBase, install, remove, packs, byLevel, pick, pickVerified, daily, validatePack, DAILY_LEVEL_FROM
  * Changelog : see CHANGELOG.md
  * ---------------------------------------------------------------------------
  * A pack is { format: 1, id, name, gen, scale, puzzles: [[code, rawScore], ...] }. It holds CODES only: the game rebuilds the puzzle
@@ -20,7 +20,7 @@
   var DAILY_POOL = 400;                  // per level, taken from the start of the base pack
   var MAX_PUZZLES = 20000;
 
-  var base = null, addons = {}, cache = null;
+  var base = null, addons = {}, cache = null, banned = {};     // banned: codes found not to match the level a pack gave them
 
   /* strict check of a pack coming from outside: { ok, pack } or { ok: false, error } */
   function validatePack(o) {
@@ -71,7 +71,7 @@
     var lv = [[], [], [], [], []], seen = {};
     var all = (base ? [base] : []).concat(Object.keys(addons).sort().map(function (id) { return addons[id]; }));
     all.forEach(function (p) {
-      p.puzzles.forEach(function (x) { if (!seen[x[0]]) { seen[x[0]] = 1; lv[E.levelOf(x[1])].push(x[0]); } });
+      p.puzzles.forEach(function (x) { if (!seen[x[0]] && !banned[x[0]]) { seen[x[0]] = 1; lv[E.levelOf(x[1])].push(x[0]); } });
     });
     return (cache = lv);
   }
@@ -86,6 +86,19 @@
     return from[Math.floor((rnd || Math.random)() * from.length)];
   }
 
+  /* Same as pick(), but the level of the puzzle is checked by levelOf(code) (the game rebuilds and grades the puzzle) before it is
+   * offered: the score written in a pack only decides where a puzzle is listed, so a pack that lies cannot get a puzzle of another
+   * level played. A puzzle that does not match is dropped for the rest of the session. Null if nothing matches in a few tries. */
+  function pickVerified(level, played, rnd, levelOf) {
+    for (var i = 0; i < 8; i++) {
+      var c = pick(level, played, rnd);
+      if (c === null) return null;
+      if (levelOf(c) === level) return c;
+      banned[c] = 1; cache = null;
+    }
+    return null;
+  }
+
   /* 32-bit hash with good mixing (FNV-1a then the murmur3 finalizer) */
   function hash32(s) {
     var h = 0x811c9dc5;
@@ -98,6 +111,7 @@
   /* code of the puzzle of the day: before DAILY_LEVEL_FROM (or without a base pack) the old rule; after, a puzzle of the level of the day,
    * drawn from the frozen start of the base pack, so it is the same on every device whatever add-ons are installed. */
   function daily(dateText) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateText)) throw new Error('daily: date must be YYYY-MM-DD');   // the comparison below is on strings
     if (!base || dateText < DAILY_LEVEL_FROM) return E.dailyCode(dateText);
     var lv = dailyLevel(dateText);
     var pool = base.puzzles.filter(function (x) { return E.levelOf(x[1]) === lv; }).slice(0, DAILY_POOL);
@@ -107,7 +121,7 @@
 
   var api = {
     validatePack: validatePack, addBase: addBase, install: install, remove: remove, packs: packs,
-    byLevel: byLevel, pick: pick, daily: daily, dailyLevel: dailyLevel, DAILY_LEVEL_FROM: DAILY_LEVEL_FROM, DAILY_POOL: DAILY_POOL
+    byLevel: byLevel, pick: pick, pickVerified: pickVerified, daily: daily, dailyLevel: dailyLevel, DAILY_LEVEL_FROM: DAILY_LEVEL_FROM, DAILY_POOL: DAILY_POOL
   };
   if (typeof module !== 'undefined' && module.exports) { module.exports = api; root.SteinLib = api; }
   else root.SteinLib = api;

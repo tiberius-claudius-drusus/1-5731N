@@ -1,5 +1,13 @@
 # Changelog - 1-5731N
 
+## 1.2.1 - 2026-10-15
+Fourth review by Kimi K3 (each point checked in the code first; one was wrong and is not changed: `theme-color` already follows the theme), and the first add-on pack.
+- **Packs**: the score written in a pack only decides where a puzzle is *listed*. Before a puzzle is offered for a level, the game now rebuilds and grades it (`pickVerified`); one that does not match is dropped for the session. The documentation said a pack "cannot lie about difficulty": it now says exactly what is guaranteed.
+- **Puzzle of the day**: `daily()` refuses a date that is not `YYYY-MM-DD` (it compares strings).
+- **Saved games**: `validGame` also refuses a save whose board (or any history step) excludes its own solution, and a solution row that is not a permutation of 1-6 (17 corrupted saves are rejected in the tests, instead of 14).
+- **Add-on "Ultimate"** (`addons/ultimate.json`, 500 puzzles, 4 KB compressed): the 500 hardest of 540 new extreme puzzles found among about 97 000 generated (raw score 203 to 261; the extreme puzzles of the base pack stop at 242). Listed in `addons/index.json`, installable from Options. `test_library.js` checks the index, the packs and a tenth of their puzzles.
+- **Tools**: `grade_distribution.js --keep-min N --until K` (keeps only the puzzles of a high score: how the extreme puzzles are found); `make_pack.js --exclude-base`, and `--base` now refuses to overwrite `lib_base.js` without `--force` (the puzzle of the day indexes into its order).
+
 ## 1.2.0 - 2026-10-15
 Levels, puzzle packs, background generation.
 - **Difficulty**: `gradeSolve()` replays the solution like a systematic player (easiest kind of clue first); its score becomes a **note 0-20** (rank among 100 002 generated puzzles) and one of **five levels**: Facile, Normal, Difficile, Expert, Extrême (the top 0.5 %, 1 puzzle in 200). The level is shown under the code on the board; it is recomputed from the puzzle, so it needs no new field in codes or saves. The scale is versioned (`SCALE_VERSION = 1`).
