@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/nl.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Dutch (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "nl"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Dutch. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("nl", {
+  name: "Nederlands", dir: "ltr",
+  s: {
+    "home.sub": "Til de steen op…",
+    "home.new": "Nieuw spel",
+    "home.continue": "Doorgaan",
+    "home.help": "Help",
+    "home.stats": "Statistieken",
+    "home.options": "Opties",
+    "foot.build": "v{v} - ontwikkeld door Claudius - {date} - GPL2+",
+    "foot.inspired": "Geïnspireerd op <i>Einstein Puzzle</i> van Flowix Games",
+    "common.back": "Terug",
+    "common.cancel": "Annuleren",
+    "dlg.no": "Nee",
+    "dlg.abandon": "Het lopende spel opgeven?",
+    "dlg.yesNew": "Ja, nieuw spel",
+    "menu.title": "Menu",
+    "menu.resume": "Hervatten",
+    "menu.sound": "Geluid: {state}",
+    "state.yes": "aan",
+    "state.no": "uit",
+    "menu.version": "Versie: {name}",
+    "menu.new": "Nieuw spel",
+    "menu.home": "Start",
+    "toast.error": "Fout: deze zet is in strijd met de oplossing",
+    "toast.version": "Versie: {name}",
+    "cap.choose": "<b>Kort</b> tikken: kiezen · <b>Lang</b> drukken: uitsluiten",
+    "cap.excl": "<b>Kort</b> tikken: uitsluiten · <b>Lang</b> drukken: kiezen",
+    "win.title": "Gefeliciteerd, je hebt gewonnen!",
+    "win.time": "Tijd: {time}",
+    "win.errors": "Fouten: {n}",
+    "win.clean": "Zonder fouten",
+    "win.menu": "Menu",
+    "win.new": "Nieuw spel",
+    "tt.menu": "Menu",
+    "tt.undo": "Laatste zet ongedaan maken",
+    "tt.mode": "Kiezen / uitsluiten",
+    "tt.close": "Terug naar het bord",
+    "tt.hand": "Knoppen links / rechts",
+    "logo.alt": "Een opgetild kiezelsteentje met een oplichtende 1 eronder",
+    "stats.title": "Statistieken",
+    "stats.none": "Nog geen spel gewonnen.",
+    "stats.won": "Gewonnen spellen",
+    "stats.started": "Gestarte spellen",
+    "stats.best": "Beste tijd",
+    "stats.avg": "Gemiddelde tijd",
+    "stats.clean": "Zonder fouten",
+    "stats.last": "Laatste spellen",
+    "stats.err": "{n} fout(en)",
+    "stats.reset": "Wissen",
+    "stats.resetConfirm": "Alle statistieken wissen?",
+    "stats.export": "Exporteren",
+    "stats.import": "Importeren",
+    "stats.exported": "Statistieken geëxporteerd",
+    "stats.importOk": "Import voltooid: {n} spel(len) toegevoegd",
+    "stats.importBad": "Ongeldig bestand",
+    "stats.merge": "Samenvoegen",
+    "stats.replace": "Vervangen",
+    "stats.importAsk": "{n} spel(len) importeren:\nsamenvoegen met de huidige statistieken of ze vervangen?",
+    "opt.title": "Opties",
+    "opt.sound": "Geluid",
+    "opt.on": "Aan",
+    "opt.off": "Uit",
+    "opt.theme": "Thema",
+    "opt.version": "Versie",
+    "opt.lang": "Taal",
+    "theme.epure": "Minimalistisch",
+    "variant.clair": "Licht",
+    "variant.fonce": "Donker",
+    "help.title": "Help",
+    "help.p1": "Het bord heeft <b>6 kolommen</b> en <b>6 rijen</b>. Elke rij bevat dezelfde zes elementen (cijfers, letters, Romeinse cijfers, dobbelstenen, vormen, tekens), zonder herhaling verdeeld over de zes kolommen. Met behulp van de aanwijzingen moet je de plaats van elk element vinden.",
+    "help.p2": "<b>Op het bord</b>: in een nog niet opgelost vakje worden de nog mogelijke elementen klein getoond. <b>Tik op een vakje om het onderaan het scherm te vergroten, in plaats van de aanwijzingen</b>: de mogelijke elementen verschijnen groot en het bord blijft actief (tik op een ander vakje om de vergroting te verplaatsen, tik nogmaals op hetzelfde vakje om te sluiten). In de vergroting kies je met een <b>korte tik</b> een element (het vakje is opgelost en het element verdwijnt uit de andere vakjes van de rij); een <b>lange druk</b> sluit het uit. Naast de tegel staan drie knoppen: {up} gaat terug naar het bord; {ok}/{no} wisselt de twee gebaren om (kiezen / uitsluiten); de zijpijl zet de knoppen links of rechts (linkshandig / rechtshandig).",
+    "help.p3": "<b>De aanwijzingen</b> (twee lijsten: eerst die met drie vakjes, daaronder die met twee). Eén tik vinkt een aanwijzing aan, een tweede tik haalt het vinkje weg; een aangevinkte aanwijzing wordt grijs en schuift naar het begin van haar lijst:",
+    "help.ex1": "staan in naburige kolommen (in beide richtingen)",
+    "help.ex2": "de eerste staat links van de tweede, niet per se ernaast",
+    "help.ex3": "de middelste staat precies tussen de andere twee",
+    "help.ex4": "de een boven de ander: dezelfde kolom",
+    "help.p4": "Elk spel is op te lossen met pure deductie, zonder te gokken. Een zet die in strijd is met de oplossing wordt met een melding geweigerd en als fout geteld. {undo} maakt de laatste zet ongedaan."
+  }
+});

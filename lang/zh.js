@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/zh.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Chinese (Simplified) (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "zh"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Chinese (Simplified). Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("zh", {
+  name: "中文（简体）", dir: "ltr",
+  s: {
+    "home.sub": "掀起那块石头…",
+    "home.new": "新游戏",
+    "home.continue": "继续",
+    "home.help": "帮助",
+    "home.stats": "统计",
+    "home.options": "选项",
+    "foot.build": "v{v} - 由 Claudius 开发 - {date} - GPL2+",
+    "foot.inspired": "灵感来自 Flowix Games 的 <i>Einstein Puzzle</i>",
+    "common.back": "返回",
+    "common.cancel": "取消",
+    "dlg.no": "否",
+    "dlg.abandon": "放弃当前的游戏吗？",
+    "dlg.yesNew": "是，开始新游戏",
+    "menu.title": "菜单",
+    "menu.resume": "继续",
+    "menu.sound": "声音：{state}",
+    "state.yes": "开",
+    "state.no": "关",
+    "menu.version": "版本：{name}",
+    "menu.new": "新游戏",
+    "menu.home": "主页",
+    "toast.error": "错误：这一步与答案矛盾",
+    "toast.version": "版本：{name}",
+    "cap.choose": "<b>短</b>按：选择 · <b>长</b>按：排除",
+    "cap.excl": "<b>短</b>按：排除 · <b>长</b>按：选择",
+    "win.title": "太棒了，你赢了！",
+    "win.time": "用时：{time}",
+    "win.errors": "错误：{n}",
+    "win.clean": "无错误",
+    "win.menu": "菜单",
+    "win.new": "新游戏",
+    "tt.menu": "菜单",
+    "tt.undo": "撤销上一步",
+    "tt.mode": "选择 / 排除",
+    "tt.close": "返回棋盘",
+    "tt.hand": "按钮在左 / 在右",
+    "logo.alt": "被掀起的鹅卵石，下面露出发光的数字 1",
+    "stats.title": "统计",
+    "stats.none": "还没有获胜的对局。",
+    "stats.won": "获胜局数",
+    "stats.started": "开始局数",
+    "stats.best": "最佳用时",
+    "stats.avg": "平均用时",
+    "stats.clean": "无错误",
+    "stats.last": "最近对局",
+    "stats.err": "{n} 个错误",
+    "stats.reset": "清除",
+    "stats.resetConfirm": "清除所有统计数据吗？",
+    "stats.export": "导出",
+    "stats.import": "导入",
+    "stats.exported": "统计数据已导出",
+    "stats.importOk": "导入完成：新增 {n} 局",
+    "stats.importBad": "文件无效",
+    "stats.merge": "合并",
+    "stats.replace": "替换",
+    "stats.importAsk": "导入 {n} 局：\n与当前统计合并，还是替换？",
+    "opt.title": "选项",
+    "opt.sound": "声音",
+    "opt.on": "开",
+    "opt.off": "关",
+    "opt.theme": "主题",
+    "opt.version": "版本",
+    "opt.lang": "语言",
+    "theme.epure": "简约",
+    "variant.clair": "浅色",
+    "variant.fonce": "深色",
+    "help.title": "帮助",
+    "help.p1": "棋盘有 <b>6 列</b>和 <b>6 行</b>。每一行都包含相同的六个元素（数字、字母、罗马数字、骰子、图形、符号），在六列中各出现一次。需要借助提示找出它们的位置。",
+    "help.p2": "<b>在棋盘上</b>：未解开的格子里，仍然可能的元素以小图显示。<b>点一下格子，它会在屏幕下方放大，取代提示区</b>：可能的元素以大图显示，棋盘仍可操作（点另一个格子会移动放大区，再点同一个格子则关闭）。在放大区里，<b>短按</b>选择一个元素（该格解开，该元素从同一行的其他格子中消失）；<b>长按</b>则排除它。方块旁有三个按钮：{up} 返回棋盘；{ok}/{no} 互换两种手势（选择 / 排除）；侧向箭头把按钮移到左边或右边（左手 / 右手）。",
+    "help.p3": "<b>提示</b>（两个列表：先是占三格的，下面是占两格的）。点一下勾选提示，再点一下取消；已勾选的提示变灰并移到列表最前面：",
+    "help.ex1": "位于相邻的列（左右均可）",
+    "help.ex2": "前者在后者左边，不一定紧挨着",
+    "help.ex3": "中间的恰好位于另外两个之间",
+    "help.ex4": "上下相对：同一列",
+    "help.p4": "每一局都能纯靠推理解开，无需猜测。与答案矛盾的一步会被拒绝并提示，同时记为一次错误。{undo} 撤销上一步。"
+  }
+});

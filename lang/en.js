@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/en.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in English (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "en"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in English. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("en", {
+  name: "English", dir: "ltr",
+  s: {
+    "home.sub": "Lift the stone…",
+    "home.new": "New game",
+    "home.continue": "Continue",
+    "home.help": "Help",
+    "home.stats": "Statistics",
+    "home.options": "Options",
+    "foot.build": "v{v} - developed by Claudius - {date} - GPL2+",
+    "foot.inspired": "Inspired by <i>Einstein Puzzle</i> by Flowix Games",
+    "common.back": "Back",
+    "common.cancel": "Cancel",
+    "dlg.no": "No",
+    "dlg.abandon": "Abandon the current game?",
+    "dlg.yesNew": "Yes, new game",
+    "menu.title": "Menu",
+    "menu.resume": "Resume",
+    "menu.sound": "Sound: {state}",
+    "state.yes": "on",
+    "state.no": "off",
+    "menu.version": "Version: {name}",
+    "menu.new": "New game",
+    "menu.home": "Home",
+    "toast.error": "Error: that move contradicts the solution",
+    "toast.version": "Version: {name}",
+    "cap.choose": "<b>Short</b> tap: choose · <b>Long</b> press: exclude",
+    "cap.excl": "<b>Short</b> tap: exclude · <b>Long</b> press: choose",
+    "win.title": "Well done, you won!",
+    "win.time": "Time: {time}",
+    "win.errors": "Errors: {n}",
+    "win.clean": "No errors",
+    "win.menu": "Menu",
+    "win.new": "New game",
+    "tt.menu": "Menu",
+    "tt.undo": "Undo last move",
+    "tt.mode": "Choose / exclude",
+    "tt.close": "Back to the board",
+    "tt.hand": "Buttons left / right",
+    "logo.alt": "A lifted pebble revealing a glowing 1",
+    "stats.title": "Statistics",
+    "stats.none": "No games won yet.",
+    "stats.won": "Games won",
+    "stats.started": "Games started",
+    "stats.best": "Best time",
+    "stats.avg": "Average time",
+    "stats.clean": "Without errors",
+    "stats.last": "Latest games",
+    "stats.err": "{n} err.",
+    "stats.reset": "Erase",
+    "stats.resetConfirm": "Erase all statistics?",
+    "stats.export": "Export",
+    "stats.import": "Import",
+    "stats.exported": "Statistics exported",
+    "stats.importOk": "Import done: {n} game(s) added",
+    "stats.importBad": "Invalid file",
+    "stats.merge": "Merge",
+    "stats.replace": "Replace",
+    "stats.importAsk": "Import {n} game(s):\nmerge them with the current statistics or replace them?",
+    "opt.title": "Options",
+    "opt.sound": "Sound",
+    "opt.on": "On",
+    "opt.off": "Off",
+    "opt.theme": "Theme",
+    "opt.version": "Version",
+    "opt.lang": "Language",
+    "theme.epure": "Clean",
+    "variant.clair": "Light",
+    "variant.fonce": "Dark",
+    "help.title": "Help",
+    "help.p1": "The board has <b>6 columns</b> and <b>6 rows</b>. Each row contains the same six elements (digits, letters, Roman numerals, dice, shapes, signs), spread without repetition across the six columns. Use the clues to find where each one goes.",
+    "help.p2": "<b>On the board</b>: in an unsolved cell, the elements that are still possible are shown small. <b>Tapping a cell enlarges it at the bottom of the screen, in place of the clues</b>: its possible elements appear large and the board stays active (tapping another cell moves the zoom; tapping the same cell again closes it). In the zoom, a <b>short tap</b> chooses an element (the cell is solved and the element disappears from the other cells of the row); a <b>long press</b> excludes it. Three buttons sit next to the tile: {up} goes back to the board; {ok}/{no} swaps the two gestures (choose / exclude); the side arrow moves the buttons to the left or right (left-handed / right-handed).",
+    "help.p3": "<b>The clues</b> (two lists: first those with three cells, below those with two). A tap checks a clue, a second tap unchecks it; a checked clue is greyed out and moves to the top of its list:",
+    "help.ex1": "are in neighbouring columns (in either direction)",
+    "help.ex2": "the first is to the left of the second, not necessarily next to it",
+    "help.ex3": "the middle one is exactly between the other two",
+    "help.ex4": "one above the other: same column",
+    "help.p4": "Every game can be solved by pure deduction, with no guessing. A move that contradicts the solution is refused with a message and counted as an error. {undo} undoes the last move."
+  }
+});

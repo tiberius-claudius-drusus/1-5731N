@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/it.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Italian (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "it"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Italian. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("it", {
+  name: "Italiano", dir: "ltr",
+  s: {
+    "home.sub": "Solleva la pietra…",
+    "home.new": "Nuova partita",
+    "home.continue": "Continua",
+    "home.help": "Aiuto",
+    "home.stats": "Statistiche",
+    "home.options": "Opzioni",
+    "foot.build": "v{v} - sviluppato da Claudius - {date} - GPL2+",
+    "foot.inspired": "Ispirato a <i>Einstein Puzzle</i> di Flowix Games",
+    "common.back": "Indietro",
+    "common.cancel": "Annulla",
+    "dlg.no": "No",
+    "dlg.abandon": "Abbandonare la partita in corso?",
+    "dlg.yesNew": "Sì, nuova partita",
+    "menu.title": "Menu",
+    "menu.resume": "Riprendi",
+    "menu.sound": "Suono: {state}",
+    "state.yes": "sì",
+    "state.no": "no",
+    "menu.version": "Versione: {name}",
+    "menu.new": "Nuova partita",
+    "menu.home": "Home",
+    "toast.error": "Errore: questa mossa contraddice la soluzione",
+    "toast.version": "Versione: {name}",
+    "cap.choose": "Tocco <b>breve</b>: scegliere · Pressione <b>lunga</b>: escludere",
+    "cap.excl": "Tocco <b>breve</b>: escludere · Pressione <b>lunga</b>: scegliere",
+    "win.title": "Bravo, hai vinto!",
+    "win.time": "Tempo: {time}",
+    "win.errors": "Errori: {n}",
+    "win.clean": "Nessun errore",
+    "win.menu": "Menu",
+    "win.new": "Nuova partita",
+    "tt.menu": "Menu",
+    "tt.undo": "Annulla l'ultima mossa",
+    "tt.mode": "Scegliere / escludere",
+    "tt.close": "Torna alla tavola",
+    "tt.hand": "Pulsanti a sinistra / destra",
+    "logo.alt": "Un sasso sollevato che rivela un 1 luminoso",
+    "stats.title": "Statistiche",
+    "stats.none": "Nessuna partita vinta per ora.",
+    "stats.won": "Partite vinte",
+    "stats.started": "Partite iniziate",
+    "stats.best": "Miglior tempo",
+    "stats.avg": "Tempo medio",
+    "stats.clean": "Senza errori",
+    "stats.last": "Ultime partite",
+    "stats.err": "{n} err.",
+    "stats.reset": "Cancella",
+    "stats.resetConfirm": "Cancellare tutte le statistiche?",
+    "stats.export": "Esporta",
+    "stats.import": "Importa",
+    "stats.exported": "Statistiche esportate",
+    "stats.importOk": "Importazione completata: {n} partita/e aggiunta/e",
+    "stats.importBad": "File non valido",
+    "stats.merge": "Unisci",
+    "stats.replace": "Sostituisci",
+    "stats.importAsk": "Importare {n} partita/e:\nunirle alle statistiche attuali o sostituirle?",
+    "opt.title": "Opzioni",
+    "opt.sound": "Suono",
+    "opt.on": "Attivo",
+    "opt.off": "Disattivo",
+    "opt.theme": "Tema",
+    "opt.version": "Versione",
+    "opt.lang": "Lingua",
+    "theme.epure": "Essenziale",
+    "variant.clair": "Chiaro",
+    "variant.fonce": "Scuro",
+    "help.title": "Aiuto",
+    "help.p1": "La tavola ha <b>6 colonne</b> e <b>6 righe</b>. Ogni riga contiene gli stessi sei elementi (numeri, lettere, numeri romani, dadi, forme, segni), distribuiti senza ripetizioni nelle sei colonne. Bisogna ritrovare il loro posto grazie agli indizi.",
+    "help.p2": "<b>Sulla tavola</b>: in una casella non risolta gli elementi ancora possibili sono mostrati in piccolo. <b>Toccando una casella la si ingrandisce nella parte bassa dello schermo, al posto degli indizi</b>: i suoi elementi possibili compaiono in grande e la tavola resta attiva (toccare un'altra casella sposta l'ingrandimento; toccare di nuovo la stessa lo chiude). Nell'ingrandimento, un <b>tocco breve</b> sceglie un elemento (la casella è risolta e l'elemento scompare dalle altre caselle della riga); una <b>pressione lunga</b> lo esclude. Tre pulsanti accompagnano la tessera: {up} torna alla tavola; {ok}/{no} inverte i due gesti (scegliere / escludere); la freccia laterale sposta i pulsanti a sinistra o a destra (mancini / destrimani).",
+    "help.p3": "<b>Gli indizi</b> (due elenchi: prima quelli a tre caselle, sotto quelli a due). Un tocco spunta un indizio, un secondo tocco lo deseleziona; un indizio spuntato diventa grigio e sale in cima al suo elenco:",
+    "help.ex1": "sono in colonne vicine (in un senso o nell'altro)",
+    "help.ex2": "il primo è a sinistra del secondo, non necessariamente accanto",
+    "help.ex3": "quello al centro è esattamente tra gli altri due",
+    "help.ex4": "uno sopra l'altro: stessa colonna",
+    "help.p4": "Ogni partita si risolve per pura deduzione, senza mai tirare a indovinare. Una mossa contraria alla soluzione viene rifiutata con un messaggio e conteggiata come errore. {undo} annulla l'ultima mossa."
+  }
+});

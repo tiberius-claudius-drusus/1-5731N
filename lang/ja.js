@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/ja.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Japanese (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "ja"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Japanese. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("ja", {
+  name: "日本語", dir: "ltr",
+  s: {
+    "home.sub": "石を持ち上げてみよう…",
+    "home.new": "新しいゲーム",
+    "home.continue": "続きから",
+    "home.help": "ヘルプ",
+    "home.stats": "統計",
+    "home.options": "オプション",
+    "foot.build": "v{v} - 開発: Claudius - {date} - GPL2+",
+    "foot.inspired": "Flowix Games の <i>Einstein Puzzle</i> に着想を得ています",
+    "common.back": "戻る",
+    "common.cancel": "キャンセル",
+    "dlg.no": "いいえ",
+    "dlg.abandon": "進行中のゲームをやめますか？",
+    "dlg.yesNew": "はい、新しいゲーム",
+    "menu.title": "メニュー",
+    "menu.resume": "再開",
+    "menu.sound": "サウンド：{state}",
+    "state.yes": "オン",
+    "state.no": "オフ",
+    "menu.version": "バージョン：{name}",
+    "menu.new": "新しいゲーム",
+    "menu.home": "ホーム",
+    "toast.error": "エラー：この手は答えと矛盾します",
+    "toast.version": "バージョン：{name}",
+    "cap.choose": "<b>短く</b>タップ：選ぶ · <b>長</b>押し：除外",
+    "cap.excl": "<b>短く</b>タップ：除外 · <b>長</b>押し：選ぶ",
+    "win.title": "おめでとう、勝ちました！",
+    "win.time": "タイム：{time}",
+    "win.errors": "エラー：{n}",
+    "win.clean": "エラーなし",
+    "win.menu": "メニュー",
+    "win.new": "新しいゲーム",
+    "tt.menu": "メニュー",
+    "tt.undo": "最後の手を取り消す",
+    "tt.mode": "選ぶ / 除外",
+    "tt.close": "盤面に戻る",
+    "tt.hand": "ボタンを左 / 右に",
+    "logo.alt": "持ち上げた小石の下に光る「1」が見える",
+    "stats.title": "統計",
+    "stats.none": "まだ勝ったゲームがありません。",
+    "stats.won": "勝ったゲーム",
+    "stats.started": "始めたゲーム",
+    "stats.best": "ベストタイム",
+    "stats.avg": "平均タイム",
+    "stats.clean": "エラーなし",
+    "stats.last": "最近のゲーム",
+    "stats.err": "エラー{n}",
+    "stats.reset": "消去",
+    "stats.resetConfirm": "すべての統計を消去しますか？",
+    "stats.export": "エクスポート",
+    "stats.import": "インポート",
+    "stats.exported": "統計をエクスポートしました",
+    "stats.importOk": "インポート完了：{n}ゲーム追加",
+    "stats.importBad": "無効なファイルです",
+    "stats.merge": "統合",
+    "stats.replace": "置き換え",
+    "stats.importAsk": "{n}ゲームをインポートします。\n現在の統計と統合しますか、置き換えますか？",
+    "opt.title": "オプション",
+    "opt.sound": "サウンド",
+    "opt.on": "オン",
+    "opt.off": "オフ",
+    "opt.theme": "テーマ",
+    "opt.version": "バージョン",
+    "opt.lang": "言語",
+    "theme.epure": "シンプル",
+    "variant.clair": "ライト",
+    "variant.fonce": "ダーク",
+    "help.title": "ヘルプ",
+    "help.p1": "盤面は<b>6列</b>×<b>6行</b>です。各行には同じ6つの要素（数字、文字、ローマ数字、サイコロ、図形、記号）が入り、6つの列に重複なく並びます。ヒントを手がかりに、それぞれの位置を見つけます。",
+    "help.p2": "<b>盤面では</b>：未確定のマスには、まだ可能な要素が小さく表示されます。<b>マスをタップすると、ヒントの代わりに画面下部に拡大表示されます</b>。可能な要素が大きく表示され、盤面は操作できたままです（別のマスをタップすると拡大が移動し、同じマスをもう一度タップすると閉じます）。拡大表示では、<b>短くタップ</b>すると要素を選びます（そのマスが確定し、同じ行の他のマスからその要素が消えます）。<b>長押し</b>すると除外します。タイルの横には3つのボタンがあります。{up} は盤面に戻り、{ok}/{no} は2つの操作（選ぶ / 除外）を入れ替え、横向きの矢印はボタンを左右に移します（左利き / 右利き）。",
+    "help.p3": "<b>ヒント</b>（2つのリスト：3マスのものが先、その下に2マスのもの）。タップでチェック、もう一度タップで解除します。チェックしたヒントは薄くなり、リストの先頭に移ります：",
+    "help.ex1": "隣り合う列にある（どちら側でも）",
+    "help.ex2": "前者は後者の左にある（隣とは限らない）",
+    "help.ex3": "真ん中のものは、他の2つのちょうど間にある",
+    "help.ex4": "上下に並ぶ：同じ列",
+    "help.p4": "どのゲームも、推測なしで推理だけで解けます。答えと矛盾する手は、メッセージとともに拒否され、エラーとして数えられます。{undo} で最後の手を取り消せます。"
+  }
+});

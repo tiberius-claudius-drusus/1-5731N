@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/pt-pt.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Portuguese (Portugal) (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "pt-pt"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Portuguese (Portugal). Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("pt-pt", {
+  name: "Português (Portugal)", dir: "ltr",
+  s: {
+    "home.sub": "Levante a pedra…",
+    "home.new": "Novo jogo",
+    "home.continue": "Continuar",
+    "home.help": "Ajuda",
+    "home.stats": "Estatísticas",
+    "home.options": "Definições",
+    "foot.build": "v{v} - desenvolvido por Claudius - {date} - GPL2+",
+    "foot.inspired": "Inspirado em <i>Einstein Puzzle</i> da Flowix Games",
+    "common.back": "Voltar",
+    "common.cancel": "Cancelar",
+    "dlg.no": "Não",
+    "dlg.abandon": "Abandonar o jogo em curso?",
+    "dlg.yesNew": "Sim, novo jogo",
+    "menu.title": "Menu",
+    "menu.resume": "Retomar",
+    "menu.sound": "Som: {state}",
+    "state.yes": "ligado",
+    "state.no": "desligado",
+    "menu.version": "Versão: {name}",
+    "menu.new": "Novo jogo",
+    "menu.home": "Início",
+    "toast.error": "Erro: esta jogada contradiz a solução",
+    "toast.version": "Versão: {name}",
+    "cap.choose": "Toque <b>curto</b>: escolher · Toque <b>longo</b>: excluir",
+    "cap.excl": "Toque <b>curto</b>: excluir · Toque <b>longo</b>: escolher",
+    "win.title": "Parabéns, ganhou!",
+    "win.time": "Tempo: {time}",
+    "win.errors": "Erros: {n}",
+    "win.clean": "Sem erros",
+    "win.menu": "Menu",
+    "win.new": "Novo jogo",
+    "tt.menu": "Menu",
+    "tt.undo": "Anular a última jogada",
+    "tt.mode": "Escolher / excluir",
+    "tt.close": "Voltar ao tabuleiro",
+    "tt.hand": "Botões à esquerda / à direita",
+    "logo.alt": "Uma pedra levantada que revela um 1 luminoso",
+    "stats.title": "Estatísticas",
+    "stats.none": "Ainda não ganhou nenhum jogo.",
+    "stats.won": "Jogos ganhos",
+    "stats.started": "Jogos iniciados",
+    "stats.best": "Melhor tempo",
+    "stats.avg": "Tempo médio",
+    "stats.clean": "Sem erros",
+    "stats.last": "Últimos jogos",
+    "stats.err": "{n} erro(s)",
+    "stats.reset": "Apagar",
+    "stats.resetConfirm": "Apagar todas as estatísticas?",
+    "stats.export": "Exportar",
+    "stats.import": "Importar",
+    "stats.exported": "Estatísticas exportadas",
+    "stats.importOk": "Importação concluída: {n} jogo(s) adicionado(s)",
+    "stats.importBad": "Ficheiro inválido",
+    "stats.merge": "Juntar",
+    "stats.replace": "Substituir",
+    "stats.importAsk": "Importar {n} jogo(s):\njuntá-los às estatísticas atuais ou substituí-las?",
+    "opt.title": "Definições",
+    "opt.sound": "Som",
+    "opt.on": "Ligado",
+    "opt.off": "Desligado",
+    "opt.theme": "Tema",
+    "opt.version": "Versão",
+    "opt.lang": "Idioma",
+    "theme.epure": "Limpo",
+    "variant.clair": "Claro",
+    "variant.fonce": "Escuro",
+    "help.title": "Ajuda",
+    "help.p1": "O tabuleiro tem <b>6 colunas</b> e <b>6 linhas</b>. Cada linha contém os mesmos seis elementos (algarismos, letras, números romanos, dados, formas, sinais), distribuídos sem repetição pelas seis colunas. É preciso descobrir o lugar de cada um com a ajuda das pistas.",
+    "help.p2": "<b>No tabuleiro</b>: numa casa por resolver, os elementos ainda possíveis aparecem em ponto pequeno. <b>Tocar numa casa amplia-a na parte inferior do ecrã, no lugar das pistas</b>: os elementos possíveis aparecem em grande e o tabuleiro continua ativo (tocar noutra casa desloca a ampliação; tocar de novo na mesma fecha-a). Na ampliação, um <b>toque curto</b> escolhe um elemento (a casa fica resolvida e o elemento desaparece das outras casas da linha); um <b>toque longo</b> exclui-o. Três botões acompanham a peça: {up} volta ao tabuleiro; {ok}/{no} troca os dois gestos (escolher / excluir); a seta lateral coloca os botões à esquerda ou à direita (canhotos / destros).",
+    "help.p3": "<b>As pistas</b> (duas listas: primeiro as de três casas e, por baixo, as de duas). Um toque assinala uma pista e um segundo toque retira a marca; uma pista assinalada fica esbatida e sobe para o início da sua lista:",
+    "help.ex1": "estão em colunas vizinhas (num sentido ou noutro)",
+    "help.ex2": "o primeiro está à esquerda do segundo, não necessariamente ao lado",
+    "help.ex3": "o do meio está exatamente entre os outros dois",
+    "help.ex4": "um por cima do outro: mesma coluna",
+    "help.p4": "Cada jogo resolve-se por pura dedução, sem adivinhar. Uma jogada contrária à solução é recusada com uma mensagem e conta como erro. {undo} anula a última jogada."
+  }
+});

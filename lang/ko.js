@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/ko.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Korean (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "ko"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Korean. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("ko", {
+  name: "한국어", dir: "ltr",
+  s: {
+    "home.sub": "돌을 들어 올려 보세요…",
+    "home.new": "새 게임",
+    "home.continue": "계속하기",
+    "home.help": "도움말",
+    "home.stats": "통계",
+    "home.options": "설정",
+    "foot.build": "v{v} - Claudius 개발 - {date} - GPL2+",
+    "foot.inspired": "Flowix Games의 <i>Einstein Puzzle</i>에서 영감을 받았습니다",
+    "common.back": "뒤로",
+    "common.cancel": "취소",
+    "dlg.no": "아니요",
+    "dlg.abandon": "진행 중인 게임을 포기할까요?",
+    "dlg.yesNew": "예, 새 게임",
+    "menu.title": "메뉴",
+    "menu.resume": "계속",
+    "menu.sound": "소리: {state}",
+    "state.yes": "켜짐",
+    "state.no": "꺼짐",
+    "menu.version": "버전: {name}",
+    "menu.new": "새 게임",
+    "menu.home": "홈",
+    "toast.error": "오류: 이 수는 정답과 모순됩니다",
+    "toast.version": "버전: {name}",
+    "cap.choose": "<b>짧게</b> 누르기: 선택 · <b>길게</b> 누르기: 제외",
+    "cap.excl": "<b>짧게</b> 누르기: 제외 · <b>길게</b> 누르기: 선택",
+    "win.title": "축하합니다, 승리했습니다!",
+    "win.time": "시간: {time}",
+    "win.errors": "오류: {n}",
+    "win.clean": "오류 없음",
+    "win.menu": "메뉴",
+    "win.new": "새 게임",
+    "tt.menu": "메뉴",
+    "tt.undo": "마지막 수 취소",
+    "tt.mode": "선택 / 제외",
+    "tt.close": "판으로 돌아가기",
+    "tt.hand": "버튼 왼쪽 / 오른쪽",
+    "logo.alt": "들어 올린 조약돌 아래로 빛나는 1이 보입니다",
+    "stats.title": "통계",
+    "stats.none": "아직 이긴 게임이 없습니다.",
+    "stats.won": "이긴 게임",
+    "stats.started": "시작한 게임",
+    "stats.best": "최고 기록",
+    "stats.avg": "평균 시간",
+    "stats.clean": "오류 없음",
+    "stats.last": "최근 게임",
+    "stats.err": "오류 {n}",
+    "stats.reset": "지우기",
+    "stats.resetConfirm": "모든 통계를 지울까요?",
+    "stats.export": "내보내기",
+    "stats.import": "가져오기",
+    "stats.exported": "통계를 내보냈습니다",
+    "stats.importOk": "가져오기 완료: {n}게임 추가됨",
+    "stats.importBad": "올바르지 않은 파일",
+    "stats.merge": "병합",
+    "stats.replace": "바꾸기",
+    "stats.importAsk": "{n}게임을 가져옵니다.\n현재 통계와 병합할까요, 바꿀까요?",
+    "opt.title": "설정",
+    "opt.sound": "소리",
+    "opt.on": "켜짐",
+    "opt.off": "꺼짐",
+    "opt.theme": "테마",
+    "opt.version": "버전",
+    "opt.lang": "언어",
+    "theme.epure": "미니멀",
+    "variant.clair": "밝게",
+    "variant.fonce": "어둡게",
+    "help.title": "도움말",
+    "help.p1": "판은 <b>6개의 열</b>과 <b>6개의 행</b>으로 이루어져 있습니다. 각 행에는 같은 여섯 개의 요소(숫자, 문자, 로마 숫자, 주사위, 도형, 기호)가 여섯 열에 중복 없이 놓입니다. 힌트를 이용해 각 요소의 자리를 찾아야 합니다.",
+    "help.p2": "<b>판 위에서</b>: 풀리지 않은 칸에는 아직 가능한 요소가 작게 표시됩니다. <b>칸을 한 번 누르면 힌트 대신 화면 아래쪽에 확대됩니다</b>. 가능한 요소가 크게 보이고 판은 계속 사용할 수 있습니다(다른 칸을 누르면 확대가 옮겨 가고, 같은 칸을 다시 누르면 닫힙니다). 확대 화면에서 <b>짧게 누르면</b> 요소를 선택하고(칸이 확정되고 같은 행의 다른 칸에서 그 요소가 사라집니다), <b>길게 누르면</b> 제외합니다. 타일 옆에는 버튼 세 개가 있습니다. {up}는 판으로 돌아가고, {ok}/{no}는 두 동작(선택 / 제외)을 바꾸며, 옆 화살표는 버튼을 왼쪽이나 오른쪽으로 옮깁니다(왼손잡이 / 오른손잡이).",
+    "help.p3": "<b>힌트</b>(두 목록: 세 칸짜리가 먼저, 아래에 두 칸짜리). 한 번 누르면 힌트에 체크하고 다시 누르면 해제합니다. 체크한 힌트는 흐려지고 목록 맨 앞으로 올라갑니다:",
+    "help.ex1": "서로 이웃한 열에 있다(어느 쪽이든)",
+    "help.ex2": "첫 번째가 두 번째의 왼쪽에 있다(바로 옆일 필요는 없음)",
+    "help.ex3": "가운데 것이 다른 둘의 정확히 사이에 있다",
+    "help.ex4": "위아래로 있다: 같은 열",
+    "help.p4": "모든 게임은 추측 없이 순수한 추리만으로 풀 수 있습니다. 정답과 모순되는 수는 메시지와 함께 거부되고 오류로 집계됩니다. {undo}는 마지막 수를 취소합니다."
+  }
+});

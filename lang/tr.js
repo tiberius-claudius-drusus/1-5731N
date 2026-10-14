@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/tr.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Turkish (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "tr"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Turkish. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("tr", {
+  name: "Türkçe", dir: "ltr",
+  s: {
+    "home.sub": "Taşı kaldır…",
+    "home.new": "Yeni oyun",
+    "home.continue": "Devam et",
+    "home.help": "Yardım",
+    "home.stats": "İstatistikler",
+    "home.options": "Seçenekler",
+    "foot.build": "v{v} - Claudius tarafından geliştirildi - {date} - GPL2+",
+    "foot.inspired": "Flowix Games'in <i>Einstein Puzzle</i> oyunundan esinlenilmiştir",
+    "common.back": "Geri",
+    "common.cancel": "İptal",
+    "dlg.no": "Hayır",
+    "dlg.abandon": "Devam eden oyundan vazgeçilsin mi?",
+    "dlg.yesNew": "Evet, yeni oyun",
+    "menu.title": "Menü",
+    "menu.resume": "Devam",
+    "menu.sound": "Ses: {state}",
+    "state.yes": "açık",
+    "state.no": "kapalı",
+    "menu.version": "Sürüm: {name}",
+    "menu.new": "Yeni oyun",
+    "menu.home": "Ana sayfa",
+    "toast.error": "Hata: bu hamle çözümle çelişiyor",
+    "toast.version": "Sürüm: {name}",
+    "cap.choose": "<b>Kısa</b> dokunuş: seç · <b>Uzun</b> basış: ele",
+    "cap.excl": "<b>Kısa</b> dokunuş: ele · <b>Uzun</b> basış: seç",
+    "win.title": "Tebrikler, kazandınız!",
+    "win.time": "Süre: {time}",
+    "win.errors": "Hata: {n}",
+    "win.clean": "Hatasız",
+    "win.menu": "Menü",
+    "win.new": "Yeni oyun",
+    "tt.menu": "Menü",
+    "tt.undo": "Son hamleyi geri al",
+    "tt.mode": "Seç / ele",
+    "tt.close": "Tahtaya dön",
+    "tt.hand": "Düğmeler solda / sağda",
+    "logo.alt": "Kaldırılmış bir çakıl taşı, altında parlayan bir 1",
+    "stats.title": "İstatistikler",
+    "stats.none": "Henüz kazanılan oyun yok.",
+    "stats.won": "Kazanılan oyunlar",
+    "stats.started": "Başlanan oyunlar",
+    "stats.best": "En iyi süre",
+    "stats.avg": "Ortalama süre",
+    "stats.clean": "Hatasız",
+    "stats.last": "Son oyunlar",
+    "stats.err": "{n} hata",
+    "stats.reset": "Sil",
+    "stats.resetConfirm": "Tüm istatistikler silinsin mi?",
+    "stats.export": "Dışa aktar",
+    "stats.import": "İçe aktar",
+    "stats.exported": "İstatistikler dışa aktarıldı",
+    "stats.importOk": "İçe aktarma tamam: {n} oyun eklendi",
+    "stats.importBad": "Geçersiz dosya",
+    "stats.merge": "Birleştir",
+    "stats.replace": "Değiştir",
+    "stats.importAsk": "{n} oyun içe aktarılacak:\nmevcut istatistiklerle birleştirilsin mi, yoksa değiştirilsin mi?",
+    "opt.title": "Seçenekler",
+    "opt.sound": "Ses",
+    "opt.on": "Açık",
+    "opt.off": "Kapalı",
+    "opt.theme": "Tema",
+    "opt.version": "Sürüm",
+    "opt.lang": "Dil",
+    "theme.epure": "Sade",
+    "variant.clair": "Açık",
+    "variant.fonce": "Koyu",
+    "help.title": "Yardım",
+    "help.p1": "Tahtada <b>6 sütun</b> ve <b>6 satır</b> vardır. Her satırda aynı altı öğe bulunur (rakamlar, harfler, Romen rakamları, zarlar, şekiller, işaretler) ve bunlar altı sütuna tekrarsız dağıtılır. Öğelerin yerini ipuçları sayesinde bulmak gerekir.",
+    "help.p2": "<b>Tahtada</b>: çözülmemiş bir karede hâlâ mümkün olan öğeler küçük gösterilir. <b>Bir kareye dokunmak, onu ipuçlarının yerine ekranın alt kısmında büyütür</b>: mümkün öğeler büyük görünür ve tahta etkin kalır (başka bir kareye dokunmak büyütmeyi oraya taşır, aynı kareye tekrar dokunmak kapatır). Büyütmede <b>kısa dokunuş</b> bir öğeyi seçer (kare çözülür ve öğe satırdaki diğer karelerden kalkar); <b>uzun basış</b> onu eler. Karonun yanında üç düğme vardır: {up} tahtaya döner; {ok}/{no} iki hareketi (seç / ele) değiştirir; yan ok düğmeleri sola ya da sağa koyar (solak / sağlak).",
+    "help.p3": "<b>İpuçları</b> (iki liste: önce üç kareli olanlar, altında iki kareli olanlar). Bir dokunuş ipucunu işaretler, ikincisi işareti kaldırır; işaretli ipucu soluklaşır ve listesinin başına çıkar:",
+    "help.ex1": "yan yana sütunlarda (herhangi bir yönde)",
+    "help.ex2": "birincisi ikincinin solunda, yan yana olması şart değil",
+    "help.ex3": "ortadaki, diğer ikisinin tam arasında",
+    "help.ex4": "biri diğerinin üstünde: aynı sütun",
+    "help.p4": "Her oyun tahmin yürütmeden, yalnızca çıkarımla çözülür. Çözümle çelişen bir hamle mesajla reddedilir ve hata sayılır. {undo} son hamleyi geri alır."
+  }
+});

@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/fr.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in French (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "fr"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in French. Translation by Claudius.
+ * This file is the reference for the keys (all other languages follow it). <b>...</b> = bold.
+ */
+SteinI18n.add("fr", {
+  name: "Français", dir: "ltr",
+  s: {
+    "home.sub": "Soulevez la pierre…",
+    "home.new": "Nouvelle partie",
+    "home.continue": "Continuer",
+    "home.help": "Aide",
+    "home.stats": "Statistiques",
+    "home.options": "Options",
+    "foot.build": "v{v} - développé par Claudius - {date} - GPL2+",
+    "foot.inspired": "Inspiré d'<i>Einstein Puzzle</i> de Flowix Games",
+    "common.back": "Retour",
+    "common.cancel": "Annuler",
+    "dlg.no": "Non",
+    "dlg.abandon": "Abandonner la partie en cours ?",
+    "dlg.yesNew": "Oui, nouvelle partie",
+    "menu.title": "Menu",
+    "menu.resume": "Reprendre",
+    "menu.sound": "Son : {state}",
+    "state.yes": "oui",
+    "state.no": "non",
+    "menu.version": "Version : {name}",
+    "menu.new": "Nouvelle partie",
+    "menu.home": "Accueil",
+    "toast.error": "Erreur : ce coup contredit la solution",
+    "toast.version": "Version : {name}",
+    "cap.choose": "Appui <b>court</b> : choisir · Appui <b>long</b> : exclure",
+    "cap.excl": "Appui <b>court</b> : exclure · Appui <b>long</b> : choisir",
+    "win.title": "Bravo, c'est gagné !",
+    "win.time": "Temps : {time}",
+    "win.errors": "Erreurs : {n}",
+    "win.clean": "Sans erreur",
+    "win.menu": "Menu",
+    "win.new": "Nouvelle partie",
+    "tt.menu": "Menu",
+    "tt.undo": "Annuler le dernier coup",
+    "tt.mode": "Choisir / exclure",
+    "tt.close": "Revenir au plateau",
+    "tt.hand": "Boutons à gauche / à droite",
+    "logo.alt": "Un galet soulevé qui laisse voir un 1 lumineux",
+    "stats.title": "Statistiques",
+    "stats.none": "Aucune partie gagnée pour l'instant.",
+    "stats.won": "Parties gagnées",
+    "stats.started": "Parties commencées",
+    "stats.best": "Meilleur temps",
+    "stats.avg": "Temps moyen",
+    "stats.clean": "Sans erreur",
+    "stats.last": "Dernières parties",
+    "stats.err": "{n} err.",
+    "stats.reset": "Effacer",
+    "stats.resetConfirm": "Effacer toutes les statistiques ?",
+    "stats.export": "Exporter",
+    "stats.import": "Importer",
+    "stats.exported": "Statistiques exportées",
+    "stats.importOk": "Import terminé : {n} partie(s) ajoutée(s)",
+    "stats.importBad": "Fichier invalide",
+    "stats.merge": "Fusionner",
+    "stats.replace": "Remplacer",
+    "stats.importAsk": "Importer {n} partie(s) :\nles fusionner avec les statistiques actuelles ou les remplacer ?",
+    "opt.title": "Options",
+    "opt.sound": "Son",
+    "opt.on": "Activé",
+    "opt.off": "Coupé",
+    "opt.theme": "Thème",
+    "opt.version": "Version",
+    "opt.lang": "Langue",
+    "theme.epure": "Épuré",
+    "variant.clair": "Clair",
+    "variant.fonce": "Foncé",
+    "help.title": "Aide",
+    "help.p1": "Le plateau comporte <b>6 colonnes</b> et <b>6 rangées</b>. Chaque rangée contient les mêmes six éléments (chiffres, lettres, chiffres romains, dés, formes, signes), répartis sans répétition dans les six colonnes. Il faut retrouver leur place grâce aux indices.",
+    "help.p2": "<b>Sur le plateau</b> : dans une case non résolue, les éléments encore possibles sont affichés en petit. <b>Un appui sur une case l'agrandit en bas de l'écran, à la place des indices</b> : ses éléments possibles s'y affichent en grand, et le plateau reste actif (un appui sur une autre case déplace le zoom ; un second appui sur la même case le ferme). Dans le zoom, <b>un appui court</b> choisit un élément (la case est résolue et l'élément disparaît des autres cases de la rangée) ; <b>un appui long</b> l'exclut. Trois boutons accompagnent la tuile : {up} revient au plateau ; {ok}/{no} inverse les deux gestes (choisir / exclure) ; la flèche latérale place les boutons à gauche ou à droite (gaucher / droitier).",
+    "help.p3": "<b>Les indices</b> (deux listes : d'abord ceux à trois cases, dessous ceux à deux cases). Un appui coche un indice, un second le décoche ; un indice coché est grisé et remonte en tête de sa liste :",
+    "help.ex1": "sont dans des colonnes voisines (dans un sens ou dans l'autre)",
+    "help.ex2": "le premier est à gauche du second, pas forcément à côté",
+    "help.ex3": "celui du milieu est exactement entre les deux autres",
+    "help.ex4": "l'un au-dessus de l'autre : même colonne",
+    "help.p4": "Toute partie se résout par pure déduction, sans jamais deviner. Un coup contraire à la solution est refusé avec un message et compté comme erreur. {undo} annule le dernier coup."
+  }
+});

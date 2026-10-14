@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/id.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Indonesian (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "id"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Indonesian. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("id", {
+  name: "Bahasa Indonesia", dir: "ltr",
+  s: {
+    "home.sub": "Angkat batunya…",
+    "home.new": "Permainan baru",
+    "home.continue": "Lanjutkan",
+    "home.help": "Bantuan",
+    "home.stats": "Statistik",
+    "home.options": "Opsi",
+    "foot.build": "v{v} - dikembangkan oleh Claudius - {date} - GPL2+",
+    "foot.inspired": "Terinspirasi dari <i>Einstein Puzzle</i> karya Flowix Games",
+    "common.back": "Kembali",
+    "common.cancel": "Batal",
+    "dlg.no": "Tidak",
+    "dlg.abandon": "Tinggalkan permainan yang sedang berjalan?",
+    "dlg.yesNew": "Ya, permainan baru",
+    "menu.title": "Menu",
+    "menu.resume": "Lanjutkan",
+    "menu.sound": "Suara: {state}",
+    "state.yes": "hidup",
+    "state.no": "mati",
+    "menu.version": "Versi: {name}",
+    "menu.new": "Permainan baru",
+    "menu.home": "Beranda",
+    "toast.error": "Kesalahan: langkah ini bertentangan dengan solusi",
+    "toast.version": "Versi: {name}",
+    "cap.choose": "Ketuk <b>singkat</b>: pilih · Tekan <b>lama</b>: kecualikan",
+    "cap.excl": "Ketuk <b>singkat</b>: kecualikan · Tekan <b>lama</b>: pilih",
+    "win.title": "Selamat, Anda menang!",
+    "win.time": "Waktu: {time}",
+    "win.errors": "Kesalahan: {n}",
+    "win.clean": "Tanpa kesalahan",
+    "win.menu": "Menu",
+    "win.new": "Permainan baru",
+    "tt.menu": "Menu",
+    "tt.undo": "Batalkan langkah terakhir",
+    "tt.mode": "Pilih / kecualikan",
+    "tt.close": "Kembali ke papan",
+    "tt.hand": "Tombol kiri / kanan",
+    "logo.alt": "Kerikil yang diangkat memperlihatkan angka 1 yang bercahaya",
+    "stats.title": "Statistik",
+    "stats.none": "Belum ada permainan yang dimenangkan.",
+    "stats.won": "Permainan dimenangkan",
+    "stats.started": "Permainan dimulai",
+    "stats.best": "Waktu terbaik",
+    "stats.avg": "Waktu rata-rata",
+    "stats.clean": "Tanpa kesalahan",
+    "stats.last": "Permainan terakhir",
+    "stats.err": "{n} salah",
+    "stats.reset": "Hapus",
+    "stats.resetConfirm": "Hapus semua statistik?",
+    "stats.export": "Ekspor",
+    "stats.import": "Impor",
+    "stats.exported": "Statistik diekspor",
+    "stats.importOk": "Impor selesai: {n} permainan ditambahkan",
+    "stats.importBad": "Berkas tidak valid",
+    "stats.merge": "Gabungkan",
+    "stats.replace": "Ganti",
+    "stats.importAsk": "Impor {n} permainan:\ngabungkan dengan statistik saat ini atau ganti?",
+    "opt.title": "Opsi",
+    "opt.sound": "Suara",
+    "opt.on": "Hidup",
+    "opt.off": "Mati",
+    "opt.theme": "Tema",
+    "opt.version": "Versi",
+    "opt.lang": "Bahasa",
+    "theme.epure": "Minimalis",
+    "variant.clair": "Terang",
+    "variant.fonce": "Gelap",
+    "help.title": "Bantuan",
+    "help.p1": "Papan memiliki <b>6 kolom</b> dan <b>6 baris</b>. Setiap baris berisi enam elemen yang sama (angka, huruf, angka Romawi, dadu, bentuk, tanda), tersebar tanpa pengulangan di keenam kolom. Dengan bantuan petunjuk, temukan tempat masing-masing.",
+    "help.p2": "<b>Di papan</b>: pada kotak yang belum terpecahkan, elemen yang masih mungkin ditampilkan kecil. <b>Mengetuk sebuah kotak memperbesarnya di bagian bawah layar, menggantikan petunjuk</b>: elemen yang mungkin tampil besar dan papan tetap aktif (mengetuk kotak lain memindahkan pembesaran; mengetuk kotak yang sama lagi menutupnya). Pada pembesaran, <b>ketukan singkat</b> memilih sebuah elemen (kotak terpecahkan dan elemen itu hilang dari kotak lain di baris tersebut); <b>tekan lama</b> mengecualikannya. Tiga tombol mendampingi ubin: {up} kembali ke papan; {ok}/{no} menukar kedua gestur (pilih / kecualikan); panah samping memindahkan tombol ke kiri atau kanan (kidal / tidak kidal).",
+    "help.p3": "<b>Petunjuk</b> (dua daftar: yang tiga kotak lebih dulu, di bawahnya yang dua kotak). Satu ketukan mencentang petunjuk, ketukan kedua membatalkannya; petunjuk yang dicentang memudar dan naik ke awal daftarnya:",
+    "help.ex1": "berada di kolom bersebelahan (ke arah mana pun)",
+    "help.ex2": "yang pertama di sebelah kiri yang kedua, tidak harus bersebelahan",
+    "help.ex3": "yang di tengah tepat berada di antara dua lainnya",
+    "help.ex4": "satu di atas yang lain: kolom yang sama",
+    "help.p4": "Setiap permainan dapat dipecahkan dengan deduksi murni, tanpa menebak. Langkah yang bertentangan dengan solusi ditolak dengan pesan dan dihitung sebagai kesalahan. {undo} membatalkan langkah terakhir."
+  }
+});

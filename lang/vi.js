@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/vi.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Vietnamese (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "vi"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Vietnamese. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("vi", {
+  name: "Tiếng Việt", dir: "ltr",
+  s: {
+    "home.sub": "Hãy nhấc hòn đá lên…",
+    "home.new": "Ván mới",
+    "home.continue": "Tiếp tục",
+    "home.help": "Trợ giúp",
+    "home.stats": "Thống kê",
+    "home.options": "Tùy chọn",
+    "foot.build": "v{v} - phát triển bởi Claudius - {date} - GPL2+",
+    "foot.inspired": "Lấy cảm hứng từ <i>Einstein Puzzle</i> của Flowix Games",
+    "common.back": "Quay lại",
+    "common.cancel": "Hủy",
+    "dlg.no": "Không",
+    "dlg.abandon": "Bỏ ván đang chơi?",
+    "dlg.yesNew": "Có, ván mới",
+    "menu.title": "Menu",
+    "menu.resume": "Tiếp tục",
+    "menu.sound": "Âm thanh: {state}",
+    "state.yes": "bật",
+    "state.no": "tắt",
+    "menu.version": "Phiên bản: {name}",
+    "menu.new": "Ván mới",
+    "menu.home": "Trang chủ",
+    "toast.error": "Lỗi: nước đi này mâu thuẫn với lời giải",
+    "toast.version": "Phiên bản: {name}",
+    "cap.choose": "Chạm <b>nhanh</b>: chọn · Nhấn <b>giữ</b>: loại",
+    "cap.excl": "Chạm <b>nhanh</b>: loại · Nhấn <b>giữ</b>: chọn",
+    "win.title": "Chúc mừng, bạn đã thắng!",
+    "win.time": "Thời gian: {time}",
+    "win.errors": "Lỗi: {n}",
+    "win.clean": "Không lỗi",
+    "win.menu": "Menu",
+    "win.new": "Ván mới",
+    "tt.menu": "Menu",
+    "tt.undo": "Hoàn tác nước đi cuối",
+    "tt.mode": "Chọn / loại",
+    "tt.close": "Quay lại bàn cờ",
+    "tt.hand": "Nút bên trái / phải",
+    "logo.alt": "Viên sỏi được nhấc lên, để lộ số 1 phát sáng",
+    "stats.title": "Thống kê",
+    "stats.none": "Chưa thắng ván nào.",
+    "stats.won": "Ván đã thắng",
+    "stats.started": "Ván đã bắt đầu",
+    "stats.best": "Thời gian tốt nhất",
+    "stats.avg": "Thời gian trung bình",
+    "stats.clean": "Không lỗi",
+    "stats.last": "Các ván gần đây",
+    "stats.err": "{n} lỗi",
+    "stats.reset": "Xóa",
+    "stats.resetConfirm": "Xóa toàn bộ thống kê?",
+    "stats.export": "Xuất",
+    "stats.import": "Nhập",
+    "stats.exported": "Đã xuất thống kê",
+    "stats.importOk": "Nhập xong: đã thêm {n} ván",
+    "stats.importBad": "Tệp không hợp lệ",
+    "stats.merge": "Gộp",
+    "stats.replace": "Thay thế",
+    "stats.importAsk": "Nhập {n} ván:\ngộp với thống kê hiện tại hay thay thế?",
+    "opt.title": "Tùy chọn",
+    "opt.sound": "Âm thanh",
+    "opt.on": "Bật",
+    "opt.off": "Tắt",
+    "opt.theme": "Chủ đề",
+    "opt.version": "Phiên bản",
+    "opt.lang": "Ngôn ngữ",
+    "theme.epure": "Tối giản",
+    "variant.clair": "Sáng",
+    "variant.fonce": "Tối",
+    "help.title": "Trợ giúp",
+    "help.p1": "Bàn cờ có <b>6 cột</b> và <b>6 hàng</b>. Mỗi hàng chứa sáu phần tử giống nhau (chữ số, chữ cái, số La Mã, xúc xắc, hình khối, ký hiệu), phân bố không lặp lại trong sáu cột. Hãy dựa vào các gợi ý để tìm vị trí của từng phần tử.",
+    "help.p2": "<b>Trên bàn cờ</b>: trong ô chưa giải, các phần tử còn khả dĩ được hiển thị nhỏ. <b>Chạm vào một ô sẽ phóng to nó ở cuối màn hình, thay cho khu vực gợi ý</b>: các phần tử khả dĩ hiện lớn và bàn cờ vẫn dùng được (chạm ô khác sẽ chuyển vùng phóng to; chạm lại cùng ô sẽ đóng). Trong vùng phóng to, <b>chạm nhanh</b> sẽ chọn một phần tử (ô được giải và phần tử đó biến mất khỏi các ô khác trong hàng); <b>nhấn giữ</b> sẽ loại nó. Ba nút nằm cạnh ô: {up} quay lại bàn cờ; {ok}/{no} đổi chỗ hai thao tác (chọn / loại); mũi tên bên chuyển các nút sang trái hoặc phải (người thuận tay trái / phải).",
+    "help.p3": "<b>Các gợi ý</b> (hai danh sách: trước hết loại ba ô, bên dưới là loại hai ô). Chạm một lần để đánh dấu gợi ý, chạm lần nữa để bỏ dấu; gợi ý đã đánh dấu sẽ mờ đi và lên đầu danh sách của nó:",
+    "help.ex1": "nằm ở các cột kề nhau (theo hướng nào cũng được)",
+    "help.ex2": "phần tử đầu ở bên trái phần tử thứ hai, không nhất thiết liền kề",
+    "help.ex3": "phần tử ở giữa nằm đúng giữa hai phần tử còn lại",
+    "help.ex4": "cái này nằm trên cái kia: cùng một cột",
+    "help.p4": "Mọi ván đều giải được bằng suy luận thuần túy, không cần đoán. Nước đi mâu thuẫn với lời giải sẽ bị từ chối kèm thông báo và tính là một lỗi. {undo} hoàn tác nước đi cuối cùng."
+  }
+});

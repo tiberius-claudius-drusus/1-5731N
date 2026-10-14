@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/es.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Spanish (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "es"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Spanish. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("es", {
+  name: "Español", dir: "ltr",
+  s: {
+    "home.sub": "Levanta la piedra…",
+    "home.new": "Nueva partida",
+    "home.continue": "Continuar",
+    "home.help": "Ayuda",
+    "home.stats": "Estadísticas",
+    "home.options": "Opciones",
+    "foot.build": "v{v} - desarrollado por Claudius - {date} - GPL2+",
+    "foot.inspired": "Inspirado en <i>Einstein Puzzle</i> de Flowix Games",
+    "common.back": "Volver",
+    "common.cancel": "Cancelar",
+    "dlg.no": "No",
+    "dlg.abandon": "¿Abandonar la partida en curso?",
+    "dlg.yesNew": "Sí, nueva partida",
+    "menu.title": "Menú",
+    "menu.resume": "Reanudar",
+    "menu.sound": "Sonido: {state}",
+    "state.yes": "sí",
+    "state.no": "no",
+    "menu.version": "Versión: {name}",
+    "menu.new": "Nueva partida",
+    "menu.home": "Inicio",
+    "toast.error": "Error: esa jugada contradice la solución",
+    "toast.version": "Versión: {name}",
+    "cap.choose": "Toque <b>corto</b>: elegir · Pulsación <b>larga</b>: excluir",
+    "cap.excl": "Toque <b>corto</b>: excluir · Pulsación <b>larga</b>: elegir",
+    "win.title": "¡Enhorabuena, has ganado!",
+    "win.time": "Tiempo: {time}",
+    "win.errors": "Errores: {n}",
+    "win.clean": "Sin errores",
+    "win.menu": "Menú",
+    "win.new": "Nueva partida",
+    "tt.menu": "Menú",
+    "tt.undo": "Deshacer la última jugada",
+    "tt.mode": "Elegir / excluir",
+    "tt.close": "Volver al tablero",
+    "tt.hand": "Botones a la izquierda / derecha",
+    "logo.alt": "Un guijarro levantado que deja ver un 1 luminoso",
+    "stats.title": "Estadísticas",
+    "stats.none": "Aún no has ganado ninguna partida.",
+    "stats.won": "Partidas ganadas",
+    "stats.started": "Partidas empezadas",
+    "stats.best": "Mejor tiempo",
+    "stats.avg": "Tiempo medio",
+    "stats.clean": "Sin errores",
+    "stats.last": "Últimas partidas",
+    "stats.err": "{n} err.",
+    "stats.reset": "Borrar",
+    "stats.resetConfirm": "¿Borrar todas las estadísticas?",
+    "stats.export": "Exportar",
+    "stats.import": "Importar",
+    "stats.exported": "Estadísticas exportadas",
+    "stats.importOk": "Importación terminada: {n} partida(s) añadida(s)",
+    "stats.importBad": "Archivo no válido",
+    "stats.merge": "Combinar",
+    "stats.replace": "Reemplazar",
+    "stats.importAsk": "Importar {n} partida(s):\n¿combinarlas con las estadísticas actuales o reemplazarlas?",
+    "opt.title": "Opciones",
+    "opt.sound": "Sonido",
+    "opt.on": "Activado",
+    "opt.off": "Desactivado",
+    "opt.theme": "Tema",
+    "opt.version": "Versión",
+    "opt.lang": "Idioma",
+    "theme.epure": "Limpio",
+    "variant.clair": "Claro",
+    "variant.fonce": "Oscuro",
+    "help.title": "Ayuda",
+    "help.p1": "El tablero tiene <b>6 columnas</b> y <b>6 filas</b>. Cada fila contiene los mismos seis elementos (números, letras, números romanos, dados, formas, signos), repartidos sin repetición en las seis columnas. Hay que encontrar su lugar con ayuda de las pistas.",
+    "help.p2": "<b>En el tablero</b>: en una casilla sin resolver se muestran en pequeño los elementos aún posibles. <b>Al tocar una casilla se amplía en la parte inferior de la pantalla, en lugar de las pistas</b>: sus elementos posibles aparecen en grande y el tablero sigue activo (tocar otra casilla mueve el zoom; tocar de nuevo la misma lo cierra). En el zoom, un <b>toque corto</b> elige un elemento (la casilla queda resuelta y el elemento desaparece de las demás casillas de la fila); una <b>pulsación larga</b> lo excluye. Tres botones acompañan la ficha: {up} vuelve al tablero; {ok}/{no} intercambia los dos gestos (elegir / excluir); la flecha lateral coloca los botones a la izquierda o a la derecha (zurdos / diestros).",
+    "help.p3": "<b>Las pistas</b> (dos listas: primero las de tres casillas y debajo las de dos). Un toque marca una pista y otro la desmarca; una pista marcada se atenúa y sube al principio de su lista:",
+    "help.ex1": "están en columnas contiguas (en un sentido u otro)",
+    "help.ex2": "el primero está a la izquierda del segundo, no necesariamente al lado",
+    "help.ex3": "el del medio está exactamente entre los otros dos",
+    "help.ex4": "uno encima del otro: misma columna",
+    "help.p4": "Cada partida se resuelve por pura deducción, sin adivinar. Una jugada contraria a la solución se rechaza con un mensaje y cuenta como error. {undo} deshace la última jugada."
+  }
+});

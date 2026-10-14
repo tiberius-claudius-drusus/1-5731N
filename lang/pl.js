@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/pl.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Polish (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "pl"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Polish. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("pl", {
+  name: "Polski", dir: "ltr",
+  s: {
+    "home.sub": "Podnieś kamień…",
+    "home.new": "Nowa gra",
+    "home.continue": "Kontynuuj",
+    "home.help": "Pomoc",
+    "home.stats": "Statystyki",
+    "home.options": "Opcje",
+    "foot.build": "v{v} - stworzył Claudius - {date} - GPL2+",
+    "foot.inspired": "Zainspirowane grą <i>Einstein Puzzle</i> od Flowix Games",
+    "common.back": "Wstecz",
+    "common.cancel": "Anuluj",
+    "dlg.no": "Nie",
+    "dlg.abandon": "Porzucić trwającą grę?",
+    "dlg.yesNew": "Tak, nowa gra",
+    "menu.title": "Menu",
+    "menu.resume": "Wznów",
+    "menu.sound": "Dźwięk: {state}",
+    "state.yes": "włączony",
+    "state.no": "wyłączony",
+    "menu.version": "Wersja: {name}",
+    "menu.new": "Nowa gra",
+    "menu.home": "Strona główna",
+    "toast.error": "Błąd: ten ruch jest sprzeczny z rozwiązaniem",
+    "toast.version": "Wersja: {name}",
+    "cap.choose": "<b>Krótkie</b> dotknięcie: wybierz · <b>Długie</b> przytrzymanie: wyklucz",
+    "cap.excl": "<b>Krótkie</b> dotknięcie: wyklucz · <b>Długie</b> przytrzymanie: wybierz",
+    "win.title": "Brawo, wygrana!",
+    "win.time": "Czas: {time}",
+    "win.errors": "Błędy: {n}",
+    "win.clean": "Bez błędów",
+    "win.menu": "Menu",
+    "win.new": "Nowa gra",
+    "tt.menu": "Menu",
+    "tt.undo": "Cofnij ostatni ruch",
+    "tt.mode": "Wybierz / wyklucz",
+    "tt.close": "Wróć do planszy",
+    "tt.hand": "Przyciski z lewej / z prawej",
+    "logo.alt": "Podniesiony kamyk odsłaniający świecącą jedynkę",
+    "stats.title": "Statystyki",
+    "stats.none": "Nie wygrano jeszcze żadnej gry.",
+    "stats.won": "Wygrane gry",
+    "stats.started": "Rozpoczęte gry",
+    "stats.best": "Najlepszy czas",
+    "stats.avg": "Średni czas",
+    "stats.clean": "Bez błędów",
+    "stats.last": "Ostatnie gry",
+    "stats.err": "błędy: {n}",
+    "stats.reset": "Wyczyść",
+    "stats.resetConfirm": "Wyczyścić wszystkie statystyki?",
+    "stats.export": "Eksportuj",
+    "stats.import": "Importuj",
+    "stats.exported": "Statystyki wyeksportowane",
+    "stats.importOk": "Import zakończony: dodano gier — {n}",
+    "stats.importBad": "Nieprawidłowy plik",
+    "stats.merge": "Połącz",
+    "stats.replace": "Zastąp",
+    "stats.importAsk": "Importowanie gier: {n}.\nPołączyć z obecnymi statystykami czy je zastąpić?",
+    "opt.title": "Opcje",
+    "opt.sound": "Dźwięk",
+    "opt.on": "Włączony",
+    "opt.off": "Wyłączony",
+    "opt.theme": "Motyw",
+    "opt.version": "Wersja",
+    "opt.lang": "Język",
+    "theme.epure": "Minimalistyczny",
+    "variant.clair": "Jasny",
+    "variant.fonce": "Ciemny",
+    "help.title": "Pomoc",
+    "help.p1": "Plansza ma <b>6 kolumn</b> i <b>6 wierszy</b>. Każdy wiersz zawiera te same sześć elementów (cyfry, litery, cyfry rzymskie, kości, kształty, znaki), rozmieszczone bez powtórzeń w sześciu kolumnach. Za pomocą wskazówek trzeba odnaleźć miejsce każdego z nich.",
+    "help.p2": "<b>Na planszy</b>: w nierozwiązanym polu małymi znakami pokazane są elementy, które nadal są możliwe. <b>Dotknięcie pola powiększa je u dołu ekranu, w miejscu wskazówek</b>: możliwe elementy pojawiają się w dużym rozmiarze, a plansza pozostaje aktywna (dotknięcie innego pola przenosi powiększenie, ponowne dotknięcie tego samego pola je zamyka). W powiększeniu <b>krótkie dotknięcie</b> wybiera element (pole zostaje rozwiązane, a element znika z pozostałych pól wiersza); <b>długie przytrzymanie</b> go wyklucza. Obok kafelka są trzy przyciski: {up} wraca do planszy; {ok}/{no} zamienia oba gesty (wybierz / wyklucz); strzałka boczna przesuwa przyciski na lewo lub na prawo (dla leworęcznych / praworęcznych).",
+    "help.p3": "<b>Wskazówki</b> (dwie listy: najpierw te z trzema polami, pod nimi te z dwoma). Dotknięcie zaznacza wskazówkę, kolejne odznacza; zaznaczona wskazówka szarzeje i przesuwa się na początek swojej listy:",
+    "help.ex1": "znajdują się w sąsiednich kolumnach (w którąkolwiek stronę)",
+    "help.ex2": "pierwszy jest na lewo od drugiego, niekoniecznie obok",
+    "help.ex3": "środkowy leży dokładnie między dwoma pozostałymi",
+    "help.ex4": "jeden nad drugim: ta sama kolumna",
+    "help.p4": "Każdą grę można rozwiązać czystą dedukcją, bez zgadywania. Ruch sprzeczny z rozwiązaniem zostaje odrzucony z komunikatem i liczy się jako błąd. {undo} cofa ostatni ruch."
+  }
+});

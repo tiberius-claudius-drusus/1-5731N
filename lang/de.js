@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/de.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in German (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "de"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in German. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("de", {
+  name: "Deutsch", dir: "ltr",
+  s: {
+    "home.sub": "Heb den Stein hoch…",
+    "home.new": "Neues Spiel",
+    "home.continue": "Fortsetzen",
+    "home.help": "Hilfe",
+    "home.stats": "Statistik",
+    "home.options": "Optionen",
+    "foot.build": "v{v} - entwickelt von Claudius - {date} - GPL2+",
+    "foot.inspired": "Inspiriert von <i>Einstein Puzzle</i> von Flowix Games",
+    "common.back": "Zurück",
+    "common.cancel": "Abbrechen",
+    "dlg.no": "Nein",
+    "dlg.abandon": "Laufendes Spiel abbrechen?",
+    "dlg.yesNew": "Ja, neues Spiel",
+    "menu.title": "Menü",
+    "menu.resume": "Fortsetzen",
+    "menu.sound": "Ton: {state}",
+    "state.yes": "an",
+    "state.no": "aus",
+    "menu.version": "Version: {name}",
+    "menu.new": "Neues Spiel",
+    "menu.home": "Startseite",
+    "toast.error": "Fehler: Dieser Zug widerspricht der Lösung",
+    "toast.version": "Version: {name}",
+    "cap.choose": "<b>Kurz</b> tippen: wählen · <b>Lang</b> drücken: ausschließen",
+    "cap.excl": "<b>Kurz</b> tippen: ausschließen · <b>Lang</b> drücken: wählen",
+    "win.title": "Bravo, gewonnen!",
+    "win.time": "Zeit: {time}",
+    "win.errors": "Fehler: {n}",
+    "win.clean": "Fehlerfrei",
+    "win.menu": "Menü",
+    "win.new": "Neues Spiel",
+    "tt.menu": "Menü",
+    "tt.undo": "Letzten Zug zurücknehmen",
+    "tt.mode": "Wählen / ausschließen",
+    "tt.close": "Zurück zum Spielfeld",
+    "tt.hand": "Tasten links / rechts",
+    "logo.alt": "Ein angehobener Kiesel, unter dem eine leuchtende 1 erscheint",
+    "stats.title": "Statistik",
+    "stats.none": "Noch kein Spiel gewonnen.",
+    "stats.won": "Gewonnene Spiele",
+    "stats.started": "Begonnene Spiele",
+    "stats.best": "Beste Zeit",
+    "stats.avg": "Durchschnittszeit",
+    "stats.clean": "Fehlerfrei",
+    "stats.last": "Letzte Spiele",
+    "stats.err": "{n} Fehler",
+    "stats.reset": "Löschen",
+    "stats.resetConfirm": "Alle Statistiken löschen?",
+    "stats.export": "Exportieren",
+    "stats.import": "Importieren",
+    "stats.exported": "Statistik exportiert",
+    "stats.importOk": "Import abgeschlossen: {n} Spiel(e) hinzugefügt",
+    "stats.importBad": "Ungültige Datei",
+    "stats.merge": "Zusammenführen",
+    "stats.replace": "Ersetzen",
+    "stats.importAsk": "{n} Spiel(e) importieren:\nmit der aktuellen Statistik zusammenführen oder sie ersetzen?",
+    "opt.title": "Optionen",
+    "opt.sound": "Ton",
+    "opt.on": "An",
+    "opt.off": "Aus",
+    "opt.theme": "Design",
+    "opt.version": "Version",
+    "opt.lang": "Sprache",
+    "theme.epure": "Schlicht",
+    "variant.clair": "Hell",
+    "variant.fonce": "Dunkel",
+    "help.title": "Hilfe",
+    "help.p1": "Das Spielfeld hat <b>6 Spalten</b> und <b>6 Zeilen</b>. Jede Zeile enthält dieselben sechs Elemente (Ziffern, Buchstaben, römische Zahlen, Würfel, Formen, Zeichen), ohne Wiederholung auf die sechs Spalten verteilt. Mithilfe der Hinweise muss man ihre Plätze finden.",
+    "help.p2": "<b>Auf dem Spielfeld</b>: In einem ungelösten Feld werden die noch möglichen Elemente klein angezeigt. <b>Ein Tipp auf ein Feld vergrößert es am unteren Bildschirmrand, anstelle der Hinweise</b>: Seine möglichen Elemente erscheinen groß, und das Spielfeld bleibt aktiv (ein Tipp auf ein anderes Feld verschiebt die Vergrößerung, ein zweiter Tipp auf dasselbe Feld schließt sie). In der Vergrößerung wählt <b>kurzes Tippen</b> ein Element (das Feld ist gelöst, und das Element verschwindet aus den anderen Feldern der Zeile); <b>langes Drücken</b> schließt es aus. Drei Tasten gehören zur Kachel: {up} geht zurück zum Spielfeld; {ok}/{no} vertauscht die beiden Gesten (wählen / ausschließen); der seitliche Pfeil setzt die Tasten nach links oder rechts (Linkshänder / Rechtshänder).",
+    "help.p3": "<b>Die Hinweise</b> (zwei Listen: zuerst die mit drei Feldern, darunter die mit zwei Feldern). Ein Tipp hakt einen Hinweis ab, ein zweiter nimmt es zurück; ein abgehakter Hinweis wird ausgegraut und rückt an den Anfang seiner Liste:",
+    "help.ex1": "stehen in benachbarten Spalten (in beliebiger Richtung)",
+    "help.ex2": "das erste steht links vom zweiten, nicht unbedingt direkt daneben",
+    "help.ex3": "das mittlere steht genau zwischen den beiden anderen",
+    "help.ex4": "eins über dem anderen: dieselbe Spalte",
+    "help.p4": "Jedes Spiel lässt sich rein durch Schlussfolgern lösen, ganz ohne Raten. Ein Zug, der der Lösung widerspricht, wird mit einer Meldung abgelehnt und als Fehler gezählt. {undo} nimmt den letzten Zug zurück."
+  }
+});

@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/la.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Latin (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "la"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Latin. Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("la", {
+  name: "Latina", dir: "ltr",
+  s: {
+    "home.sub": "Lapidem tolle…",
+    "home.new": "Ludus novus",
+    "home.continue": "Perge",
+    "home.help": "Auxilium",
+    "home.stats": "Statistica",
+    "home.options": "Optiones",
+    "foot.build": "v{v} - a Claudio conditum - {date} - GPL2+",
+    "foot.inspired": "Ex <i>Einstein Puzzle</i> Flowix Games inspiratum",
+    "common.back": "Redi",
+    "common.cancel": "Omitte",
+    "dlg.no": "Non",
+    "dlg.abandon": "Ludum currentem relinquere?",
+    "dlg.yesNew": "Ita, ludus novus",
+    "menu.title": "Elenchus",
+    "menu.resume": "Continua",
+    "menu.sound": "Sonus: {state}",
+    "state.yes": "accensus",
+    "state.no": "extinctus",
+    "menu.version": "Versio: {name}",
+    "menu.new": "Ludus novus",
+    "menu.home": "Domus",
+    "toast.error": "Error: hic motus solutioni repugnat",
+    "toast.version": "Versio: {name}",
+    "cap.choose": "Tactus <b>brevis</b>: eligere · Pressio <b>longa</b>: excludere",
+    "cap.excl": "Tactus <b>brevis</b>: excludere · Pressio <b>longa</b>: eligere",
+    "win.title": "Euge, vicisti!",
+    "win.time": "Tempus: {time}",
+    "win.errors": "Errores: {n}",
+    "win.clean": "Sine erroribus",
+    "win.menu": "Elenchus",
+    "win.new": "Ludus novus",
+    "tt.menu": "Elenchus",
+    "tt.undo": "Ultimum motum revoca",
+    "tt.mode": "Eligere / excludere",
+    "tt.close": "Ad tabulam redi",
+    "tt.hand": "Claves ad sinistram / ad dextram",
+    "logo.alt": "Lapillus sublatus numerum 1 lucentem ostendens",
+    "stats.title": "Statistica",
+    "stats.none": "Nondum ullus ludus victus est.",
+    "stats.won": "Ludi victi",
+    "stats.started": "Ludi incepti",
+    "stats.best": "Optimum tempus",
+    "stats.avg": "Tempus medium",
+    "stats.clean": "Sine erroribus",
+    "stats.last": "Ludi novissimi",
+    "stats.err": "{n} err.",
+    "stats.reset": "Dele",
+    "stats.resetConfirm": "Omnem statisticam delere?",
+    "stats.export": "Exporta",
+    "stats.import": "Importa",
+    "stats.exported": "Statistica exportata",
+    "stats.importOk": "Importatio perfecta: {n} ludi additi",
+    "stats.importBad": "Tabella invalida",
+    "stats.merge": "Coniunge",
+    "stats.replace": "Substitue",
+    "stats.importAsk": "{n} ludos importare:\nconiungere cum statistica praesenti an substituere?",
+    "opt.title": "Optiones",
+    "opt.sound": "Sonus",
+    "opt.on": "Accensus",
+    "opt.off": "Extinctus",
+    "opt.theme": "Thema",
+    "opt.version": "Versio",
+    "opt.lang": "Lingua",
+    "theme.epure": "Simplex",
+    "variant.clair": "Clarum",
+    "variant.fonce": "Obscurum",
+    "help.title": "Auxilium",
+    "help.p1": "Tabula habet <b>6 columnas</b> et <b>6 ordines</b>. Quisque ordo eadem sex elementa continet (numeros, litteras, numeros Romanos, tesseras, figuras, signa), sine repetitione per sex columnas distributa. Locus cuiusque indiciis invenienda est.",
+    "help.p2": "<b>In tabula</b>: in loculo nondum soluto elementa adhuc possibilia parva monstrantur. <b>Loculum tangere eum in ima parte scaenae amplificat, loco indiciorum</b>: elementa possibilia magna apparent et tabula activa manet (alium loculum tangere amplificationem movet; eundem iterum tangere claudit). In amplificatione, <b>tactus brevis</b> elementum eligit (loculus solvitur et elementum ex ceteris loculis ordinis evanescit); <b>pressio longa</b> id excludit. Tres claves tessellam comitantur: {up} ad tabulam redit; {ok}/{no} duos gestus permutat (eligere / excludere); sagitta lateralis claves ad sinistram vel dextram ponit (sinistrimanibus / dextrimanibus).",
+    "help.p3": "<b>Indicia</b> (duo indices: primum quae tres loculos habent, infra quae duos). Tactus indicium notat, alter notam tollit; indicium notatum pallescit et ad caput sui indicis ascendit:",
+    "help.ex1": "in columnis vicinis sunt (in utramque partem)",
+    "help.ex2": "prius ad sinistram posterioris est, non necessario iuxta",
+    "help.ex3": "medium inter duo alia exacte est",
+    "help.ex4": "alterum supra alterum: eadem columna",
+    "help.p4": "Omnis ludus pura deductione solvitur, sine coniectura. Motus solutioni contrarius cum nuntio repudiatur et pro errore numeratur. {undo} ultimum motum revocat."
+  }
+});

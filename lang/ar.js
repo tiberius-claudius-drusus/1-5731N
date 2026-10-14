@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------------------
+ * File      : 1-5731n/lang/ar.js
+ * Version   : 1.0.0
+ * Role      : User-interface texts in Arabic (right to left) (75 keys): home, menus, help, options, statistics, messages.
+ * Depends on: i18n.js (SteinI18n.add)
+ * Called by : index.html (script tag) ; i18n.js ; test_lang.js
+ * Produces  : texts registered under the language code "ar"
+ * Changelog : see CHANGELOG.md
+ * ---------------------------------------------------------------------------
+ * Texts in Arabic (right to left). Translation by Claudius (to be proofread by a native speaker; corrections welcome).
+ * Keys and {placeholders} are those of fr.js. <b>...</b> = bold.
+ */
+SteinI18n.add("ar", {
+  name: "العربية", dir: "rtl",
+  s: {
+    "home.sub": "ارفع الحجر…",
+    "home.new": "لعبة جديدة",
+    "home.continue": "متابعة",
+    "home.help": "مساعدة",
+    "home.stats": "الإحصائيات",
+    "home.options": "الخيارات",
+    "foot.build": "v{v} - تطوير Claudius - {date} - GPL2+",
+    "foot.inspired": "مستوحاة من <i>Einstein Puzzle</i> من Flowix Games",
+    "common.back": "رجوع",
+    "common.cancel": "إلغاء",
+    "dlg.no": "لا",
+    "dlg.abandon": "هل تريد التخلي عن اللعبة الحالية؟",
+    "dlg.yesNew": "نعم، لعبة جديدة",
+    "menu.title": "القائمة",
+    "menu.resume": "استئناف",
+    "menu.sound": "الصوت: {state}",
+    "state.yes": "مفعّل",
+    "state.no": "متوقف",
+    "menu.version": "النسخة: {name}",
+    "menu.new": "لعبة جديدة",
+    "menu.home": "الرئيسية",
+    "toast.error": "خطأ: هذه الحركة تناقض الحل",
+    "toast.version": "النسخة: {name}",
+    "cap.choose": "نقرة <b>قصيرة</b>: اختيار · ضغطة <b>طويلة</b>: استبعاد",
+    "cap.excl": "نقرة <b>قصيرة</b>: استبعاد · ضغطة <b>طويلة</b>: اختيار",
+    "win.title": "أحسنت، لقد فزت!",
+    "win.time": "الوقت: {time}",
+    "win.errors": "الأخطاء: {n}",
+    "win.clean": "بلا أخطاء",
+    "win.menu": "القائمة",
+    "win.new": "لعبة جديدة",
+    "tt.menu": "القائمة",
+    "tt.undo": "تراجع عن آخر حركة",
+    "tt.mode": "اختيار / استبعاد",
+    "tt.close": "العودة إلى اللوحة",
+    "tt.hand": "الأزرار يسارًا / يمينًا",
+    "logo.alt": "حصاة مرفوعة تكشف عن الرقم 1 المضيء",
+    "stats.title": "الإحصائيات",
+    "stats.none": "لم تفز بأي لعبة بعد.",
+    "stats.won": "الألعاب الفائزة",
+    "stats.started": "الألعاب المبدوءة",
+    "stats.best": "أفضل وقت",
+    "stats.avg": "متوسط الوقت",
+    "stats.clean": "بلا أخطاء",
+    "stats.last": "آخر الألعاب",
+    "stats.err": "{n} أخطاء",
+    "stats.reset": "مسح",
+    "stats.resetConfirm": "هل تريد مسح كل الإحصائيات؟",
+    "stats.export": "تصدير",
+    "stats.import": "استيراد",
+    "stats.exported": "تم تصدير الإحصائيات",
+    "stats.importOk": "اكتمل الاستيراد: أُضيفت {n} لعبة",
+    "stats.importBad": "ملف غير صالح",
+    "stats.merge": "دمج",
+    "stats.replace": "استبدال",
+    "stats.importAsk": "استيراد {n} لعبة:\nدمجها مع إحصائياتك الحالية أم استبدالها؟",
+    "opt.title": "الخيارات",
+    "opt.sound": "الصوت",
+    "opt.on": "مفعّل",
+    "opt.off": "متوقف",
+    "opt.theme": "المظهر",
+    "opt.version": "النسخة",
+    "opt.lang": "اللغة",
+    "theme.epure": "بسيط",
+    "variant.clair": "فاتح",
+    "variant.fonce": "داكن",
+    "help.title": "مساعدة",
+    "help.p1": "تتكوّن اللوحة من <b>6 أعمدة</b> و<b>6 صفوف</b>. يحتوي كل صف على العناصر الستة نفسها (أرقام وحروف وأرقام رومانية ونرد وأشكال ورموز) موزعة دون تكرار على الأعمدة الستة. المطلوب إيجاد مكان كل عنصر بمساعدة التلميحات.",
+    "help.p2": "<b>على اللوحة</b>: تظهر في الخانة غير المحلولة العناصر الممكنة بحجم صغير. <b>لمس خانة يكبّرها أسفل الشاشة بدل التلميحات</b>: تظهر عناصرها الممكنة بحجم كبير وتبقى اللوحة فعّالة (لمس خانة أخرى ينقل التكبير، ولمس الخانة نفسها مرة ثانية يغلقه). في التكبير، <b>النقرة القصيرة</b> تختار عنصرًا (تُحلّ الخانة ويختفي العنصر من بقية خانات الصف)، و<b>الضغطة الطويلة</b> تستبعده. ثلاثة أزرار بجانب البلاطة: {up} للعودة إلى اللوحة؛ {ok}/{no} يبدّل الإيماءتين (اختيار / استبعاد)؛ والسهم الجانبي ينقل الأزرار إلى اليسار أو اليمين (للأعسر / للأيمن).",
+    "help.p3": "<b>التلميحات</b> (قائمتان: الأولى بثلاث خانات وتحتها التي بخانتين). لمسة واحدة تحدّد التلميح ولمسة ثانية تلغي تحديده؛ يصبح التلميح المحدّد باهتًا ويصعد إلى رأس قائمته:",
+    "help.ex1": "في عمودين متجاورين (في أي اتجاه)",
+    "help.ex2": "الأول على يسار الثاني، وليس بالضرورة بجانبه",
+    "help.ex3": "الأوسط يقع تمامًا بين العنصرين الآخرين",
+    "help.ex4": "أحدهما فوق الآخر: العمود نفسه",
+    "help.p4": "كل لعبة تُحَلّ بالاستنتاج الخالص دون تخمين. الحركة المخالفة للحل تُرفض مع رسالة وتُحتسب خطأً. {undo} يتراجع عن آخر حركة."
+  }
+});
