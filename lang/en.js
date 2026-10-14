@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/en.js
- * Version   : 1.0.0
- * Role      : User-interface texts in English (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in English (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "en"
@@ -87,6 +87,32 @@ SteinI18n.add("en", {
     "help.ex2": "the first is to the left of the second, not necessarily next to it",
     "help.ex3": "the middle one is exactly between the other two",
     "help.ex4": "one above the other: same column",
-    "help.p4": "Every game can be solved by pure deduction, with no guessing. A move that contradicts the solution is refused with a message and counted as an error. {undo} undoes the last move."
+    "help.p4": "Every game can be solved by pure deduction, with no guessing. A move that contradicts the solution is refused with a message and counted as an error. {undo} undoes the last move.",
+    "a11y.board": "Game board",
+    "a11y.cell": "Row {r}, column {c}: {state}",
+    "a11y.cellOpen": "unsolved, {n} possible: {list}",
+    "a11y.set": "{sym} chosen, row {r}, column {c}",
+    "a11y.excl": "{sym} excluded, row {r}, column {c}",
+    "a11y.undone": "Move undone",
+    "a11y.zoom": "Row {r}, column {c}: choose a symbol",
+    "a11y.hints": "Clues",
+    "clue.near": "{a} next to {b}",
+    "clue.side": "{a} somewhere to the left of {b}",
+    "clue.between": "{c} between {a} and {b}",
+    "clue.under": "{a} and {b} in the same column",
+    "sym.die": "die {n}",
+    "sym.shape1": "triangle",
+    "sym.shape2": "inverted triangle",
+    "sym.shape3": "square",
+    "sym.shape4": "diamond",
+    "sym.shape5": "pentagon",
+    "sym.shape6": "inverted pentagon",
+    "sym.sign1": "plus",
+    "sym.sign2": "minus",
+    "sym.sign3": "divided by",
+    "sym.sign4": "times",
+    "sym.sign5": "equals",
+    "sym.sign6": "square root",
+    "help.keys": "Keyboard: arrow keys move around the board, Enter opens a cell, 1 to 6 apply the current mode (choose or exclude) to a symbol, Shift+Enter applies the other one, M switches mode, U or Ctrl+Z undoes, T reads the time, Esc closes."
   }
 });

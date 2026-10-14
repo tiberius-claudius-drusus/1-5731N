@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_lang.js
- * Version   : 1.0.0
+ * Version   : 1.0.4
  * Role      : Translation check: every language has exactly the keys of French, the same {placeholders} and the same HTML tags.
  * Depends on: Node.js ; i18n.js ; lang/*.js
  * Called by : by hand: node test_lang.js (exit code 1 on any problem)

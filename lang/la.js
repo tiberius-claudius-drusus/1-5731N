@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Latin (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Latin (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "la"
@@ -87,6 +87,32 @@ SteinI18n.add("la", {
     "help.ex2": "prius ad sinistram posterioris est, non necessario iuxta",
     "help.ex3": "medium inter duo alia exacte est",
     "help.ex4": "alterum supra alterum: eadem columna",
-    "help.p4": "Omnis ludus pura deductione solvitur, sine coniectura. Motus solutioni contrarius cum nuntio repudiatur et pro errore numeratur. {undo} ultimum motum revocat."
+    "help.p4": "Omnis ludus pura deductione solvitur, sine coniectura. Motus solutioni contrarius cum nuntio repudiatur et pro errore numeratur. {undo} ultimum motum revocat.",
+    "a11y.board": "Tabula ludi",
+    "a11y.cell": "Ordo {r}, columna {c}: {state}",
+    "a11y.cellOpen": "non soluta, {n} possibilia: {list}",
+    "a11y.set": "{sym} electum, ordo {r}, columna {c}",
+    "a11y.excl": "{sym} exclusum, ordo {r}, columna {c}",
+    "a11y.undone": "Motus revocatus",
+    "a11y.zoom": "Ordo {r}, columna {c}: signum elige",
+    "a11y.hints": "Indicia",
+    "clue.near": "{a} iuxta {b}",
+    "clue.side": "{a} alicubi ad sinistram {b}",
+    "clue.between": "{c} inter {a} et {b}",
+    "clue.under": "{a} et {b} in eadem columna",
+    "sym.die": "alea {n}",
+    "sym.shape1": "triangulum",
+    "sym.shape2": "triangulum inversum",
+    "sym.shape3": "quadratum",
+    "sym.shape4": "rhombus",
+    "sym.shape5": "pentagonum",
+    "sym.shape6": "pentagonum inversum",
+    "sym.sign1": "plus",
+    "sym.sign2": "minus",
+    "sym.sign3": "divisum per",
+    "sym.sign4": "multiplicatum per",
+    "sym.sign5": "aequale",
+    "sym.sign6": "radix quadrata",
+    "help.keys": "Claviatura: sagittae per tabulam moventur, Enter cellam aperit, 1 ad 6 modum praesentem (eligere vel excludere) signo applicant, Shift+Enter alterum applicat, M modum mutat, U vel Ctrl+Z revocat, T tempus pronuntiat, Esc claudit."
   }
 });

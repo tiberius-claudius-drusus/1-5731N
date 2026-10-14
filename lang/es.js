@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/es.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Spanish (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Spanish (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "es"
@@ -87,6 +87,32 @@ SteinI18n.add("es", {
     "help.ex2": "el primero está a la izquierda del segundo, no necesariamente al lado",
     "help.ex3": "el del medio está exactamente entre los otros dos",
     "help.ex4": "uno encima del otro: misma columna",
-    "help.p4": "Cada partida se resuelve por pura deducción, sin adivinar. Una jugada contraria a la solución se rechaza con un mensaje y cuenta como error. {undo} deshace la última jugada."
+    "help.p4": "Cada partida se resuelve por pura deducción, sin adivinar. Una jugada contraria a la solución se rechaza con un mensaje y cuenta como error. {undo} deshace la última jugada.",
+    "a11y.board": "Tablero de juego",
+    "a11y.cell": "Fila {r}, columna {c}: {state}",
+    "a11y.cellOpen": "sin resolver, {n} posibles: {list}",
+    "a11y.set": "{sym} elegido, fila {r}, columna {c}",
+    "a11y.excl": "{sym} excluido, fila {r}, columna {c}",
+    "a11y.undone": "Jugada deshecha",
+    "a11y.zoom": "Fila {r}, columna {c}: elige un símbolo",
+    "a11y.hints": "Pistas",
+    "clue.near": "{a} junto a {b}",
+    "clue.side": "{a} en algún lugar a la izquierda de {b}",
+    "clue.between": "{c} entre {a} y {b}",
+    "clue.under": "{a} y {b} en la misma columna",
+    "sym.die": "dado {n}",
+    "sym.shape1": "triángulo",
+    "sym.shape2": "triángulo invertido",
+    "sym.shape3": "cuadrado",
+    "sym.shape4": "rombo",
+    "sym.shape5": "pentágono",
+    "sym.shape6": "pentágono invertido",
+    "sym.sign1": "más",
+    "sym.sign2": "menos",
+    "sym.sign3": "dividido por",
+    "sym.sign4": "por",
+    "sym.sign5": "igual",
+    "sym.sign6": "raíz cuadrada",
+    "help.keys": "Teclado: las flechas se mueven por el tablero, Intro abre una casilla, 1 a 6 aplican a un símbolo el modo actual (elegir o excluir), Mayús+Intro aplica el otro, M cambia de modo, U o Ctrl+Z deshace, T anuncia el tiempo, Esc cierra."
   }
 });

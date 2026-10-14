@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ja.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Japanese (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Japanese (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "ja"
@@ -87,6 +87,32 @@ SteinI18n.add("ja", {
     "help.ex2": "前者は後者の左にある（隣とは限らない）",
     "help.ex3": "真ん中のものは、他の2つのちょうど間にある",
     "help.ex4": "上下に並ぶ：同じ列",
-    "help.p4": "どのゲームも、推測なしで推理だけで解けます。答えと矛盾する手は、メッセージとともに拒否され、エラーとして数えられます。{undo} で最後の手を取り消せます。"
+    "help.p4": "どのゲームも、推測なしで推理だけで解けます。答えと矛盾する手は、メッセージとともに拒否され、エラーとして数えられます。{undo} で最後の手を取り消せます。",
+    "a11y.board": "ゲーム盤",
+    "a11y.cell": "{r}行{c}列：{state}",
+    "a11y.cellOpen": "未解決、候補{n}個：{list}",
+    "a11y.set": "{sym}を選択、{r}行{c}列",
+    "a11y.excl": "{sym}を除外、{r}行{c}列",
+    "a11y.undone": "操作を取り消しました",
+    "a11y.zoom": "{r}行{c}列：記号を選んでください",
+    "a11y.hints": "ヒント",
+    "clue.near": "{a}は{b}の隣",
+    "clue.side": "{a}は{b}より左のどこか",
+    "clue.between": "{c}は{a}と{b}の間",
+    "clue.under": "{a}と{b}は同じ列",
+    "sym.die": "サイコロ{n}",
+    "sym.shape1": "三角形",
+    "sym.shape2": "逆三角形",
+    "sym.shape3": "正方形",
+    "sym.shape4": "ひし形",
+    "sym.shape5": "五角形",
+    "sym.shape6": "逆五角形",
+    "sym.sign1": "プラス",
+    "sym.sign2": "マイナス",
+    "sym.sign3": "割る",
+    "sym.sign4": "掛ける",
+    "sym.sign5": "イコール",
+    "sym.sign6": "平方根",
+    "help.keys": "キーボード：矢印キーで盤上を移動し、Enterでマスを開き、1〜6で記号に現在のモード（選択または除外）を適用し、Shift＋Enterでもう一方を適用し、Mでモードを切り替え、UまたはCtrl+Zで取り消し、Tで時間を読み上げ、Escで閉じます。"
   }
 });

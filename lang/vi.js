@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/vi.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Vietnamese (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Vietnamese (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "vi"
@@ -87,6 +87,32 @@ SteinI18n.add("vi", {
     "help.ex2": "phần tử đầu ở bên trái phần tử thứ hai, không nhất thiết liền kề",
     "help.ex3": "phần tử ở giữa nằm đúng giữa hai phần tử còn lại",
     "help.ex4": "cái này nằm trên cái kia: cùng một cột",
-    "help.p4": "Mọi ván đều giải được bằng suy luận thuần túy, không cần đoán. Nước đi mâu thuẫn với lời giải sẽ bị từ chối kèm thông báo và tính là một lỗi. {undo} hoàn tác nước đi cuối cùng."
+    "help.p4": "Mọi ván đều giải được bằng suy luận thuần túy, không cần đoán. Nước đi mâu thuẫn với lời giải sẽ bị từ chối kèm thông báo và tính là một lỗi. {undo} hoàn tác nước đi cuối cùng.",
+    "a11y.board": "Bàn chơi",
+    "a11y.cell": "Hàng {r}, cột {c}: {state}",
+    "a11y.cellOpen": "chưa giải, {n} khả năng: {list}",
+    "a11y.set": "đã chọn {sym}, hàng {r}, cột {c}",
+    "a11y.excl": "đã loại {sym}, hàng {r}, cột {c}",
+    "a11y.undone": "Đã hoàn tác nước đi",
+    "a11y.zoom": "Hàng {r}, cột {c}: chọn một ký hiệu",
+    "a11y.hints": "Gợi ý",
+    "clue.near": "{a} bên cạnh {b}",
+    "clue.side": "{a} ở đâu đó bên trái {b}",
+    "clue.between": "{c} nằm giữa {a} và {b}",
+    "clue.under": "{a} và {b} cùng một cột",
+    "sym.die": "xúc xắc {n}",
+    "sym.shape1": "tam giác",
+    "sym.shape2": "tam giác ngược",
+    "sym.shape3": "hình vuông",
+    "sym.shape4": "hình thoi",
+    "sym.shape5": "ngũ giác",
+    "sym.shape6": "ngũ giác ngược",
+    "sym.sign1": "cộng",
+    "sym.sign2": "trừ",
+    "sym.sign3": "chia",
+    "sym.sign4": "nhân",
+    "sym.sign5": "bằng",
+    "sym.sign6": "căn bậc hai",
+    "help.keys": "Bàn phím: phím mũi tên di chuyển trên bàn, Enter mở một ô, 1 đến 6 áp dụng chế độ hiện tại (chọn hoặc loại) cho ký hiệu, Shift+Enter áp dụng chế độ còn lại, M đổi chế độ, U hoặc Ctrl+Z hoàn tác, T đọc thời gian, Esc đóng."
   }
 });

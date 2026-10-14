@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Polish (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Polish (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "pl"
@@ -87,6 +87,32 @@ SteinI18n.add("pl", {
     "help.ex2": "pierwszy jest na lewo od drugiego, niekoniecznie obok",
     "help.ex3": "środkowy leży dokładnie między dwoma pozostałymi",
     "help.ex4": "jeden nad drugim: ta sama kolumna",
-    "help.p4": "Każdą grę można rozwiązać czystą dedukcją, bez zgadywania. Ruch sprzeczny z rozwiązaniem zostaje odrzucony z komunikatem i liczy się jako błąd. {undo} cofa ostatni ruch."
+    "help.p4": "Każdą grę można rozwiązać czystą dedukcją, bez zgadywania. Ruch sprzeczny z rozwiązaniem zostaje odrzucony z komunikatem i liczy się jako błąd. {undo} cofa ostatni ruch.",
+    "a11y.board": "Plansza",
+    "a11y.cell": "Rząd {r}, kolumna {c}: {state}",
+    "a11y.cellOpen": "nierozwiązane, możliwych: {n} — {list}",
+    "a11y.set": "wybrano {sym}, rząd {r}, kolumna {c}",
+    "a11y.excl": "wykluczono {sym}, rząd {r}, kolumna {c}",
+    "a11y.undone": "Cofnięto ruch",
+    "a11y.zoom": "Rząd {r}, kolumna {c}: wybierz symbol",
+    "a11y.hints": "Wskazówki",
+    "clue.near": "{a} obok {b}",
+    "clue.side": "{a} gdzieś na lewo od {b}",
+    "clue.between": "{c} między {a} i {b}",
+    "clue.under": "{a} i {b} w tej samej kolumnie",
+    "sym.die": "kość {n}",
+    "sym.shape1": "trójkąt",
+    "sym.shape2": "trójkąt odwrócony",
+    "sym.shape3": "kwadrat",
+    "sym.shape4": "romb",
+    "sym.shape5": "pięciokąt",
+    "sym.shape6": "pięciokąt odwrócony",
+    "sym.sign1": "plus",
+    "sym.sign2": "minus",
+    "sym.sign3": "podzielić przez",
+    "sym.sign4": "razy",
+    "sym.sign5": "równa się",
+    "sym.sign6": "pierwiastek kwadratowy",
+    "help.keys": "Klawiatura: strzałki przesuwają po planszy, Enter otwiera pole, od 1 do 6 stosują do symbolu bieżący tryb (wybieranie lub wykluczanie), Shift+Enter stosuje drugi, M zmienia tryb, U lub Ctrl+Z cofa, T odczytuje czas, Esc zamyka."
   }
 });

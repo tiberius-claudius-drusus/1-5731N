@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ko.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Korean (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Korean (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "ko"
@@ -87,6 +87,32 @@ SteinI18n.add("ko", {
     "help.ex2": "첫 번째가 두 번째의 왼쪽에 있다(바로 옆일 필요는 없음)",
     "help.ex3": "가운데 것이 다른 둘의 정확히 사이에 있다",
     "help.ex4": "위아래로 있다: 같은 열",
-    "help.p4": "모든 게임은 추측 없이 순수한 추리만으로 풀 수 있습니다. 정답과 모순되는 수는 메시지와 함께 거부되고 오류로 집계됩니다. {undo}는 마지막 수를 취소합니다."
+    "help.p4": "모든 게임은 추측 없이 순수한 추리만으로 풀 수 있습니다. 정답과 모순되는 수는 메시지와 함께 거부되고 오류로 집계됩니다. {undo}는 마지막 수를 취소합니다.",
+    "a11y.board": "게임 보드",
+    "a11y.cell": "{r}행 {c}열: {state}",
+    "a11y.cellOpen": "미해결, 가능 {n}개: {list}",
+    "a11y.set": "{sym} 선택됨, {r}행 {c}열",
+    "a11y.excl": "{sym} 제외됨, {r}행 {c}열",
+    "a11y.undone": "수를 취소했습니다",
+    "a11y.zoom": "{r}행 {c}열: 기호를 선택하세요",
+    "a11y.hints": "힌트",
+    "clue.near": "{a}이(가) {b} 옆에 있음",
+    "clue.side": "{a}이(가) {b}보다 왼쪽 어딘가에 있음",
+    "clue.between": "{c}이(가) {a}과(와) {b} 사이에 있음",
+    "clue.under": "{a}과(와) {b}이(가) 같은 열에 있음",
+    "sym.die": "주사위 {n}",
+    "sym.shape1": "삼각형",
+    "sym.shape2": "역삼각형",
+    "sym.shape3": "정사각형",
+    "sym.shape4": "마름모",
+    "sym.shape5": "오각형",
+    "sym.shape6": "역오각형",
+    "sym.sign1": "더하기",
+    "sym.sign2": "빼기",
+    "sym.sign3": "나누기",
+    "sym.sign4": "곱하기",
+    "sym.sign5": "같음",
+    "sym.sign6": "제곱근",
+    "help.keys": "키보드: 화살표 키로 보드를 이동하고, Enter로 칸을 열고, 1~6으로 기호에 현재 모드(선택 또는 제외)를 적용하고, Shift+Enter로 다른 모드를 적용하며, M으로 모드를 바꾸고, U 또는 Ctrl+Z로 취소하고, T로 시간을 읽어 주며, Esc로 닫습니다."
   }
 });

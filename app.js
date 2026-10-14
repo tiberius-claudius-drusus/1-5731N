@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.0.3
+ * Version   : 1.0.4
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,11 +11,29 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.0.3', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.0.4', BUILD_DATE = '2026-10-14';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var $ = function (id) { return document.getElementById(id); };
   var LET = 'ABCDEF', let_ = 'abcdef';
+
+  /* ---------- accessibility: spoken names of the symbols, announcements ---------- */
+  var ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+  function symName(r, e) {                                    // spoken name of symbol e (1..6) in row r (0..5)
+    switch (r) {
+      case 0: return String(e);
+      case 1: return LET.charAt(e - 1);
+      case 2: return ROMAN[e - 1];
+      case 3: return t('sym.die', { n: e });
+      case 4: return t('sym.shape' + e);
+      default: return t('sym.sign' + e);
+    }
+  }
+  var liveT;
+  function say(msg) {                                         // polite announcement for screen readers (#live)
+    var l = $('live'); l.textContent = '';
+    clearTimeout(liveT); liveT = setTimeout(function () { l.textContent = I.plain(String(msg)); }, 40);
+  }
 
   function load(k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
   function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
@@ -59,7 +77,16 @@
   }
 
   /* ---------- dialogues ---------- */
-  function dialog(text, btns) {
+  var dialogReturn = null, dialogEsc = null;
+  function hideDialog() {
+    $('dialog').hidden = true; dialogEsc = null;
+    var r = dialogReturn; dialogReturn = null;
+    if (r && document.body.contains(r)) { try { r.focus(); } catch (e) {} }
+    else if (r && $('s-game').classList.contains('on') && !zoomCell) focusBoardCell(focusCell[0], focusCell[1]);   // the element was rebuilt meanwhile
+  }
+  /* btns: [[label, callback?], ...]. opts.escIndex: button run by Escape (default the first; -1 = none). Focus goes to the first button and comes back. */
+  function dialog(text, btns, opts) {
+    opts = opts || {};
     $('d-text').textContent = text;
     var box = $('d-btns'); box.innerHTML = '';
     var shownAt = performance.now();   // ignore the ghost click of the last tap on the board
@@ -67,16 +94,20 @@
       var el = document.createElement('button'); el.textContent = b[0];
       el.onclick = function () {
         if (performance.now() - shownAt < 400) return;
-        $('dialog').hidden = true; if (b[1]) b[1]();
+        hideDialog(); if (b[1]) b[1]();
       };
       box.appendChild(el);
     });
+    var ei = opts.escIndex == null ? 0 : opts.escIndex;
+    dialogEsc = ei >= 0 && btns[ei] ? function () { hideDialog(); if (btns[ei][1]) btns[ei][1](); } : null;
+    if (!dialogReturn && document.activeElement && document.activeElement !== document.body) dialogReturn = document.activeElement;
     $('dialog').hidden = false;
+    if (box.firstChild) box.firstChild.focus();
   }
   var toastT;
   function toast(msg) {
-    var t = $('toast'); t.textContent = msg; t.hidden = false;
-    clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 2200);
+    var el = $('toast'); el.textContent = msg; el.hidden = false; say(msg);
+    clearTimeout(toastT); toastT = setTimeout(function () { el.hidden = true; }, 2200);
   }
 
   /* ---------- game ---------- */
@@ -97,7 +128,7 @@
     save(KEY_GAME, G);
   }
   function setup(g) {
-    G = g; ended = false;
+    G = g; ended = false; focusCell = [0, 0];
     rules = G.rules.map(E.ruleFromJSON);
     pos = new E.Possibilities(G.pos);
     renderAll();
@@ -140,14 +171,26 @@
   /* ---------- rendu ---------- */
   function renderAll() { renderBoard(); renderHints(); $('g-time').textContent = fmt(G.elapsed); }
 
+  var focusCell = [0, 0];                                      // the cell that holds the tab stop (roving tabindex)
+  function cellLabel(c, r) {
+    var state;
+    if (pos.isDefined(c, r)) state = symName(r, pos.getDefined(c, r));
+    else {
+      var names = [];
+      for (var e = 1; e <= N; e++) if (pos.isPossible(c, r, e)) names.push(symName(r, e));
+      state = t('a11y.cellOpen', { n: names.length, list: names.join(', ') });
+    }
+    return t('a11y.cell', { r: r + 1, c: c + 1, state: state });
+  }
   function renderBoard(errCell) {
-    var b = $('board'), h = '';
+    var b = $('board'), h = '', hadFocus = b.contains(document.activeElement);
     for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
       var cls = 'cell' + (errCell && errCell[0] === c && errCell[1] === r ? ' err' : ''), dat = ' data-c="' + c + '" data-r="' + r + '"';
+      var acc = ' role="button" tabindex="' + (focusCell[0] === c && focusCell[1] === r ? 0 : -1) + '" aria-label="' + esc(cellLabel(c, r)) + '"';
       if (pos.isDefined(c, r)) {
-        h += '<div class="' + cls + ' def"' + dat + '>' + tile(r, pos.getDefined(c, r)) + '</div>';
+        h += '<div class="' + cls + ' def"' + dat + acc + ' aria-disabled="true">' + tile(r, pos.getDefined(c, r)) + '</div>';
       } else {
-        h += '<div class="' + cls + '"' + dat + '>';
+        h += '<div class="' + cls + '"' + dat + acc + '>';
         for (var e = 1; e <= N; e++) {
           h += '<div class="slot r' + r + '" data-c="' + c + '" data-r="' + r + '" data-e="' + e + '">' +
             (pos.isPossible(c, r, e) ? GL.glyph(r, e) : '') + '</div>';
@@ -156,13 +199,24 @@
       }
     }
     b.innerHTML = h;
+    if (hadFocus) { var f = b.querySelector('.cell[data-c="' + focusCell[0] + '"][data-r="' + focusCell[1] + '"]'); if (f) f.focus(); }
     renderZoom();
   }
 
   function tile(r, e) { return '<span class="tile r' + r + '">' + GL.glyph(r, e) + '</span>'; }
   function icon(t) { return tile(t[0], t[1]); }
   function symTile(id) { return '<span class="tile sym">' + GL.hint(id) + '</span>'; }
+  function nm(cell) { return symName(cell[0], cell[1]); }
+  function clueLabel(r) {
+    switch (r.t) {
+      case 'near': return t('clue.near', { a: nm(r.a), b: nm(r.b) });
+      case 'dir': return t('clue.side', { a: nm(r.a), b: nm(r.b) });
+      case 'between': return t('clue.between', { a: nm(r.a), b: nm(r.b), c: nm(r.c) });
+      default: return t('clue.under', { a: nm(r.a), b: nm(r.b) });
+    }
+  }
   function renderHints() {
+    var fa = document.activeElement, fi = fa && fa.classList && fa.classList.contains('hint') ? +fa.dataset.i : -1;
     var items = hintItems();
     var chk = G.checked.filter(function (i) { return items.indexOf(i) >= 0; });
     function hintHtml(i) {
@@ -173,7 +227,7 @@
         case 'between': inner = icon(r.a) + icon(r.c) + icon(r.b); break;
         case 'under': inner = icon(r.a) + icon(r.b); cls += ' v'; break;
       }
-      return '<div class="' + cls + '" data-i="' + i + '">' + inner + '</div>';
+      return '<div class="' + cls + '" data-i="' + i + '" role="button" tabindex="0" aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(clueLabel(r)) + '">' + inner + '</div>';
     }
     // two lists: first the 3-cell clues (horizontal), below them the 2-cell ones (vertical).
     // In each list: ticked clues first (in the order they were ticked), then the others.
@@ -182,17 +236,25 @@
       var grp = items.filter(function (i) { return rules[i].show === kind; });
       var on = chk.filter(function (i) { return grp.indexOf(i) >= 0; });
       var order = on.concat(grp.filter(function (i) { return on.indexOf(i) < 0; }));
-      if (order.length) h += '<div class="hgrp">' + order.map(hintHtml).join('') + '</div>';
+      if (order.length) h += '<div class="hgrp" role="group" aria-label="' + esc(t('a11y.hints')) + '">' + order.map(hintHtml).join('') + '</div>';
     });
     $('hints').innerHTML = h;
+    if (fi >= 0) { var hf = $('hints').querySelector('.hint[data-i="' + fi + '"]'); if (hf) hf.focus(); }
   }
 
-  $('hints').addEventListener('click', function (ev) {
-    var el = ev.target.closest('.hint'); if (!el || ended) return;
-    if (performance.now() - zoomShut < 450) return;      // ghost click: the zoom has just closed under the finger
+  function toggleHint(el) {
     var i = +el.dataset.i, k = G.checked.indexOf(i);
     if (k >= 0) G.checked.splice(k, 1); else G.checked.push(i);
     renderHints(); play('click'); persist();
+  }
+  $('hints').addEventListener('click', function (ev) {
+    var el = ev.target.closest('.hint'); if (!el || ended) return;
+    if (performance.now() - zoomShut < 450) return;      // ghost click: the zoom has just closed under the finger
+    toggleHint(el);
+  });
+  $('hints').addEventListener('keydown', function (ev) {
+    var el = ev.target.closest && ev.target.closest('.hint');
+    if (el && !ended && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); toggleHint(el); }
   });
 
   /* ---------- coups ---------- */
@@ -209,12 +271,13 @@
     }
     G.history.push(before); if (G.history.length > 300) G.history.shift();
     play(kind === 'set' ? 'laser' : 'whizz');
+    say(t(kind === 'set' ? 'a11y.set' : 'a11y.excl', { sym: symName(r, e), r: r + 1, c: c + 1 }));
     renderBoard();
     if (pos.isSolved()) win(); else persist();
   }
   function undo() {
     if (ended || !G.history.length) return;
-    pos.p.set(G.history.pop()); renderBoard(); persist(); play('click');
+    pos.p.set(G.history.pop()); renderBoard(); persist(); play('click'); say(t('a11y.undone'));
   }
 
   function win() {
@@ -225,7 +288,7 @@
     save(KEY_STATS, st); drop(KEY_GAME);
     play('applause');
     dialog([t('win.title'), t('win.time', { time: fmt(G.elapsed) }), G.errors ? t('win.errors', { n: G.errors }) : t('win.clean')].join('\n'),
-      [[t('win.menu'), function () { show('s-home'); }], [t('win.new'), newGame]]);
+      [[t('win.menu'), function () { show('s-home'); }], [t('win.new'), newGame]], { escIndex: -1 });
   }
 
   /* ---------- cell zoom: tapping an unsolved cell enlarges it in the centre ---------- */
@@ -240,12 +303,20 @@
     if (zoomCell && zoomCell[0] === c && zoomCell[1] === r) closeZoom();   // a second tap closes it
     else openZoom(c, r);                                                  // otherwise the zoom moves to this cell
   });
-  function openZoom(c, r) {
-    zoomCell = [c, r];
+  function focusBoardCell(c, r) {
+    focusCell = [c, r];
+    Array.prototype.forEach.call(board.querySelectorAll('.cell'), function (x) { x.tabIndex = (+x.dataset.c === c && +x.dataset.r === r) ? 0 : -1; });
+    var el = board.querySelector('.cell[data-c="' + c + '"][data-r="' + r + '"]'); if (el) el.focus();
+  }
+  /* viaKey: opened with the keyboard, so the focus goes into the panel (first possible symbol) */
+  function openZoom(c, r, viaKey) {
+    zoomCell = [c, r]; focusCell = [c, r];
     $('s-game').classList.add('zooming');
     zoomEl.classList.add('on');
     fitZoom();
     renderBoard(); renderZoom();
+    if (viaKey) { var f = zbox.querySelector('.zslot[tabindex]'); if (f) f.focus(); }
+    say(t('a11y.zoom', { r: r + 1, c: c + 1 }));
   }
   /* The panel takes all the room left under the board; the zoom (3:2 ratio, square tiles) fits into it. */
   function fitZoom() {
@@ -258,9 +329,11 @@
   window.addEventListener('resize', fitZoom);
   function closeZoom() {
     if (!zoomCell) return;
+    var had = zoomEl.contains(document.activeElement), zc = zoomCell;
     zoomCell = null; zoomEl.classList.remove('on'); $('s-game').classList.remove('zooming');
     zoomShut = performance.now();
     var s = board.querySelector('.zsel'); if (s) s.classList.remove('zsel');
+    if (had) focusBoardCell(zc[0], zc[1]);                    // the focus goes back to the cell the panel was open on
   }
   function renderZoom() {
     if (!zoomCell) return;
@@ -268,12 +341,15 @@
     if (ended || pos.isDefined(c, r)) { closeZoom(); return; }
     Array.prototype.forEach.call(board.querySelectorAll('.zsel'), function (x) { x.classList.remove('zsel'); });
     var cur = board.querySelector('.cell[data-c="' + c + '"][data-r="' + r + '"]'); if (cur) cur.classList.add('zsel');
+    var fa = document.activeElement, fe = zbox.contains(fa) && fa.dataset ? +fa.dataset.e : 0;
     var h = '';
     for (var e = 1; e <= N; e++) {
-      h += '<div class="zslot" data-c="' + c + '" data-r="' + r + '" data-e="' + e + '">' +
-        (pos.isPossible(c, r, e) ? tile(r, e) : '') + '</div>';
+      var poss = pos.isPossible(c, r, e);
+      h += '<div class="zslot" data-c="' + c + '" data-r="' + r + '" data-e="' + e + '"' +
+        (poss ? ' role="button" tabindex="0" aria-label="' + esc(symName(r, e)) + '"' : '') + '>' + (poss ? tile(r, e) : '') + '</div>';
     }
     zbox.innerHTML = h;
+    if (fe) { var f = zbox.querySelector('.zslot[data-e="' + fe + '"][tabindex]') || zbox.querySelector('.zslot[tabindex]'); if (f) f.focus(); }
   }
   $('z-close').onclick = closeZoom;
 
@@ -306,6 +382,67 @@
   zbox.addEventListener('pointercancel', endPress);
   function doMove(kind, c, r, e) { lastMove = performance.now(); move(kind, c, r, e); }
 
+  /* ---------- keyboard (desktop) ---------- */
+  function other(kind) { return kind === 'set' ? 'excl' : 'set'; }
+  function modeKind() { return opt.mode === 'choose' ? 'set' : 'excl'; }
+  board.addEventListener('keydown', function (ev) {
+    var cell = ev.target.closest && ev.target.closest('.cell'); if (!cell || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    var c = +cell.dataset.c, r = +cell.dataset.r, nc = c, nr = r;
+    if (/^[1-6]$/.test(ev.key)) { ev.preventDefault(); if (!ended && !cell.classList.contains('def')) doMove(modeKind(), c, r, +ev.key); return; }
+    switch (ev.key) {
+      case 'ArrowLeft': nc = Math.max(0, c - 1); break;
+      case 'ArrowRight': nc = Math.min(N - 1, c + 1); break;
+      case 'ArrowUp': nr = Math.max(0, r - 1); break;
+      case 'ArrowDown': nr = Math.min(N - 1, r + 1); break;
+      case 'Home': nc = 0; break;
+      case 'End': nc = N - 1; break;
+      case 'Enter': case ' ':
+        ev.preventDefault(); if (!ended && !cell.classList.contains('def')) openZoom(c, r, true); return;
+      default: return;
+    }
+    ev.preventDefault(); focusBoardCell(nc, nr);
+  });
+  zoomEl.addEventListener('keydown', function (ev) {
+    if (!zoomCell || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    var c = zoomCell[0], r = zoomCell[1], s = ev.target.closest && ev.target.closest('.zslot');
+    if (ev.key === 'Escape') { ev.preventDefault(); closeZoom(); return; }
+    if (/^[1-6]$/.test(ev.key)) { ev.preventDefault(); if (pos.isPossible(c, r, +ev.key)) doMove(modeKind(), c, r, +ev.key); return; }
+    if (s && (ev.key === 'Enter' || ev.key === ' ')) {
+      ev.preventDefault(); doMove(ev.shiftKey ? other(modeKind()) : modeKind(), c, r, +s.dataset.e); return;
+    }
+    var d = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -3, ArrowDown: 3 }[ev.key];
+    if (s && d) {                                              // the six symbols form a grid of 3 columns x 2 rows
+      ev.preventDefault();
+      for (var e = +s.dataset.e + d; e >= 1 && e <= N; e += d) {
+        var f = zbox.querySelector('.zslot[data-e="' + e + '"][tabindex]'); if (f) { f.focus(); break; }
+      }
+    }
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.defaultPrevented) return;
+    var tag = ev.target && ev.target.tagName;
+    if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+    if (!$('dialog').hidden) {
+      if (ev.key === 'Escape' && dialogEsc) { ev.preventDefault(); dialogEsc(); }
+      else if (ev.key === 'Tab') {                              // the focus stays inside the dialog
+        var bs = $('d-btns').querySelectorAll('button'); if (!bs.length) return;
+        var first = bs[0], last = bs[bs.length - 1];
+        if (!$('dialog').contains(document.activeElement)) { ev.preventDefault(); first.focus(); }
+        else if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+        else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+      }
+      return;
+    }
+    if (!$('s-game').classList.contains('on')) return;
+    var k = ev.key.length === 1 ? ev.key.toLowerCase() : ev.key;
+    if (ev.ctrlKey || ev.metaKey) { if (k === 'z') { ev.preventDefault(); undo(); } return; }
+    if (ev.altKey) return;
+    if (k === 'm') { ev.preventDefault(); toggleMode(); }
+    else if (k === 'u') { ev.preventDefault(); undo(); }
+    else if (k === 't') { ev.preventDefault(); say(fmt(G.elapsed)); }
+    else if (k === 'Escape') { if (zoomCell) closeZoom(); else $('g-menu').click(); }
+  });
+
   /* ---------- barre ---------- */
   $('g-undo').onclick = undo;
   function setModeButtons() {
@@ -325,7 +462,7 @@
   function toggleHand() { opt.hand = opt.hand === 'left' ? 'right' : 'left'; save(KEY_OPT, opt); applyHand(); fitZoom(); }
   function toggleMode() {
     opt.mode = opt.mode === 'choose' ? 'excl' : 'choose'; save(KEY_OPT, opt);
-    setModeButtons();
+    setModeButtons(); say($('gcap').textContent);
   }
   $('g-mode').onclick = toggleMode;
   $('z-mode').onclick = toggleMode;
@@ -523,7 +660,7 @@
       ex(im(0, 1) + imSym('side') + im(1, 3), 'help.ex2') +
       ex(im(0, 1) + im(2, 2) + im(1, 3), 'help.ex3') +
       ex(im(0, 1) + im(2, 2), 'help.ex4') +
-      '<p>' + fill(t('help.p4')) + '</p>';
+      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.keys') + '</p>';
   }
 
   /* ---------- language: (re)writes everything that holds text ---------- */

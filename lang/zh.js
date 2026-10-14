@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/zh.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Chinese (Simplified) (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Chinese (Simplified) (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "zh"
@@ -87,6 +87,32 @@ SteinI18n.add("zh", {
     "help.ex2": "前者在后者左边，不一定紧挨着",
     "help.ex3": "中间的恰好位于另外两个之间",
     "help.ex4": "上下相对：同一列",
-    "help.p4": "每一局都能纯靠推理解开，无需猜测。与答案矛盾的一步会被拒绝并提示，同时记为一次错误。{undo} 撤销上一步。"
+    "help.p4": "每一局都能纯靠推理解开，无需猜测。与答案矛盾的一步会被拒绝并提示，同时记为一次错误。{undo} 撤销上一步。",
+    "a11y.board": "游戏棋盘",
+    "a11y.cell": "第{r}行，第{c}列：{state}",
+    "a11y.cellOpen": "未解决，{n}个可能：{list}",
+    "a11y.set": "已选择{sym}，第{r}行，第{c}列",
+    "a11y.excl": "已排除{sym}，第{r}行，第{c}列",
+    "a11y.undone": "已撤销",
+    "a11y.zoom": "第{r}行，第{c}列：选择一个符号",
+    "a11y.hints": "提示",
+    "clue.near": "{a}在{b}旁边",
+    "clue.side": "{a}在{b}的左边某处",
+    "clue.between": "{c}在{a}和{b}之间",
+    "clue.under": "{a}和{b}在同一列",
+    "sym.die": "骰子{n}",
+    "sym.shape1": "三角形",
+    "sym.shape2": "倒三角形",
+    "sym.shape3": "正方形",
+    "sym.shape4": "菱形",
+    "sym.shape5": "五边形",
+    "sym.shape6": "倒五边形",
+    "sym.sign1": "加",
+    "sym.sign2": "减",
+    "sym.sign3": "除以",
+    "sym.sign4": "乘以",
+    "sym.sign5": "等于",
+    "sym.sign6": "平方根",
+    "help.keys": "键盘：方向键在棋盘上移动，回车键打开格子，1到6对符号应用当前模式（选择或排除），Shift加回车应用另一种模式，M切换模式，U或Ctrl+Z撤销，T报读时间，Esc关闭。"
   }
 });

@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pt-pt.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Portuguese (Portugal) (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Portuguese (Portugal) (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "pt-pt"
@@ -87,6 +87,32 @@ SteinI18n.add("pt-pt", {
     "help.ex2": "o primeiro está à esquerda do segundo, não necessariamente ao lado",
     "help.ex3": "o do meio está exatamente entre os outros dois",
     "help.ex4": "um por cima do outro: mesma coluna",
-    "help.p4": "Cada jogo resolve-se por pura dedução, sem adivinhar. Uma jogada contrária à solução é recusada com uma mensagem e conta como erro. {undo} anula a última jogada."
+    "help.p4": "Cada jogo resolve-se por pura dedução, sem adivinhar. Uma jogada contrária à solução é recusada com uma mensagem e conta como erro. {undo} anula a última jogada.",
+    "a11y.board": "Tabuleiro de jogo",
+    "a11y.cell": "Linha {r}, coluna {c}: {state}",
+    "a11y.cellOpen": "por resolver, {n} possíveis: {list}",
+    "a11y.set": "{sym} escolhido, linha {r}, coluna {c}",
+    "a11y.excl": "{sym} excluído, linha {r}, coluna {c}",
+    "a11y.undone": "Jogada anulada",
+    "a11y.zoom": "Linha {r}, coluna {c}: escolha um símbolo",
+    "a11y.hints": "Pistas",
+    "clue.near": "{a} ao lado de {b}",
+    "clue.side": "{a} algures à esquerda de {b}",
+    "clue.between": "{c} entre {a} e {b}",
+    "clue.under": "{a} e {b} na mesma coluna",
+    "sym.die": "dado {n}",
+    "sym.shape1": "triângulo",
+    "sym.shape2": "triângulo invertido",
+    "sym.shape3": "quadrado",
+    "sym.shape4": "losango",
+    "sym.shape5": "pentágono",
+    "sym.shape6": "pentágono invertido",
+    "sym.sign1": "mais",
+    "sym.sign2": "menos",
+    "sym.sign3": "dividido por",
+    "sym.sign4": "vezes",
+    "sym.sign5": "igual",
+    "sym.sign6": "raiz quadrada",
+    "help.keys": "Teclado: as setas deslocam-se pelo tabuleiro, Enter abre uma casa, 1 a 6 aplicam a um símbolo o modo atual (escolher ou excluir), Shift+Enter aplica o outro, M muda de modo, U ou Ctrl+Z anula, T anuncia o tempo, Esc fecha."
   }
 });

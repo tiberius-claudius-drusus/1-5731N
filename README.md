@@ -5,6 +5,7 @@
 
 Six rows of six symbols, six columns: use the clues to find which symbol goes in each cell. Every puzzle is generated and can be solved by pure deduction.
 
+- Playable with the keyboard and with a screen reader (arrow keys, Enter, 1-6, M, U, T, Esc: see the Help screen).
 - 20 languages (English by default), 4 themes × light/dark, sounds of the original, works offline, no account, no tracking.
 - Statistics are kept on the device; they can be exported to / imported from a `.json` file.
 

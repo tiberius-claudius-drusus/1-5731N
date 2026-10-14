@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/it.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Italian (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Italian (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "it"
@@ -87,6 +87,32 @@ SteinI18n.add("it", {
     "help.ex2": "il primo è a sinistra del secondo, non necessariamente accanto",
     "help.ex3": "quello al centro è esattamente tra gli altri due",
     "help.ex4": "uno sopra l'altro: stessa colonna",
-    "help.p4": "Ogni partita si risolve per pura deduzione, senza mai tirare a indovinare. Una mossa contraria alla soluzione viene rifiutata con un messaggio e conteggiata come errore. {undo} annulla l'ultima mossa."
+    "help.p4": "Ogni partita si risolve per pura deduzione, senza mai tirare a indovinare. Una mossa contraria alla soluzione viene rifiutata con un messaggio e conteggiata come errore. {undo} annulla l'ultima mossa.",
+    "a11y.board": "Tabellone di gioco",
+    "a11y.cell": "Riga {r}, colonna {c}: {state}",
+    "a11y.cellOpen": "non risolta, {n} possibili: {list}",
+    "a11y.set": "{sym} scelto, riga {r}, colonna {c}",
+    "a11y.excl": "{sym} escluso, riga {r}, colonna {c}",
+    "a11y.undone": "Mossa annullata",
+    "a11y.zoom": "Riga {r}, colonna {c}: scegli un simbolo",
+    "a11y.hints": "Indizi",
+    "clue.near": "{a} accanto a {b}",
+    "clue.side": "{a} da qualche parte a sinistra di {b}",
+    "clue.between": "{c} tra {a} e {b}",
+    "clue.under": "{a} e {b} nella stessa colonna",
+    "sym.die": "dado {n}",
+    "sym.shape1": "triangolo",
+    "sym.shape2": "triangolo rovesciato",
+    "sym.shape3": "quadrato",
+    "sym.shape4": "rombo",
+    "sym.shape5": "pentagono",
+    "sym.shape6": "pentagono rovesciato",
+    "sym.sign1": "più",
+    "sym.sign2": "meno",
+    "sym.sign3": "diviso per",
+    "sym.sign4": "per",
+    "sym.sign5": "uguale",
+    "sym.sign6": "radice quadrata",
+    "help.keys": "Tastiera: le frecce si spostano sul tabellone, Invio apre una casella, da 1 a 6 applicano a un simbolo la modalità attuale (scegliere o escludere), Maiusc+Invio applica l'altra, M cambia modalità, U o Ctrl+Z annulla, T annuncia il tempo, Esc chiude."
   }
 });

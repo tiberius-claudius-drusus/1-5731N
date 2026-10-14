@@ -2,7 +2,7 @@
 <!--
 ===========================================================================
 File      : 1-5731n/index.html
-Version   : 1.0.3
+Version   : 1.0.4
 Role      : Single page of the application: markup of all screens, the whole stylesheet (inline, theme-driven) and the script tags.
 Depends on: all scripts of the project
 Called by : the browser (served by the portal)
@@ -119,6 +119,10 @@ table{width:100%;border-collapse:collapse;margin:8px 0}
 td,th{padding:6px 4px;border-bottom:1px solid var(--rule);text-align:left}
 td:last-child,th:last-child{text-align:end}
 /* dialog and message */
+/* accessibility: text for screen readers only, visible keyboard focus */
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.cell:focus-visible,.zslot:focus-visible,.hint:focus-visible{outline:3px solid var(--acc);outline-offset:-3px}
+.hint:focus-visible{outline-offset:2px}
 #dialog{position:fixed;inset:0;background:var(--dialog-veil);display:flex;align-items:center;justify-content:center;z-index:9}
 #dialog[hidden],#toast[hidden]{display:none}
 .box{-webkit-backdrop-filter:var(--bf);backdrop-filter:var(--bf);background:var(--dialog-bg);border:var(--bw) solid var(--dialog-bd);border-radius:16px;padding:20px;max-width:min(88vw,380px);text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.2)}
@@ -152,7 +156,7 @@ td:last-child,th:last-child{text-align:end}
     <button id="g-mode" data-i18n-aria="tt.mode" data-i18n-title="tt.mode"></button>
     <button id="g-undo" data-i18n-aria="tt.undo" data-i18n-title="tt.undo"></button>
   </header>
-  <div id="board"></div>
+  <div id="board" role="group" data-i18n-aria="a11y.board"></div>
   <div id="hints"></div>
   <div id="gcap"></div>
   <div id="zoom"><div id="zrow"><div id="zbox"></div><div id="zbtns">
@@ -186,7 +190,8 @@ td:last-child,th:last-child{text-align:end}
   <button class="back" data-i18n="common.back"></button>
 </section>
 
-<div id="dialog" hidden><div class="box"><p id="d-text"></p><div id="d-btns"></div></div></div>
+<div id="dialog" hidden role="dialog" aria-modal="true" aria-labelledby="d-text"><div class="box"><p id="d-text"></p><div id="d-btns"></div></div></div>
+<div id="live" class="sr" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="toast" hidden></div>
 
 <script src="i18n.js"></script>

@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/de.js
- * Version   : 1.0.0
- * Role      : User-interface texts in German (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in German (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "de"
@@ -87,6 +87,32 @@ SteinI18n.add("de", {
     "help.ex2": "das erste steht links vom zweiten, nicht unbedingt direkt daneben",
     "help.ex3": "das mittlere steht genau zwischen den beiden anderen",
     "help.ex4": "eins über dem anderen: dieselbe Spalte",
-    "help.p4": "Jedes Spiel lässt sich rein durch Schlussfolgern lösen, ganz ohne Raten. Ein Zug, der der Lösung widerspricht, wird mit einer Meldung abgelehnt und als Fehler gezählt. {undo} nimmt den letzten Zug zurück."
+    "help.p4": "Jedes Spiel lässt sich rein durch Schlussfolgern lösen, ganz ohne Raten. Ein Zug, der der Lösung widerspricht, wird mit einer Meldung abgelehnt und als Fehler gezählt. {undo} nimmt den letzten Zug zurück.",
+    "a11y.board": "Spielfeld",
+    "a11y.cell": "Reihe {r}, Spalte {c}: {state}",
+    "a11y.cellOpen": "ungelöst, {n} möglich: {list}",
+    "a11y.set": "{sym} gewählt, Reihe {r}, Spalte {c}",
+    "a11y.excl": "{sym} ausgeschlossen, Reihe {r}, Spalte {c}",
+    "a11y.undone": "Zug zurückgenommen",
+    "a11y.zoom": "Reihe {r}, Spalte {c}: Symbol wählen",
+    "a11y.hints": "Hinweise",
+    "clue.near": "{a} neben {b}",
+    "clue.side": "{a} irgendwo links von {b}",
+    "clue.between": "{c} zwischen {a} und {b}",
+    "clue.under": "{a} und {b} in derselben Spalte",
+    "sym.die": "Würfel {n}",
+    "sym.shape1": "Dreieck",
+    "sym.shape2": "umgekehrtes Dreieck",
+    "sym.shape3": "Quadrat",
+    "sym.shape4": "Raute",
+    "sym.shape5": "Fünfeck",
+    "sym.shape6": "umgekehrtes Fünfeck",
+    "sym.sign1": "plus",
+    "sym.sign2": "minus",
+    "sym.sign3": "geteilt durch",
+    "sym.sign4": "mal",
+    "sym.sign5": "gleich",
+    "sym.sign6": "Quadratwurzel",
+    "help.keys": "Tastatur: Die Pfeiltasten bewegen sich über das Spielfeld, Enter öffnet ein Feld, 1 bis 6 wenden den aktuellen Modus (Wählen oder Ausschließen) auf ein Symbol an, Umschalt+Enter wendet den anderen an, M wechselt den Modus, U oder Strg+Z macht rückgängig, T liest die Zeit vor, Esc schließt."
   }
 });

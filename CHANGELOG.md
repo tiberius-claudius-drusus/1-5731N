@@ -1,5 +1,12 @@
 # Changelog - 1-5731N
 
+## 1.0.4 - 2026-10-14
+Accessibility and keyboard play, following the suggestions of a fourth external review.
+- Keyboard (desktop): arrow keys / Home / End move over the board, Enter opens a cell (the focus goes into the zoom panel), 1 to 6 apply the current mode (choose or exclude) to a symbol, Shift+Enter applies the other one, arrows move inside the panel, M switches the mode, U or Ctrl+Z undoes, T reads the time, Esc closes the panel (or opens the menu). Digits work directly on the focused cell too.
+- Screen readers: each cell has a spoken description ("Row 2, column 3: unsolved, 4 possible: ..."), the symbols have names (shapes, signs and dice are translated), clues are buttons with a description ("3 next to square") and a pressed state, and a polite live region announces moves, errors, mode changes, undo and the time on request.
+- Focus management: one tab stop on the board (roving), the focus goes into the zoom panel and comes back to the cell, dialogs take the focus, trap it, close with Esc and give it back; visible focus ring for keyboard users only.
+- 26 new texts in the 20 languages (same reservation as the other translations: not proofread by native speakers).
+
 ## 1.0.3 - 2026-10-14
 Robustness, following a second external review of the repository.
 - A saved game read back from `localStorage` is now checked strictly (`validGame` in `engine.js`: structure, sizes, value ranges, rule coordinates, history) before it reaches the engine or the interface. A truncated, edited or incompatible save is discarded instead of leaving "Continue" active and failing on every click, or opening a broken game. Covered by tests (200 generated games accepted, 14 kinds of corrupted saves rejected).

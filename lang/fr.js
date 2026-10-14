@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/fr.js
- * Version   : 1.0.0
- * Role      : User-interface texts in French (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in French (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "fr"
@@ -87,6 +87,32 @@ SteinI18n.add("fr", {
     "help.ex2": "le premier est à gauche du second, pas forcément à côté",
     "help.ex3": "celui du milieu est exactement entre les deux autres",
     "help.ex4": "l'un au-dessus de l'autre : même colonne",
-    "help.p4": "Toute partie se résout par pure déduction, sans jamais deviner. Un coup contraire à la solution est refusé avec un message et compté comme erreur. {undo} annule le dernier coup."
+    "help.p4": "Toute partie se résout par pure déduction, sans jamais deviner. Un coup contraire à la solution est refusé avec un message et compté comme erreur. {undo} annule le dernier coup.",
+    "a11y.board": "Plateau de jeu",
+    "a11y.cell": "Rangée {r}, colonne {c} : {state}",
+    "a11y.cellOpen": "non résolue, {n} possibles : {list}",
+    "a11y.set": "{sym} choisi, rangée {r}, colonne {c}",
+    "a11y.excl": "{sym} exclu, rangée {r}, colonne {c}",
+    "a11y.undone": "Coup annulé",
+    "a11y.zoom": "Rangée {r}, colonne {c} : choisir un symbole",
+    "a11y.hints": "Indices",
+    "clue.near": "{a} à côté de {b}",
+    "clue.side": "{a} quelque part à gauche de {b}",
+    "clue.between": "{c} entre {a} et {b}",
+    "clue.under": "{a} et {b} dans la même colonne",
+    "sym.die": "dé {n}",
+    "sym.shape1": "triangle",
+    "sym.shape2": "triangle inversé",
+    "sym.shape3": "carré",
+    "sym.shape4": "losange",
+    "sym.shape5": "pentagone",
+    "sym.shape6": "pentagone inversé",
+    "sym.sign1": "plus",
+    "sym.sign2": "moins",
+    "sym.sign3": "divisé par",
+    "sym.sign4": "fois",
+    "sym.sign5": "égale",
+    "sym.sign6": "racine carrée",
+    "help.keys": "Clavier : les flèches se déplacent sur le plateau, Entrée ouvre une case, 1 à 6 appliquent le mode en cours (choisir ou exclure) à un symbole, Maj+Entrée applique l'autre, M change de mode, U ou Ctrl+Z annule, T annonce le temps, Échap ferme."
   }
 });

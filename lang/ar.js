@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ar.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Arabic (right to left) (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Arabic (right to left) (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "ar"
@@ -87,6 +87,32 @@ SteinI18n.add("ar", {
     "help.ex2": "الأول على يسار الثاني، وليس بالضرورة بجانبه",
     "help.ex3": "الأوسط يقع تمامًا بين العنصرين الآخرين",
     "help.ex4": "أحدهما فوق الآخر: العمود نفسه",
-    "help.p4": "كل لعبة تُحَلّ بالاستنتاج الخالص دون تخمين. الحركة المخالفة للحل تُرفض مع رسالة وتُحتسب خطأً. {undo} يتراجع عن آخر حركة."
+    "help.p4": "كل لعبة تُحَلّ بالاستنتاج الخالص دون تخمين. الحركة المخالفة للحل تُرفض مع رسالة وتُحتسب خطأً. {undo} يتراجع عن آخر حركة.",
+    "a11y.board": "لوحة اللعب",
+    "a11y.cell": "الصف {r}، العمود {c}: {state}",
+    "a11y.cellOpen": "غير محلولة، {n} ممكنة: {list}",
+    "a11y.set": "تم اختيار {sym}، الصف {r}، العمود {c}",
+    "a11y.excl": "تم استبعاد {sym}، الصف {r}، العمود {c}",
+    "a11y.undone": "تم التراجع عن الحركة",
+    "a11y.zoom": "الصف {r}، العمود {c}: اختر رمزًا",
+    "a11y.hints": "التلميحات",
+    "clue.near": "{a} بجوار {b}",
+    "clue.side": "{a} في مكان ما إلى يسار {b}",
+    "clue.between": "{c} بين {a} و{b}",
+    "clue.under": "{a} و{b} في العمود نفسه",
+    "sym.die": "نرد {n}",
+    "sym.shape1": "مثلث",
+    "sym.shape2": "مثلث مقلوب",
+    "sym.shape3": "مربع",
+    "sym.shape4": "معيّن",
+    "sym.shape5": "خماسي",
+    "sym.shape6": "خماسي مقلوب",
+    "sym.sign1": "زائد",
+    "sym.sign2": "ناقص",
+    "sym.sign3": "مقسوم على",
+    "sym.sign4": "ضرب",
+    "sym.sign5": "يساوي",
+    "sym.sign6": "الجذر التربيعي",
+    "help.keys": "لوحة المفاتيح: تتنقل الأسهم على اللوحة، وEnter يفتح خانة، والمفاتيح من 1 إلى 6 تطبّق الوضع الحالي (اختيار أو استبعاد) على رمز، وShift+Enter يطبّق الوضع الآخر، وM يغيّر الوضع، وU أو Ctrl+Z يتراجع، وT يقرأ الوقت، وEsc يغلق."
   }
 });

@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Indonesian (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Indonesian (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "id"
@@ -87,6 +87,32 @@ SteinI18n.add("id", {
     "help.ex2": "yang pertama di sebelah kiri yang kedua, tidak harus bersebelahan",
     "help.ex3": "yang di tengah tepat berada di antara dua lainnya",
     "help.ex4": "satu di atas yang lain: kolom yang sama",
-    "help.p4": "Setiap permainan dapat dipecahkan dengan deduksi murni, tanpa menebak. Langkah yang bertentangan dengan solusi ditolak dengan pesan dan dihitung sebagai kesalahan. {undo} membatalkan langkah terakhir."
+    "help.p4": "Setiap permainan dapat dipecahkan dengan deduksi murni, tanpa menebak. Langkah yang bertentangan dengan solusi ditolak dengan pesan dan dihitung sebagai kesalahan. {undo} membatalkan langkah terakhir.",
+    "a11y.board": "Papan permainan",
+    "a11y.cell": "Baris {r}, kolom {c}: {state}",
+    "a11y.cellOpen": "belum terpecahkan, {n} kemungkinan: {list}",
+    "a11y.set": "{sym} dipilih, baris {r}, kolom {c}",
+    "a11y.excl": "{sym} dikecualikan, baris {r}, kolom {c}",
+    "a11y.undone": "Langkah dibatalkan",
+    "a11y.zoom": "Baris {r}, kolom {c}: pilih sebuah simbol",
+    "a11y.hints": "Petunjuk",
+    "clue.near": "{a} di samping {b}",
+    "clue.side": "{a} di suatu tempat di kiri {b}",
+    "clue.between": "{c} di antara {a} dan {b}",
+    "clue.under": "{a} dan {b} di kolom yang sama",
+    "sym.die": "dadu {n}",
+    "sym.shape1": "segitiga",
+    "sym.shape2": "segitiga terbalik",
+    "sym.shape3": "persegi",
+    "sym.shape4": "belah ketupat",
+    "sym.shape5": "segilima",
+    "sym.shape6": "segilima terbalik",
+    "sym.sign1": "tambah",
+    "sym.sign2": "kurang",
+    "sym.sign3": "dibagi",
+    "sym.sign4": "kali",
+    "sym.sign5": "sama dengan",
+    "sym.sign6": "akar kuadrat",
+    "help.keys": "Papan tombol: tombol panah bergerak di papan, Enter membuka sel, 1 sampai 6 menerapkan mode saat ini (memilih atau mengecualikan) pada simbol, Shift+Enter menerapkan mode lainnya, M mengganti mode, U atau Ctrl+Z membatalkan, T membacakan waktu, Esc menutup."
   }
 });

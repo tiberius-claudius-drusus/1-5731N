@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Turkish (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Turkish (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "tr"
@@ -87,6 +87,32 @@ SteinI18n.add("tr", {
     "help.ex2": "birincisi ikincinin solunda, yan yana olması şart değil",
     "help.ex3": "ortadaki, diğer ikisinin tam arasında",
     "help.ex4": "biri diğerinin üstünde: aynı sütun",
-    "help.p4": "Her oyun tahmin yürütmeden, yalnızca çıkarımla çözülür. Çözümle çelişen bir hamle mesajla reddedilir ve hata sayılır. {undo} son hamleyi geri alır."
+    "help.p4": "Her oyun tahmin yürütmeden, yalnızca çıkarımla çözülür. Çözümle çelişen bir hamle mesajla reddedilir ve hata sayılır. {undo} son hamleyi geri alır.",
+    "a11y.board": "Oyun tahtası",
+    "a11y.cell": "{r}. satır, {c}. sütun: {state}",
+    "a11y.cellOpen": "çözülmedi, {n} olasılık: {list}",
+    "a11y.set": "{sym} seçildi, {r}. satır, {c}. sütun",
+    "a11y.excl": "{sym} dışlandı, {r}. satır, {c}. sütun",
+    "a11y.undone": "Hamle geri alındı",
+    "a11y.zoom": "{r}. satır, {c}. sütun: bir simge seçin",
+    "a11y.hints": "İpuçları",
+    "clue.near": "{a}, {b} yanında",
+    "clue.side": "{a}, {b} öğesinin bir yerde solunda",
+    "clue.between": "{c}, {a} ile {b} arasında",
+    "clue.under": "{a} ve {b} aynı sütunda",
+    "sym.die": "zar {n}",
+    "sym.shape1": "üçgen",
+    "sym.shape2": "ters üçgen",
+    "sym.shape3": "kare",
+    "sym.shape4": "eşkenar dörtgen",
+    "sym.shape5": "beşgen",
+    "sym.shape6": "ters beşgen",
+    "sym.sign1": "artı",
+    "sym.sign2": "eksi",
+    "sym.sign3": "bölü",
+    "sym.sign4": "çarpı",
+    "sym.sign5": "eşittir",
+    "sym.sign6": "karekök",
+    "help.keys": "Klavye: ok tuşları tahtada gezinir, Enter bir kutuyu açar, 1 ile 6 arası bir simgeye geçerli kipi (seçme veya dışlama) uygular, Shift+Enter diğerini uygular, M kipi değiştirir, U veya Ctrl+Z geri alır, T süreyi okur, Esc kapatır."
   }
 });

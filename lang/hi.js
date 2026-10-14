@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/hi.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Hindi (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Hindi (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "hi"
@@ -87,6 +87,32 @@ SteinI18n.add("hi", {
     "help.ex2": "पहला दूसरे के बाएँ है, ज़रूरी नहीं कि बिल्कुल बगल में हो",
     "help.ex3": "बीच वाला बाकी दोनों के ठीक बीच में है",
     "help.ex4": "एक के ऊपर दूसरा: एक ही स्तंभ",
-    "help.p4": "हर खेल बिना अंदाज़ा लगाए, केवल तर्क से हल हो जाता है। हल के विपरीत चाल संदेश के साथ अस्वीकार हो जाती है और त्रुटि गिनी जाती है। {undo} पिछली चाल वापस लेता है।"
+    "help.p4": "हर खेल बिना अंदाज़ा लगाए, केवल तर्क से हल हो जाता है। हल के विपरीत चाल संदेश के साथ अस्वीकार हो जाती है और त्रुटि गिनी जाती है। {undo} पिछली चाल वापस लेता है।",
+    "a11y.board": "खेल बोर्ड",
+    "a11y.cell": "पंक्ति {r}, स्तंभ {c}: {state}",
+    "a11y.cellOpen": "हल नहीं हुआ, {n} संभव: {list}",
+    "a11y.set": "{sym} चुना गया, पंक्ति {r}, स्तंभ {c}",
+    "a11y.excl": "{sym} बाहर किया गया, पंक्ति {r}, स्तंभ {c}",
+    "a11y.undone": "चाल वापस ली गई",
+    "a11y.zoom": "पंक्ति {r}, स्तंभ {c}: एक चिह्न चुनें",
+    "a11y.hints": "संकेत",
+    "clue.near": "{a}, {b} के बगल में",
+    "clue.side": "{a}, {b} के बाईं ओर कहीं",
+    "clue.between": "{c}, {a} और {b} के बीच",
+    "clue.under": "{a} और {b} एक ही स्तंभ में",
+    "sym.die": "पासा {n}",
+    "sym.shape1": "त्रिभुज",
+    "sym.shape2": "उल्टा त्रिभुज",
+    "sym.shape3": "वर्ग",
+    "sym.shape4": "समचतुर्भुज",
+    "sym.shape5": "पंचभुज",
+    "sym.shape6": "उल्टा पंचभुज",
+    "sym.sign1": "जोड़",
+    "sym.sign2": "घटाव",
+    "sym.sign3": "भाग",
+    "sym.sign4": "गुणा",
+    "sym.sign5": "बराबर",
+    "sym.sign6": "वर्गमूल",
+    "help.keys": "कीबोर्ड: तीर कुंजियाँ बोर्ड पर चलती हैं, Enter खाना खोलता है, 1 से 6 चिह्न पर मौजूदा मोड (चुनना या बाहर करना) लागू करते हैं, Shift+Enter दूसरा मोड लागू करता है, M मोड बदलता है, U या Ctrl+Z वापस लेता है, T समय बोलता है, Esc बंद करता है।"
   }
 });

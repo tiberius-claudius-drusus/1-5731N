@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/nl.js
- * Version   : 1.0.0
- * Role      : User-interface texts in Dutch (75 keys): home, menus, help, options, statistics, messages.
+ * Version   : 1.0.4
+ * Role      : User-interface texts in Dutch (101 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
  * Produces  : texts registered under the language code "nl"
@@ -87,6 +87,32 @@ SteinI18n.add("nl", {
     "help.ex2": "de eerste staat links van de tweede, niet per se ernaast",
     "help.ex3": "de middelste staat precies tussen de andere twee",
     "help.ex4": "de een boven de ander: dezelfde kolom",
-    "help.p4": "Elk spel is op te lossen met pure deductie, zonder te gokken. Een zet die in strijd is met de oplossing wordt met een melding geweigerd en als fout geteld. {undo} maakt de laatste zet ongedaan."
+    "help.p4": "Elk spel is op te lossen met pure deductie, zonder te gokken. Een zet die in strijd is met de oplossing wordt met een melding geweigerd en als fout geteld. {undo} maakt de laatste zet ongedaan.",
+    "a11y.board": "Speelbord",
+    "a11y.cell": "Rij {r}, kolom {c}: {state}",
+    "a11y.cellOpen": "onopgelost, {n} mogelijk: {list}",
+    "a11y.set": "{sym} gekozen, rij {r}, kolom {c}",
+    "a11y.excl": "{sym} uitgesloten, rij {r}, kolom {c}",
+    "a11y.undone": "Zet ongedaan gemaakt",
+    "a11y.zoom": "Rij {r}, kolom {c}: kies een symbool",
+    "a11y.hints": "Aanwijzingen",
+    "clue.near": "{a} naast {b}",
+    "clue.side": "{a} ergens links van {b}",
+    "clue.between": "{c} tussen {a} en {b}",
+    "clue.under": "{a} en {b} in dezelfde kolom",
+    "sym.die": "dobbelsteen {n}",
+    "sym.shape1": "driehoek",
+    "sym.shape2": "omgekeerde driehoek",
+    "sym.shape3": "vierkant",
+    "sym.shape4": "ruit",
+    "sym.shape5": "vijfhoek",
+    "sym.shape6": "omgekeerde vijfhoek",
+    "sym.sign1": "plus",
+    "sym.sign2": "min",
+    "sym.sign3": "gedeeld door",
+    "sym.sign4": "keer",
+    "sym.sign5": "is gelijk aan",
+    "sym.sign6": "vierkantswortel",
+    "help.keys": "Toetsenbord: met de pijltjestoetsen ga je over het bord, Enter opent een vakje, 1 tot 6 passen de huidige modus (kiezen of uitsluiten) toe op een symbool, Shift+Enter past de andere toe, M wisselt van modus, U of Ctrl+Z maakt ongedaan, T leest de tijd voor, Esc sluit."
   }
 });
