@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.2.0
+ * Version   : 1.2.1
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.2.0', BUILD_DATE = '2026-10-15';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.2.1', BUILD_DATE = '2026-10-15';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -182,7 +182,9 @@
       if (typeof c === 'string' && E.canonicalCode(c) === c && !played[c]) { pool[level] = list; save(KEY_POOL, pool); return c; }
     }
     pool[level] = list; save(KEY_POOL, pool);
-    var code = LIB.pick(level, played);
+    var code = LIB.pickVerified(level, played, null, function (c) {      // the level written in a pack is not trusted: grade the puzzle
+      try { var g = E.genPuzzle(c); return E.gradeOf(g.solved, g.rules).level; } catch (e) { return -1; }
+    });
     if (code && !played[code]) return code;
     var t0 = performance.now();                                  // library exhausted for this level: search for one (a short while)
     while (performance.now() - t0 < 2500) {

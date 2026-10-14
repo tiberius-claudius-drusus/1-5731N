@@ -1,13 +1,16 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/tools/grade_distribution.js
- * Version   : 1.2.0
+ * Version   : 1.2.1
  * Role      : Authoring aid: generates many puzzles, grades each with gradeSolve() and prints the distribution of the raw score (histogram, quantiles, tiers) to calibrate a 0-20 scale.
  * Depends on: Node.js ; ../engine.js
- * Called by : by hand: node tools/grade_distribution.js [count] [--out samples.json]
+ * Called by : by hand: node tools/grade_distribution.js [count] [--out samples.json] [--keep-min N --until K]
  * Produces  : summary on stdout ; with --out, a JSON list of { code, raw, maxTier, steps, h, v } (a library of graded puzzles)
  * Changelog : see CHANGELOG.md
  * ---------------------------------------------------------------------------
  * Usage: node tools/grade_distribution.js 10000 --out /path/outside/the/repo/samples.json
+ *        node tools/grade_distribution.js 400000 --keep-min 203 --until 180 --out extreme_1.json
+ *          (keeps only the puzzles whose raw score is at least 203 and stops after 180 of them, or after 400000 puzzles made;
+ *           how the extreme puzzles of an add-on pack are found: they are about 1 in 200)
  */
 'use strict';
 const path = require('path');
@@ -15,17 +18,23 @@ const fs = require('fs');
 const E = require(path.join(__dirname, '..', 'engine.js'));
 
 const args = process.argv.slice(2);
-const outIdx = args.indexOf('--out');
-const outFile = outIdx >= 0 ? args[outIdx + 1] : null;
-const count = parseInt(args.find((a, i) => /^\d+$/.test(a) && i !== outIdx + 1) || '2000', 10);
+const val = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : null; };
+const outFile = val('--out');
+const keepMin = val('--keep-min') !== null ? parseInt(val('--keep-min'), 10) : null;
+const until = val('--until') !== null ? parseInt(val('--until'), 10) : Infinity;
+const valueIdx = ['--out', '--keep-min', '--until'].map(n => args.indexOf(n)).filter(i => i >= 0).map(i => i + 1);
+const count = parseInt(args.find((a, i) => /^\d+$/.test(a) && valueIdx.indexOf(i) < 0) || '2000', 10);
 
 const samples = [];
 let unsolved = 0;
 const t0 = Date.now();
-for (let i = 0; i < count; i++) {
+let made = 0;
+for (let i = 0; i < count && samples.length < until; i++) {
+  made++;
   const g = E.genPuzzle();
   const r = E.gradeSolve(g.solved, g.rules);
   if (!r.solved) { unsolved++; continue; }
+  if (keepMin !== null && r.raw < keepMin) continue;
   const q = E.hintsQty(g.rules);
   samples.push({ code: g.code, raw: r.raw, maxTier: r.maxTier, steps: r.steps, tiers: r.tiers, h: q.h, v: q.v, clues: g.rules.length });
 }
@@ -35,7 +44,7 @@ const raws = samples.map(s => s.raw).sort((a, b) => a - b);
 const pct = p => raws[Math.min(raws.length - 1, Math.floor(p / 100 * raws.length))];
 const mean = a => a.reduce((x, y) => x + y, 0) / a.length;
 
-console.log(`puzzles: ${count}, graded: ${samples.length}, not solved by the grader: ${unsolved}, ${(ms / count).toFixed(1)} ms per puzzle (generation + grading)`);
+console.log(`puzzles made: ${made}, kept: ${samples.length}, not solved by the grader: ${unsolved}, ${(ms / made).toFixed(1)} ms per puzzle (generation + grading)`);
 console.log(`raw score: min ${raws[0]}, median ${pct(50)}, mean ${mean(raws).toFixed(1)}, max ${raws[raws.length - 1]}`);
 console.log('quantiles (5% steps):', Array.from({ length: 21 }, (_, i) => pct(Math.min(i * 5, 99.99))).join(' '));
 

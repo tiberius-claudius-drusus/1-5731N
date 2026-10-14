@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_engine.js
- * Version   : 1.0.0
+ * Version   : 1.2.1
  * Role      : Engine test: generates puzzles and checks each is solved by deduction alone, with a JSON round trip of the rules.
  * Depends on: Node.js ; engine.js
  * Called by : by hand: node test_engine.js
@@ -44,6 +44,7 @@ console.log({n,bad,msPerGame:(Date.now()-t0)/n,H:nH/n,V:nV/n,open:nO/n});
     'truncated pos': mut(x => { x.pos = x.pos.slice(0, 10); }), 'pos with a 2': mut(x => { x.pos[3] = 2; }),
     'solved with a 9': mut(x => { x.solved[0][0] = 9; }), 'checked out of range': mut(x => { x.checked = [999]; }),
     'history too long': mut(x => { x.history = new Array(301).fill(x.pos); }), 'history item truncated': mut(x => { x.history = [[1, 0]]; }),
+    'pos without the solution': mut(x => { x.pos[(0 * 6 + 0) * 6 + x.solved[0][0] - 1] = 0; }), 'history without the solution': mut(x => { x.history = [x.pos.slice()]; x.history[0][(2 * 6 + 3) * 6 + x.solved[3][2] - 1] = 0; }), 'solved row not a permutation': mut(x => { x.solved[1][0] = x.solved[1][1]; }),
     'elapsed text': mut(x => { x.elapsed = '12'; }), 'elapsed negative': mut(x => { x.elapsed = -1; }), 'errors fractional': mut(x => { x.errors = 1.5; })
   };
   let bads = 0;

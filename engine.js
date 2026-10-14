@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.2.0
+ * Version   : 1.2.1
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
@@ -445,6 +445,14 @@
     if (!Array.isArray(g.solved) || g.solved.length !== N) return false;
     if (!g.solved.every(function (row) { return Array.isArray(row) && row.length === N && row.every(function (v) { return isInt(v, 1, N); }); })) return false;
     if (!isBits(g.pos)) return false;
+    // each row of the solution holds every element once, and the possibilities (now and in the history) never exclude the solution:
+    // a save written by hand with a board that contradicts its own solution is refused
+    if (!g.solved.every(function (row) { return row.slice().sort().join() === '1,2,3,4,5,6'; })) return false;
+    var keepsSolution = function (bits) {
+      for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) if (bits[(c * N + r) * N + g.solved[r][c] - 1] !== 1) return false;
+      return true;
+    };
+    if (!keepsSolution(g.pos)) return false;
     if (!Array.isArray(g.rules) || g.rules.length > 200) return false;
     var okRule = g.rules.every(function (r) {
       if (!r || typeof r !== 'object') return false;
@@ -457,7 +465,7 @@
     });
     if (!okRule) return false;
     if (!Array.isArray(g.checked) || g.checked.length > g.rules.length || !g.checked.every(function (i) { return isInt(i, 0, g.rules.length - 1); })) return false;
-    if (!Array.isArray(g.history) || g.history.length > 300 || !g.history.every(isBits)) return false;
+    if (!Array.isArray(g.history) || g.history.length > 300 || !g.history.every(isBits) || !g.history.every(keepsSolution)) return false;
     if (g.code != null && canonicalCode(g.code) !== g.code) return false;          // optional: the code of the puzzle
     if (typeof g.elapsed !== 'number' || !isFinite(g.elapsed) || g.elapsed < 0) return false;
     if (!isInt(g.errors, 0, 1e6)) return false;
