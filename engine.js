@@ -15,7 +15,56 @@
   'use strict';
   var N = 6;
 
-  function rnd(n) { return Math.floor(Math.random() * n); }
+  /* ---------- Puzzle code ----------
+   * A puzzle is generated from a seed, so that a short code gives the same puzzle back: "VV-AAAA-AAAA" = generator
+   * version (2 digits) + seed (8 characters of the alphabet below, 40 bits). The single source of randomness of the
+   * generator is rnd(); inside genPuzzle(code) it is fed by a seeded generator (integer arithmetic only: same
+   * sequence in every JavaScript engine). The version tells WHICH generation algorithm the seed belongs to: if the
+   * algorithm ever changes, give it a new number and keep the old one callable, otherwise old codes would give other puzzles. */
+  var CODE_VERSION = 1;
+  var CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';       // Crockford base32: no I, L, O, U (no look-alikes)
+  var rng = Math.random;                                         // replaced by the seeded generator while a puzzle is generated
+
+  function rnd(n) { return Math.floor(rng() * n); }
+
+  function cyrb128(str) {                                        // string -> four 32-bit words (public domain, bryc)
+    var h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+    for (var i = 0, k; i < str.length; i++) {
+      k = str.charCodeAt(i);
+      h1 = h2 ^ Math.imul(h1 ^ k, 597399067); h2 = h3 ^ Math.imul(h2 ^ k, 2869860233);
+      h3 = h4 ^ Math.imul(h3 ^ k, 951274213); h4 = h1 ^ Math.imul(h4 ^ k, 2716044179);
+    }
+    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067); h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213); h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+    h1 ^= (h2 ^ h3 ^ h4); h2 ^= h1; h3 ^= h1; h4 ^= h1;
+    return [h1 >>> 0, h2 >>> 0, h3 >>> 0, h4 >>> 0];
+  }
+  function seeded(text) {                                        // sfc32 generator, values in [0, 1)
+    var w = cyrb128(text), a = w[0], b = w[1], c = w[2], d = w[3];
+    function next() {
+      var t = (a + b) | 0; a = b ^ (b >>> 9); b = (c + (c << 3)) | 0; c = (c << 21) | (c >>> 11); d = (d + 1) | 0;
+      t = (t + d) | 0; c = (c + t) | 0;
+      return (t >>> 0) / 4294967296;
+    }
+    for (var i = 0; i < 15; i++) next();                         // warm-up
+    return next;
+  }
+  function randomSeed() {
+    var out = '', buf = null;
+    try { buf = new Uint8Array(8); (root.crypto || {}).getRandomValues(buf); } catch (e) { buf = null; }
+    for (var i = 0; i < 8; i++) out += CODE_ALPHABET.charAt((buf ? buf[i] : Math.floor(Math.random() * 32)) & 31);
+    return out;
+  }
+  function formatCode(version, seed) { return (version < 10 ? '0' : '') + version + '-' + seed.slice(0, 4) + '-' + seed.slice(4); }
+  /* "01-7K3F-9A2Q" (also lower case, without dashes, with spaces; O read as 0, I and L as 1) -> { version, seed } or null */
+  function parseCode(text) {
+    var s = String(text == null ? '' : text).toUpperCase().replace(/[\s\-_.]/g, '').replace(/O/g, '0').replace(/[IL]/g, '1');
+    if (!/^[0-9]{2}[0-9A-Z]{8}$/.test(s)) return null;
+    var seed = s.slice(2);
+    for (var i = 0; i < 8; i++) if (CODE_ALPHABET.indexOf(seed.charAt(i)) < 0) return null;
+    var version = +s.slice(0, 2);
+    return version === CODE_VERSION ? { version: version, seed: seed } : null;     // only the generator versions we still have
+  }
 
   /* ---------- Possibilities ---------- */
   function Possibilities(src) {
@@ -283,11 +332,19 @@
   }
 
   /* As in Game::genPuzzle: games with too many clues are rejected. */
-  function genPuzzle() {
-    for (;;) {
-      var g = genPuzzleOnce(), q = hintsQty(g.rules);
-      if (q.h <= 24 && q.v <= 15) return g;
-    }
+  /* genPuzzle() gives a new random puzzle; genPuzzle("01-7K3F-9A2Q") gives the puzzle of that code again.
+   * The result carries its code (g.code). An invalid or unsupported code throws. */
+  function genPuzzle(code) {
+    var c = null;
+    if (code != null) { c = parseCode(code); if (!c) throw new Error('invalid puzzle code: ' + code); }
+    var version = c ? c.version : CODE_VERSION, seed = c ? c.seed : randomSeed();
+    rng = seeded('stein-puzzle-' + version + '-' + seed);
+    try {
+      for (;;) {
+        var g = genPuzzleOnce(), q = hintsQty(g.rules);
+        if (q.h <= 24 && q.v <= 15) { g.code = formatCode(version, seed); return g; }
+      }
+    } finally { rng = Math.random; }
   }
 
   function openInitial(pos, rules) {
@@ -344,7 +401,7 @@
 
   var api = {
     N: N, Possibilities: Possibilities, genPuzzle: genPuzzle, openInitial: openInitial,
-    canSolve: canSolve, hintsQty: hintsQty, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
+    canSolve: canSolve, hintsQty: hintsQty, parseCode: parseCode, CODE_VERSION: CODE_VERSION, ruleToJSON: ruleToJSON, ruleFromJSON: ruleFromJSON, validGame: validGame
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Stein = api;
