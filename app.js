@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.2.2
+ * Version   : 1.2.3
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.2.2', BUILD_DATE = '2026-10-15';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.2.3', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -60,7 +60,12 @@
   window.addEventListener('resize', function () { if ($('s-home').classList.contains('on')) drawLogo(); });
 
   /* ---------- screens ---------- */
+  /* History: while a screen other than the home is open there is exactly ONE extra history entry (pushed), so that the Back button of
+   * the phone returns to the home first and only then leaves the application; the on-screen back buttons remove that entry too. */
+  var pushed = false;
   function show(id) {
+    if (id === 's-home') { if (pushed) { pushed = false; if (zoomCell) closeZoom(); history.back(); } }
+    else if (!pushed) { pushed = true; history.pushState({}, ''); }
     ['s-home', 's-game', 's-help', 's-stats', 's-options'].forEach(function (s) { $(s).classList.toggle('on', s === id); });
     if (id === 's-home') { $('b-continue').disabled = !loadGame(); drawLogo(); }
     if (id === 's-game') startTimer(); else stopTimer();
@@ -224,7 +229,12 @@
   }
   /* level of a code, kept in a cache apart from the statistics (never exported; recomputed if the scale changes) */
   var KEY_LVL = 'stein.lvl.v1';
-  function lvlCache() { var c = load(KEY_LVL, null); return c && c.s === E.SCALE_VERSION && c.m && typeof c.m === 'object' ? c : { s: E.SCALE_VERSION, m: {} }; }
+  function lvlCache() {                                         // entries are checked: a level is an integer from -1 (unknown) to 4
+    var c = load(KEY_LVL, null), m = {};
+    if (!c || c.s !== E.SCALE_VERSION || !c.m || typeof c.m !== 'object' || Array.isArray(c.m)) return { s: E.SCALE_VERSION, m: m };
+    Object.keys(c.m).forEach(function (k) { var v = c.m[k]; if (E.canonicalCode(k) === k && Number.isInteger(v) && v >= -1 && v < E.LEVEL_COUNT) m[k] = v; });
+    return { s: E.SCALE_VERSION, m: m };
+  }
   function cacheLevel(code, level) { if (!code) return; var c = lvlCache(); c.m[code] = level; save(KEY_LVL, c); }
   function levelForCode(code, cache) {
     if (cache.m[code] != null) return cache.m[code];
@@ -734,7 +744,7 @@
     else if (k === 'variant') setLook(opt.theme, v);
     renderOptions();
   });
-  $('b-options').onclick = function () { renderOptions(); show('s-options'); history.pushState({}, ''); loadAvail(); };
+  $('b-options').onclick = function () { renderOptions(); show('s-options'); loadAvail(); };
 
   /* ---------- accueil, aide, stats ---------- */
   $('b-new').onclick = askNew;
@@ -745,13 +755,13 @@
     return g;
   }
   $('b-continue').onclick = function () { var g = loadGame(); if (g) setup(g); else $('b-continue').disabled = true; };
-  $('b-help').onclick = function () { show('s-help'); history.pushState({}, ''); };
-  $('b-stats').onclick = function () { renderStats(); show('s-stats'); history.pushState({}, ''); };
+  $('b-help').onclick = function () { show('s-help'); };
+  $('b-stats').onclick = function () { renderStats(); show('s-stats'); };
   Array.prototype.forEach.call(document.querySelectorAll('.back'), function (b) { b.onclick = function () { show('s-home'); }; });
   window.addEventListener('popstate', function () {
-    if (zoomCell) { closeZoom(); history.pushState({}, ''); }
-    else if ($('s-game').classList.contains('on')) { goHome(); history.pushState({}, ''); }
-    else show('s-home');
+    if (zoomCell) { closeZoom(); history.pushState({}, ''); return; }       // Back closes the zoom first; the entry is put back
+    pushed = false;                                                            // the browser has just removed our entry
+    if ($('s-game').classList.contains('on')) goHome(); else show('s-home');
   });
   $('stats-reset').onclick = function () {
     dialog(t('stats.resetConfirm'), [[t('dlg.no')], [t('stats.reset'), function () { drop(KEY_STATS); renderStats(); }]]);
