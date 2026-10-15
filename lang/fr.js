@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/fr.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in French (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("fr", {
     "packs.badVersion": "Ce pack n'est pas compatible avec cette version du jeu",
     "packs.avail": "Packs disponibles",
     "packs.get": "Installer",
-    "new.noPuzzle": "Aucun puzzle trouvé pour ce niveau, réessayez."
+    "new.noPuzzle": "Aucun puzzle trouvé pour ce niveau, réessayez.",
+    "col.act": "Colonnes {list} : touchez des cases pour ajouter ou retirer des colonnes, puis choisissez un symbole à exclure de toutes.", 
+    "col.known": "Colonne {c} : cette rangée y est déjà résolue",
+    "col.done": "{sym} exclu de {n} colonnes",
+    "col.enter": "Mode colonne, rangée {r}. Colonne {c} sélectionnée. Touchez des cases ou appuyez sur Espace pour ajouter ou retirer des colonnes, puis choisissez un symbole ; Échap quitte.",
+    "col.none": "Aucun symbole ne peut être exclu de toutes ces colonnes.",
+    "help.cols": "<b>Plusieurs colonnes à la fois</b> : appui long sur une case (double-clic sur ordinateur, ou touche C) pour lancer le mode colonne pour sa rangée. Le zoom s'ouvre ; touchez d'autres cases pour ajouter ou retirer leurs colonnes, et chaque symbole touché est exclu de toutes les colonnes sélectionnées en même temps. Les symboles qui ne sont pas possibles dans toutes les colonnes sélectionnées sont grisés et désactivés. Quittez avec le bouton de fermeture. Le jeu reste ensuite en mode exclusion."
   }
 });

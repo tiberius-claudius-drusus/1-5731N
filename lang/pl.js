@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in Polish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("pl", {
     "packs.badVersion": "Ta paczka nie jest zgodna z tą wersją gry",
     "packs.avail": "Dostępne paczki",
     "packs.get": "Zainstaluj",
-    "new.noPuzzle": "Nie znaleziono łamigłówki tego poziomu, spróbuj ponownie."
+    "new.noPuzzle": "Nie znaleziono łamigłówki tego poziomu, spróbuj ponownie.",
+    "col.act": "Kolumny {list}: dotykaj pól, aby dodać lub usunąć kolumny, a potem wybierz symbol do wykluczenia ze wszystkich.", 
+    "col.known": "Kolumna {c}: ten wiersz jest tam już rozwiązany",
+    "col.done": "{sym} wykluczony z kolumn: {n}",
+    "col.enter": "Tryb kolumn, wiersz {r}. Wybrano kolumnę {c}. Dotykaj pól lub naciśnij spację, aby dodać lub usunąć kolumny, potem wybierz symbol; Escape kończy.",
+    "col.none": "Z wszystkich tych kolumn nie można wykluczyć żadnego symbolu.",
+    "help.cols": "<b>Kilka kolumn naraz</b>: przytrzymaj pole (na komputerze dwukrotne kliknięcie lub klawisz C), aby włączyć tryb kolumn dla jego wiersza. Otworzy się powiększenie; dotykaj innych pól, aby dodać lub usunąć ich kolumny, a każdy dotknięty symbol zostanie wykluczony jednocześnie ze wszystkich wybranych kolumn. Symbole niemożliwe w każdej wybranej kolumnie są wyszarzone i nieaktywne. Wyjdź przyciskiem zamknięcia. Potem gra pozostaje w trybie wykluczania."
   }
 });

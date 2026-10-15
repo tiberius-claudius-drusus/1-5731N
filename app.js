@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.2.3
- * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, clues, undo, timer, sounds, options, statistics export/import.
+ * Version   : 1.3.0
+ * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, column mode, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
  * Produces  : localStorage keys stein.game.v1 / stein.stats.v1 / stein.opt.v1 ; registers sw.js
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.2.3', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.3.0', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -64,6 +64,7 @@
    * the phone returns to the home first and only then leaves the application; the on-screen back buttons remove that entry too. */
   var pushed = false;
   function show(id) {
+    if (id !== 's-game') colReset();
     if (id === 's-home') { if (pushed) { pushed = false; if (zoomCell) closeZoom(); history.back(); } }
     else if (!pushed) { pushed = true; history.pushState({}, ''); }
     ['s-home', 's-game', 's-help', 's-stats', 's-options'].forEach(function (s) { $(s).classList.toggle('on', s === id); });
@@ -245,6 +246,7 @@
     rules = G.rules.map(E.ruleFromJSON);
     pos = new E.Possibilities(G.pos);
     grade = E.gradeOf(G.solved, rules);
+    colReset();
     renderAll(); showCode(); showLevel();
     closeZoom(); setModeButtons(); applyHand();
     show('s-game');
@@ -350,7 +352,7 @@
   function renderBoard(errCell) {
     var b = $('board'), h = '', hadFocus = b.contains(document.activeElement);
     for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) {
-      var cls = 'cell' + (errCell && errCell[0] === c && errCell[1] === r ? ' err' : ''), dat = ' data-c="' + c + '" data-r="' + r + '"';
+      var cls = 'cell' + (errCell && errCell[0] === c && errCell[1] === r ? ' err' : '') + (colMode ? (colMode.cols.indexOf(c) >= 0 ? ' csel' : '') + (r === colMode.row ? ' crow' : '') : ''), dat = ' data-c="' + c + '" data-r="' + r + '"';
       var acc = ' role="button" tabindex="' + (focusCell[0] === c && focusCell[1] === r ? 0 : -1) + '" aria-label="' + esc(cellLabel(c, r)) + '"';
       if (pos.isDefined(c, r)) {
         h += '<div class="' + cls + ' def"' + dat + acc + ' aria-disabled="true">' + tile(r, pos.getDefined(c, r)) + '</div>';
@@ -447,6 +449,7 @@
 
   function win() {
     tick(); ended = true; stopTimer();
+    if (colMode) colExit();
     var st = load(KEY_STATS, { games: [], started: 0 });
     var rec = { t: Math.round(G.elapsed), errors: G.errors, d: localDate() };
     if (G.code) rec.c = G.code;
@@ -465,7 +468,9 @@
   board.addEventListener('contextmenu', function (e) { e.preventDefault(); });
   board.addEventListener('click', function (ev) {
     if (ended) return;
+    if (lpSuppress) { lpSuppress = false; return; }         // the release of a long press that started the column mode
     var cell = ev.target.closest('.cell');
+    if (colMode) { if (cell) colToggle(+cell.dataset.c); return; }
     if (!cell || cell.classList.contains('def')) return;
     var c = +cell.dataset.c, r = +cell.dataset.r;
     if (zoomCell && zoomCell[0] === c && zoomCell[1] === r) closeZoom();   // a second tap closes it
@@ -488,7 +493,7 @@
   }
   /* The panel takes all the room left under the board; the zoom (3:2 ratio, square tiles) fits into it. */
   function fitZoom() {
-    if (!zoomCell) return;
+    if (!zoomCell && !colMode) return;
     var bw = 64, gap = 10;                                   // button column + gap
     var availW = zoomEl.clientWidth - bw - gap, availH = zoomEl.clientHeight - $('zcap').offsetHeight - 8 - 14;
     var w = Math.min(availW, 440, availH * 1.5);
@@ -504,6 +509,7 @@
     if (had) focusBoardCell(zc[0], zc[1]);                    // the focus goes back to the cell the panel was open on
   }
   function renderZoom() {
+    if (colMode) { if (ended) colExit(); else renderCol(); return; }
     if (!zoomCell) return;
     var c = zoomCell[0], r = zoomCell[1];
     if (ended || pos.isDefined(c, r)) { closeZoom(); return; }
@@ -519,12 +525,16 @@
     zbox.innerHTML = h;
     if (fe) { var f = zbox.querySelector('.zslot[data-e="' + fe + '"][tabindex]') || zbox.querySelector('.zslot[tabindex]'); if (f) f.focus(); }
   }
-  $('z-close').onclick = closeZoom;
+  $('z-close').onclick = function () { if (colMode) colExit(); else closeZoom(); };
 
   var press = null;
   zbox.addEventListener('contextmenu', function (e) { e.preventDefault(); });
   zbox.addEventListener('pointerdown', function (ev) {
     var s = ev.target.closest('.zslot'); if (!s || !s.querySelector('svg')) return;
+    if (colMode) {                                          // column mode: a tap on a tile that is possible in every column excludes it from all of them
+      if (ev.button === 2 || s.classList.contains('dis')) return;
+      press = { e: +s.dataset.e, long: false, x: ev.clientX, y: ev.clientY }; s.classList.add('pr'); return;
+    }
     var c = +s.dataset.c, r = +s.dataset.r, e = +s.dataset.e;
     if (ev.button === 2) { doMove('excl', c, r, e); return; }
     press = { c: c, r: r, e: e, long: false, x: ev.clientX, y: ev.clientY };
@@ -544,11 +554,113 @@
     if (!press) return;
     clearTimeout(press.t);
     var p = press; press = null; clearPr();
-    if (ev.type === 'pointerup' && !p.long) doMove(opt.mode === 'choose' ? 'set' : 'excl', p.c, p.r, p.e);
+    if (ev.type === 'pointerup' && !p.long) { if (colMode) colExclude(p.e); else doMove(opt.mode === 'choose' ? 'set' : 'excl', p.c, p.r, p.e); }
   }
   zbox.addEventListener('pointerup', endPress);
   zbox.addEventListener('pointercancel', endPress);
   function doMove(kind, c, r, e) { lastMove = performance.now(); move(kind, c, r, e); }
+
+  /* ---------- column mode: exclude one symbol from several columns at once ----------
+   * Entered from a cell that is not solved (long press on a touch screen, double-click with a mouse, key C): that cell's row becomes the
+   * working row, its column is selected and the zoom panel opens with the usual three side buttons (the choose/exclude switch is greyed:
+   * the mode is exclude). Touching a cell adds or removes its column; a column whose cell in the working row is already solved cannot be
+   * selected. The panel shows the six symbols of the row, greyed and disabled unless possible in EVERY selected column; a tap on one
+   * excludes it from all the selected columns at once, directly (one undo step; if it removes the true answer anywhere, the whole move is
+   * refused and counted as an error). The game is left in exclude mode. */
+  var colMode = null;                                          // { row, cols: [selected columns] }
+  var lp = null, lpSuppress = false, lastPtr = '';             // long press on the board
+  function colList() { return colMode.cols.map(function (c) { return c + 1; }).join(', '); }
+  function colEnter(c, r) {
+    if (ended || !G || pos.isDefined(c, r)) return;
+    closeZoom();
+    colMode = { row: r, cols: [c] }; focusCell = [c, r];
+    if (opt.mode !== 'excl') { opt.mode = 'excl'; save(KEY_OPT, opt); }
+    setModeButtons();
+    $('s-game').classList.add('zooming'); zoomEl.classList.add('on'); fitZoom();
+    renderBoard();
+    say(t('col.enter', { r: r + 1, c: c + 1 }));
+  }
+  function colReset() {                                        // leaves the column mode without redrawing the board
+    if (!colMode) return;
+    colMode = null;
+    zoomEl.classList.remove('on'); $('s-game').classList.remove('zooming'); zbox.innerHTML = '';
+    $('z-mode').disabled = false;
+    setModeButtons();
+  }
+  function colExit() {
+    var had = zoomEl.contains(document.activeElement);
+    colReset(); zoomShut = performance.now();
+    renderBoard();
+    if (had) focusBoardCell(focusCell[0], focusCell[1]);
+  }
+  function colToggle(c) {
+    if (!colMode) return;
+    if (pos.isDefined(c, colMode.row)) { toast(t('col.known', { c: c + 1 })); return; }
+    var i = colMode.cols.indexOf(c);
+    if (i >= 0) colMode.cols.splice(i, 1); else { colMode.cols.push(c); colMode.cols.sort(); }
+    renderBoard(); say(colMode.cols.length ? colList() : t('col.none'));
+  }
+  function colTileOk(e) { return colMode.cols.every(function (c) { return pos.isPossible(c, colMode.row, e); }); }
+  function renderCol() {                                       // content of the zoom panel: the six symbols of the working row
+    var m = colMode, r = m.row, h = '', e, anyOk = false, list = m.cols.length ? colList() : '–';
+    var fa = document.activeElement, fe = zbox.contains(fa) && fa.dataset ? +fa.dataset.e : 0;
+    for (e = 1; e <= N; e++) {                                   // greyed (and disabled) unless possible in EVERY selected column
+      var ok = m.cols.length > 0 && colTileOk(e); if (ok) anyOk = true;
+      h += '<div class="zslot' + (ok ? '' : ' dis') + '" data-e="' + e + '"' + (ok ? ' role="button" tabindex="0" aria-label="' + esc(symName(r, e)) + '"' : ' aria-hidden="true"') + '>' + tile(r, e) + '</div>';
+    }
+    $('z-mode').disabled = true;                                 // the choose/exclude switch is greyed: this mode only excludes
+    $('zcap').textContent = anyOk || !m.cols.length ? t('col.act', { list: list }) : t('col.none');
+    zbox.innerHTML = h;
+    if (fe) { var f = zbox.querySelector('.zslot[data-e="' + fe + '"][tabindex]') || zbox.querySelector('.zslot[tabindex]'); if (f) f.focus(); }
+  }
+  function colExclude(e) {
+    var m = colMode; if (!m || ended || !colTileOk(e)) return;
+    var r = m.row, cols = m.cols.slice(), before = Array.prototype.slice.call(pos.p);
+    cols.forEach(function (c) { if (pos.isPossible(c, r, e)) pos.exclude(c, r, e); });
+    if (!pos.isValid(G.solved)) {                               // one of the columns holds the true answer: nothing is changed
+      pos.p.set(before); G.errors++;
+      play('glasbk2'); toast(t('toast.error'));
+      renderBoard([cols[0], r]);
+      setTimeout(function () { renderBoard(); }, 700);
+      persist(); return;
+    }
+    G.history.push(before); if (G.history.length > 300) G.history.shift();
+    play('whizz'); say(t('col.done', { sym: symName(r, e), n: cols.length }));
+    m.cols = m.cols.filter(function (c) { return !pos.isDefined(c, r); });   // a column that became solved leaves the selection
+    renderBoard();
+    if (pos.isSolved()) { win(); return; }
+    if (!m.cols.length) colExit();
+    persist();
+  }
+  function colKey(ev) {
+    if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    var s = ev.target.closest && ev.target.closest('.zslot'), k = ev.key;
+    if (k === 'Escape') { ev.preventDefault(); colExit(); return; }
+    if (/^[1-6]$/.test(k)) { ev.preventDefault(); colExclude(+k); return; }
+    if (s && (k === 'Enter' || k === ' ')) { ev.preventDefault(); colExclude(+s.dataset.e); return; }
+    var d = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -3, ArrowDown: 3 }[k];
+    if (s && d) {
+      ev.preventDefault();
+      for (var e = +s.dataset.e + d; e >= 1 && e <= N; e += d) { var g = zbox.querySelector('.zslot[data-e="' + e + '"][tabindex]'); if (g) { g.focus(); break; } }
+    }
+  }
+  board.addEventListener('pointerdown', function (ev) {         // long press (finger or pen) starts the column mode
+    lastPtr = ev.pointerType; lpSuppress = false;
+    if (ended || colMode || ev.pointerType === 'mouse' || ev.button) return;
+    var cell = ev.target.closest('.cell'); if (!cell || cell.classList.contains('def')) return;
+    var c = +cell.dataset.c, r = +cell.dataset.r;
+    lp = { x: ev.clientX, y: ev.clientY };
+    lp.t = setTimeout(function () { lp = null; lpSuppress = true; if (navigator.vibrate) navigator.vibrate(15); colEnter(c, r); }, 500);
+  });
+  board.addEventListener('pointermove', function (ev) {
+    if (lp && Math.hypot(ev.clientX - lp.x, ev.clientY - lp.y) > 14) { clearTimeout(lp.t); lp = null; }
+  });
+  ['pointerup', 'pointercancel'].forEach(function (n) { board.addEventListener(n, function () { if (lp) { clearTimeout(lp.t); lp = null; } }); });
+  board.addEventListener('dblclick', function (ev) {            // mouse: double-click (touch screens use the long press)
+    if (ended || colMode || lastPtr !== 'mouse') return;
+    var cell = ev.target.closest('.cell'); if (!cell || cell.classList.contains('def')) return;
+    colEnter(+cell.dataset.c, +cell.dataset.r);
+  });
 
   /* ---------- keyboard (desktop) ---------- */
   function other(kind) { return kind === 'set' ? 'excl' : 'set'; }
@@ -556,6 +668,11 @@
   board.addEventListener('keydown', function (ev) {
     var cell = ev.target.closest && ev.target.closest('.cell'); if (!cell || ev.ctrlKey || ev.metaKey || ev.altKey) return;
     var c = +cell.dataset.c, r = +cell.dataset.r, nc = c, nr = r;
+    if (colMode) {                                             // column mode: Space adds/removes the column, 1-6 exclude a symbol
+      if (ev.key === ' ') { ev.preventDefault(); colToggle(c); return; }
+      if (ev.key === 'Enter') { ev.preventDefault(); return; }
+      if (/^[1-6]$/.test(ev.key)) { ev.preventDefault(); colExclude(+ev.key); return; }
+    }
     if (/^[1-6]$/.test(ev.key)) { ev.preventDefault(); if (!ended && !cell.classList.contains('def')) doMove(modeKind(), c, r, +ev.key); return; }
     switch (ev.key) {
       case 'ArrowLeft': nc = Math.max(0, c - 1); break;
@@ -564,6 +681,8 @@
       case 'ArrowDown': nr = Math.min(N - 1, r + 1); break;
       case 'Home': nc = 0; break;
       case 'End': nc = N - 1; break;
+      case 'c': case 'C':
+        ev.preventDefault(); if (!ended && !colMode && !cell.classList.contains('def')) colEnter(c, r); return;
       case 'Enter': case ' ':
         ev.preventDefault(); if (!ended && !cell.classList.contains('def')) openZoom(c, r, true); return;
       default: return;
@@ -571,6 +690,7 @@
     ev.preventDefault(); focusBoardCell(nc, nr);
   });
   zoomEl.addEventListener('keydown', function (ev) {
+    if (colMode) { colKey(ev); return; }
     if (!zoomCell || ev.ctrlKey || ev.metaKey || ev.altKey) return;
     var c = zoomCell[0], r = zoomCell[1], s = ev.target.closest && ev.target.closest('.zslot');
     if (ev.key === 'Escape') { ev.preventDefault(); closeZoom(); return; }
@@ -609,7 +729,7 @@
     if (k === 'm') { ev.preventDefault(); toggleMode(); }
     else if (k === 'u') { ev.preventDefault(); undo(); }
     else if (k === 't') { ev.preventDefault(); say(fmt(G.elapsed)); }
-    else if (k === 'Escape') { if (zoomCell) closeZoom(); else $('g-menu').click(); }
+    else if (k === 'Escape') { if (colMode) colExit(); else if (zoomCell) closeZoom(); else $('g-menu').click(); }
   });
 
   /* ---------- barre ---------- */
@@ -630,6 +750,7 @@
   }
   function toggleHand() { opt.hand = opt.hand === 'left' ? 'right' : 'left'; save(KEY_OPT, opt); applyHand(); fitZoom(); }
   function toggleMode() {
+    if (colMode) return;
     opt.mode = opt.mode === 'choose' ? 'excl' : 'choose'; save(KEY_OPT, opt);
     setModeButtons(); say($('gcap').textContent);
   }
@@ -759,7 +880,7 @@
   $('b-stats').onclick = function () { renderStats(); show('s-stats'); };
   Array.prototype.forEach.call(document.querySelectorAll('.back'), function (b) { b.onclick = function () { show('s-home'); }; });
   window.addEventListener('popstate', function () {
-    if (zoomCell) { closeZoom(); history.pushState({}, ''); return; }       // Back closes the zoom first; the entry is put back
+    if (colMode || zoomCell) { if (colMode) colExit(); else closeZoom(); history.pushState({}, ''); return; }   // Back closes the column mode or the zoom first; the entry is put back
     pushed = false;                                                            // the browser has just removed our entry
     if ($('s-game').classList.contains('on')) goHome(); else show('s-home');
   });
@@ -918,13 +1039,13 @@
       ex(im(0, 1) + imSym('side') + im(1, 3), 'help.ex2') +
       ex(im(0, 1) + im(2, 2) + im(1, 3), 'help.ex3') +
       ex(im(0, 1) + im(2, 2), 'help.ex4') +
-      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.keys') + '</p>';
+      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.cols') + '</p><p>' + t('help.keys') + '</p>';
   }
 
   /* ---------- language: (re)writes everything that holds text ---------- */
   function applyLang() {
     I.apply();
-    renderHelp(); setModeButtons(); showCode(); showLevel();
+    renderHelp(); setModeButtons(); showCode(); showLevel(); if (colMode) renderCol();
     $('ver').textContent = t('foot.build', { v: VERSION, date: BUILD_DATE });
     if ($('s-options').classList.contains('on')) renderOptions();
     if ($('s-stats').classList.contains('on')) renderStats();

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/nl.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in Dutch (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("nl", {
     "packs.badVersion": "Dit pakket is niet compatibel met deze versie van het spel",
     "packs.avail": "Beschikbare pakketten",
     "packs.get": "Installeren",
-    "new.noPuzzle": "Geen puzzel gevonden voor dit niveau, probeer opnieuw."
+    "new.noPuzzle": "Geen puzzel gevonden voor dit niveau, probeer opnieuw.",
+    "col.act": "Kolommen {list}: tik op vakjes om kolommen toe te voegen of te verwijderen en kies dan een symbool dat uit alle wordt uitgesloten.", 
+    "col.known": "Kolom {c}: deze rij is daar al opgelost",
+    "col.done": "{sym} uitgesloten uit {n} kolommen",
+    "col.enter": "Kolommodus, rij {r}. Kolom {c} geselecteerd. Tik op vakjes of druk op Spatie om kolommen toe te voegen of te verwijderen en kies dan een symbool; Escape sluit af.",
+    "col.none": "Geen enkel symbool kan uit al deze kolommen worden uitgesloten.",
+    "help.cols": "<b>Meerdere kolommen tegelijk</b>: houd een vakje ingedrukt (dubbelklik op een computer, of de C-toets) om de kolommodus voor zijn rij te starten. De zoom opent; tik op andere vakjes om hun kolommen toe te voegen of te verwijderen, en elk symbool dat je aantikt wordt tegelijk uit alle geselecteerde kolommen uitgesloten. Symbolen die niet in elke geselecteerde kolom mogelijk zijn, zijn grijs en uitgeschakeld. Verlaat met de sluitknop. Daarna blijft het spel in uitsluitmodus."
   }
 });

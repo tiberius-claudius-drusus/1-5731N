@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/de.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in German (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("de", {
     "packs.badVersion": "Dieses Paket ist mit dieser Spielversion nicht kompatibel",
     "packs.avail": "Verfügbare Pakete",
     "packs.get": "Installieren",
-    "new.noPuzzle": "Für diese Stufe wurde kein Rätsel gefunden, versuche es erneut."
+    "new.noPuzzle": "Für diese Stufe wurde kein Rätsel gefunden, versuche es erneut.",
+    "col.act": "Spalten {list}: Tippe auf Felder, um Spalten hinzuzufügen oder zu entfernen, und wähle dann ein Symbol, das aus allen ausgeschlossen wird.", 
+    "col.known": "Spalte {c}: Diese Reihe ist dort schon gelöst",
+    "col.done": "{sym} aus {n} Spalten ausgeschlossen",
+    "col.enter": "Spaltenmodus, Reihe {r}. Spalte {c} ausgewählt. Tippe auf Felder oder drücke die Leertaste, um Spalten hinzuzufügen oder zu entfernen, und wähle dann ein Symbol; Escape beendet.",
+    "col.none": "Aus all diesen Spalten kann kein Symbol ausgeschlossen werden.",
+    "help.cols": "<b>Mehrere Spalten auf einmal</b>: Halte ein Feld gedrückt (Doppelklick am Computer oder die Taste C), um den Spaltenmodus für seine Reihe zu starten. Der Zoom öffnet sich; tippe auf weitere Felder, um deren Spalten hinzuzufügen oder zu entfernen, und jedes angetippte Symbol wird aus allen ausgewählten Spalten gleichzeitig ausgeschlossen. Symbole, die nicht in jeder ausgewählten Spalte möglich sind, sind ausgegraut und deaktiviert. Mit der Schließen-Taste verlassen. Danach bleibt das Spiel im Ausschließen-Modus."
   }
 });

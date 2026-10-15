@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pt-br.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in Portuguese (Brazil) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("pt-br", {
     "packs.badVersion": "Este pacote não é compatível com esta versão do jogo",
     "packs.avail": "Pacotes disponíveis",
     "packs.get": "Instalar",
-    "new.noPuzzle": "Nenhum quebra-cabeça encontrado para este nível, tente de novo."
+    "new.noPuzzle": "Nenhum quebra-cabeça encontrado para este nível, tente de novo.",
+    "col.act": "Colunas {list}: toque nas casas para adicionar ou remover colunas e depois escolha um símbolo para excluir de todas.", 
+    "col.known": "Coluna {c}: esta linha já está resolvida lá",
+    "col.done": "{sym} excluído de {n} colunas",
+    "col.enter": "Modo coluna, linha {r}. Coluna {c} selecionada. Toque nas casas ou pressione Espaço para adicionar ou remover colunas e depois escolha um símbolo; Escape sai.",
+    "col.none": "Nenhum símbolo pode ser excluído de todas estas colunas.",
+    "help.cols": "<b>Várias colunas ao mesmo tempo</b>: mantenha uma casa pressionada (clique duplo no computador, ou a tecla C) para iniciar o modo coluna da sua linha. O zoom abre; toque em outras casas para adicionar ou remover as colunas delas, e cada símbolo tocado é excluído de todas as colunas selecionadas ao mesmo tempo. Os símbolos que não são possíveis em todas as colunas selecionadas ficam cinza e desativados. Saia com o botão de fechar. Depois, o jogo continua no modo excluir."
   }
 });

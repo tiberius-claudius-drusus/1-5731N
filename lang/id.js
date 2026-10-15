@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in Indonesian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("id", {
     "packs.badVersion": "Paket ini tidak kompatibel dengan versi permainan ini",
     "packs.avail": "Paket tersedia",
     "packs.get": "Pasang",
-    "new.noPuzzle": "Tidak ada teka-teki untuk tingkat ini, coba lagi."
+    "new.noPuzzle": "Tidak ada teka-teki untuk tingkat ini, coba lagi.",
+    "col.act": "Kolom {list}: sentuh kotak untuk menambah atau menghapus kolom, lalu pilih simbol yang akan dikecualikan dari semuanya.", 
+    "col.known": "Kolom {c}: baris ini sudah terselesaikan di sana",
+    "col.done": "{sym} dikecualikan dari {n} kolom",
+    "col.enter": "Mode kolom, baris {r}. Kolom {c} dipilih. Sentuh kotak atau tekan Spasi untuk menambah atau menghapus kolom, lalu pilih simbol; Escape untuk keluar.",
+    "col.none": "Tidak ada simbol yang bisa dikecualikan dari semua kolom ini.",
+    "help.cols": "<b>Beberapa kolom sekaligus</b>: tekan lama sebuah kotak (klik ganda di komputer, atau tombol C) untuk memulai mode kolom bagi barisnya. Zoom terbuka; sentuh kotak lain untuk menambah atau menghapus kolomnya, dan setiap simbol yang disentuh dikecualikan dari semua kolom terpilih sekaligus. Simbol yang tidak mungkin ada di setiap kolom terpilih tampak abu-abu dan nonaktif. Keluar dengan tombol tutup. Setelah itu permainan tetap dalam mode kecualikan."
   }
 });

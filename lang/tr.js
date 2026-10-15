@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in Turkish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("tr", {
     "packs.badVersion": "Bu paket oyunun bu sürümüyle uyumlu değil",
     "packs.avail": "Mevcut paketler",
     "packs.get": "Yükle",
-    "new.noPuzzle": "Bu seviye için bulmaca bulunamadı, tekrar dene."
+    "new.noPuzzle": "Bu seviye için bulmaca bulunamadı, tekrar dene.",
+    "col.act": "Sütunlar {list}: Sütun eklemek veya çıkarmak için kutulara dokunun, sonra hepsinden çıkarılacak bir simge seçin.", 
+    "col.known": "Sütun {c}: Bu satır orada zaten çözülmüş",
+    "col.done": "{sym}, {n} sütundan çıkarıldı",
+    "col.enter": "Sütun modu, satır {r}. Sütun {c} seçildi. Sütun eklemek veya çıkarmak için kutulara dokunun ya da Boşluk'a basın, sonra bir simge seçin; Escape çıkar.",
+    "col.none": "Bu sütunların hepsinden çıkarılabilecek bir simge yok.",
+    "help.cols": "<b>Aynı anda birkaç sütun</b>: Satırı için sütun modunu başlatmak üzere bir kutuya uzun basın (bilgisayarda çift tıklama veya C tuşu). Yakınlaştırma açılır; sütunlarını eklemek veya çıkarmak için başka kutulara dokunun, dokunduğunuz her simge seçili tüm sütunlardan aynı anda çıkarılır. Seçili her sütunda mümkün olmayan simgeler gri ve devre dışı görünür. Kapatma düğmesiyle çıkın. Sonrasında oyun çıkarma modunda kalır."
   }
 });

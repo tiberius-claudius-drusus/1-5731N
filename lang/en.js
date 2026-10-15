@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/en.js
- * Version   : 1.2.2
+ * Version   : 1.3.0
  * Role      : User-interface texts in English (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -143,6 +143,12 @@ SteinI18n.add("en", {
     "packs.badVersion": "This pack is not compatible with this version of the game",
     "packs.avail": "Available packs",
     "packs.get": "Install",
-    "new.noPuzzle": "No puzzle found for this level, try again."
+    "new.noPuzzle": "No puzzle found for this level, try again.",
+    "col.act": "Columns {list}: touch cells to add or remove columns, then choose a symbol to exclude from all of them.", 
+    "col.known": "Column {c}: this row is already solved there",
+    "col.done": "{sym} excluded from {n} columns",
+    "col.enter": "Column mode, row {r}. Column {c} selected. Touch cells or press Space to add or remove columns, then choose a symbol; Escape leaves.",
+    "col.none": "No symbol can be excluded from all these columns.",
+    "help.cols": "<b>Several columns at once</b>: press and hold a cell (double-click on a computer, or the C key) to start the column mode for its row. The zoom opens; touch other cells to add or remove their columns, and each symbol you tap is excluded from all the selected columns together. Symbols that are not possible in every selected column are greyed out and disabled. Leave with the close button. The game stays in exclude mode afterwards."
   }
 });
