@@ -1,20 +1,23 @@
 # Changelog - 1-5731N
 
-## 1.4.1 - 2026-10-16
+## 1.4.2 - 2026-10-15
+- **Date fix**: the build date shown at the bottom of the home screen and the dates of versions 1.2.3 to 1.4.1 in this changelog said 2026-10-16; the real publication date is 2026-10-15. No change to the game.
+
+## 1.4.1 - 2026-10-15
 - **Three-cell clues aligned on both edges**: they were packed from the left, so on some screens the free width stayed on the right (up to nearly one clue). They now sit in a grid of columns of one clue's width with the free width shared between the columns: the first clue touches the left edge of the board, the last one the right edge, on every row (the last row keeps the same columns). The tiles keep their size. The two-cell clues stay on the left.
 - The clue area now follows the width of the board (it kept the full width when a short screen made the board narrower).
 - While a clue is lifted, "the empty space after the last clue means last place" now only holds after the last clue (rest of the last row, or below): a touch in a gap between two columns does nothing.
 
-## 1.4.0 - 2026-10-16
+## 1.4.0 - 2026-10-15
 - **Arranging the clues**: a long press on a clue lifts it (highlighted); drag it to its new place and the others make room, or lift the finger and touch the clue whose place it should take (the empty space after the last one puts it last); touching it again, or Escape, cancels. The three-cell clues and the two-cell clues are two lists, each with its own order, saved with the game (`order` in the saved game, checked by `validGame`: a list that is not a permutation of its clues is refused). Keyboard: Shift+Enter picks a clue up, arrows move it, Enter puts it down, Esc cancels; each step is announced. Three new texts in the 20 languages and a paragraph in the help.
 - **Ticked clues no longer move to the top** of their list: they stay in place, greyed (the player now decides the order).
 
-## 1.3.2 - 2026-10-16
+## 1.3.2 - 2026-10-15
 Call for native speakers to proofread the translations.
 - **Help screen**: a link at the bottom, "A mistake in a translation? Tell us (opens GitHub)", opens the project's translation form already filled with the current language and the version of the game (new text in the 20 languages). Nothing is sent by the game itself: the link only opens the page when tapped.
 - **Documentation**: new `TRANSLATIONS.md` (proofreading status of each language, how to help with or without GitHub knowledge, a paragraph in French); a "Help translate / proofread" section in `README.md`; issue form `.github/ISSUE_TEMPLATE/translation.yml` (language, text key, current and suggested text, native speaker or not).
 
-## 1.3.1 - 2026-10-16
+## 1.3.1 - 2026-10-15
 Points left over from the review of 1.2.2, all checked first.
 - **Background reserve** (`stein.pool.v1`): it now carries the version of the scale of levels and is dropped when it differs (a reserve made under another scale would have offered puzzles of the wrong level). The reserve of earlier versions, which did not carry it, is dropped once and refilled by the background generation.
 - **Exhausted level**: when every puzzle of a level in the packs has been played, the search for a new one no longer freezes the interface for up to 2.5 s: it runs in slices of 30 ms, says "Looking for a new puzzle…" (new text in the 20 languages), ignores a second tap meanwhile, and falls back to a puzzle already played if nothing is found.
@@ -22,10 +25,10 @@ Points left over from the review of 1.2.2, all checked first.
 - **Caption under the board**: it said "short tap: choose · long press: exclude", which describes the symbols of the zoom; it now says what a press on a cell does ("short tap: cell mode · long press: column mode"; new text in the 20 languages). The choose/exclude caption stays in the zoom panel.
 - Comment of the clue-count check moved to its place in `genPuzzle` (`engine.js`).
 
-## 1.3.0 - 2026-10-16
+## 1.3.0 - 2026-10-15
 - **Column mode**: exclude one symbol from several columns in a single move. A long press on an unsolved cell (double-click with a mouse, or the C key) starts it for that cell's row: its column is selected and the zoom panel opens with its usual three side buttons (the choose/exclude switch is greyed, the mode being exclude). Touching other cells adds or removes their columns (the cells of the selected columns that are not in the working row are greyed on the board); a column whose cell in that row is already solved cannot be selected. The panel shows the six symbols of the row, greyed and disabled unless possible in EVERY selected column (updated as columns are added or removed); a tap excludes the symbol from all the selected columns at once, directly, with no confirmation step (one undo step; if it would remove the true answer in one of them, nothing changes and it counts as one error). The game is left in exclude mode. Keyboard: C starts, Space adds/removes the column of the focused cell, 1-6 exclude a symbol, Escape leaves; every step is announced for screen readers. 6 new texts in the 20 languages (translations to be proofread by native speakers), a paragraph in the help.
 
-## 1.2.3 - 2026-10-16
+## 1.2.3 - 2026-10-15
 Review of the published 1.2.2 (each point checked in a browser or in the code first).
 - **Back button**: starting a game did not add a history entry, so the Back button of the phone left the application from a game (the intended "go back to the home" only worked after visiting Options, Help or Statistics). And the on-screen back buttons of those screens left their entry behind (three visits to Help left five entries). Now every screen other than the home owns exactly one history entry, pushed when it opens and removed when it closes; Back closes the zoom, then returns to the home, then leaves.
 - **Level cache** (`stein.lvl.v1`): its entries are now checked like the other stored data (a code, and a level from -1 to 4); a damaged value used to break the statistics screen.
