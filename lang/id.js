@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Indonesian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("id", {
     "toast.version": "Versi: {name}",
     "cap.choose": "Ketuk <b>singkat</b>: pilih · Tekan <b>lama</b>: kecualikan",
     "cap.excl": "Ketuk <b>singkat</b>: kecualikan · Tekan <b>lama</b>: pilih",
+    "cap.board": "Ketuk <b>singkat</b>: mode kotak · Tekan <b>lama</b>: mode kolom",
     "win.title": "Selamat, Anda menang!",
     "win.time": "Waktu: {time}",
     "win.errors": "Kesalahan: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("id", {
     "col.done": "{sym} dikecualikan dari {n} kolom",
     "col.enter": "Mode kolom, baris {r}. Kolom {c} dipilih. Sentuh kotak atau tekan Spasi untuk menambah atau menghapus kolom, lalu pilih simbol; Escape untuk keluar.",
     "col.none": "Tidak ada simbol yang bisa dikecualikan dari semua kolom ini.",
-    "help.cols": "<b>Beberapa kolom sekaligus</b>: tekan lama sebuah kotak (klik ganda di komputer, atau tombol C) untuk memulai mode kolom bagi barisnya. Zoom terbuka; sentuh kotak lain untuk menambah atau menghapus kolomnya, dan setiap simbol yang disentuh dikecualikan dari semua kolom terpilih sekaligus. Simbol yang tidak mungkin ada di setiap kolom terpilih tampak abu-abu dan nonaktif. Keluar dengan tombol tutup. Setelah itu permainan tetap dalam mode kecualikan."
+    "help.cols": "<b>Beberapa kolom sekaligus</b>: tekan lama sebuah kotak (klik ganda di komputer, atau tombol C) untuk memulai mode kolom bagi barisnya. Zoom terbuka; sentuh kotak lain untuk menambah atau menghapus kolomnya, dan setiap simbol yang disentuh dikecualikan dari semua kolom terpilih sekaligus. Simbol yang tidak mungkin ada di setiap kolom terpilih tampak abu-abu dan nonaktif. Keluar dengan tombol tutup. Setelah itu permainan tetap dalam mode kecualikan.",
+    "new.searching": "Mencari teka-teki baru…"
   }
 });

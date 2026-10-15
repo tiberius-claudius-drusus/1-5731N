@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Polish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("pl", {
     "toast.version": "Wersja: {name}",
     "cap.choose": "<b>Krótkie</b> dotknięcie: wybierz · <b>Długie</b> przytrzymanie: wyklucz",
     "cap.excl": "<b>Krótkie</b> dotknięcie: wyklucz · <b>Długie</b> przytrzymanie: wybierz",
+    "cap.board": "<b>Krótkie</b> dotknięcie: tryb pola · <b>Długie</b> przytrzymanie: tryb kolumn",
     "win.title": "Brawo, wygrana!",
     "win.time": "Czas: {time}",
     "win.errors": "Błędy: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("pl", {
     "col.done": "{sym} wykluczony z kolumn: {n}",
     "col.enter": "Tryb kolumn, wiersz {r}. Wybrano kolumnę {c}. Dotykaj pól lub naciśnij spację, aby dodać lub usunąć kolumny, potem wybierz symbol; Escape kończy.",
     "col.none": "Z wszystkich tych kolumn nie można wykluczyć żadnego symbolu.",
-    "help.cols": "<b>Kilka kolumn naraz</b>: przytrzymaj pole (na komputerze dwukrotne kliknięcie lub klawisz C), aby włączyć tryb kolumn dla jego wiersza. Otworzy się powiększenie; dotykaj innych pól, aby dodać lub usunąć ich kolumny, a każdy dotknięty symbol zostanie wykluczony jednocześnie ze wszystkich wybranych kolumn. Symbole niemożliwe w każdej wybranej kolumnie są wyszarzone i nieaktywne. Wyjdź przyciskiem zamknięcia. Potem gra pozostaje w trybie wykluczania."
+    "help.cols": "<b>Kilka kolumn naraz</b>: przytrzymaj pole (na komputerze dwukrotne kliknięcie lub klawisz C), aby włączyć tryb kolumn dla jego wiersza. Otworzy się powiększenie; dotykaj innych pól, aby dodać lub usunąć ich kolumny, a każdy dotknięty symbol zostanie wykluczony jednocześnie ze wszystkich wybranych kolumn. Symbole niemożliwe w każdej wybranej kolumnie są wyszarzone i nieaktywne. Wyjdź przyciskiem zamknięcia. Potem gra pozostaje w trybie wykluczania.",
+    "new.searching": "Szukam nowej łamigłówki…"
   }
 });

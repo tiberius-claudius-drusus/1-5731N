@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Turkish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("tr", {
     "toast.version": "Sürüm: {name}",
     "cap.choose": "<b>Kısa</b> dokunuş: seç · <b>Uzun</b> basış: ele",
     "cap.excl": "<b>Kısa</b> dokunuş: ele · <b>Uzun</b> basış: seç",
+    "cap.board": "<b>Kısa</b> dokunuş: kutu modu · <b>Uzun</b> basış: sütun modu",
     "win.title": "Tebrikler, kazandınız!",
     "win.time": "Süre: {time}",
     "win.errors": "Hata: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("tr", {
     "col.done": "{sym}, {n} sütundan çıkarıldı",
     "col.enter": "Sütun modu, satır {r}. Sütun {c} seçildi. Sütun eklemek veya çıkarmak için kutulara dokunun ya da Boşluk'a basın, sonra bir simge seçin; Escape çıkar.",
     "col.none": "Bu sütunların hepsinden çıkarılabilecek bir simge yok.",
-    "help.cols": "<b>Aynı anda birkaç sütun</b>: Satırı için sütun modunu başlatmak üzere bir kutuya uzun basın (bilgisayarda çift tıklama veya C tuşu). Yakınlaştırma açılır; sütunlarını eklemek veya çıkarmak için başka kutulara dokunun, dokunduğunuz her simge seçili tüm sütunlardan aynı anda çıkarılır. Seçili her sütunda mümkün olmayan simgeler gri ve devre dışı görünür. Kapatma düğmesiyle çıkın. Sonrasında oyun çıkarma modunda kalır."
+    "help.cols": "<b>Aynı anda birkaç sütun</b>: Satırı için sütun modunu başlatmak üzere bir kutuya uzun basın (bilgisayarda çift tıklama veya C tuşu). Yakınlaştırma açılır; sütunlarını eklemek veya çıkarmak için başka kutulara dokunun, dokunduğunuz her simge seçili tüm sütunlardan aynı anda çıkarılır. Seçili her sütunda mümkün olmayan simgeler gri ve devre dışı görünür. Kapatma düğmesiyle çıkın. Sonrasında oyun çıkarma modunda kalır.",
+    "new.searching": "Yeni bir bulmaca aranıyor…"
   }
 });

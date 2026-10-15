@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, column mode, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.3.0', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.3.1', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -179,27 +179,39 @@
     var a = load(KEY_PLAYED, []); if (!Array.isArray(a)) a = [];
     if (a.indexOf(code) < 0) { a.push(code); if (a.length > MAX_PLAYED) a.shift(); save(KEY_PLAYED, a); }
   }
-  function poolLoad() { var p = load(KEY_POOL, {}); return p && typeof p === 'object' && !Array.isArray(p) ? p : {}; }
-  /* a puzzle of the level: first one made in the background on this device, then the packs (not played yet), else made on the spot */
-  function codeForLevel(level) {
+  /* the reserve is { s: scale version, <level>: [codes] }: a reserve made under another scale of levels (or before 1.3.1, which did not write it) is dropped */
+  function poolLoad() {
+    var p = load(KEY_POOL, null);
+    return p && typeof p === 'object' && !Array.isArray(p) && p.s === E.SCALE_VERSION ? p : { s: E.SCALE_VERSION };
+  }
+  /* a puzzle of the level: first one made in the background on this device, then the packs (not played yet), else one searched for in
+   * slices of 30 ms (the interface stays usable; at most 2.5 s), else a puzzle already played. cb(code) gets null if the level is empty. */
+  var searching = false;
+  function codeForLevel(level, cb) {
     var played = playedSet(), pool = poolLoad(), list = Array.isArray(pool[level]) ? pool[level] : [];
     while (list.length) {
       var c = list.shift();
-      if (typeof c === 'string' && E.canonicalCode(c) === c && !played[c]) { pool[level] = list; save(KEY_POOL, pool); return c; }
+      if (typeof c === 'string' && E.canonicalCode(c) === c && !played[c]) { pool[level] = list; save(KEY_POOL, pool); cb(c); return; }
     }
     pool[level] = list; save(KEY_POOL, pool);
     var code = LIB.pickVerified(level, played, null, function (c) {      // the level written in a pack is not trusted: grade the puzzle
       try { var g = E.genPuzzle(c); return E.gradeOf(g.solved, g.rules).level; } catch (e) { return -1; }
     });
-    if (code && !played[code]) return code;
-    var t0 = performance.now();                                  // library exhausted for this level: search for one (a short while)
-    while (performance.now() - t0 < 2500) {
-      try {
-        var g = E.genPuzzle();
-        if (E.gradeOf(g.solved, g.rules).level === level && !played[g.code]) return g.code;
-      } catch (e) { break; }                                     // generation failed (bounded loops): give up on this level
-    }
-    return code;                                                 // may be null (empty level and nothing found)
+    if (code && !played[code]) { cb(code); return; }
+    if (searching) return;                                       // a search is already running: the tap is ignored
+    searching = true; toast(t('new.searching'));                 // library exhausted for this level: search for one (a short while)
+    var t0 = performance.now();
+    (function step() {
+      var s0 = performance.now(), found = null, failed = false;
+      while (!found && !failed && performance.now() - s0 < 30) {
+        try {
+          var g = E.genPuzzle();
+          if (E.gradeOf(g.solved, g.rules).level === level && !played[g.code]) found = g.code;
+        } catch (e) { failed = true; }                           // generation failed (bounded loops): give up on this level
+      }
+      if (found || failed || performance.now() - t0 > 2500) { searching = false; cb(found || code); return; }   // code may be null (empty level, nothing found)
+      setTimeout(step, 0);
+    })();
   }
   /* background generation: one puzzle every 10 s while a game is on screen, graded and kept per level (at most POOL_MAX each) */
   var bgWorker = null, bgOff = false;
@@ -301,8 +313,7 @@
     var btns = [];
     for (var lv = 0; lv < E.LEVEL_COUNT; lv++) (function (l) {
       btns.push([t('lvl.' + l), function () {
-        var code = codeForLevel(l);
-        if (code) startPuzzle(code); else toast(t('new.noPuzzle'));
+        codeForLevel(l, function (code) { if (code) startPuzzle(code); else toast(t('new.noPuzzle')); });
       }]);
     })(lv);
     btns.push([t('common.cancel'), askNew]);
@@ -740,7 +751,8 @@
     $('g-mode').classList.toggle('excl', ex); $('g-mode').classList.toggle('chs', !ex);
     $('z-mode').innerHTML = GL.icon(ex ? 'no' : 'ok');
     $('z-mode').classList.toggle('excl', ex); $('z-mode').classList.toggle('chs', !ex);
-    $('zcap').innerHTML = $('gcap').innerHTML = t(ex ? 'cap.excl' : 'cap.choose');   // the caption stays under the board (and in the zoom panel)
+    $('zcap').innerHTML = t(ex ? 'cap.excl' : 'cap.choose');   // in the zoom panel: what a press on a symbol does
+    $('gcap').innerHTML = t('cap.board');                       // under the board: what a press on a cell does
   }
   function applyHand() {
     var left = opt.hand === 'left';
@@ -752,7 +764,7 @@
   function toggleMode() {
     if (colMode) return;
     opt.mode = opt.mode === 'choose' ? 'excl' : 'choose'; save(KEY_OPT, opt);
-    setModeButtons(); say($('gcap').textContent);
+    setModeButtons(); say($('zcap').textContent);
   }
   $('g-mode').onclick = toggleMode;
   $('z-mode').onclick = toggleMode;
@@ -830,8 +842,13 @@
   function installPack(obj) {
     var r = LIB.install(obj);
     if (!r.ok) { toast(t(r.error === 'gen' || r.error === 'scale' ? 'packs.badVersion' : 'packs.bad')); return; }
+    var previous = savedPacks.filter(function (p) { return p.id === r.pack.id; })[0];       // same id: the older version must survive a failed write
     savedPacks = savedPacks.filter(function (p) { return p.id !== r.pack.id; }); savedPacks.push(r.pack);
-    if (!writePacks()) { LIB.remove(r.pack.id); savedPacks.pop(); toast(t('packs.bad')); return; }
+    if (!writePacks()) {
+      savedPacks.pop();
+      if (previous) { savedPacks.push(previous); LIB.install(previous); } else LIB.remove(r.pack.id);
+      toast(t('packs.bad')); return;
+    }
     toast(t('packs.ok', { name: r.pack.name })); renderOptions();
   }
   $('pack-file').addEventListener('change', function () {

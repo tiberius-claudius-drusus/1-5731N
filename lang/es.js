@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/es.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Spanish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("es", {
     "toast.version": "Versión: {name}",
     "cap.choose": "Toque <b>corto</b>: elegir · Pulsación <b>larga</b>: excluir",
     "cap.excl": "Toque <b>corto</b>: excluir · Pulsación <b>larga</b>: elegir",
+    "cap.board": "Toque <b>corto</b>: modo casilla · Pulsación <b>larga</b>: modo columna",
     "win.title": "¡Enhorabuena, has ganado!",
     "win.time": "Tiempo: {time}",
     "win.errors": "Errores: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("es", {
     "col.done": "{sym} excluido de {n} columnas",
     "col.enter": "Modo columna, fila {r}. Columna {c} seleccionada. Toca casillas o pulsa Espacio para añadir o quitar columnas y luego elige un símbolo; Escape sale.",
     "col.none": "Ningún símbolo se puede excluir de todas estas columnas.",
-    "help.cols": "<b>Varias columnas a la vez</b>: mantén pulsada una casilla (doble clic en el ordenador, o la tecla C) para iniciar el modo columna de su fila. Se abre el zoom; toca otras casillas para añadir o quitar sus columnas, y cada símbolo que toques se excluye de todas las columnas seleccionadas a la vez. Los símbolos que no son posibles en todas las columnas seleccionadas aparecen en gris y desactivados. Sal con el botón de cierre. Después, el juego se queda en modo excluir."
+    "help.cols": "<b>Varias columnas a la vez</b>: mantén pulsada una casilla (doble clic en el ordenador, o la tecla C) para iniciar el modo columna de su fila. Se abre el zoom; toca otras casillas para añadir o quitar sus columnas, y cada símbolo que toques se excluye de todas las columnas seleccionadas a la vez. Los símbolos que no son posibles en todas las columnas seleccionadas aparecen en gris y desactivados. Sal con el botón de cierre. Después, el juego se queda en modo excluir.",
+    "new.searching": "Buscando un puzzle nuevo…"
   }
 });

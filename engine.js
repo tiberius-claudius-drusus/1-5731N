@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.2.2
+ * Version   : 1.3.1
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
@@ -384,7 +384,6 @@
     return { v: v, h: h };
   }
 
-  /* As in Game::genPuzzle: games with too many clues are rejected. */
   /* Puzzle of the day: the code is derived from the calendar date "YYYY-MM-DD" (the caller passes the date of the
    * device, in its own time zone), so that everybody who plays "the puzzle of the day" on the same date gets the same one. */
   /* YYYY-MM-DD that is a real calendar day (2026-19-42 and 2026-02-30 are refused) */
@@ -416,6 +415,7 @@
         var g = genPuzzleOnce();
         if (!g) continue;
         var q = hintsQty(g.rules);
+        // as in Game::genPuzzle: puzzles with too many clues are rejected
         if (q.h <= 24 && q.v <= 15) { g.code = formatCode(version, seed); return g; }
       }
       throw new Error('no puzzle found for this code');

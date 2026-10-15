@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Latin (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("la", {
     "toast.version": "Versio: {name}",
     "cap.choose": "Tactus <b>brevis</b>: eligere · Pressio <b>longa</b>: excludere",
     "cap.excl": "Tactus <b>brevis</b>: excludere · Pressio <b>longa</b>: eligere",
+    "cap.board": "Tactus <b>brevis</b>: modus cellae · Pressio <b>longa</b>: modus columnarum",
     "win.title": "Euge, vicisti!",
     "win.time": "Tempus: {time}",
     "win.errors": "Errores: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("la", {
     "col.done": "{sym} ex {n} columnis exclusum",
     "col.enter": "Modus columnarum, ordo {r}. Columna {c} electa. Cellas tange vel Spatium preme ut columnas addas vel demas, deinde signum elige; Escape relinquit.",
     "col.none": "Nullum signum ex his omnibus columnis excludi potest.",
-    "help.cols": "<b>Plures columnae simul</b>: cellam diu preme (in computatro bis clica, vel clavem C) ut modus columnarum pro eius ordine incipiat. Auctio aperitur; alias cellas tange ut earum columnas addas vel demas, et omne signum tactum ex omnibus columnis electis simul excluditur. Signa quae non in omni columna electa possunt grisea sunt et inertia. Claustro relinque. Postea ludus in modo excludendi manet."
+    "help.cols": "<b>Plures columnae simul</b>: cellam diu preme (in computatro bis clica, vel clavem C) ut modus columnarum pro eius ordine incipiat. Auctio aperitur; alias cellas tange ut earum columnas addas vel demas, et omne signum tactum ex omnibus columnis electis simul excluditur. Signa quae non in omni columna electa possunt grisea sunt et inertia. Claustro relinque. Postea ludus in modo excludendi manet.",
+    "new.searching": "Aenigma novum quaeritur…"
   }
 });

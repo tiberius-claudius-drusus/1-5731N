@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/vi.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Vietnamese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("vi", {
     "toast.version": "Phiên bản: {name}",
     "cap.choose": "Chạm <b>nhanh</b>: chọn · Nhấn <b>giữ</b>: loại",
     "cap.excl": "Chạm <b>nhanh</b>: loại · Nhấn <b>giữ</b>: chọn",
+    "cap.board": "Chạm <b>nhanh</b>: chế độ ô · Nhấn <b>giữ</b>: chế độ cột",
     "win.title": "Chúc mừng, bạn đã thắng!",
     "win.time": "Thời gian: {time}",
     "win.errors": "Lỗi: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("vi", {
     "col.done": "Đã loại {sym} khỏi {n} cột",
     "col.enter": "Chế độ cột, hàng {r}. Đã chọn cột {c}. Chạm vào các ô hoặc nhấn phím cách để thêm hoặc bỏ cột, rồi chọn một ký hiệu; Escape để thoát.",
     "col.none": "Không thể loại ký hiệu nào khỏi tất cả các cột này.",
-    "help.cols": "<b>Nhiều cột cùng lúc</b>: nhấn giữ một ô (nhấp đúp trên máy tính, hoặc phím C) để bắt đầu chế độ cột cho hàng của ô đó. Khung phóng to mở ra; chạm vào các ô khác để thêm hoặc bỏ cột của chúng, và mỗi ký hiệu bạn chạm sẽ được loại khỏi tất cả các cột đã chọn cùng lúc. Những ký hiệu không thể có trong mọi cột đã chọn sẽ hiện màu xám và bị vô hiệu. Thoát bằng nút đóng. Sau đó trò chơi vẫn ở chế độ loại trừ."
+    "help.cols": "<b>Nhiều cột cùng lúc</b>: nhấn giữ một ô (nhấp đúp trên máy tính, hoặc phím C) để bắt đầu chế độ cột cho hàng của ô đó. Khung phóng to mở ra; chạm vào các ô khác để thêm hoặc bỏ cột của chúng, và mỗi ký hiệu bạn chạm sẽ được loại khỏi tất cả các cột đã chọn cùng lúc. Những ký hiệu không thể có trong mọi cột đã chọn sẽ hiện màu xám và bị vô hiệu. Thoát bằng nút đóng. Sau đó trò chơi vẫn ở chế độ loại trừ.",
+    "new.searching": "Đang tìm câu đố mới…"
   }
 });

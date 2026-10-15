@@ -1,5 +1,13 @@
 # Changelog - 1-5731N
 
+## 1.3.1 - 2026-10-16
+Points left over from the review of 1.2.2, all checked first.
+- **Background reserve** (`stein.pool.v1`): it now carries the version of the scale of levels and is dropped when it differs (a reserve made under another scale would have offered puzzles of the wrong level). The reserve of earlier versions, which did not carry it, is dropped once and refilled by the background generation.
+- **Exhausted level**: when every puzzle of a level in the packs has been played, the search for a new one no longer freezes the interface for up to 2.5 s: it runs in slices of 30 ms, says "Looking for a new puzzle…" (new text in the 20 languages), ignores a second tap meanwhile, and falls back to a puzzle already played if nothing is found.
+- **Packs**: when the browser refuses to store a re-installed pack (storage full), the previous version of that pack stays installed (it used to vanish until the next reload).
+- **Caption under the board**: it said "short tap: choose · long press: exclude", which describes the symbols of the zoom; it now says what a press on a cell does ("short tap: cell mode · long press: column mode"; new text in the 20 languages). The choose/exclude caption stays in the zoom panel.
+- Comment of the clue-count check moved to its place in `genPuzzle` (`engine.js`).
+
 ## 1.3.0 - 2026-10-16
 - **Column mode**: exclude one symbol from several columns in a single move. A long press on an unsolved cell (double-click with a mouse, or the C key) starts it for that cell's row: its column is selected and the zoom panel opens with its usual three side buttons (the choose/exclude switch is greyed, the mode being exclude). Touching other cells adds or removes their columns (the cells of the selected columns that are not in the working row are greyed on the board); a column whose cell in that row is already solved cannot be selected. The panel shows the six symbols of the row, greyed and disabled unless possible in EVERY selected column (updated as columns are added or removed); a tap excludes the symbol from all the selected columns at once, directly, with no confirmation step (one undo step; if it would remove the true answer in one of them, nothing changes and it counts as one error). The game is left in exclude mode. Keyboard: C starts, Space adds/removes the column of the focused cell, 1-6 exclude a symbol, Escape leaves; every step is announced for screen readers. 6 new texts in the 20 languages (translations to be proofread by native speakers), a paragraph in the help.
 

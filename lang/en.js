@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/en.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in English (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("en", {
     "toast.version": "Version: {name}",
     "cap.choose": "<b>Short</b> tap: choose · <b>Long</b> press: exclude",
     "cap.excl": "<b>Short</b> tap: exclude · <b>Long</b> press: choose",
+    "cap.board": "<b>Short</b> tap: cell mode · <b>Long</b> press: column mode",
     "win.title": "Well done, you won!",
     "win.time": "Time: {time}",
     "win.errors": "Errors: {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("en", {
     "col.done": "{sym} excluded from {n} columns",
     "col.enter": "Column mode, row {r}. Column {c} selected. Touch cells or press Space to add or remove columns, then choose a symbol; Escape leaves.",
     "col.none": "No symbol can be excluded from all these columns.",
-    "help.cols": "<b>Several columns at once</b>: press and hold a cell (double-click on a computer, or the C key) to start the column mode for its row. The zoom opens; touch other cells to add or remove their columns, and each symbol you tap is excluded from all the selected columns together. Symbols that are not possible in every selected column are greyed out and disabled. Leave with the close button. The game stays in exclude mode afterwards."
+    "help.cols": "<b>Several columns at once</b>: press and hold a cell (double-click on a computer, or the C key) to start the column mode for its row. The zoom opens; touch other cells to add or remove their columns, and each symbol you tap is excluded from all the selected columns together. Symbols that are not possible in every selected column are greyed out and disabled. Leave with the close button. The game stays in exclude mode afterwards.",
+    "new.searching": "Looking for a new puzzle…"
   }
 });

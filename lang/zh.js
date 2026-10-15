@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/zh.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in Chinese (Simplified) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("zh", {
     "toast.version": "版本：{name}",
     "cap.choose": "<b>短</b>按：选择 · <b>长</b>按：排除",
     "cap.excl": "<b>短</b>按：排除 · <b>长</b>按：选择",
+    "cap.board": "<b>短</b>按：单格模式 · <b>长</b>按：列模式",
     "win.title": "太棒了，你赢了！",
     "win.time": "用时：{time}",
     "win.errors": "错误：{n}",
@@ -149,6 +150,7 @@ SteinI18n.add("zh", {
     "col.done": "已从 {n} 列中排除 {sym}",
     "col.enter": "列模式，第 {r} 行。已选中第 {c} 列。点击格子或按空格键添加或取消列，然后选择符号；按 Esc 退出。",
     "col.none": "无法从所有这些列中排除任何符号。",
-    "help.cols": "<b>一次处理多列</b>：长按一个格子（电脑上双击，或按 C 键），即可对其所在行启动列模式。放大面板会打开；点击其他格子以添加或取消它们的列，你点击的每个符号会同时从所有所选列中排除。并非在每个所选列中都可能的符号会显示为灰色并被禁用。用关闭按钮退出。之后游戏保持在排除模式。"
+    "help.cols": "<b>一次处理多列</b>：长按一个格子（电脑上双击，或按 C 键），即可对其所在行启动列模式。放大面板会打开；点击其他格子以添加或取消它们的列，你点击的每个符号会同时从所有所选列中排除。并非在每个所选列中都可能的符号会显示为灰色并被禁用。用关闭按钮退出。之后游戏保持在排除模式。",
+    "new.searching": "正在寻找新谜题…"
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/fr.js
- * Version   : 1.3.0
+ * Version   : 1.3.1
  * Role      : User-interface texts in French (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -38,6 +38,7 @@ SteinI18n.add("fr", {
     "toast.version": "Version : {name}",
     "cap.choose": "Appui <b>court</b> : choisir · Appui <b>long</b> : exclure",
     "cap.excl": "Appui <b>court</b> : exclure · Appui <b>long</b> : choisir",
+    "cap.board": "Appui <b>court</b> : mode cellule · Appui <b>long</b> : mode colonne",
     "win.title": "Bravo, c'est gagné !",
     "win.time": "Temps : {time}",
     "win.errors": "Erreurs : {n}",
@@ -149,6 +150,7 @@ SteinI18n.add("fr", {
     "col.done": "{sym} exclu de {n} colonnes",
     "col.enter": "Mode colonne, rangée {r}. Colonne {c} sélectionnée. Touchez des cases ou appuyez sur Espace pour ajouter ou retirer des colonnes, puis choisissez un symbole ; Échap quitte.",
     "col.none": "Aucun symbole ne peut être exclu de toutes ces colonnes.",
-    "help.cols": "<b>Plusieurs colonnes à la fois</b> : appui long sur une case (double-clic sur ordinateur, ou touche C) pour lancer le mode colonne pour sa rangée. Le zoom s'ouvre ; touchez d'autres cases pour ajouter ou retirer leurs colonnes, et chaque symbole touché est exclu de toutes les colonnes sélectionnées en même temps. Les symboles qui ne sont pas possibles dans toutes les colonnes sélectionnées sont grisés et désactivés. Quittez avec le bouton de fermeture. Le jeu reste ensuite en mode exclusion."
+    "help.cols": "<b>Plusieurs colonnes à la fois</b> : appui long sur une case (double-clic sur ordinateur, ou touche C) pour lancer le mode colonne pour sa rangée. Le zoom s'ouvre ; touchez d'autres cases pour ajouter ou retirer leurs colonnes, et chaque symbole touché est exclu de toutes les colonnes sélectionnées en même temps. Les symboles qui ne sont pas possibles dans toutes les colonnes sélectionnées sont grisés et désactivés. Quittez avec le bouton de fermeture. Le jeu reste ensuite en mode exclusion.",
+    "new.searching": "Recherche d'un nouveau puzzle…"
   }
 });
