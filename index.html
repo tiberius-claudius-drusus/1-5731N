@@ -2,7 +2,7 @@
 <!--
 ===========================================================================
 File      : 1-5731n/index.html
-Version   : 1.4.0
+Version   : 1.4.1
 Role      : Single page of the application: markup of all screens, the whole stylesheet (inline, theme-driven) and the script tags.
 Depends on: all scripts of the project
 Called by : the browser (served by the portal)
@@ -65,8 +65,11 @@ h1 .tg{display:inline-block;width:1.1em;height:1.1em;vertical-align:-.17em;margi
 .slot{display:flex;align-items:center;justify-content:center;min-width:0;min-height:0}
 .slot svg.g{width:84%;height:auto;max-width:24px;max-height:100%;aspect-ratio:1;opacity:var(--slot-opacity);pointer-events:none}
 /* clues */
-#hints{flex:1;width:100%;max-width:560px;overflow-y:auto;margin-top:8px;padding:4px 0 12px;-webkit-overflow-scrolling:touch}
+#hints{flex:1;width:min(100%,560px,calc(100vh - 300px));max-width:560px;overflow-y:auto;margin-top:8px;padding:4px 0 12px;-webkit-overflow-scrolling:touch}
 .hgrp{display:flex;flex-wrap:wrap;gap:3px;align-items:flex-start;align-content:flex-start;justify-content:flex-start}
+/* three-cell clues: columns of the width of one clue, the free width shared between the columns (first clue on the left edge, last one on the right edge, same columns on the last row) */
+.hgrp[data-kind="H"]{display:grid;grid-template-columns:repeat(auto-fill,calc(3*var(--hi) + 2px + 2*var(--bw)));justify-content:space-between;column-gap:3px;row-gap:3px}
+.hgrp[data-kind="H"] .hint{justify-self:start}
 .hgrp+.hgrp{margin-top:8px;padding-top:8px;border-top:1px solid var(--hint-sep)}
 .hint{display:flex;border-radius:var(--hint-radius);padding:1px;background:var(--hint-bg);border:var(--bw) solid var(--hint-bd);cursor:pointer}
 .hint.v{flex-direction:column}

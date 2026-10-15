@@ -1,5 +1,10 @@
 # Changelog - 1-5731N
 
+## 1.4.1 - 2026-10-16
+- **Three-cell clues aligned on both edges**: they were packed from the left, so on some screens the free width stayed on the right (up to nearly one clue). They now sit in a grid of columns of one clue's width with the free width shared between the columns: the first clue touches the left edge of the board, the last one the right edge, on every row (the last row keeps the same columns). The tiles keep their size. The two-cell clues stay on the left.
+- The clue area now follows the width of the board (it kept the full width when a short screen made the board narrower).
+- While a clue is lifted, "the empty space after the last clue means last place" now only holds after the last clue (rest of the last row, or below): a touch in a gap between two columns does nothing.
+
 ## 1.4.0 - 2026-10-16
 - **Arranging the clues**: a long press on a clue lifts it (highlighted); drag it to its new place and the others make room, or lift the finger and touch the clue whose place it should take (the empty space after the last one puts it last); touching it again, or Escape, cancels. The three-cell clues and the two-cell clues are two lists, each with its own order, saved with the game (`order` in the saved game, checked by `validGame`: a list that is not a permutation of its clues is refused). Keyboard: Shift+Enter picks a clue up, arrows move it, Enter puts it down, Esc cancels; each step is announced. Three new texts in the 20 languages and a paragraph in the help.
 - **Ticked clues no longer move to the top** of their list: they stay in place, greyed (the player now decides the order).

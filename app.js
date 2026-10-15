@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.4.0
+ * Version   : 1.4.1
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, column mode, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.4.0', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.4.1', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -456,6 +456,13 @@
     var next = idx + 1 < o.length ? grp.querySelector('.hint[data-i="' + o[idx + 1] + '"]') : null;
     grp.insertBefore(el, next);
   }
+  /* is the point after the last clue of the list (rest of its last row, or below)? Only there does "empty space" mean "last place":
+   * the gaps between the columns of the grid must not move a clue by accident. */
+  function inEndZone(grp, x, y) {
+    var last = grp.lastElementChild; if (!last) return true;
+    var r = last.getBoundingClientRect();
+    return y > r.bottom || (y >= r.top && x > r.right);
+  }
   function liftEnd(commit) {
     if (!lift) return;
     var l = lift; lift = null;
@@ -474,7 +481,7 @@
     var under = document.elementFromPoint(ev.clientX, ev.clientY); if (!under) return;
     var el = under.closest('.hint'), grp = under.closest('.hgrp');
     if (el && el.dataset.kind === lift.kind && +el.dataset.i !== lift.i) liftMoveTo(orderFor(lift.kind).indexOf(+el.dataset.i));
-    else if (!el && grp && grp.dataset.kind === lift.kind) liftMoveTo(1e9);
+    else if (!el && grp && grp.dataset.kind === lift.kind && inEndZone(grp, ev.clientX, ev.clientY)) liftMoveTo(1e9);
   }
   function hpEnd() {
     var dragged = hp && hp.lifted && lift && lift.moved;
@@ -500,7 +507,7 @@
       var grp = ev.target.closest('.hgrp');
       if (el && +el.dataset.i === lift.i) liftEnd(false);
       else if (el && el.dataset.kind === lift.kind) { liftMoveTo(orderFor(lift.kind).indexOf(+el.dataset.i)); liftEnd(true); }
-      else if (!el && grp && grp.dataset.kind === lift.kind) { liftMoveTo(1e9); liftEnd(true); }
+      else if (!el && grp && grp.dataset.kind === lift.kind) { if (inEndZone(grp, ev.clientX, ev.clientY)) { liftMoveTo(1e9); liftEnd(true); } }   // a gap between two columns: nothing happens
       else liftEnd(false);
       return;
     }
