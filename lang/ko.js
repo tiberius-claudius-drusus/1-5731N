@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ko.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : User-interface texts in Korean (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -151,6 +151,7 @@ SteinI18n.add("ko", {
     "col.enter": "열 모드, {r}번째 줄. {c}열 선택됨. 칸을 누르거나 스페이스를 눌러 열을 추가하거나 제거한 다음 기호를 고르세요. Esc로 나갑니다.",
     "col.none": "이 열들 모두에서 제외할 수 있는 기호가 없습니다.",
     "help.cols": "<b>여러 열을 한 번에</b>: 칸을 길게 누르면(컴퓨터에서는 더블클릭 또는 C 키) 그 줄의 열 모드가 시작됩니다. 확대 창이 열립니다. 다른 칸을 눌러 열을 추가하거나 제거하면, 누른 기호가 선택된 모든 열에서 동시에 제외됩니다. 선택된 모든 열에서 가능하지 않은 기호는 회색으로 표시되고 사용할 수 없습니다. 닫기 버튼으로 나갑니다. 이후 게임은 제외 모드로 유지됩니다.",
-    "new.searching": "새 퍼즐을 찾는 중…"
+    "new.searching": "새 퍼즐을 찾는 중…",
+    "help.translate": "번역 오류가 있나요? 알려 주세요 (GitHub이 열립니다)"
   }
 });

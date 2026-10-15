@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, column mode, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.3.1', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.3.2', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -1045,6 +1045,11 @@
 
   function im(r, e) { return tile(r, e); }
   function imSym(id) { return symTile(id); }
+  /* link to the translation-correction form of the GitHub project, already filled with the current language and version */
+  function translateUrl() {
+    return 'https://github.com/tiberius-claudius-drusus/1-5731N/issues/new?template=translation.yml&language=' + encodeURIComponent(I.lang) +
+      '&title=' + encodeURIComponent('[translation] ' + I.lang + ' (v' + VERSION + ') ');
+  }
   function renderHelp() {
     function fill(s) {
       return s.replace('{up}', GL.icon('up', true)).replace('{ok}', GL.icon('ok', true)).replace('{no}', GL.icon('no', true)).replace('{undo}', GL.icon('undo', true));
@@ -1056,7 +1061,8 @@
       ex(im(0, 1) + imSym('side') + im(1, 3), 'help.ex2') +
       ex(im(0, 1) + im(2, 2) + im(1, 3), 'help.ex3') +
       ex(im(0, 1) + im(2, 2), 'help.ex4') +
-      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.cols') + '</p><p>' + t('help.keys') + '</p>';
+      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.cols') + '</p><p>' + t('help.keys') + '</p>' +
+      '<p class="helplink"><a href="' + esc(translateUrl()) + '" target="_blank" rel="noopener noreferrer">' + esc(t('help.translate')) + '</a></p>';
   }
 
   /* ---------- language: (re)writes everything that holds text ---------- */

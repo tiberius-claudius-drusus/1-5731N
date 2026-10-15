@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/ja.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : User-interface texts in Japanese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -151,6 +151,7 @@ SteinI18n.add("ja", {
     "col.enter": "列モード、{r}行目。{c}列目を選択しました。マスをタップするかスペースで列を追加・解除し、記号を選んでください。Escで終了します。",
     "col.none": "これらすべての列から除外できる記号はありません。",
     "help.cols": "<b>複数の列を一度に</b>：マスを長押し（パソコンではダブルクリック、またはCキー）すると、その行の列モードが始まります。拡大パネルが開きます。ほかのマスをタップして列を追加・解除すると、タップした記号が選択したすべての列から同時に除外されます。選択したすべての列で可能とは限らない記号は灰色になり、選べません。閉じるボタンで終了します。その後もゲームは除外モードのままです。",
-    "new.searching": "新しいパズルを探しています…"
+    "new.searching": "新しいパズルを探しています…",
+    "help.translate": "翻訳の誤りを見つけたら教えてください（GitHubが開きます）"
   }
 });

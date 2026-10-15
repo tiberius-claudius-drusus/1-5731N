@@ -1,0 +1,54 @@
+name: Translation correction / proofreading
+description: Correct a text or tell us you proofread a whole language of the game
+title: "[translation] "
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping! Most translations were written with an AI and have not been read by native speakers yet (see TRANSLATIONS.md).
+        Please do not post personal information: issues are public. You do not need to know how to code, a sentence in plain words is enough.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What do you bring?
+      options:
+        - A correction of one text
+        - Several corrections (listed below)
+        - I proofread the whole language and found nothing to change
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language code
+      description: "As in the game's language list and in TRANSLATIONS.md (fr, en, es, de, it, pt-pt, pt-br, ru, ar, zh, ko, ja, hi, tr, nl, pl, uk, id, vi, la)."
+      placeholder: "ko"
+    validations:
+      required: true
+  - type: input
+    id: key
+    attributes:
+      label: Text key (optional)
+      description: "The identifier of the text in lang/<code>.js, for example help.p1 or cap.board. If you do not know it, quote the current text below."
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text
+      description: As it appears in the game.
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested text
+      description: What it should say. Several corrections can be listed, one per line.
+  - type: textarea
+    id: comment
+    attributes:
+      label: Comment (optional)
+      description: Why (wrong word, unnatural, too formal, wrong script direction...).
+  - type: checkboxes
+    id: native
+    attributes:
+      label: About you
+      options:
+        - label: I am a native or fluent speaker of this language

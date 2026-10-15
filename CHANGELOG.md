@@ -1,5 +1,10 @@
 # Changelog - 1-5731N
 
+## 1.3.2 - 2026-10-16
+Call for native speakers to proofread the translations.
+- **Help screen**: a link at the bottom, "A mistake in a translation? Tell us (opens GitHub)", opens the project's translation form already filled with the current language and the version of the game (new text in the 20 languages). Nothing is sent by the game itself: the link only opens the page when tapped.
+- **Documentation**: new `TRANSLATIONS.md` (proofreading status of each language, how to help with or without GitHub knowledge, a paragraph in French); a "Help translate / proofread" section in `README.md`; issue form `.github/ISSUE_TEMPLATE/translation.yml` (language, text key, current and suggested text, native speaker or not).
+
 ## 1.3.1 - 2026-10-16
 Points left over from the review of 1.2.2, all checked first.
 - **Background reserve** (`stein.pool.v1`): it now carries the version of the scale of levels and is dropped when it differs (a reserve made under another scale would have offered puzzles of the wrong level). The reserve of earlier versions, which did not carry it, is dropped once and refilled by the background generation.

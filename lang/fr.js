@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/fr.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : User-interface texts in French (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -151,6 +151,7 @@ SteinI18n.add("fr", {
     "col.enter": "Mode colonne, rangée {r}. Colonne {c} sélectionnée. Touchez des cases ou appuyez sur Espace pour ajouter ou retirer des colonnes, puis choisissez un symbole ; Échap quitte.",
     "col.none": "Aucun symbole ne peut être exclu de toutes ces colonnes.",
     "help.cols": "<b>Plusieurs colonnes à la fois</b> : appui long sur une case (double-clic sur ordinateur, ou touche C) pour lancer le mode colonne pour sa rangée. Le zoom s'ouvre ; touchez d'autres cases pour ajouter ou retirer leurs colonnes, et chaque symbole touché est exclu de toutes les colonnes sélectionnées en même temps. Les symboles qui ne sont pas possibles dans toutes les colonnes sélectionnées sont grisés et désactivés. Quittez avec le bouton de fermeture. Le jeu reste ensuite en mode exclusion.",
-    "new.searching": "Recherche d'un nouveau puzzle…"
+    "new.searching": "Recherche d'un nouveau puzzle…",
+    "help.translate": "Une erreur de traduction ? Dites-le-nous (ouvre GitHub)"
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : User-interface texts in Latin (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -151,6 +151,7 @@ SteinI18n.add("la", {
     "col.enter": "Modus columnarum, ordo {r}. Columna {c} electa. Cellas tange vel Spatium preme ut columnas addas vel demas, deinde signum elige; Escape relinquit.",
     "col.none": "Nullum signum ex his omnibus columnis excludi potest.",
     "help.cols": "<b>Plures columnae simul</b>: cellam diu preme (in computatro bis clica, vel clavem C) ut modus columnarum pro eius ordine incipiat. Auctio aperitur; alias cellas tange ut earum columnas addas vel demas, et omne signum tactum ex omnibus columnis electis simul excluditur. Signa quae non in omni columna electa possunt grisea sunt et inertia. Claustro relinque. Postea ludus in modo excludendi manet.",
-    "new.searching": "Aenigma novum quaeritur…"
+    "new.searching": "Aenigma novum quaeritur…",
+    "help.translate": "Error in translatione? Nobis indica (GitHub aperit)"
   }
 });

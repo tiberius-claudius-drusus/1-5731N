@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/it.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : User-interface texts in Italian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -151,6 +151,7 @@ SteinI18n.add("it", {
     "col.enter": "Modalità colonna, riga {r}. Colonna {c} selezionata. Tocca le caselle o premi Spazio per aggiungere o togliere colonne, poi scegli un simbolo; Esc esce.",
     "col.none": "Nessun simbolo può essere escluso da tutte queste colonne.",
     "help.cols": "<b>Più colonne alla volta</b>: tieni premuta una casella (doppio clic sul computer, o il tasto C) per avviare la modalità colonna per la sua riga. Si apre lo zoom; tocca altre caselle per aggiungere o togliere le loro colonne, e ogni simbolo toccato viene escluso da tutte le colonne selezionate insieme. I simboli che non sono possibili in ogni colonna selezionata sono in grigio e disattivati. Esci con il pulsante di chiusura. Poi il gioco resta in modalità esclusione.",
-    "new.searching": "Ricerca di un nuovo puzzle…"
+    "new.searching": "Ricerca di un nuovo puzzle…",
+    "help.translate": "Un errore di traduzione? Dillo a noi (apre GitHub)"
   }
 });

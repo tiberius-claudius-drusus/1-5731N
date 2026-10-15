@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pt-br.js
- * Version   : 1.3.1
+ * Version   : 1.3.2
  * Role      : User-interface texts in Portuguese (Brazil) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -151,6 +151,7 @@ SteinI18n.add("pt-br", {
     "col.enter": "Modo coluna, linha {r}. Coluna {c} selecionada. Toque nas casas ou pressione Espaço para adicionar ou remover colunas e depois escolha um símbolo; Escape sai.",
     "col.none": "Nenhum símbolo pode ser excluído de todas estas colunas.",
     "help.cols": "<b>Várias colunas ao mesmo tempo</b>: mantenha uma casa pressionada (clique duplo no computador, ou a tecla C) para iniciar o modo coluna da sua linha. O zoom abre; toque em outras casas para adicionar ou remover as colunas delas, e cada símbolo tocado é excluído de todas as colunas selecionadas ao mesmo tempo. Os símbolos que não são possíveis em todas as colunas selecionadas ficam cinza e desativados. Saia com o botão de fechar. Depois, o jogo continua no modo excluir.",
-    "new.searching": "Procurando um novo puzzle…"
+    "new.searching": "Procurando um novo puzzle…",
+    "help.translate": "Um erro de tradução? Conte para a gente (abre o GitHub)"
   }
 });
