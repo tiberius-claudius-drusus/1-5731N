@@ -1,5 +1,10 @@
 # Changelog - 1-5731N
 
+## 1.2.3 - 2026-10-16
+Review of the published 1.2.2 (each point checked in a browser or in the code first).
+- **Back button**: starting a game did not add a history entry, so the Back button of the phone left the application from a game (the intended "go back to the home" only worked after visiting Options, Help or Statistics). And the on-screen back buttons of those screens left their entry behind (three visits to Help left five entries). Now every screen other than the home owns exactly one history entry, pushed when it opens and removed when it closes; Back closes the zoom, then returns to the home, then leaves.
+- **Level cache** (`stein.lvl.v1`): its entries are now checked like the other stored data (a code, and a level from -1 to 4); a damaged value used to break the statistics screen.
+
 ## 1.2.2 - 2026-10-15
 Targeted audit by ChatGPT of the published 1.2.1 (each point checked in the code and by measurement first).
 - **Dates**: one calendar check (`validDate`) shared by `dailyCode()`, `daily()` and `dailyLevel()`: `2026-19-42`, `2026-02-30`, `2025-02-29` are refused (the format alone was checked before). Also used by the statistics import.
