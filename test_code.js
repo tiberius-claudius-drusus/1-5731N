@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/test_code.js
- * Version   : 1.1.0
+ * Version   : 1.4.0
  * Role      : Tests of the puzzle code ("VV-AAAA-AAAA"): same code = same puzzle, pinned puzzles of generator version 1, uniqueness, independence of neighbouring codes, parsing, speed.
  * Depends on: engine.js ; Node.js (standard library only)
  * Called by : by hand (node test_code.js ; STEIN_HEAVY=1 for the large samples) ; GitHub Actions
@@ -87,6 +87,17 @@ console.log('pinned puzzles:', Object.keys(GOLDEN).length, 'codes');
   if (!E.validGame(sv({ code: g.code })) || !E.validGame(sv({}))) fail('a game with a valid code, or without code, was refused');
   ['nope', '01-7k3f-9a2q', 123, '02-7K3F-9A2Q'].forEach(v => { if (E.validGame(sv({ code: v }))) fail('a game with the code ' + v + ' was accepted'); });
   console.log('saved games with a code: canonical codes only'); }
+
+// 10. a saved game may carry the order the player gave the clues: a permutation of each list, nothing else
+{ const g = E.genPuzzle(), p = new E.Possibilities(); E.openInitial(p, g.rules);
+  const rules = g.rules.map(E.ruleToJSON), H = [], V = [];
+  rules.forEach((r, i) => { if (r.t === 'under') V.push(i); else if (r.t !== 'open') H.push(i); });
+  const sv = extra => Object.assign({ solved: g.solved, rules, pos: Array.from(p.p), checked: [], history: [], elapsed: 0, errors: 0 }, extra);
+  const rev = a => a.slice().reverse();
+  if (!E.validGame(sv({ order: { H: rev(H), V: rev(V) } })) || !E.validGame(sv({ order: { H, V } })) || !E.validGame(sv({}))) fail('a valid order was refused');
+  const wrong = [null && 0, { H: H.slice(1), V }, { H, V: V.concat(V[0]) }, { H: H.concat(99), V }, { H: V, V: H }, { H, V: 'x' }, [H, V], 5, { H }];
+  wrong.slice(1).forEach((o, k) => { if (E.validGame(sv({ order: o }))) fail('a bad order was accepted (case ' + k + ')'); });
+  console.log('saved games with an order: permutations of each list only'); }
 
 console.log(bad ? bad + ' problem(s)' : 'puzzle code: all consistent');
 process.exit(bad ? 1 : 0);

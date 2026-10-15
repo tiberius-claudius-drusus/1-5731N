@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/de.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in German (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("de", {
     "col.none": "Aus all diesen Spalten kann kein Symbol ausgeschlossen werden.",
     "help.cols": "<b>Mehrere Spalten auf einmal</b>: Halte ein Feld gedrückt (Doppelklick am Computer oder die Taste C), um den Spaltenmodus für seine Reihe zu starten. Der Zoom öffnet sich; tippe auf weitere Felder, um deren Spalten hinzuzufügen oder zu entfernen, und jedes angetippte Symbol wird aus allen ausgewählten Spalten gleichzeitig ausgeschlossen. Symbole, die nicht in jeder ausgewählten Spalte möglich sind, sind ausgegraut und deaktiviert. Mit der Schließen-Taste verlassen. Danach bleibt das Spiel im Ausschließen-Modus.",
     "new.searching": "Suche nach einem neuen Rätsel…",
-    "help.translate": "Ein Übersetzungsfehler? Sag es uns (öffnet GitHub)"
+    "help.translate": "Ein Übersetzungsfehler? Sag es uns (öffnet GitHub)",
+    "hint.lift": "Hinweis aufgenommen. Zieh ihn, oder tippe auf einen anderen Hinweis, um ihn dorthin zu setzen.",
+    "hint.moved": "Hinweis auf Position {n} verschoben",
+    "help.reorder": "<b>Hinweise ordnen</b>: Halte einen Hinweis gedrückt und zieh ihn an seinen neuen Platz (die anderen machen Platz), oder heb den Finger und tippe auf den Hinweis, dessen Platz er einnehmen soll (oder auf den leeren Raum nach dem letzten). Tippe ihn erneut an, um abzubrechen. Jede der beiden Listen behält ihre eigene Reihenfolge, die mit der Partie gespeichert wird. Mit der Tastatur: Umschalt+Enter nimmt einen Hinweis auf, die Pfeiltasten bewegen ihn, Enter setzt ihn ab, Esc bricht ab."
   }
 });

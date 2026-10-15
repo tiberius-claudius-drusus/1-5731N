@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/vi.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Vietnamese (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("vi", {
     "col.none": "Không thể loại ký hiệu nào khỏi tất cả các cột này.",
     "help.cols": "<b>Nhiều cột cùng lúc</b>: nhấn giữ một ô (nhấp đúp trên máy tính, hoặc phím C) để bắt đầu chế độ cột cho hàng của ô đó. Khung phóng to mở ra; chạm vào các ô khác để thêm hoặc bỏ cột của chúng, và mỗi ký hiệu bạn chạm sẽ được loại khỏi tất cả các cột đã chọn cùng lúc. Những ký hiệu không thể có trong mọi cột đã chọn sẽ hiện màu xám và bị vô hiệu. Thoát bằng nút đóng. Sau đó trò chơi vẫn ở chế độ loại trừ.",
     "new.searching": "Đang tìm câu đố mới…",
-    "help.translate": "Có lỗi dịch thuật? Hãy báo cho chúng tôi (mở GitHub)"
+    "help.translate": "Có lỗi dịch thuật? Hãy báo cho chúng tôi (mở GitHub)",
+    "hint.lift": "Đã nhấc gợi ý. Hãy kéo nó, hoặc chạm vào gợi ý khác để đặt nó vào đó.",
+    "hint.moved": "Đã chuyển gợi ý đến vị trí {n}",
+    "help.reorder": "<b>Sắp xếp các gợi ý</b>: nhấn giữ một gợi ý rồi kéo đến vị trí mới (các gợi ý khác nhường chỗ), hoặc nhấc ngón tay và chạm vào gợi ý mà nó sẽ thế chỗ (hoặc khoảng trống sau gợi ý cuối). Chạm lại để hủy. Mỗi trong hai danh sách giữ thứ tự riêng, được lưu cùng ván chơi. Với bàn phím: Shift+Enter nhấc gợi ý, phím mũi tên di chuyển, Enter đặt xuống, Esc hủy."
   }
 });

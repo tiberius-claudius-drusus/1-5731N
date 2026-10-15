@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/nl.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Dutch (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("nl", {
     "col.none": "Geen enkel symbool kan uit al deze kolommen worden uitgesloten.",
     "help.cols": "<b>Meerdere kolommen tegelijk</b>: houd een vakje ingedrukt (dubbelklik op een computer, of de C-toets) om de kolommodus voor zijn rij te starten. De zoom opent; tik op andere vakjes om hun kolommen toe te voegen of te verwijderen, en elk symbool dat je aantikt wordt tegelijk uit alle geselecteerde kolommen uitgesloten. Symbolen die niet in elke geselecteerde kolom mogelijk zijn, zijn grijs en uitgeschakeld. Verlaat met de sluitknop. Daarna blijft het spel in uitsluitmodus.",
     "new.searching": "Zoeken naar een nieuwe puzzel…",
-    "help.translate": "Een fout in een vertaling? Laat het ons weten (opent GitHub)"
+    "help.translate": "Een fout in een vertaling? Laat het ons weten (opent GitHub)",
+    "hint.lift": "Aanwijzing opgepakt. Sleep hem, of tik op een andere aanwijzing om hem daar neer te zetten.",
+    "hint.moved": "Aanwijzing verplaatst naar positie {n}",
+    "help.reorder": "<b>Aanwijzingen ordenen</b>: houd een aanwijzing ingedrukt en sleep hem naar zijn nieuwe plek (de andere maken ruimte), of til je vinger op en tik op de aanwijzing wiens plek hij moet innemen (of op de lege ruimte na de laatste). Tik hem opnieuw aan om te annuleren. Elk van de twee lijsten houdt zijn eigen volgorde, bewaard met het spel. Met het toetsenbord: Shift+Enter pakt een aanwijzing op, de pijltjes verplaatsen hem, Enter zet hem neer, Esc annuleert."
   }
 });

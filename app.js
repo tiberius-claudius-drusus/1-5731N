@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/app.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : Application: screens (home, game, help, options, statistics), board and zoom panel, column mode, clues, undo, timer, sounds, options, statistics export/import.
  * Depends on: engine.js, glyphs.js, themes.js, i18n.js, lang/*.js, logo.js
  * Called by : index.html (script tag, last)
@@ -11,7 +11,7 @@
  */
 (function () {
   'use strict';
-  var VERSION = '1.3.2', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
+  var VERSION = '1.4.0', BUILD_DATE = '2026-10-16';   // date as YYYY-MM-DD, shown as is at the bottom of the home screen
   var E = window.Stein, N = E.N, GL = window.SteinGlyphs, TH = window.SteinThemes, I = window.SteinI18n, t = I.t;
   var KEY_GAME = 'stein.game.v1', KEY_STATS = 'stein.stats.v1', KEY_OPT = 'stein.opt.v1';
   var KEY_PLAYED = 'stein.played.v1', KEY_POOL = 'stein.pool.v1', KEY_PACKS = 'stein.packs.v1';
@@ -64,7 +64,7 @@
    * the phone returns to the home first and only then leaves the application; the on-screen back buttons remove that entry too. */
   var pushed = false;
   function show(id) {
-    if (id !== 's-game') colReset();
+    if (id !== 's-game') { colReset(); if (lift) { lift = null; hpStop(); } }
     if (id === 's-home') { if (pushed) { pushed = false; if (zoomCell) closeZoom(); history.back(); } }
     else if (!pushed) { pushed = true; history.pushState({}, ''); }
     ['s-home', 's-game', 's-help', 's-stats', 's-options'].forEach(function (s) { $(s).classList.toggle('on', s === id); });
@@ -258,7 +258,7 @@
     rules = G.rules.map(E.ruleFromJSON);
     pos = new E.Possibilities(G.pos);
     grade = E.gradeOf(G.solved, rules);
-    colReset();
+    colReset(); lift = null;
     renderAll(); showCode(); showLevel();
     closeZoom(); setModeButtons(); applyHand();
     show('s-game');
@@ -393,28 +393,31 @@
       default: return t('clue.under', { a: nm(r.a), b: nm(r.b) });
     }
   }
+  /* Order of the clues of one list ('H' three cells, 'V' two cells): the order the player gave them (G.order, saved with the game),
+   * else the order of the generator. A ticked clue stays where it is (it is only greyed). */
+  function orderFor(kind) {
+    var natural = hintItems().filter(function (i) { return rules[i].show === kind; }), o = G.order && G.order[kind];
+    if (Array.isArray(o) && o.length === natural.length && natural.every(function (i) { return o.indexOf(i) >= 0; })) return o.slice();
+    return natural;
+  }
   function renderHints() {
     var fa = document.activeElement, fi = fa && fa.classList && fa.classList.contains('hint') ? +fa.dataset.i : -1;
-    var items = hintItems();
-    var chk = G.checked.filter(function (i) { return items.indexOf(i) >= 0; });
+    var chk = G.checked;
     function hintHtml(i) {
-      var r = rules[i], done = chk.indexOf(i) >= 0, inner = '', cls = 'hint' + (done ? ' done' : '');
+      var r = rules[i], done = chk.indexOf(i) >= 0, inner = '', cls = 'hint' + (done ? ' done' : '') + (lift && lift.i === i ? ' lifted' : '');
       switch (r.t) {
         case 'near': inner = icon(r.a) + symTile('near') + icon(r.b); break;
         case 'dir': inner = icon(r.a) + symTile('side') + icon(r.b); break;
         case 'between': inner = icon(r.a) + icon(r.c) + icon(r.b); break;
         case 'under': inner = icon(r.a) + icon(r.b); cls += ' v'; break;
       }
-      return '<div class="' + cls + '" data-i="' + i + '" role="button" tabindex="0" aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(clueLabel(r)) + '">' + inner + '</div>';
+      return '<div class="' + cls + '" data-i="' + i + '" data-kind="' + r.show + '" role="button" tabindex="0" aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(clueLabel(r)) + '">' + inner + '</div>';
     }
-    // two lists: first the 3-cell clues (horizontal), below them the 2-cell ones (vertical).
-    // In each list: ticked clues first (in the order they were ticked), then the others.
+    // two lists: first the 3-cell clues (horizontal), below them the 2-cell ones (vertical)
     var h = '';
     ['H', 'V'].forEach(function (kind) {
-      var grp = items.filter(function (i) { return rules[i].show === kind; });
-      var on = chk.filter(function (i) { return grp.indexOf(i) >= 0; });
-      var order = on.concat(grp.filter(function (i) { return on.indexOf(i) < 0; }));
-      if (order.length) h += '<div class="hgrp" role="group" aria-label="' + esc(t('a11y.hints')) + '">' + order.map(hintHtml).join('') + '</div>';
+      var order = orderFor(kind);
+      if (order.length) h += '<div class="hgrp' + (lift && lift.kind === kind ? ' lifting' : '') + '" data-kind="' + kind + '" role="group" aria-label="' + esc(t('a11y.hints')) + '">' + order.map(hintHtml).join('') + '</div>';
     });
     $('hints').innerHTML = h;
     if (fi >= 0) { var hf = $('hints').querySelector('.hint[data-i="' + fi + '"]'); if (hf) hf.focus(); }
@@ -425,14 +428,102 @@
     if (k >= 0) G.checked.splice(k, 1); else G.checked.push(i);
     renderHints(); play('click'); persist();
   }
+
+  /* ---------- reordering the clues ----------
+   * A long press on a clue lifts it. Then either keep the finger down and drag it (the others make room), or lift the finger and touch the
+   * clue whose place it should take (the empty space after the last one = last place); touching it again cancels. Each list keeps its own
+   * order (G.order, saved with the game). Keyboard: Shift+Enter lifts, arrows move, Enter puts down, Escape cancels. */
+  var lift = null;                                              // { i: rule index, kind: 'H' | 'V', start: [order before], moved: bool }
+  var hp = null, hintSuppress = false;                          // press in progress on a clue
+  function setOrder(kind, arr) {
+    if (!G.order) G.order = { H: orderFor('H'), V: orderFor('V') };
+    G.order[kind] = arr;
+  }
+  function liftStart(i) {
+    if (ended || colMode || zoomCell || lift) return;
+    var el = $('hints').querySelector('.hint[data-i="' + i + '"]'); if (!el) return;
+    lift = { i: i, kind: rules[i].show, start: orderFor(rules[i].show), moved: false };
+    el.classList.add('lifted'); el.parentNode.classList.add('lifting');       // no redraw: the touched element must stay in the page
+    toast(t('hint.lift'));
+  }
+  /* moves the lifted clue to position idx of its list (the others shift) */
+  function liftMoveTo(idx) {
+    var o = orderFor(lift.kind), from = o.indexOf(lift.i);
+    idx = Math.max(0, Math.min(o.length - 1, idx));
+    if (from < 0 || from === idx) return;
+    o.splice(from, 1); o.splice(idx, 0, lift.i); setOrder(lift.kind, o); lift.moved = true;
+    var grp = $('hints').querySelector('.hgrp[data-kind="' + lift.kind + '"]'), el = grp.querySelector('.hint[data-i="' + lift.i + '"]');
+    var next = idx + 1 < o.length ? grp.querySelector('.hint[data-i="' + o[idx + 1] + '"]') : null;
+    grp.insertBefore(el, next);
+  }
+  function liftEnd(commit) {
+    if (!lift) return;
+    var l = lift; lift = null;
+    if (!commit && l.moved) setOrder(l.kind, l.start);
+    renderHints();
+    if (commit && l.moved) { persist(); play('click'); say(t('hint.moved', { n: orderFor(l.kind).indexOf(l.i) + 1 })); }
+  }
+  function hpStop() {
+    if (hp) clearTimeout(hp.t);
+    hp = null;
+    window.removeEventListener('pointermove', hpMove); window.removeEventListener('pointerup', hpEnd); window.removeEventListener('pointercancel', hpEnd);
+  }
+  function hpMove(ev) {
+    if (!hp) return;
+    if (!lift) { if (Math.hypot(ev.clientX - hp.x, ev.clientY - hp.y) > 14) hpStop(); return; }   // the finger moved before the long press: it is a scroll
+    var under = document.elementFromPoint(ev.clientX, ev.clientY); if (!under) return;
+    var el = under.closest('.hint'), grp = under.closest('.hgrp');
+    if (el && el.dataset.kind === lift.kind && +el.dataset.i !== lift.i) liftMoveTo(orderFor(lift.kind).indexOf(+el.dataset.i));
+    else if (!el && grp && grp.dataset.kind === lift.kind) liftMoveTo(1e9);
+  }
+  function hpEnd() {
+    var dragged = hp && hp.lifted && lift && lift.moved;
+    hpStop();
+    if (dragged) liftEnd(true);                                  // dropped after a drag; without a drag the clue stays lifted, waiting for a touch
+  }
+  $('hints').addEventListener('pointerdown', function (ev) {
+    hintSuppress = false;
+    if (ended || lift || colMode || ev.button) return;
+    var el = ev.target.closest('.hint'); if (!el) return;
+    hp = { x: ev.clientX, y: ev.clientY, i: +el.dataset.i, lifted: false };
+    var me = hp;
+    me.t = setTimeout(function () { if (hp !== me) return; liftStart(me.i); me.lifted = !!lift; hintSuppress = true; if (navigator.vibrate) navigator.vibrate(15); }, 500);
+    window.addEventListener('pointermove', hpMove); window.addEventListener('pointerup', hpEnd); window.addEventListener('pointercancel', hpEnd);
+  });
+  document.addEventListener('touchmove', function (ev) { if (lift && hp) ev.preventDefault(); }, { passive: false });   // dragging a clue does not scroll the list
+  $('hints').addEventListener('contextmenu', function (ev) { ev.preventDefault(); });
   $('hints').addEventListener('click', function (ev) {
-    var el = ev.target.closest('.hint'); if (!el || ended) return;
+    if (ended) return;
+    if (hintSuppress) { hintSuppress = false; return; }          // the release of the long press that lifted the clue
+    var el = ev.target.closest('.hint');
+    if (lift) {                                                  // a clue is lifted: this touch says where it goes
+      var grp = ev.target.closest('.hgrp');
+      if (el && +el.dataset.i === lift.i) liftEnd(false);
+      else if (el && el.dataset.kind === lift.kind) { liftMoveTo(orderFor(lift.kind).indexOf(+el.dataset.i)); liftEnd(true); }
+      else if (!el && grp && grp.dataset.kind === lift.kind) { liftMoveTo(1e9); liftEnd(true); }
+      else liftEnd(false);
+      return;
+    }
+    if (!el) return;
     if (performance.now() - zoomShut < 450) return;      // ghost click: the zoom has just closed under the finger
     toggleHint(el);
   });
   $('hints').addEventListener('keydown', function (ev) {
     var el = ev.target.closest && ev.target.closest('.hint');
-    if (el && !ended && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); toggleHint(el); }
+    if (!el || ended) return;
+    var i = +el.dataset.i;
+    if (lift) {
+      if (lift.i !== i) return;
+      var d = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 }[ev.key];
+      if (d) { ev.preventDefault(); var o = orderFor(lift.kind); liftMoveTo(o.indexOf(i) + d); el.focus(); }
+      else if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); liftEnd(true); }
+      else if (ev.key === 'Escape') { ev.preventDefault(); liftEnd(false); }
+      return;
+    }
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      if (ev.shiftKey) liftStart(i); else toggleHint(el);
+    }
   });
 
   /* ---------- coups ---------- */
@@ -494,6 +585,7 @@
   }
   /* viaKey: opened with the keyboard, so the focus goes into the panel (first possible symbol) */
   function openZoom(c, r, viaKey) {
+    if (lift) liftEnd(false);
     zoomCell = [c, r]; focusCell = [c, r];
     $('s-game').classList.add('zooming');
     zoomEl.classList.add('on');
@@ -583,6 +675,7 @@
   function colList() { return colMode.cols.map(function (c) { return c + 1; }).join(', '); }
   function colEnter(c, r) {
     if (ended || !G || pos.isDefined(c, r)) return;
+    if (lift) liftEnd(false);
     closeZoom();
     colMode = { row: r, cols: [c] }; focusCell = [c, r];
     if (opt.mode !== 'excl') { opt.mode = 'excl'; save(KEY_OPT, opt); }
@@ -740,7 +833,7 @@
     if (k === 'm') { ev.preventDefault(); toggleMode(); }
     else if (k === 'u') { ev.preventDefault(); undo(); }
     else if (k === 't') { ev.preventDefault(); say(fmt(G.elapsed)); }
-    else if (k === 'Escape') { if (colMode) colExit(); else if (zoomCell) closeZoom(); else $('g-menu').click(); }
+    else if (k === 'Escape') { if (lift) liftEnd(false); else if (colMode) colExit(); else if (zoomCell) closeZoom(); else $('g-menu').click(); }
   });
 
   /* ---------- barre ---------- */
@@ -1061,7 +1154,7 @@
       ex(im(0, 1) + imSym('side') + im(1, 3), 'help.ex2') +
       ex(im(0, 1) + im(2, 2) + im(1, 3), 'help.ex3') +
       ex(im(0, 1) + im(2, 2), 'help.ex4') +
-      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.cols') + '</p><p>' + t('help.keys') + '</p>' +
+      '<p>' + fill(t('help.p4')) + '</p><p>' + t('help.code') + '</p><p>' + t('help.cols') + '</p><p>' + t('help.reorder') + '</p><p>' + t('help.keys') + '</p>' +
       '<p class="helplink"><a href="' + esc(translateUrl()) + '" target="_blank" rel="noopener noreferrer">' + esc(t('help.translate')) + '</a></p>';
   }
 

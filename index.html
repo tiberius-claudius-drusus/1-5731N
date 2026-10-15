@@ -2,7 +2,7 @@
 <!--
 ===========================================================================
 File      : 1-5731n/index.html
-Version   : 1.3.2
+Version   : 1.4.0
 Role      : Single page of the application: markup of all screens, the whole stylesheet (inline, theme-driven) and the script tags.
 Depends on: all scripts of the project
 Called by : the browser (served by the portal)
@@ -73,6 +73,9 @@ h1 .tg{display:inline-block;width:1.1em;height:1.1em;vertical-align:-.17em;margi
 .hint .tile{width:var(--hi);height:var(--hi);padding:3%;background:transparent;border:0;box-shadow:none;border-radius:3px}
 .hint .tile.sym{--rc:var(--hint-sym)}
 .hint.done{opacity:var(--done-opacity);filter:grayscale(1)}
+.hint{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.hgrp.lifting{outline:2px dashed var(--acc);outline-offset:3px;border-radius:6px}
+.hint.lifted{outline:3px solid var(--acc);outline-offset:1px;transform:scale(1.08);box-shadow:0 4px 12px rgba(0,0,0,.28);position:relative;z-index:1}
 /* cell zoom: panel in place of the clues; the board stays active */
 #zoom{display:none;flex:1;min-height:0;width:100%;max-width:560px;margin-top:8px;padding-bottom:12px}
 #zoom.on{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px}

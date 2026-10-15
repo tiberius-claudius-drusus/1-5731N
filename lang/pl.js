@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pl.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Polish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("pl", {
     "col.none": "Z wszystkich tych kolumn nie można wykluczyć żadnego symbolu.",
     "help.cols": "<b>Kilka kolumn naraz</b>: przytrzymaj pole (na komputerze dwukrotne kliknięcie lub klawisz C), aby włączyć tryb kolumn dla jego wiersza. Otworzy się powiększenie; dotykaj innych pól, aby dodać lub usunąć ich kolumny, a każdy dotknięty symbol zostanie wykluczony jednocześnie ze wszystkich wybranych kolumn. Symbole niemożliwe w każdej wybranej kolumnie są wyszarzone i nieaktywne. Wyjdź przyciskiem zamknięcia. Potem gra pozostaje w trybie wykluczania.",
     "new.searching": "Szukam nowej łamigłówki…",
-    "help.translate": "Błąd w tłumaczeniu? Daj nam znać (otworzy GitHub)"
+    "help.translate": "Błąd w tłumaczeniu? Daj nam znać (otworzy GitHub)",
+    "hint.lift": "Wskazówka podniesiona. Przeciągnij ją albo dotknij innej wskazówki, by ją tam postawić.",
+    "hint.moved": "Wskazówka przeniesiona na pozycję {n}",
+    "help.reorder": "<b>Układanie wskazówek</b>: przytrzymaj wskazówkę i przeciągnij ją na nowe miejsce (pozostałe zrobią jej miejsce) albo unieś palec i dotknij wskazówki, której miejsce ma zająć (lub pustej przestrzeni po ostatniej). Dotknij jej ponownie, aby anulować. Każda z dwóch list zachowuje własną kolejność, zapisywaną razem z grą. Z klawiatury: Shift+Enter podnosi wskazówkę, strzałki ją przesuwają, Enter odkłada, Esc anuluje."
   }
 });

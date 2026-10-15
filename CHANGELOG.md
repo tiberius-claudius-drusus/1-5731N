@@ -1,5 +1,9 @@
 # Changelog - 1-5731N
 
+## 1.4.0 - 2026-10-16
+- **Arranging the clues**: a long press on a clue lifts it (highlighted); drag it to its new place and the others make room, or lift the finger and touch the clue whose place it should take (the empty space after the last one puts it last); touching it again, or Escape, cancels. The three-cell clues and the two-cell clues are two lists, each with its own order, saved with the game (`order` in the saved game, checked by `validGame`: a list that is not a permutation of its clues is refused). Keyboard: Shift+Enter picks a clue up, arrows move it, Enter puts it down, Esc cancels; each step is announced. Three new texts in the 20 languages and a paragraph in the help.
+- **Ticked clues no longer move to the top** of their list: they stay in place, greyed (the player now decides the order).
+
 ## 1.3.2 - 2026-10-16
 Call for native speakers to proofread the translations.
 - **Help screen**: a link at the bottom, "A mistake in a translation? Tell us (opens GitHub)", opens the project's translation form already filled with the current language and the version of the game (new text in the 20 languages). Nothing is sent by the game itself: the link only opens the page when tapped.

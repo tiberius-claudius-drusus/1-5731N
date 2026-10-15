@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/la.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Latin (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("la", {
     "col.none": "Nullum signum ex his omnibus columnis excludi potest.",
     "help.cols": "<b>Plures columnae simul</b>: cellam diu preme (in computatro bis clica, vel clavem C) ut modus columnarum pro eius ordine incipiat. Auctio aperitur; alias cellas tange ut earum columnas addas vel demas, et omne signum tactum ex omnibus columnis electis simul excluditur. Signa quae non in omni columna electa possunt grisea sunt et inertia. Claustro relinque. Postea ludus in modo excludendi manet.",
     "new.searching": "Aenigma novum quaeritur…",
-    "help.translate": "Error in translatione? Nobis indica (GitHub aperit)"
+    "help.translate": "Error in translatione? Nobis indica (GitHub aperit)",
+    "hint.lift": "Indicium sublatum. Trahe illud, vel aliud indicium tange ut illuc ponatur.",
+    "hint.moved": "Indicium ad locum {n} motum",
+    "help.reorder": "<b>Indicia ordinare</b>: indicium diu preme et trahe ad locum novum (cetera locum dant), vel digitum tolle et tange indicium cuius locum capiet (vel spatium vacuum post ultimum). Iterum tange ut revoces. Utraque series ordinem suum servat, cum ludo repositum. Per tabulam clavium: Shift+Enter indicium tollit, sagittae movent, Enter ponit, Esc revocat."
   }
 });

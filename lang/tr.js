@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/tr.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Turkish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("tr", {
     "col.none": "Bu sütunların hepsinden çıkarılabilecek bir simge yok.",
     "help.cols": "<b>Aynı anda birkaç sütun</b>: Satırı için sütun modunu başlatmak üzere bir kutuya uzun basın (bilgisayarda çift tıklama veya C tuşu). Yakınlaştırma açılır; sütunlarını eklemek veya çıkarmak için başka kutulara dokunun, dokunduğunuz her simge seçili tüm sütunlardan aynı anda çıkarılır. Seçili her sütunda mümkün olmayan simgeler gri ve devre dışı görünür. Kapatma düğmesiyle çıkın. Sonrasında oyun çıkarma modunda kalır.",
     "new.searching": "Yeni bir bulmaca aranıyor…",
-    "help.translate": "Çeviride bir hata mı var? Bize bildirin (GitHub açılır)"
+    "help.translate": "Çeviride bir hata mı var? Bize bildirin (GitHub açılır)",
+    "hint.lift": "İpucu alındı. Sürükleyin ya da oraya koymak için başka bir ipucuna dokunun.",
+    "hint.moved": "İpucu {n}. sıraya taşındı",
+    "help.reorder": "<b>İpuçlarını düzenleyin</b>: bir ipucuna uzun basın, sonra yeni yerine sürükleyin (diğerleri yer açar) ya da parmağınızı kaldırıp yerini alacağı ipucuna (veya sonuncudan sonraki boş alana) dokunun. İptal için tekrar dokunun. İki listenin her biri kendi sırasını korur ve oyunla birlikte kaydedilir. Klavyede: Shift+Enter ipucunu alır, ok tuşları taşır, Enter bırakır, Esc iptal eder."
   }
 });

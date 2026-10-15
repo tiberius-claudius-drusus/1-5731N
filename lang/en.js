@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/en.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in English (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("en", {
     "col.none": "No symbol can be excluded from all these columns.",
     "help.cols": "<b>Several columns at once</b>: press and hold a cell (double-click on a computer, or the C key) to start the column mode for its row. The zoom opens; touch other cells to add or remove their columns, and each symbol you tap is excluded from all the selected columns together. Symbols that are not possible in every selected column are greyed out and disabled. Leave with the close button. The game stays in exclude mode afterwards.",
     "new.searching": "Looking for a new puzzle…",
-    "help.translate": "A mistake in a translation? Tell us (opens GitHub)"
+    "help.translate": "A mistake in a translation? Tell us (opens GitHub)",
+    "hint.lift": "Clue picked up. Drag it, or touch another clue to put it there.",
+    "hint.moved": "Clue moved to position {n}",
+    "help.reorder": "<b>Arrange the clues</b>: press and hold a clue, then drag it to its new place (the others make room), or lift your finger and touch the clue it should take the place of (or the empty space after the last one). Touch it again to cancel. Each of the two lists keeps its own order, saved with the game. With the keyboard: Shift+Enter picks a clue up, the arrow keys move it, Enter puts it down, Esc cancels."
   }
 });

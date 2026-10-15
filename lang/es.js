@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/es.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Spanish (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("es", {
     "col.none": "Ningún símbolo se puede excluir de todas estas columnas.",
     "help.cols": "<b>Varias columnas a la vez</b>: mantén pulsada una casilla (doble clic en el ordenador, o la tecla C) para iniciar el modo columna de su fila. Se abre el zoom; toca otras casillas para añadir o quitar sus columnas, y cada símbolo que toques se excluye de todas las columnas seleccionadas a la vez. Los símbolos que no son posibles en todas las columnas seleccionadas aparecen en gris y desactivados. Sal con el botón de cierre. Después, el juego se queda en modo excluir.",
     "new.searching": "Buscando un puzzle nuevo…",
-    "help.translate": "¿Un error de traducción? Cuéntanoslo (abre GitHub)"
+    "help.translate": "¿Un error de traducción? Cuéntanoslo (abre GitHub)",
+    "hint.lift": "Pista cogida. Arrástrala o toca otra pista para ponerla ahí.",
+    "hint.moved": "Pista movida a la posición {n}",
+    "help.reorder": "<b>Ordenar las pistas</b>: mantén pulsada una pista y arrástrala a su nuevo sitio (las demás le hacen sitio), o levanta el dedo y toca la pista cuyo lugar debe ocupar (o el espacio vacío tras la última). Tócala de nuevo para cancelar. Cada una de las dos listas conserva su propio orden, guardado con la partida. Con el teclado: Mayús+Intro coge una pista, las flechas la mueven, Intro la suelta, Esc cancela."
   }
 });

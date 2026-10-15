@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/engine.js
- * Version   : 1.3.1
+ * Version   : 1.4.0
  * Role      : Game engine: puzzle generator, deduction solver and the five clue rules (near, direction, open, under, between).
  * Depends on: none (plain JavaScript; also loadable by Node for tests)
  * Called by : app.js (browser, window.Stein) ; test_engine.js (Node, module.exports)
@@ -487,6 +487,17 @@
     });
     if (!okRule) return false;
     if (!g.rules.every(holds)) return false;                      // every clue is true in the solution
+    if (g.order != null) {                                                         // optional: the order the player gave the clues of each list
+      if (typeof g.order !== 'object' || Array.isArray(g.order)) return false;
+      var kindOf = function (r) { return r.t === 'open' ? '' : r.t === 'under' ? 'V' : 'H'; };
+      var okOrder = ['H', 'V'].every(function (k) {
+        var want = []; g.rules.forEach(function (r, i) { if (kindOf(r) === k) want.push(i); });
+        var o = g.order[k];
+        return Array.isArray(o) && o.length === want.length && o.every(function (i) { return isInt(i, 0, g.rules.length - 1); }) &&
+          o.slice().sort(function (x, y) { return x - y; }).join() === want.join();
+      });
+      if (!okOrder) return false;
+    }
     if (!Array.isArray(g.checked) || g.checked.length > g.rules.length || !g.checked.every(function (i) { return isInt(i, 0, g.rules.length - 1); })) return false;
     if (!Array.isArray(g.history) || g.history.length > 300 || !g.history.every(isBits) || !g.history.every(keepsSolution)) return false;
     if (g.code != null) {                                                          // optional: the code of the puzzle, which must give this very puzzle

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/pt-br.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Portuguese (Brazil) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("pt-br", {
     "col.none": "Nenhum símbolo pode ser excluído de todas estas colunas.",
     "help.cols": "<b>Várias colunas ao mesmo tempo</b>: mantenha uma casa pressionada (clique duplo no computador, ou a tecla C) para iniciar o modo coluna da sua linha. O zoom abre; toque em outras casas para adicionar ou remover as colunas delas, e cada símbolo tocado é excluído de todas as colunas selecionadas ao mesmo tempo. Os símbolos que não são possíveis em todas as colunas selecionadas ficam cinza e desativados. Saia com o botão de fechar. Depois, o jogo continua no modo excluir.",
     "new.searching": "Procurando um novo puzzle…",
-    "help.translate": "Um erro de tradução? Conte para a gente (abre o GitHub)"
+    "help.translate": "Um erro de tradução? Conte para a gente (abre o GitHub)",
+    "hint.lift": "Pista pega. Arraste-a ou toque em outra pista para colocá-la ali.",
+    "hint.moved": "Pista movida para a posição {n}",
+    "help.reorder": "<b>Organizar as pistas</b>: mantenha uma pista pressionada e arraste-a para o novo lugar (as outras abrem espaço), ou levante o dedo e toque na pista cujo lugar ela deve ocupar (ou no espaço vazio depois da última). Toque nela de novo para cancelar. Cada uma das duas listas mantém sua própria ordem, salva com a partida. Com o teclado: Shift+Enter pega uma pista, as setas a movem, Enter a solta, Esc cancela."
   }
 });

@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/id.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Indonesian (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("id", {
     "col.none": "Tidak ada simbol yang bisa dikecualikan dari semua kolom ini.",
     "help.cols": "<b>Beberapa kolom sekaligus</b>: tekan lama sebuah kotak (klik ganda di komputer, atau tombol C) untuk memulai mode kolom bagi barisnya. Zoom terbuka; sentuh kotak lain untuk menambah atau menghapus kolomnya, dan setiap simbol yang disentuh dikecualikan dari semua kolom terpilih sekaligus. Simbol yang tidak mungkin ada di setiap kolom terpilih tampak abu-abu dan nonaktif. Keluar dengan tombol tutup. Setelah itu permainan tetap dalam mode kecualikan.",
     "new.searching": "Mencari teka-teki baru…",
-    "help.translate": "Ada kesalahan terjemahan? Beri tahu kami (membuka GitHub)"
+    "help.translate": "Ada kesalahan terjemahan? Beri tahu kami (membuka GitHub)",
+    "hint.lift": "Petunjuk diambil. Seret, atau sentuh petunjuk lain untuk menaruhnya di sana.",
+    "hint.moved": "Petunjuk dipindahkan ke posisi {n}",
+    "help.reorder": "<b>Mengatur petunjuk</b>: tekan lama sebuah petunjuk lalu seret ke tempat barunya (yang lain memberi ruang), atau angkat jari dan sentuh petunjuk yang tempatnya akan diambil (atau ruang kosong setelah yang terakhir). Sentuh lagi untuk membatalkan. Masing-masing dari dua daftar menyimpan urutannya sendiri, disimpan bersama permainan. Dengan papan ketik: Shift+Enter mengambil petunjuk, tombol panah memindahkannya, Enter meletakkannya, Esc membatalkan."
   }
 });

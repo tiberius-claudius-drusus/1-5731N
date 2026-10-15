@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------------------
  * File      : 1-5731n/lang/zh.js
- * Version   : 1.3.2
+ * Version   : 1.4.0
  * Role      : User-interface texts in Chinese (Simplified) (111 keys): home, menus, help, options, statistics, messages.
  * Depends on: i18n.js (SteinI18n.add)
  * Called by : index.html (script tag) ; i18n.js ; test_lang.js
@@ -152,6 +152,9 @@ SteinI18n.add("zh", {
     "col.none": "无法从所有这些列中排除任何符号。",
     "help.cols": "<b>一次处理多列</b>：长按一个格子（电脑上双击，或按 C 键），即可对其所在行启动列模式。放大面板会打开；点击其他格子以添加或取消它们的列，你点击的每个符号会同时从所有所选列中排除。并非在每个所选列中都可能的符号会显示为灰色并被禁用。用关闭按钮退出。之后游戏保持在排除模式。",
     "new.searching": "正在寻找新谜题…",
-    "help.translate": "翻译有误？请告诉我们（将打开 GitHub）"
+    "help.translate": "翻译有误？请告诉我们（将打开 GitHub）",
+    "hint.lift": "已拿起提示。拖动它，或点击另一条提示把它放到那里。",
+    "hint.moved": "提示已移到第 {n} 位",
+    "help.reorder": "<b>整理提示</b>：长按一条提示，然后把它拖到新位置（其他提示会让出位置），或抬起手指，点击它要取代位置的那条提示（或最后一条之后的空白处）。再次点击它即可取消。两个列表各自保留自己的顺序，并随对局保存。键盘操作：Shift+Enter 拿起提示，方向键移动，Enter 放下，Esc 取消。"
   }
 });
