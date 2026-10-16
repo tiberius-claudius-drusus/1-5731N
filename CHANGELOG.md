@@ -1,5 +1,8 @@
 # Changelog - 1-5731N
 
+## 1.4.3 - 2026-10-16
+- **Offline cache no longer erases other apps' caches**: when a new version activated, the service worker deleted every cache except its own. Cache Storage is shared by all the pages of an origin, and 1-5731N now shares `tiberius-claudius-drusus.github.io` with another app (T-7r4V3x), whose offline cache it wiped. It now deletes only the old `stein-*` caches. No change to the game. `test_version.js` checks it.
+
 ## 1.4.2 - 2026-10-15
 - **Date fix**: the build date shown at the bottom of the home screen and the dates of versions 1.2.3 to 1.4.1 in this changelog said 2026-10-16; the real publication date is 2026-10-15. No change to the game.
 
