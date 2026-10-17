@@ -1,3 +1,5 @@
+**English** · [Français](README.fr.md)
+
 # 1-5+31IV (1-5731N)
 
 *Lift the stone…* — an installable web app (PWA) port of the free logic game **Einstein Puzzle** 2.0
